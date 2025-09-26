@@ -302,14 +302,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new contact with name, company, and contact information
+2.  Wi-Find validates the fields (name, company, contact info).
+3.  Wi-Find adds the new contact.
+4.  Wi-Find displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. A required field is empty.
+
+    * 2a1. Wi-Find shows an error message. 
+      
+      Use case ends.
+
+* 3a. The input format for name, company or contact info is invalid.
+
+    * 3a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 4a. The contact already exists (duplicate name or contact number).
+
+    * 4a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+**Use case: Delete a contact**
+
+**MSS**
+
+1. User requests to list contacts
+2. Wi-Find shows a list of contacts
+3. User requests to delete a specific contact in the list
+4. Wi-Find deletes the contact
 
     Use case ends.
 
@@ -317,15 +348,83 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+    There is no contact to delete. Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given identifier is invalid (no contact found).
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 4a. Multiple contacts match the identifier.
+
+    * 4a1. Wi-Find shows an error message indicating ambiguity. 
+
+      Use case ends.
+
+* 5a. User deletes from a filtered list. 
+
+    * 5a1. Deletion only applies to the filtered view's index.
+
+      Step 3 and 4 carries out normally. Use case ends.
+
+**Use case: Save and read contacts on shutdown/startup**
+
+**MSS**
+
+1. User interacts with Wi-Find by adding, deleting, or editing contacts.
+2. Wi-Find automatically saves the updated contact list after each command.
+3. User shuts down the application.
+4. User restarts the application.
+5. Wi-Find automatically reads and loads the previously saved contact list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Saving fails due to missing file.
+
+    * 2a1. Wi-Find requests permission to create a new file.
+  
+    * 2a2. If permission is granted, Wi-Find creates a new file.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+* 3a. Saving or reading fails due to lack of permission.
+
+    * 3a1. Wi-Find requests permission to read/write
+
+      Use case resumes at step 2 if saving, step 5 if reading.
+
+**Use case: Search contacts by company**
+
+**MSS**
+
+1. User requests to search for contacts by entering a company name.
+2. Wi-Find validates the company name input.
+3. Wi-Find displays all contacts whose company matches the given name.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The company name is empty.
+
+    * 2a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 3a. The company name contains invalid special characters.
+
+    * 3a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 4a. No contacts match the company name.
+
+    * 4a1. Wi-Find shows an empty list message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
