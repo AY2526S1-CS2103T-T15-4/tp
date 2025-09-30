@@ -48,7 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lee Junwon
 
-<img src="images/nownuj.png.jpg" width="200px">
+<img src="images/nownuj.png" width="200px">
 
 [[github](https://github.com/NownuJ)]
 [[portfolio](team/nownuj.md)]
