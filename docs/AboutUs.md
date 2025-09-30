@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Poh Kai Siang Hanson
 
-<img src="images/hansonpoh.png.jpg" width="200px">
+<img src="images/hansonpoh.png" width="200px">
 
 [[github](https://github.com/hansonpoh)]
 [[portfolio](team/hansonpoh.md)]
