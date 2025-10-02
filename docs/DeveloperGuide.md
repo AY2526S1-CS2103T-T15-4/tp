@@ -321,15 +321,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
       Use case ends.
 
-* 3a. The input format for name, company or contact info is invalid.
+* 2b. The input format for name, company or contact info is invalid.
 
-    * 3a1. Wi-Find shows an error message.
+    * 2b1. Wi-Find shows an error message.
 
       Use case ends.
 
-* 4a. The contact already exists (duplicate name or contact number).
+* 2c. The contact already exists (duplicate name or contact number).
 
-    * 4a1. Wi-Find shows an error message.
+    * 2c1. Wi-Find shows an error message.
 
       Use case ends.
 
@@ -356,15 +356,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 4a. Multiple contacts match the identifier.
+* 3b. Multiple contacts match the identifier.
 
-    * 4a1. Wi-Find shows an error message indicating ambiguity. 
+    * 3b1. Wi-Find shows an error message indicating ambiguity. 
 
       Use case ends.
 
-* 5a. User deletes from a filtered list. 
+* 3c. User deletes from a filtered list. 
 
-    * 5a1. Deletion only applies to the filtered view's index.
+    * 3c1. Deletion only applies to the filtered view's index.
 
       Step 3 and 4 carries out normally. Use case ends.
 
@@ -390,9 +390,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3a. Saving or reading fails due to lack of permission.
+* 2b. Saving or reading fails due to lack of permission.
 
-    * 3a1. Wi-Find requests permission to read/write
+    * 2b1. Wi-Find requests permission to read/write
 
       Use case resumes at step 2 if saving, step 5 if reading.
 
@@ -414,15 +414,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. The company name contains invalid special characters.
+* 2b. The company name contains invalid special characters.
 
-    * 3a1. Wi-Find shows an error message.
+    * 2b1. Wi-Find shows an error message.
 
       Use case ends.
 
-* 4a. No contacts match the company name.
+* 3a. No contacts match the company name.
 
-    * 4a1. Wi-Find shows an empty list message.
+    * 3a1. Wi-Find shows an empty list message.
 
       Use case ends.
 
