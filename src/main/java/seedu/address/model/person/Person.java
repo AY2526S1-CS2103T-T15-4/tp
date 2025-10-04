@@ -22,18 +22,20 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final HomeCountry country;
+    private final Company company;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, HomeCountry country, Company company, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, country, company, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.country = country;
+        this.company = company;
         this.tags.addAll(tags);
     }
 
@@ -49,8 +51,12 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public HomeCountry getCountry() {
+        return country;
+    }
+
+    public Company getCompany() {
+        return company;
     }
 
     /**
@@ -85,22 +91,22 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && country.equals(otherPerson.country)
+                && company.equals(otherPerson.company)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, country, company, tags);
     }
 
     @Override
@@ -109,7 +115,8 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("country", country)
+                .add("company", company)
                 .add("tags", tags)
                 .toString();
     }
