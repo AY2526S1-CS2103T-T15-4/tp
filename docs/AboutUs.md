@@ -22,7 +22,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/meckss.png" width="200px">
 
-[[github](https://github.com/Meckss]
+[[github](https://github.com/Meckss)]
 [[portfolio](team/max.md)]
 
 * Role: Developer
@@ -30,13 +30,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Javier Lua
 
-![javier-lua.png](images/javier-lua.png)
+<img src="images/javier-lua.png" width="200px">
 
 [[github](https://github.com/javier-lua)]
 [[portfolio](team/javier.md)]
 * Role: Project Advisor
 
-### Serene 
+### Serene
 
 <img src="images/serenelwt.png" width="200px">
 

@@ -317,8 +317,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. A required field is empty.
 
-    * 2a1. Wi-Find shows an error message. 
-      
+    * 2a1. Wi-Find shows an error message.
+
       Use case ends.
 
 * 2b. The input format for name, company or contact info is invalid.
@@ -358,11 +358,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. Multiple contacts match the identifier.
 
-    * 3b1. Wi-Find shows an error message indicating ambiguity. 
+    * 3b1. Wi-Find shows an error message indicating ambiguity.
 
       Use case ends.
 
-* 3c. User deletes from a filtered list. 
+* 3c. User deletes from a filtered list.
 
     * 3c1. Deletion only applies to the filtered view's index.
 
@@ -385,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. Saving fails due to missing file.
 
     * 2a1. Wi-Find requests permission to create a new file.
-  
+
     * 2a2. If permission is granted, Wi-Find creates a new file.
 
       Use case resumes at step 2.
@@ -431,17 +431,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Environment Requirements
     - Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
     - Should be runnable without requiring installation.
-    - Should not depend on any remote server. 
+    - Should not depend on any remote server.
 2.  Data Requirements
     - User data should be locally in a human-editable text file.
     - Data should be automatically saved after each modifications to prevent accidental loss.
 3.  Performance Requirements
     - The system should start up within 3 seconds on a modern computer.
-    - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
+    - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
     - Search/filter operations should return results within 1 second for 1000 contacts.
 4.  Usability Requirements
     - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-    - The system should provide clear, human-readable error messages when invalid input is given. 
+    - The system should provide clear, human-readable error messages when invalid input is given.
     - The GUI should remain usable across standard screen resolutions (≥1280x720) and scaling settings (100%, 125%, 150%).
 5.  Maintainability Requirements
     - The system should follow object-oriented principles to support modularity and extensibility.
@@ -451,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Documents should not exceed 15 MB each.
 7.  Reliability Requirements
     - The system should not crash under normal usage (adding, editing, deleting contacts).
-    - Invalid input should not cause data corruption or loss. 
+    - Invalid input should not cause data corruption or loss.
 
 ### Glossary
 
