@@ -3,7 +3,7 @@
 ![Ui](docs/images/Ui.png)
 
 # Wi-Find
-Wi-Find is a lightweight address book application that is tailored for freelancers to manage their business contacts 
+Wi-Find is a lightweight address book application that is tailored for freelancers to manage their business contacts
 easily.  Whether you're tracking clients, collaborators, or networking connections, Wi-Find helps you stay organized
 with features like contact categorization, project tagging, and quick search functionality.
 

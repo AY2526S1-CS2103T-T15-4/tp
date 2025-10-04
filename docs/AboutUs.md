@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/javier.md)]
 * Role: Project Advisor
 
-### Serene 
+### Serene
 
 <img src="images/serenelwt.png" width="200px">
 
@@ -52,6 +52,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/NownuJ)]
 [[portfolio](team/nownuj.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
