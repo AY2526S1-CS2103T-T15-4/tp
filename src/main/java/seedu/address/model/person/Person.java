@@ -25,6 +25,7 @@ public class Person {
     private final HomeCountry country;
     private final Company company;
     private final Set<Tag> tags = new HashSet<>();
+    private Time time;
 
     /**
      * Every field must be present and not null.
@@ -37,6 +38,8 @@ public class Person {
         this.country = country;
         this.company = company;
         this.tags.addAll(tags);
+        this.time = new Time();
+        time.start();
     }
 
     public Name getName() {
@@ -65,6 +68,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Time getTime() {
+        return time;
     }
 
     /**
@@ -100,7 +107,8 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && country.equals(otherPerson.country)
                 && company.equals(otherPerson.company)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && time.equals(otherPerson.time);
     }
 
     @Override
@@ -118,6 +126,7 @@ public class Person {
                 .add("country", country)
                 .add("company", company)
                 .add("tags", tags)
+                .add("time", time)
                 .toString();
     }
 

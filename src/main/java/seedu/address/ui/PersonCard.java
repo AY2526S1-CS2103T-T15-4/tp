@@ -2,11 +2,14 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.util.Duration;
 import seedu.address.model.person.Person;
 
 /**
@@ -41,8 +44,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label time;
+    @FXML
     private FlowPane tags;
 
+    private Timeline clock;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -58,5 +64,19 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        showTime();
+    }
+
+    private void showTime() {
+        clock = new Timeline(
+                new KeyFrame(Duration.ZERO, e -> {
+                    String currentTime = person.getTime().getFormattedTime();
+                    time.setText("Their time: " + currentTime);
+
+                }),
+                new KeyFrame(Duration.seconds(1))
+        );
+        clock.setCycleCount(Timeline.INDEFINITE);
+        clock.play();
     }
 }
