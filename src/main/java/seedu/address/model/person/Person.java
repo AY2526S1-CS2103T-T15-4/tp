@@ -25,6 +25,7 @@ public class Person {
     private final HomeCountry country;
     private final Company company;
     private final Set<Tag> tags = new HashSet<>();
+    private Time time;
 
     /**
      * Every field must be present and not null.
@@ -37,6 +38,7 @@ public class Person {
         this.country = country;
         this.company = company;
         this.tags.addAll(tags);
+        this.time = new Time();
     }
 
     public Name getName() {
@@ -65,6 +67,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Time getTime() {
+        return time;
     }
 
     /**
