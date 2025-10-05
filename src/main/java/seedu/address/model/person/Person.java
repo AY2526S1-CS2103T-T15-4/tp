@@ -39,7 +39,6 @@ public class Person {
         this.company = company;
         this.tags.addAll(tags);
         this.time = new Time();
-        time.start();
     }
 
     public Name getName() {
@@ -107,8 +106,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && country.equals(otherPerson.country)
                 && company.equals(otherPerson.company)
-                && tags.equals(otherPerson.tags)
-                && time.equals(otherPerson.time);
+                && tags.equals(otherPerson.tags);
     }
 
     @Override
