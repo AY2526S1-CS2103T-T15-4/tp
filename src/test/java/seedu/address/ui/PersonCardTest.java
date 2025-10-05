@@ -1,8 +1,9 @@
 package seedu.address.ui;
 
-import javafx.application.Platform;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import javafx.application.Platform;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 
