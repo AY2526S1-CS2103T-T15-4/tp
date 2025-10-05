@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
+import seedu.address.model.util.SampleDataUtil;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TimeTest {
 
@@ -28,5 +28,15 @@ public class TimeTest {
         String t2 = time.getFormattedTime();
 
         assertNotEquals(t1, t2, "Time should update after one second");
+    }
+
+    @Test
+    void getTime_shouldReturnTimeObject() {
+        Person person = SampleDataUtil.getSamplePersons()[0];
+
+        Time time = person.getTime();
+
+        assertNotNull(time, "getTime() should return a non-null Time object");
+        assertTrue(time instanceof Time, "getTime() should return a Time instance");
     }
 }
