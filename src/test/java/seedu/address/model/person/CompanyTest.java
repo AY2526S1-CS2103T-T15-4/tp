@@ -66,4 +66,5 @@ public class CompanyTest {
         Company company = new Company("Shopee");
         assertTrue(company.hashCode() == "Shopee".hashCode());
     }
+
 }
