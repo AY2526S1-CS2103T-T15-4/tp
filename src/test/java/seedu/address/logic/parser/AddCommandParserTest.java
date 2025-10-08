@@ -228,4 +228,14 @@ public class AddCommandParserTest {
                 + COUNTRY_DESC_BOB + COMPANY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_emptyInput_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "", expectedMessage);
+        assertParseFailure(parser, "   ", expectedMessage);
+    }
+
 }
+
+
