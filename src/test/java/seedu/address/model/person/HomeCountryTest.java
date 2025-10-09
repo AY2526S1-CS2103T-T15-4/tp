@@ -54,4 +54,16 @@ public class HomeCountryTest {
         // different values -> returns false
         assertFalse(country.equals(new HomeCountry("Other Valid Country")));
     }
+
+    @Test
+    public void toString_shouldReturnValue() {
+        HomeCountry country = new HomeCountry("Singapore");
+        assertTrue(country.toString().equals("Singapore"));
+    }
+
+    @Test
+    public void hashCode_shouldMatchValueHashCode() {
+        HomeCountry country = new HomeCountry("Singapore");
+        assertTrue(country.hashCode() == "Singapore".hashCode());
+    }
 }

@@ -102,4 +102,11 @@ public class PersonTest {
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void hashCode_shouldBeConsistentWithFields() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertTrue(ALICE.hashCode() == aliceCopy.hashCode());
+    }
+
 }

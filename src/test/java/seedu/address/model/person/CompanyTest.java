@@ -54,4 +54,16 @@ public class CompanyTest {
         // different values -> returns false
         assertFalse(company.equals(new Company("Other Valid Company")));
     }
+
+    @Test
+    public void toString_shouldReturnValue() {
+        Company company = new Company("Shopee");
+        assertTrue(company.toString().equals("Shopee"));
+    }
+
+    @Test
+    public void hashCode_shouldMatchValueHashCode() {
+        Company company = new Company("Shopee");
+        assertTrue(company.hashCode() == "Shopee".hashCode());
+    }
 }
