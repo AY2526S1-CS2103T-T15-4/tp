@@ -4,10 +4,10 @@ import seedu.address.model.Model;
 
 /**
  * Finds and lists all persons in address book whose tags contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 
-public class SearchTagCommand extends Command{
+public class SearchTagCommand extends Command {
 
     public static final String COMMAND_WORD = "SearchTag";
 
