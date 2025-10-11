@@ -9,8 +9,10 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CancelAddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ConfirmAddCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -19,6 +21,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * Parses user input.
@@ -30,6 +33,11 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+
+    /**
+     * Used for storing pending contacts that require confirmation to be added.
+     */
+    private static Person pendingPerson = null;
 
     /**
      * Parses user input into command for execution.
@@ -52,10 +60,24 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
+        if (pendingPerson != null) {
+            if (commandWord.equalsIgnoreCase("y")) {
+                Person personToConfirm = pendingPerson;
+                pendingPerson = null;
+                return new ConfirmAddCommand(personToConfirm);
+            } else if (commandWord.equalsIgnoreCase("n")) {
+                pendingPerson = null;
+                return new CancelAddCommand();
+            }
+        }
+
         switch (commandWord) {
 
+        // AddCommand sets pending person in the event of a duplicate contact.
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            AddCommand addCommand = new AddCommandParser().parse(arguments);
+            pendingPerson = addCommand.getPersonToAdd();
+            return addCommand;
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

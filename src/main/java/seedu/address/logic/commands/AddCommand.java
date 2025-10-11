@@ -39,7 +39,12 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON_WARNING =
+            """
+            Warning: A duplicate person already exists in the address book.
+            i.e. Same phone or email
+            Please confirm if this contact should still be added (y/n).
+            """;
 
     private final Person toAdd;
 
@@ -56,7 +61,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            return new CommandResult(MESSAGE_DUPLICATE_PERSON_WARNING);
         }
 
         model.addPerson(toAdd);
@@ -83,5 +88,9 @@ public class AddCommand extends Command {
         return new ToStringBuilder(this)
                 .add("toAdd", toAdd)
                 .toString();
+    }
+
+    public Person getPersonToAdd() {
+        return this.toAdd;
     }
 }
