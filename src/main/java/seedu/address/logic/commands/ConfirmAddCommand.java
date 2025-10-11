@@ -14,9 +14,9 @@ import seedu.address.model.person.Person;
  */
 public class ConfirmAddCommand extends Command {
 
-    private static final String MESSAGE_SUCCESS = "New person added/edited: %1$s";
+    private static final String MESSAGE_SUCCESS = "New person added: %1$s";
     private static final String MESSAGE_NO_PENDING_PERSON = "No pending person available.\n"
-            + "Please use the 'add' command first.'";
+            + "Please use the 'add' command first.";
     private Person pendingPerson = null;
 
     /**
@@ -26,6 +26,13 @@ public class ConfirmAddCommand extends Command {
     public ConfirmAddCommand(Person pendingPerson) {
         requireNonNull(pendingPerson);
         this.pendingPerson = pendingPerson;
+    }
+
+    /**
+     * Package-private constructor for testing null pendingPerson.
+     */
+    ConfirmAddCommand() {
+        this.pendingPerson = null;
     }
 
     @Override
