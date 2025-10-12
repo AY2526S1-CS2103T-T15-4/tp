@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -18,6 +19,6 @@ public class Time {
     }
 
     public String getFormattedTime(ZoneId zone) {
-        return LocalDateTime.now(zone).format(FORMATTER);
+        return ZonedDateTime.now(zone).format(FORMATTER);
     }
 }

@@ -30,7 +30,7 @@ public class TimeTest {
         ZoneId zone = ZoneId.of("Asia/Singapore");
         String formatted = time.getFormattedTime(zone);
 
-        // Regex: two digits day, sapce, three letters month, space, HH:mm
+        // Regex: two digits day, space, three letters month, space, HH:mm
         String pattern = "\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}";
 
         assertTrue(formatted.matches(pattern),
