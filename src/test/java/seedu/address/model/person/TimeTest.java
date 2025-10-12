@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.ZoneId;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.util.SampleDataUtil;
-
-import java.time.ZoneId;
 
 public class TimeTest {
 
