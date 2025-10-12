@@ -1,5 +1,12 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +19,7 @@ import java.util.stream.Collectors;
  * 2. Leading and trailing whitespaces of an argument value will be discarded.<br>
  * 3. An argument may be repeated and all its values will be accumulated e.g. the value of {@code t/}
  *    in the above example.<br>
+ * 4. Note that [ command/] is treated as argument input " command/", where command is any existing prefix.
  */
 public class ArgumentTokenizer {
 
@@ -61,18 +69,49 @@ public class ArgumentTokenizer {
      * Returns the index of the first occurrence of {@code prefix} in
      * {@code argsString} starting from index {@code fromIndex}. An occurrence
      * is valid if there is a whitespace before {@code prefix}. Returns -1 if no
-     * such occurrence can be found.
+     * such occurrence can be found. An occurrence is not valid if it is inside
+     * square brackets and a whitespace at the start for e.g. [ command/]
      *
-     * E.g if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
+     * E.g. if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
      * {@code fromIndex} = 0, this method returns -1 as there are no valid
      * occurrences of "p/" with whitespace before it. However, if
      * {@code argsString} = "e/hi p/900", {@code prefix} = "p/" and
      * {@code fromIndex} = 0, this method returns 5.
      */
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
-        int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
-        return prefixIndex == -1 ? -1
-                : prefixIndex + 1; // +1 as offset for whitespace
+        int currIndex = fromIndex;
+        while (currIndex < argsString.length()) {
+            // find the first occurrence of the prefix
+            int prefixIndex = argsString.indexOf(" " + prefix, currIndex);
+            if (prefixIndex == -1) {
+                return -1; // no prefix is found
+            }
+            if (isInSpecificSquareBrackets(argsString, prefixIndex)) {
+                currIndex = prefixIndex + 1; // +1 as offset for whitespace
+            } else {
+                return prefixIndex + 1; // +1 as offset for whitespace
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Checks if the prefix occurrence is in square brackets STRICTLY in the format
+     * [ command/]. Note that this is already in the assumption that prefix command has been found.
+     */
+    private static boolean isInSpecificSquareBrackets(String argsString, int prefixIndex) {
+        // Find the last '[' before prefixIndex
+        int openIndex = argsString.lastIndexOf('[', prefixIndex);
+        // find the first ']' after prefixIndex
+        int closeIndex = argsString.indexOf(']', prefixIndex);
+        if (openIndex == -1 || closeIndex == -1 || openIndex > closeIndex) {
+            return false;
+        }
+        // Extract substring of prefix in square brackets
+        String inside = argsString.substring(openIndex, closeIndex + 1);
+        // Match the following pattern exactly: [ command/]
+        // where command can be any word
+        return inside.matches("\\[ [^\\s\\[\\]]+/\\]");
     }
 
     /**
@@ -121,7 +160,23 @@ public class ArgumentTokenizer {
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
-        return value.trim();
+        return removeSpecificSquareBrackets(value.trim());
+    }
+
+    /**
+     * Removes square brackets only for the exact pattern "[ command/]", leaving all other
+     * brackets intact.
+     */
+    private static String removeSpecificSquareBrackets(String value) {
+        if (value == null || value.isEmpty()) {
+            return value;
+        }
+        List<Prefix> ls = List.of(PREFIX_NAME, PREFIX_COMPANY, PREFIX_COUNTRY, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
+        // e.g. n/|com/|...
+        String prefixPattern = ls.stream().map(Prefix::getPrefix).collect(Collectors.joining("|"));
+        String regex = "\\[ (" + prefixPattern + ")\\]";
+        // replace matches like "[ n/]" with " n/", keeping the space before the n/
+        return value.replaceAll(regex, " $1");
     }
 
     /**
