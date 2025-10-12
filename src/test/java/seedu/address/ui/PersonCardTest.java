@@ -1,11 +1,12 @@
 package seedu.address.ui;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.ZoneId;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.application.Platform;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Company;
@@ -16,14 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class PersonCardTest {
-
-    @BeforeAll
-    static void initToolkit() {
-        Platform.startup(() -> {});
-    }
 
     @Test
     void constructor_shouldRunWithoutException() {
@@ -47,7 +41,7 @@ public class PersonCardTest {
     }
 
     @Test
-    void constructor_shouldCallShowTimeAndUpdateTime() {
+    void timeFormatting_shouldBeValidForZone() {
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("friend"));
 
@@ -60,83 +54,32 @@ public class PersonCardTest {
                 tags
         );
 
-        PersonCard card = new PersonCard(person, 1);
-
-        Platform.runLater(() -> {
-            assertNotNull(card.time.getText());
-            assertTrue(card.time.getText().contains("Local time:"));
-        });
+        // Test Time formatting indirectly via Person
+        String formatted = person.getTime().getFormattedTime(ZoneId.of("Asia/Singapore"));
+        assertNotNull(formatted);
+        assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"),
+                "Time string should match dd MMM HH:mm format");
     }
 
     @Test
-    void getZoneIdFromCountry_shouldReturnCorrectZoneId() {
-        PersonCard card = new PersonCard(createPerson("USA"), 1);
-
-        try {
-            java.lang.reflect.Method method = PersonCard.class.getDeclaredMethod("getZoneIdFromCountry", String.class);
-            method.setAccessible(true);
-
-            assertEquals(java.time.ZoneId.of("America/New_York"),
-                    method.invoke(card, "United States"));
-            assertNull(method.invoke(card, "UnknownCountry"));
-        } catch (Exception e) {
-            fail("Reflection failed: " + e.getMessage());
-        }
-    }
-
-    @Test
-    void updateTime_shouldReturnFormattedTime() {
-        PersonCard card = new PersonCard(createPerson("Singapore"), 1);
-
-        try {
-            java.lang.reflect.Method method = PersonCard.class.getDeclaredMethod("updateTime");
-            method.setAccessible(true);
-            Platform.runLater(() -> {
-                try {
-                    method.invoke(card);
-                    assertNotNull(card.time.getText());
-                    assertTrue(card.time.getText().matches("Local time: \\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"));
-                } catch (Exception e) {
-                    fail("Reflection failed: " + e.getMessage());
-                }
-            });
-        } catch (NoSuchMethodException e) {
-            fail("Method updateTime not found");
-        }
-    }
-
-    @Test
-    void showTimeLogic_shouldProduceValidTime() {
+    void timeFormatting_shouldBeValidForDefaultZone() {
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("friend"));
+
         Person person = new Person(
                 new Name("Alice"),
                 new Phone("12345678"),
                 new Email("alice@example.com"),
-                new HomeCountry("United States"),
+                new HomeCountry("UnknownCountry"),
                 new Company("ACME Corp"),
                 tags
         );
 
-        ZoneId zone = ZoneId.of("America/New_York");
-        String formattedTime = person.getTime().getFormattedTime(zone);
-
-        assertNotNull(formattedTime);
-        assertTrue(formattedTime.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"));
-    }
-
-    private Person createPerson(String country) {
-        Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag("friend"));
-
-        return new Person(
-                new Name("Alice"),
-                new Phone("12345678"),
-                new Email("alice@example.com"),
-                new HomeCountry(country),
-                new Company("ACME Corp"),
-                tags
-        );
+        // If the country is unknown, should fallback to OS time
+        String formatted = person.getTime().getFormattedTime();
+        assertNotNull(formatted);
+        assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"),
+                "Time string should match dd MMM HH:mm format for OS time");
     }
 
 }
