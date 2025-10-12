@@ -22,12 +22,11 @@ public class PersonCardTest {
 
     @BeforeAll
     static void initToolkit() {
-        Platform.startup(() -> {}); // Initialize JavaFX toolkit once
+        Platform.startup(() -> {});
     }
 
     @Test
     void constructor_shouldRunWithoutException() {
-        // Create a simple Person with tags
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("friend"));
 
@@ -49,7 +48,6 @@ public class PersonCardTest {
 
     @Test
     void constructor_shouldCallShowTimeAndUpdateTime() {
-        // Create a simple Person
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("friend"));
 
@@ -62,10 +60,8 @@ public class PersonCardTest {
                 tags
         );
 
-        // Instantiating PersonCard will call showTime(), which calls updateTime() internally
         PersonCard card = new PersonCard(person, 1);
 
-        // The time label should be updated to something non-null
         Platform.runLater(() -> {
             assertNotNull(card.time.getText());
             assertTrue(card.time.getText().contains("Local time:"));
@@ -76,7 +72,6 @@ public class PersonCardTest {
     void getZoneIdFromCountry_shouldReturnCorrectZoneId() {
         PersonCard card = new PersonCard(createPerson("USA"), 1);
 
-        // Use reflection to call private method
         try {
             java.lang.reflect.Method method = PersonCard.class.getDeclaredMethod("getZoneIdFromCountry", String.class);
             method.setAccessible(true);
@@ -93,7 +88,6 @@ public class PersonCardTest {
     void updateTime_shouldReturnFormattedTime() {
         PersonCard card = new PersonCard(createPerson("Singapore"), 1);
 
-        // Use reflection to call private updateTime()
         try {
             java.lang.reflect.Method method = PersonCard.class.getDeclaredMethod("updateTime");
             method.setAccessible(true);
@@ -124,7 +118,6 @@ public class PersonCardTest {
                 tags
         );
 
-        // Simulate the logic of showTime
         ZoneId zone = ZoneId.of("America/New_York");
         String formattedTime = person.getTime().getFormattedTime(zone);
 
