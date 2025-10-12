@@ -43,7 +43,8 @@ public class AddCommand extends Command {
             """
             Warning: A duplicate person already exists in the address book.
             i.e. Same phone or email
-            Please confirm if this contact should still be added (y/n).
+            Please confirm if this contact should still be added.
+            Enter 'y' to confirm or enter any other input to cancel.
             """;
 
     private final Person toAdd;
