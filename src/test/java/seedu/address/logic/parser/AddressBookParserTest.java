@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -83,12 +82,15 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(
-                new FindCommand(
-                        new SingleFieldContainsKeywordsPredicate(
-                                SingleFieldContainsKeywordsPredicate.TargetField.NAME, keywords)), command);
+                FindCommand.COMMAND_WORD + " " + "n/" + keywords.stream().collect(Collectors.joining(" ")));
+
+        assertEquals(new FindCommand(
+                new SingleFieldContainsKeywordsPredicate(
+                        SingleFieldContainsKeywordsPredicate.TargetField.NAME,
+                        keywords)),
+                command);
     }
 
 
