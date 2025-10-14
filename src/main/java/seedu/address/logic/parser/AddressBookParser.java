@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ConfirmableCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -34,7 +35,7 @@ public class AddressBookParser {
     /**
      * Used for storing the last command that requires confirmation.
      */
-    private static Command pendingCommand = null;
+    private static ConfirmableCommand pendingCommand = null;
 
     /**
      * Parses user input into command for execution.
@@ -59,6 +60,7 @@ public class AddressBookParser {
 
         if (pendingCommand != null) {
             if (commandWord.equalsIgnoreCase("y")) {
+                pendingCommand.confirm();
                 Command toConfirm = pendingCommand;
                 pendingCommand = null;
                 return toConfirm;
@@ -102,7 +104,7 @@ public class AddressBookParser {
         }
     }
 
-    public static void setPendingCommand(Command command) {
+    public static void setPendingCommand(ConfirmableCommand command) {
         pendingCommand = command;
     }
 }

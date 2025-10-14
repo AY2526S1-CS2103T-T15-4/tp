@@ -23,6 +23,24 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicateConfirmed_addsPerson() throws Exception {
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+
+        ModelStubs.ModelStubAcceptingPersonAdded modelStub = new ModelStubs.ModelStubAcceptingPersonAdded();
+        modelStub.addPerson(validPerson);
+
+        CommandResult firstResult = addCommand.execute(modelStub);
+        assertEquals(AddCommand.MESSAGE_DUPLICATE_PERSON_WARNING, firstResult.getFeedbackToUser());
+
+        addCommand.confirm();
+
+        CommandResult confirmedResult = addCommand.execute(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                confirmedResult.getFeedbackToUser());
+    }
+
+    @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubs.ModelStubAcceptingPersonAdded modelStub = new ModelStubs.ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();

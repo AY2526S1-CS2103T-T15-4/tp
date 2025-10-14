@@ -19,6 +19,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ConfirmableCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -112,11 +113,17 @@ public class AddressBookParserTest {
 
     @Test
     public void setPendingCommand_executesAndClears() throws Exception {
-        Command stub = new Command() {
+        ConfirmableCommand stub = new ConfirmableCommand() {
+            @Override
+            public void confirm() {
+                // empty as not needed for this test
+            }
+
             @Override
             public CommandResult execute(Model model) {
                 return new CommandResult("stub executed");
             }
+
         };
 
         AddressBookParser.setPendingCommand(stub);
