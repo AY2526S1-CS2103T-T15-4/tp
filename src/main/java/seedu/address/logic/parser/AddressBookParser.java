@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ConfirmAddCommand;
+import seedu.address.logic.commands.ConfirmableCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -20,7 +20,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 
 /**
  * Parses user input.
@@ -34,9 +33,9 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
-     * Used for storing pending contacts that require confirmation to be added.
+     * Used for storing the last command that requires confirmation.
      */
-    private static Person pendingPerson = null;
+    private static ConfirmableCommand pendingCommand = null;
 
     /**
      * Parses user input into command for execution.
@@ -59,23 +58,20 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        if (pendingPerson != null) {
+        if (pendingCommand != null) {
             if (commandWord.equalsIgnoreCase("y")) {
-                Person personToConfirm = pendingPerson;
-                pendingPerson = null;
-                return new ConfirmAddCommand(personToConfirm);
+                Command toConfirm = pendingCommand.confirm();
+                pendingCommand = null;
+                return toConfirm;
             } else {
-                pendingPerson = null;
+                pendingCommand = null;
             }
         }
 
         switch (commandWord) {
 
-        // AddCommand sets pending person in the event of a duplicate contact.
         case AddCommand.COMMAND_WORD:
-            AddCommand addCommand = new AddCommandParser().parse(arguments);
-            pendingPerson = addCommand.getPersonToAdd();
-            return addCommand;
+            return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -107,4 +103,7 @@ public class AddressBookParser {
         }
     }
 
+    public static void setPendingCommand(ConfirmableCommand command) {
+        pendingCommand = command;
+    }
 }
