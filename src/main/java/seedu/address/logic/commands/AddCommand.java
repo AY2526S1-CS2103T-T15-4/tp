@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends ConfirmableCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -48,6 +48,7 @@ public class AddCommand extends Command {
             """;
 
     private final Person toAdd;
+    private boolean isConfirmed = false;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -61,8 +62,8 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            return new CommandResult(MESSAGE_DUPLICATE_PERSON_WARNING);
+        if (model.hasPerson(toAdd) && !isConfirmed) {
+            return new CommandResult(MESSAGE_DUPLICATE_PERSON_WARNING, this);
         }
 
         model.addPerson(toAdd);
@@ -91,7 +92,8 @@ public class AddCommand extends Command {
                 .toString();
     }
 
-    public Person getPersonToAdd() {
-        return this.toAdd;
+    @Override
+    public void confirm() {
+        isConfirmed = true;
     }
 }

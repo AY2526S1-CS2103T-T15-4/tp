@@ -19,13 +19,31 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Pending command that requires confirmation */
+    private final ConfirmableCommand pendingCommand;
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, ConfirmableCommand pendingCommand) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.pendingCommand = pendingCommand;
+    }
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this(feedbackToUser, showHelp, exit, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with feedback and a pending command.
+     */
+    public CommandResult(String feedbackToUser, ConfirmableCommand pendingCommand) {
+        this(feedbackToUser, false, false, pendingCommand);
     }
 
     /**
@@ -33,7 +51,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, null);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +64,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public ConfirmableCommand getPendingCommand() {
+        return this.pendingCommand;
     }
 
     @Override

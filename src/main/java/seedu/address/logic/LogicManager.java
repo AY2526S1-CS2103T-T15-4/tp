@@ -50,6 +50,15 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
+        // Handle pending confirmable commands
+        if (commandResult.getPendingCommand() != null) {
+            // Only store pendingCommand if the executed command needs confirmation
+            AddressBookParser.setPendingCommand(commandResult.getPendingCommand());
+        } else {
+            // Clear pendingCommand if no confirmation is needed
+            AddressBookParser.setPendingCommand(null);
+        }
+
         try {
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {
