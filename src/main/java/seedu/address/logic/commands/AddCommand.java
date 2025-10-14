@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command implements ConfirmableCommand {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -89,14 +89,5 @@ public class AddCommand extends Command implements ConfirmableCommand {
         return new ToStringBuilder(this)
                 .add("toAdd", toAdd)
                 .toString();
-    }
-
-    public Person getPersonToAdd() {
-        return this.toAdd;
-    }
-
-    @Override
-    public Command confirm() {
-        return new ConfirmAddCommand(toAdd);
     }
 }

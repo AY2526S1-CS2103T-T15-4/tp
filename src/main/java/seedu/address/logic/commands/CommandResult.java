@@ -20,12 +20,12 @@ public class CommandResult {
     private final boolean exit;
 
     /** Pending command that requires confirmation */
-    private final ConfirmableCommand pendingCommand;
+    private final Command pendingCommand;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, ConfirmableCommand pendingCommand) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, Command pendingCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -42,7 +42,7 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with feedback and a pending command.
      */
-    public CommandResult(String feedbackToUser, ConfirmableCommand pendingCommand) {
+    public CommandResult(String feedbackToUser, Command pendingCommand) {
         this(feedbackToUser, false, false, pendingCommand);
     }
 
@@ -66,7 +66,7 @@ public class CommandResult {
         return exit;
     }
 
-    public ConfirmableCommand getPendingCommand() {
+    public Command getPendingCommand() {
         return this.pendingCommand;
     }
 
