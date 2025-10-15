@@ -10,15 +10,17 @@ import java.time.format.DateTimeFormatter;
  * The time displayed currently in this version is only
  * of the OS of the user opening the application.
  */
-public class Time {
+public class TimeFormatter {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM HH:mm");
 
-    public String getFormattedTime() {
+    private TimeFormatter() {} // prevent instantiation
+
+    public static String getFormattedTime() {
         return LocalDateTime.now().format(FORMATTER);
     }
 
-    public String getFormattedTime(ZoneId zone) {
+    public static String getFormattedTime(ZoneId zone) {
         return ZonedDateTime.now(zone).format(FORMATTER);
     }
 }

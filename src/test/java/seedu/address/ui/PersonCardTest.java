@@ -15,6 +15,7 @@ import seedu.address.model.person.HomeCountry;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TimeFormatter;
 import seedu.address.model.tag.Tag;
 
 public class PersonCardTest {
@@ -37,7 +38,7 @@ public class PersonCardTest {
                 .sorted((a, b) -> a.tagName.compareTo(b.tagName))
                 .forEach(tag -> {});
 
-        person.getTime().getFormattedTime();
+        TimeFormatter.getFormattedTime();
     }
 
     @Test
@@ -55,7 +56,7 @@ public class PersonCardTest {
         );
 
         // Test Time formatting indirectly via Person
-        String formatted = person.getTime().getFormattedTime(ZoneId.of("Asia/Singapore"));
+        String formatted = TimeFormatter.getFormattedTime(ZoneId.of("Asia/Singapore"));
         assertNotNull(formatted);
         assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"),
                 "Time string should match dd MMM HH:mm format");
@@ -75,8 +76,8 @@ public class PersonCardTest {
                 tags
         );
 
-        // If the country is unknown, should fallback to OS time
-        String formatted = person.getTime().getFormattedTime();
+        // If the country is unknown, should fall back to OS time
+        String formatted = TimeFormatter.getFormattedTime();
         assertNotNull(formatted);
         assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"),
                 "Time string should match dd MMM HH:mm format for OS time");
