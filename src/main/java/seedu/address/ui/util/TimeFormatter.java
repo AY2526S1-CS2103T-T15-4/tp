@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.ui.util;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -14,7 +14,7 @@ public class TimeFormatter {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM HH:mm");
 
-    private TimeFormatter() {} // prevent instantiation
+    private TimeFormatter() {}
 
     public static String getFormattedTime() {
         return LocalDateTime.now().format(FORMATTER);

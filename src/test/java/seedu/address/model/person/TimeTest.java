@@ -7,13 +7,13 @@ import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.ui.util.TimeFormatter;
+
 public class TimeTest {
 
     @Test
     void getFormattedTime_shouldReturnCorrectFormat() {
         String formatted = TimeFormatter.getFormattedTime();
-
-        // Regex: two digits day, space, three letters month, space, HH:mm
         String pattern = "\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}";
 
         assertTrue(formatted.matches(pattern),
@@ -24,8 +24,6 @@ public class TimeTest {
     void getFormattedTime_withZone_shouldReturnCorrectFormat() {
         ZoneId zone = ZoneId.of("Asia/Singapore");
         String formatted = TimeFormatter.getFormattedTime(zone);
-
-        // Regex: two digits day, space, three letters month, space, HH:mm
         String pattern = "\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}";
 
         assertTrue(formatted.matches(pattern),

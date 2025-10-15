@@ -15,13 +15,14 @@ import seedu.address.model.person.HomeCountry;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.TimeFormatter;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.util.TimeFormatter;
 
 public class PersonCardTest {
 
     @Test
     void constructor_shouldRunWithoutException() {
+        // Create a simple Person with tags
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("friend"));
 
@@ -33,7 +34,6 @@ public class PersonCardTest {
                 new Company("ACME Corp"),
                 tags
         );
-
         person.getTags().stream()
                 .sorted((a, b) -> a.tagName.compareTo(b.tagName))
                 .forEach(tag -> {});
@@ -42,45 +42,16 @@ public class PersonCardTest {
     }
 
     @Test
-    void timeFormatting_shouldBeValidForZone() {
-        Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag("friend"));
-
-        Person person = new Person(
-                new Name("Alice"),
-                new Phone("12345678"),
-                new Email("alice@example.com"),
-                new HomeCountry("Singapore"),
-                new Company("ACME Corp"),
-                tags
-        );
-
-        // Test Time formatting indirectly via Person
+    void timeFormatter_shouldReturnValidFormat() {
         String formatted = TimeFormatter.getFormattedTime(ZoneId.of("Asia/Singapore"));
         assertNotNull(formatted);
-        assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"),
-                "Time string should match dd MMM HH:mm format");
+        assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"));
     }
 
     @Test
-    void timeFormatting_shouldBeValidForDefaultZone() {
-        Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag("friend"));
-
-        Person person = new Person(
-                new Name("Alice"),
-                new Phone("12345678"),
-                new Email("alice@example.com"),
-                new HomeCountry("UnknownCountry"),
-                new Company("ACME Corp"),
-                tags
-        );
-
-        // If the country is unknown, should fall back to OS time
+    void timeFormatter_shouldReturnValidFormatForDefaultZone() {
         String formatted = TimeFormatter.getFormattedTime();
         assertNotNull(formatted);
-        assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"),
-                "Time string should match dd MMM HH:mm format for OS time");
+        assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"));
     }
-
 }

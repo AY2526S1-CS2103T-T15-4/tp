@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.TimeFormatter;
+import seedu.address.ui.util.TimeFormatter;
 
 /**
  * A UI component that displays information of a {@code Person}.
@@ -106,13 +106,11 @@ public class PersonCard extends UiPart<Region> {
         LocalDateTime now = LocalDateTime.now();
         long delayMillis = 60_000 - (now.getSecond() * 1000 + now.getNano() / 1_000_000);
 
-        clock = new Timeline(new KeyFrame(Duration.millis(delayMillis), e -> {
-            updateTime();
-
-            Timeline repeating = new Timeline(new KeyFrame(Duration.minutes(1), ev -> updateTime()));
-            repeating.setCycleCount(Timeline.INDEFINITE);
-            repeating.play();
-        }));
+        clock = new Timeline(
+                new KeyFrame(Duration.millis(delayMillis), e -> updateTime()),
+                new KeyFrame(Duration.minutes(1), e -> updateTime())
+        );
+        clock.setCycleCount(Timeline.INDEFINITE);
         clock.play();
     }
 
