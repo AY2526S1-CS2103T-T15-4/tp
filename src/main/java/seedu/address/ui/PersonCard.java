@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.TimezoneMapper;
 import seedu.address.ui.util.TimeFormatter;
 
 /**
@@ -90,7 +91,7 @@ public class PersonCard extends UiPart<Region> {
         }
 
         try {
-            return ZoneId.of(country.trim());
+            return TimezoneMapper.getZoneIdFromCountry(country);
         } catch (Exception e) {
             return null;
         }
