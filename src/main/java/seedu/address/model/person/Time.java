@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -10,10 +12,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class Time {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MMM HH:mm:ss");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM HH:mm");
 
     public String getFormattedTime() {
         return LocalDateTime.now().format(FORMATTER);
     }
 
+    public String getFormattedTime(ZoneId zone) {
+        return ZonedDateTime.now(zone).format(FORMATTER);
+    }
 }

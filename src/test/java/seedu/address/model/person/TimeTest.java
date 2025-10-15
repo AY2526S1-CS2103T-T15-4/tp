@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.ZoneId;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.util.SampleDataUtil;
@@ -15,22 +17,35 @@ public class TimeTest {
         Time time = new Time();
         String formatted = time.getFormattedTime();
 
-        // Regex: two digits day, hyphen, three letters month, space, HH:mm:ss
-        String pattern = "\\d{2}-[A-Za-z]{3} \\d{2}:\\d{2}:\\d{2}";
+        // Regex: two digits day, space, three letters month, space, HH:mm
+        String pattern = "\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}";
 
         assertTrue(formatted.matches(pattern),
-                "Time string should match DD-MMM HH:mm:ss format");
+                "Time string should match DD-MMM HH:mm format");
     }
 
     @Test
-    void time_shouldChangeAfterOneSecond() throws InterruptedException {
+    void getFormattedTime_withZone_shouldReturnCorrectFormat() {
+        Time time = new Time();
+        ZoneId zone = ZoneId.of("Asia/Singapore");
+        String formatted = time.getFormattedTime(zone);
+
+        // Regex: two digits day, space, three letters month, space, HH:mm
+        String pattern = "\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}";
+
+        assertTrue(formatted.matches(pattern),
+                "Time string with zone should match DD-MMM HH:mm format");
+    }
+
+    @Test
+    void time_shouldChangeAfterOneMinute() throws InterruptedException {
         Time time = new Time();
         String t1 = time.getFormattedTime();
 
-        Thread.sleep(1100); // wait a little over 1 second
+        Thread.sleep(61_000);
         String t2 = time.getFormattedTime();
 
-        assertNotEquals(t1, t2, "Time should update after one second");
+        assertNotEquals(t1, t2, "Time should update after one minute");
     }
 
     @Test
