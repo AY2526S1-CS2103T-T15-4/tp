@@ -1,45 +1,43 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.ui.util.TimeFormatter;
 
 public class TimeTest {
 
     @Test
     void getFormattedTime_shouldReturnCorrectFormat() {
-        Time time = new Time();
-        String formatted = time.getFormattedTime();
-
-        // Regex: two digits day, hyphen, three letters month, space, HH:mm:ss
-        String pattern = "\\d{2}-[A-Za-z]{3} \\d{2}:\\d{2}:\\d{2}";
+        String formatted = TimeFormatter.getFormattedTime();
+        String pattern = "\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}";
 
         assertTrue(formatted.matches(pattern),
-                "Time string should match DD-MMM HH:mm:ss format");
+                "Time string should match DD-MMM HH:mm format");
     }
 
     @Test
-    void time_shouldChangeAfterOneSecond() throws InterruptedException {
-        Time time = new Time();
-        String t1 = time.getFormattedTime();
+    void getFormattedTime_withZone_shouldReturnCorrectFormat() {
+        ZoneId zone = ZoneId.of("Asia/Singapore");
+        String formatted = TimeFormatter.getFormattedTime(zone);
+        String pattern = "\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}";
 
-        Thread.sleep(1100); // wait a little over 1 second
-        String t2 = time.getFormattedTime();
-
-        assertNotEquals(t1, t2, "Time should update after one second");
+        assertTrue(formatted.matches(pattern),
+                "Time string with zone should match DD-MMM HH:mm format");
     }
 
     @Test
-    void getTime_shouldReturnTimeObject() {
-        Person person = SampleDataUtil.getSamplePersons()[0];
+    void time_shouldChangeAfterOneMinute() throws InterruptedException {
+        String t1 = TimeFormatter.getFormattedTime();
 
-        Time time = person.getTime();
+        Thread.sleep(61_000);
+        String t2 = TimeFormatter.getFormattedTime();
 
-        assertNotNull(time, "getTime() should return a non-null Time object");
-        assertTrue(time instanceof Time, "getTime() should return a Time instance");
+        assertNotEquals(t1, t2, "Time should update after one minute");
     }
+
 }

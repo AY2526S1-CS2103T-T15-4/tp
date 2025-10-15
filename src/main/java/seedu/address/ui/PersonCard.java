@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Comparator;
 
 import javafx.animation.KeyFrame;
@@ -11,9 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.TimezoneMapper;
+import seedu.address.ui.util.TimeFormatter;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -65,18 +69,65 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         showTime();
+
+        cardPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene == null && clock != null) {
+                clock.stop();
+            }
+        });
     }
 
-    private void showTime() {
-        clock = new Timeline(
-                new KeyFrame(Duration.ZERO, e -> {
-                    String currentTime = person.getTime().getFormattedTime();
-                    time.setText("Their time: " + currentTime);
+    /**
+     * Gets the time zone based on the user's input.
+     * The input must be a valid ZoneId string (e.g., "Asia/Singapore").
+     * If invalid, returns null (and OS time will be shown instead).
+     *
+     * @param country user-input time zone name
+     * @return ZoneId if valid, else null
+     */
+    private ZoneId getZoneIdFromCountry(String country) {
+        if (country == null || country.isBlank()) {
+            return null;
+        }
 
-                }),
-                new KeyFrame(Duration.seconds(1))
+        try {
+            return TimezoneMapper.getZoneIdFromCountry(country);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * ensures the updating of time on the UI is accurate and
+     * follows the same seconds as OS.
+     */
+    private void showTime() {
+        updateTime();
+
+        LocalDateTime now = LocalDateTime.now();
+        long delayMillis = 60_000 - (now.getSecond() * 1000 + now.getNano() / 1_000_000);
+
+        clock = new Timeline(
+                new KeyFrame(Duration.millis(delayMillis), e -> updateTime()),
+                new KeyFrame(Duration.minutes(1), e -> updateTime())
         );
         clock.setCycleCount(Timeline.INDEFINITE);
         clock.play();
+    }
+
+    /**
+     * Actual display of time on UI
+     */
+    private void updateTime() {
+        ZoneId zone = getZoneIdFromCountry(person.getCountry().value);
+
+        if (zone == null) {
+            time.setVisible(false);
+            return;
+        }
+
+        time.setVisible(true);
+        String formattedTime = TimeFormatter.getFormattedTime(zone);
+        time.setText("Local time: " + formattedTime);
     }
 }

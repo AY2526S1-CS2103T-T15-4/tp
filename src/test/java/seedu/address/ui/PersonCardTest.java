@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.ZoneId;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.util.TimeFormatter;
 
 public class PersonCardTest {
 
@@ -29,12 +34,24 @@ public class PersonCardTest {
                 new Company("ACME Corp"),
                 tags
         );
-
         person.getTags().stream()
                 .sorted((a, b) -> a.tagName.compareTo(b.tagName))
                 .forEach(tag -> {});
 
-        person.getTime().getFormattedTime();
+        TimeFormatter.getFormattedTime();
     }
 
+    @Test
+    void timeFormatter_shouldReturnValidFormat() {
+        String formatted = TimeFormatter.getFormattedTime(ZoneId.of("Asia/Singapore"));
+        assertNotNull(formatted);
+        assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"));
+    }
+
+    @Test
+    void timeFormatter_shouldReturnValidFormatForDefaultZone() {
+        String formatted = TimeFormatter.getFormattedTime();
+        assertNotNull(formatted);
+        assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"));
+    }
 }
