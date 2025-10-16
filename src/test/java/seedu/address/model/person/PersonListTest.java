@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -151,5 +152,46 @@ public class PersonListTest {
     @Test
     public void toStringMethod() {
         assertEquals(personList.asUnmodifiableObservableList().toString(), personList.toString());
+    }
+
+    @Test
+    public void equals() {
+        PersonList list1 = new PersonList();
+        list1.add(ALICE);
+        PersonList list2 = new PersonList();
+        list2.add(ALICE);
+
+        // same object -> returns true
+        assertTrue(list1.equals(list1));
+
+        // same contents -> returns true
+        assertTrue(list1.equals(list2));
+
+        // different contents -> returns false
+        list2.add(BOB);
+        assertFalse(list1.equals(list2));
+
+        // null -> returns false
+        assertFalse(list1.equals(null));
+
+        // different type -> returns false
+        assertFalse(list1.equals("string"));
+
+        // hashCode consistent with equals
+        assertEquals(list1.hashCode(), new PersonList() {{
+            add(ALICE);
+        }}.hashCode());
+    }
+
+    @Test
+    public void iterator_returnsExpectedElements() {
+        personList.add(ALICE);
+        personList.add(BOB);
+
+        Iterator<Person> iterator = personList.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(ALICE, iterator.next());
+        assertEquals(BOB, iterator.next());
+        assertFalse(iterator.hasNext());
     }
 }
