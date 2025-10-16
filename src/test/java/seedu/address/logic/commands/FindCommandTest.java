@@ -92,4 +92,14 @@ public class FindCommandTest {
                 TargetField.NAME,
                 Arrays.asList(userInput.split("\\s+")));
     }
+
+    @Test
+    public void execute_caseInsensitiveMatching_personsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        SingleFieldContainsKeywordsPredicate predicate = preparePredicate("kurz ELLE kunz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    }
 }
