@@ -178,9 +178,9 @@ public class PersonListTest {
         assertFalse(list1.equals("string"));
 
         // hashCode consistent with equals
-        assertEquals(list1.hashCode(), new PersonList() {{
-            add(ALICE);
-        }}.hashCode());
+        PersonList list3 = new PersonList();
+        list3.add(ALICE);
+        assertEquals(list1.hashCode(), list3.hashCode());
     }
 
     @Test
