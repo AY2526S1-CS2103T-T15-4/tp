@@ -33,7 +33,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditCommand extends ConfirmableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -52,11 +52,18 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_NO_CHANGE = "Nothing to update, fields are already set to provided values";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-
+    public static final String MESSAGE_DUPLICATE_PERSON_WARNING =
+            """
+            Warning: A duplicate person already exists in the address book.
+            i.e. Same phone or email
+            Please confirm if this contact should still be edited.
+            Enter 'y' to confirm or enter any other input to cancel.
+            """;
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private boolean isConfirmed = false;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -82,8 +89,18 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (editedPerson.equals(personToEdit)) {
+            throw new CommandException(MESSAGE_NO_CHANGE);
+        }
+
+        boolean hasSameFields =
+                model.getAddressBook().getPersonList()
+                        .stream().anyMatch(
+                                currentPerson -> !currentPerson.equals(personToEdit)
+                                        && (currentPerson.isSamePerson(editedPerson)));
+
+        if (hasSameFields && !isConfirmed) {
+            return new CommandResult(MESSAGE_DUPLICATE_PERSON_WARNING, this);
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -130,6 +147,11 @@ public class EditCommand extends Command {
                 .add("index", index)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
+    }
+
+    @Override
+    public void confirm() {
+        this.isConfirmed = true;
     }
 
     /**
