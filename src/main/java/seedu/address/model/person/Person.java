@@ -25,11 +25,12 @@ public class Person {
     private final HomeCountry country;
     private final Company company;
     private final Set<Tag> tags = new HashSet<>();
+    private final boolean isFlagged;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, HomeCountry country, Company company, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, HomeCountry country, Company company, Set<Tag> tags, boolean isFlagged) {
         requireAllNonNull(name, phone, email, country, company, tags);
         this.name = name;
         this.phone = phone;
@@ -37,6 +38,12 @@ public class Person {
         this.country = country;
         this.company = company;
         this.tags.addAll(tags);
+        this.isFlagged = isFlagged;
+    }
+
+    public Person(Name name, Phone phone, Email email,
+                  HomeCountry country, Company company, Set<Tag> tags) {
+        this(name, phone, email, country, company, tags, false);
     }
 
     public Name getName() {
@@ -65,6 +72,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public boolean isFlagged() {
+        return isFlagged;
     }
 
     /**
@@ -100,13 +111,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && country.equals(otherPerson.country)
                 && company.equals(otherPerson.company)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && isFlagged == otherPerson.isFlagged;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, country, company, tags);
+        return Objects.hash(name, phone, email, country, company, tags, isFlagged);
     }
 
     @Override
@@ -118,6 +130,7 @@ public class Person {
                 .add("country", country)
                 .add("company", company)
                 .add("tags", tags)
+                .add("flagged", isFlagged)
                 .toString();
     }
 
