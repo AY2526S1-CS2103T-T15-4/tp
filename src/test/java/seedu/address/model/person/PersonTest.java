@@ -103,14 +103,14 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", country=" + ALICE.getCountry() + ", company=" + ALICE.getCompany()
-                + ", tags=" + ALICE.getTags() + "}";
+                + ", tags=" + ALICE.getTags() + ", isFlagged=" + ALICE.isFlagged() + "}";
         assertEquals(expected, ALICE.toString());
     }
 
     @Test
     public void hashCode_shouldBeConsistentWithFields() {
         Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.hashCode() == aliceCopy.hashCode());
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
     }
 
 }
