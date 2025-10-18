@@ -60,7 +60,7 @@ public class UnflagCommand extends Command {
         );
 
         model.setPerson(personToUnflag, unflaggedPerson);
-        return new CommandResult(String.format(MESSAGE_UNFLAG_PERSON_SUCCESS, unflaggedPerson.getName()));
+        return new CommandResult(String.format(MESSAGE_UNFLAG_PERSON_SUCCESS, Messages.format(personToUnflag)));
     }
 
     @Override
