@@ -93,6 +93,10 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different flagged status -> returns false
+        editedAlice = new PersonBuilder(ALICE).withIsFlagged(true).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test

@@ -29,6 +29,7 @@ public class PersonBuilder {
     private Email email;
     private HomeCountry country;
     private Set<Tag> tags;
+    private boolean isFlagged;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +41,7 @@ public class PersonBuilder {
         country = new HomeCountry(DEFAULT_COUNTRY);
         company = new Company(DEFAULT_COMPANY);
         tags = new HashSet<>();
+        isFlagged = false;
     }
 
     /**
@@ -52,6 +54,7 @@ public class PersonBuilder {
         country = personToCopy.getCountry();
         company = personToCopy.getCompany();
         tags = new HashSet<>(personToCopy.getTags());
+        isFlagged = personToCopy.isFlagged();
     }
 
     /**
@@ -102,7 +105,15 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isFlagged} status of the {@code Person} that we are building.
+     */
+    public PersonBuilder withIsFlagged(boolean isFlagged) {
+        this.isFlagged = isFlagged;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, country, company, tags);
+        return new Person(name, phone, email, country, company, tags, isFlagged);
     }
 }
