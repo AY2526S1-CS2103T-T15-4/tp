@@ -20,6 +20,10 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code FlagCommand}.
+ */
 public class FlagCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -73,6 +77,18 @@ public class FlagCommandTest {
 
         FlagCommand flagCommand = new FlagCommand(outOfBoundIndex);
         assertCommandFailure(flagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_alreadyFlaggedPerson_throwsCommandException() {
+        Person personToFlag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        // create a flagged person in the model
+        Person flaggedPerson = new PersonBuilder(personToFlag).withFlag(true).build();
+        model.setPerson(personToFlag, flaggedPerson);
+
+        FlagCommand flagCommand = new FlagCommand(INDEX_FIRST_PERSON);
+
+        assertCommandFailure(flagCommand, model, FlagCommand.MESSAGE_ALREADY_FLAGGED);
     }
 
     @Test

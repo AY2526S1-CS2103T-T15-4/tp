@@ -130,7 +130,7 @@ public class Person {
                 .add("country", country)
                 .add("company", company)
                 .add("tags", tags)
-                .add("flagged", isFlagged)
+                .add("isFlagged", isFlagged)
                 .toString();
     }
 
