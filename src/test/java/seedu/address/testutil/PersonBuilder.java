@@ -108,7 +108,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code isFlagged} status of the {@code Person} that we are building.
      */
-    public PersonBuilder withIsFlagged(boolean isFlagged) {
+    public PersonBuilder withFlag(boolean isFlagged) {
         this.isFlagged = isFlagged;
         return this;
     }

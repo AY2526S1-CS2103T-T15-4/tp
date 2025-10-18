@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 public class FlagCommandTest {
 
@@ -28,21 +29,79 @@ public class FlagCommandTest {
         Person personToFlag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         FlagCommand flagCommand = new FlagCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(FlagCommand.MESSAGE_FLAG_PERSON_SUCCESS,
-                Messages.format(personToFlag));
+        Person flaggedPerson = new PersonBuilder(personToFlag).withFlag(true).build();
+        String expectedMessage = String.format(FlagCommand.MESSAGE_FLAG_PERSON_SUCCESS, Messages.format(flaggedPerson));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person flaggedPerson = new Person(
-                personToFlag.getName(),
-                personToFlag.getPhone(),
-                personToFlag.getEmail(),
-                personToFlag.getCountry(),
-                personToFlag.getCompany(),
-                personToFlag.getTags(),
-                true // flagged
-        );
         expectedModel.setPerson(personToFlag, flaggedPerson);
 
         assertCommandSuccess(flagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        FlagCommand flagCommand = new FlagCommand(outOfBoundIndex);
+
+        assertCommandFailure(flagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexFilteredList_success() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Person personToFlag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        FlagCommand flagCommand = new FlagCommand(INDEX_FIRST_PERSON);
+
+        Person flaggedPerson = new PersonBuilder(personToFlag).withFlag(true).build();
+        String expectedMessage = String.format(FlagCommand.MESSAGE_FLAG_PERSON_SUCCESS, Messages.format(flaggedPerson));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToFlag, flaggedPerson);
+
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+
+        assertCommandSuccess(flagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        FlagCommand flagCommand = new FlagCommand(outOfBoundIndex);
+        assertCommandFailure(flagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        FlagCommand flagFirstCommand = new FlagCommand(INDEX_FIRST_PERSON);
+        FlagCommand flagSecondCommand = new FlagCommand(INDEX_SECOND_PERSON);
+
+        // same object -> returns true
+        assertTrue(flagFirstCommand.equals(flagFirstCommand));
+
+        // same values -> returns true
+        FlagCommand flagFirstCommandCopy = new FlagCommand(INDEX_FIRST_PERSON);
+        assertTrue(flagFirstCommand.equals(flagFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(flagFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(flagFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(flagFirstCommand.equals(flagSecondCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Index targetIndex = Index.fromOneBased(1);
+        FlagCommand flagCommand = new FlagCommand(targetIndex);
+        String expected = FlagCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, flagCommand.toString());
     }
 }

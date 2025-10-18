@@ -95,7 +95,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different flagged status -> returns false
-        editedAlice = new PersonBuilder(ALICE).withIsFlagged(true).build();
+        editedAlice = new PersonBuilder(ALICE).withFlag(true).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
