@@ -22,11 +22,13 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ConfirmableCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FlagCommand;
+import seedu.address.logic.commands.UnflagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -94,6 +96,17 @@ public class AddressBookParserTest {
                 command);
     }
 
+    @Test
+    public void parseCommand_flag() throws Exception {
+        FlagCommand command = (FlagCommand) parser.parseCommand(FlagCommand.COMMAND_WORD + " 1");
+        assertEquals(new FlagCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_unflag() throws Exception {
+        UnflagCommand command = (UnflagCommand) parser.parseCommand(UnflagCommand.COMMAND_WORD + " 1");
+        assertEquals(new UnflagCommand(INDEX_FIRST_PERSON), command);
+    }
 
     @Test
     public void parseCommand_help() throws Exception {
