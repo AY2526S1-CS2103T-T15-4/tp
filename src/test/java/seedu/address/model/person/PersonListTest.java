@@ -194,4 +194,57 @@ public class PersonListTest {
         assertEquals(BOB, iterator.next());
         assertFalse(iterator.hasNext());
     }
+
+    @Test
+    public void setPersonByReference_existingPerson_replacesCorrectInstance() {
+        PersonList personList = new PersonList();
+        Person alice = new PersonBuilder().withName("Alice").build();
+        Person bob = new PersonBuilder().withName("Bob").build();
+
+        personList.add(alice);
+
+        personList.setPersonByReference(alice, bob);
+
+        assertTrue(personList.asUnmodifiableObservableList().contains(bob));
+        assertFalse(personList.asUnmodifiableObservableList().contains(alice));
+    }
+
+    @Test
+    public void setPersonByReference_nonExistingPerson_throwsException() {
+        PersonList personList = new PersonList();
+        Person alice = new PersonBuilder().withName("Alice").build();
+        Person bob = new PersonBuilder().withName("Bob").build();
+
+        assertThrows(PersonNotFoundException.class, () -> personList.setPersonByReference(alice, bob));
+    }
+
+    @Test
+    public void removeByReference_existingPerson_removesCorrectInstance() {
+        PersonList personList = new PersonList();
+        Person alice = new PersonBuilder().withName("Alice").build();
+        Person aliceDuplicate = new PersonBuilder().withName("Alice").build();
+
+        personList.add(alice);
+        personList.add(aliceDuplicate);
+
+        personList.removeByReference(alice);
+
+        boolean foundAlice = false;
+        boolean foundDuplicate = false;
+        for (Person p : personList) {
+            if (p == alice) foundAlice = true;
+            if (p == aliceDuplicate) foundDuplicate = true;
+        }
+
+        assertFalse(foundAlice);
+        assertTrue(foundDuplicate);
+    }
+
+    @Test
+    public void removeByReference_nonExistingPerson_throwsException() {
+        PersonList personList = new PersonList();
+        Person alice = new PersonBuilder().withName("Alice").build();
+
+        assertThrows(PersonNotFoundException.class, () -> personList.removeByReference(alice));
+    }
 }

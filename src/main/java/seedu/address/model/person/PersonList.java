@@ -60,6 +60,22 @@ public class PersonList implements Iterable<Person> {
     }
 
     /**
+     * Replaces the exact person instance {@code target} in the list with {@code editedPerson}.
+     * Uses reference equality (==) instead of equals().
+     */
+    public void setPersonByReference(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i) == target) { // exact reference match
+                internalList.set(i, editedPerson);
+                return;
+            }
+        }
+        throw new PersonNotFoundException();
+    }
+
+    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
@@ -68,6 +84,31 @@ public class PersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Removes the exact {@code target} person from the list.
+     * Throws PersonNotFoundException if the target is not found.
+     *
+     * Uses reference equality to ensure that when duplicates exist,
+     * the correct instance (same memory reference) is removed.
+     */
+    public void removeByReference(Person target) {
+        requireNonNull(target);
+
+        int index = -1;
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i) == target) { // reference equality
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        internalList.remove(index);
     }
 
     public void setPersons(PersonList replacement) {

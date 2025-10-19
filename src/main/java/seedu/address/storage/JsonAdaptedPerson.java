@@ -31,14 +31,19 @@ class JsonAdaptedPerson {
     private final String country;
     private final String company;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final boolean isFlagged;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("country") String country,
-            @JsonProperty("company") String company, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("country") String country,
+                             @JsonProperty("company") String company,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("isFlagged") boolean isFlagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +52,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.isFlagged = isFlagged;
     }
 
     /**
@@ -61,6 +67,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        isFlagged = source.isFlagged();
     }
 
     /**
@@ -117,7 +124,7 @@ class JsonAdaptedPerson {
         final Company modelCompany = new Company(company);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelCountry, modelCompany, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelCountry, modelCompany, modelTags, isFlagged);
     }
 
 }
