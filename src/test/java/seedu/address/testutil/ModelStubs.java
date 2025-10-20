@@ -150,6 +150,11 @@ public class ModelStubs {
         public void addMeeting(Person target, Meeting meeting) {
             throw fail();
         }
+
+        @Override
+        public void deleteMeeting(Person target, Meeting meeting) {
+            throw fail();
+        }
     }
 
     /**
