@@ -25,18 +25,21 @@ public class Person {
     private final HomeCountry country;
     private final Company company;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Meeting> meetings = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, HomeCountry country, Company company, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, country, company, tags);
+    public Person(Name name, Phone phone, Email email, HomeCountry country, Company company, Set<Tag> tags,
+                  Set<Meeting> meetings) {
+        requireAllNonNull(name, phone, email, country, company, tags, meetings);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.country = country;
         this.company = company;
         this.tags.addAll(tags);
+        this.meetings.addAll(meetings);
     }
 
     public Name getName() {
@@ -58,7 +61,6 @@ public class Person {
     public Company getCompany() {
         return company;
     }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -67,6 +69,17 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Set<Meeting> getMeetings() {
+        return Collections.unmodifiableSet(meetings);
+    }
+    /**
+     * Returns a new Person with an updated set of meetings including the new meeting.
+     */
+    public Person withAddedMeeting(Meeting newMeeting) {
+        Set<Meeting> updatedMeetings = new HashSet<>(meetings);
+        updatedMeetings.add(newMeeting);
+        return new Person(name, phone, email, country, company, tags, updatedMeetings);
+    }
     /**
      * Returns true if both persons have the same phone or email.
      * This defines a weaker notion of equality between two persons.

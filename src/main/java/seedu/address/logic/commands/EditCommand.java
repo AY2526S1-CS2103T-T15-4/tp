@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -39,7 +40,9 @@ public class EditCommand extends ConfirmableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values will be overwritten by the input values. "
+            + "Meetings cannot be edited with this command; use the addm command instead.\n"
+            // PLACEHOLDER ABOVE, EDIT MEETINGS TO BE IMPLEMENTED
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -121,8 +124,9 @@ public class EditCommand extends ConfirmableCommand {
         HomeCountry updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
         Company updatedCompany = editPersonDescriptor.getCompany().orElse(personToEdit.getCompany());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Meeting> unchangedMeetings = personToEdit.getMeetings();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedCountry, updatedCompany, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedCountry, updatedCompany, updatedTags, unchangedMeetings);
     }
 
     @Override

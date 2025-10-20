@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Meeting;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String country;
     private final String company;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedMeeting> meetings = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,7 +40,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("country") String country,
-            @JsonProperty("company") String company, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("company") String company, @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty(
+                    "meetings") List<JsonAdaptedMeeting> meetings) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,6 +49,9 @@ class JsonAdaptedPerson {
         this.company = company;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (meetings != null) {
+            this.meetings.addAll(meetings);
         }
     }
 
@@ -60,6 +66,9 @@ class JsonAdaptedPerson {
         company = source.getCompany().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        meetings.addAll(source.getMeetings().stream()
+                .map(JsonAdaptedMeeting::new)
                 .collect(Collectors.toList()));
     }
 
@@ -116,8 +125,13 @@ class JsonAdaptedPerson {
         }
         final Company modelCompany = new Company(company);
 
+        final Set<Meeting> modelMeetings = new HashSet<>();
+        for (JsonAdaptedMeeting meeting : meetings) {
+            modelMeetings.add(meeting.toModelType());
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelCountry, modelCompany, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelCountry, modelCompany, modelTags, modelMeetings);
     }
 
 }

@@ -1,9 +1,12 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Company;
@@ -13,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Meeting;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -23,27 +27,34 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new HomeCountry("Singapore"),
                 new Company("Shopee"),
-                getTagSet("friends")),
+                getTagSet("friends"),
+                getMeetingSet("01-11-2025 10:00 Project Kickoff", "2025-11-02 14:30")
+            ),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new HomeCountry("Korea"),
                 new Company("Meta"),
-                getTagSet("colleagues", "friends")),
+                getTagSet("colleagues", "friends"),
+                getMeetingSet("03-11-2025 09:00 Team Sync")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new HomeCountry("Switzerland"),
                 new Company("Google"),
-                getTagSet("neighbours")),
+                getTagSet("neighbours"),
+                getMeetingSet()),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new HomeCountry("China"),
                 new Company("Amazon"),
-                getTagSet("family")),
+                getTagSet("family"),
+                getMeetingSet("04-11-2025 15:00 Family Call")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new HomeCountry("Russia"),
                 new Company("Apple"),
-                getTagSet("classmates")),
+                getTagSet("classmates"),
+                getMeetingSet("02-03-2025")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new HomeCountry("Germany"),
                 new Company("Microsoft"),
-                getTagSet("colleagues"))
+                getTagSet("colleagues"),
+                getMeetingSet())
         };
     }
 
@@ -62,6 +73,27 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a meeting set containing the list of meeting strings given.
+     * Each string should be in the format "DD-MM-YYYY HH:MM [description]".
+     * If no description is provided, the meeting will have no description.
+     */
+    public static Set<Meeting> getMeetingSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(str -> {
+                    String[] parts = str.split(" ", 3); // Split on first two spaces (for time and optional description)
+                    String timePart = parts[0] + " " + parts[1]; // Combine date and time
+                    String description = parts.length > 2 ? parts[2] : null;
+                    try {
+                        LocalDateTime meetingTime = ParserUtil.parseMeetingTime(timePart);
+                        return new Meeting(meetingTime, description);
+                    } catch (Exception e) {
+                        throw new IllegalArgumentException("Invalid meeting time format: " + timePart, e);
+                    }
+                })
+                .collect(Collectors.toCollection(HashSet::new));
     }
 
 }
