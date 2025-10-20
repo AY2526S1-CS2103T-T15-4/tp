@@ -75,8 +75,8 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         updateMeetings();
 
-        if (person.getMeetings() instanceof ObservableList) {
-            ((ObservableList<?>) person.getMeetings()).addListener((ListChangeListener.Change<?> change) -> {
+        if (person.getMeetings() instanceof ObservableList<?> temp) {
+            temp.addListener((ListChangeListener.Change<?> change) -> {
                 updateMeetings();
             });
         }

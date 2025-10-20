@@ -3,15 +3,35 @@ package seedu.address.model.person;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/**
+ * Represents a meeting associated with a person in the address book.
+ * A meeting consists of a {@link LocalDateTime} indicating when it occurs,
+ * and an optional description.
+ */
 public class Meeting {
+    /**
+     * The date and time of the meeting.
+     */
     public final LocalDateTime meetingTime;
+    /**
+     * An optional description of the meeting.
+     */
     public final Optional<String> description;
-
+    /**
+     * Constructs a {@code Meeting} with the specified time and optional description.
+     *
+     * @param meetingTime The {@link LocalDateTime} of the meeting. Must not be {@code null}.
+     * @param description The description of the meeting. May be {@code null}.
+     */
     public Meeting(LocalDateTime meetingTime, String description) {
         this.meetingTime = meetingTime;
         this.description = Optional.ofNullable(description);
     }
-
+    /**
+     * Constructs a {@code Meeting} with no description.
+     *
+     * @param meetingTime The {@link LocalDateTime} of the meeting. Must not be {@code null}.
+     */
     public Meeting(LocalDateTime meetingTime) {
         this(meetingTime, null);
     }

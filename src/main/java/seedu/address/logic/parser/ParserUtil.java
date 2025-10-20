@@ -141,7 +141,18 @@ public class ParserUtil {
         }
         return tagSet;
     }
-
+    /**
+     * Parses a string representing a meeting time into a {@link LocalDateTime} object.
+     * <p>
+     * The expected format of the input string is {@code "dd-MM-yyyy HH:mm"} (e.g. {@code "25-12-2025 14:30"}).
+     * Leading and trailing whitespace will be ignored.
+     * </p>
+     *
+     * @param meetingTime The string containing the meeting time to parse. Must not be {@code null}.
+     * @return A {@code LocalDateTime} representing the parsed meeting time.
+     * @throws ParseException If the input string is {@code null}, does not match the expected format,
+     *                        or cannot be parsed into a valid {@code LocalDateTime}.
+     */
     public static LocalDateTime parseMeetingTime(String meetingTime) throws ParseException {
         requireNonNull(meetingTime);
         String trimmedTime = meetingTime.trim();
