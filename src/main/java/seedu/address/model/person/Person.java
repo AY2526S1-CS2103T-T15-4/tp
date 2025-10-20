@@ -25,11 +25,13 @@ public class Person {
     private final HomeCountry country;
     private final Company company;
     private final Set<Tag> tags = new HashSet<>();
+    private final Link link;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, HomeCountry country, Company company, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, HomeCountry country, Company company, Set<Tag> tags,
+                  Link link) {
         requireAllNonNull(name, phone, email, country, company, tags);
         this.name = name;
         this.phone = phone;
@@ -37,6 +39,7 @@ public class Person {
         this.country = country;
         this.company = company;
         this.tags.addAll(tags);
+        this.link = link;
     }
 
     public Name getName() {
@@ -65,6 +68,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Link getLink() {
+        return link;
     }
 
     /**
@@ -100,25 +107,32 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && country.equals(otherPerson.country)
                 && company.equals(otherPerson.company)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && Objects.equals(link, otherPerson.link);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, country, company, tags);
+        return Objects.hash(name, phone, email, country, company, tags, link);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder tsb = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("country", country)
                 .add("company", company)
                 .add("tags", tags)
-                .toString();
+                .add("link", link);
+
+        if (link != null) {
+            tsb.add("link", link);
+        }
+
+        return tsb.toString();
     }
 
 }
