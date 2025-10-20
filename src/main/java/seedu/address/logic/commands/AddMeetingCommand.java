@@ -26,7 +26,8 @@ public class AddMeetingCommand extends Command {
             + PREFIX_MEETING + "20-10-2025 14:30";
 
     public static final String MESSAGE_SUCCESS = "New meeting added for %1$s: %2$s";
-    public static final String MESSAGE_DUPLICATE_MEETING = "This meeting time is already scheduled for the person.";
+    public static final String MESSAGE_DUPLICATE_MEETING = "This meeting time is already scheduled for another "
+            + "meeting.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found at index %1$s";
 
     private final Index index;
@@ -63,7 +64,9 @@ public class AddMeetingCommand extends Command {
         }
 
         Person personToUpdate = lastShownList.get(index.getZeroBased());
-        if (personToUpdate.getMeetings().stream().anyMatch(x-> x == meeting)) {
+        if (model.getAddressBook().getPersonList().stream()
+                .anyMatch(person-> person.getMeetings().stream()
+                        .anyMatch(currentMeeting -> currentMeeting.equals(meeting)))) {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
         }
 

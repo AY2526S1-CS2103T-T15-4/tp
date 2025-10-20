@@ -36,7 +36,7 @@ public class Meeting {
         }
 
         Meeting otherMeeting = (Meeting) other;
-        return otherMeeting.description.equals(this.description) && otherMeeting.meetingTime.equals(this.meetingTime);
+        return otherMeeting.meetingTime.equals(this.meetingTime);
     }
 
     @Override
