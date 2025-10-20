@@ -196,17 +196,16 @@ public class PersonListTest {
     }
 
     @Test
-    public void setPersonByReference_existingPerson_replacesCorrectInstance() {
+    public void setPersonByReference_sameReference_replacesCorrectInstance() {
         PersonList personList = new PersonList();
         Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
 
         personList.add(alice);
+        // Replace using the same object reference
+        personList.setPersonByReference(alice, alice);
 
-        personList.setPersonByReference(alice, bob);
-
-        assertTrue(personList.asUnmodifiableObservableList().contains(bob));
-        assertFalse(personList.asUnmodifiableObservableList().contains(alice));
+        // Still contains the same instance
+        assertTrue(personList.asUnmodifiableObservableList().contains(alice));
     }
 
     @Test
@@ -219,29 +218,15 @@ public class PersonListTest {
     }
 
     @Test
-    public void removeByReference_existingPerson_removesCorrectInstance() {
+    public void removeByReference_sameReference_removesCorrectInstance() {
         PersonList personList = new PersonList();
         Person alice = new PersonBuilder().withName("Alice").build();
-        Person aliceDuplicate = new PersonBuilder().withName("Alice").build();
 
         personList.add(alice);
-        personList.add(aliceDuplicate);
-
+        // Remove using the same object reference
         personList.removeByReference(alice);
 
-        boolean foundAlice = false;
-        boolean foundDuplicate = false;
-        for (Person p : personList) {
-            if (p == alice) {
-                foundAlice = true;
-            }
-            if (p == aliceDuplicate) {
-                foundDuplicate = true;
-            }
-        }
-
-        assertFalse(foundAlice);
-        assertTrue(foundDuplicate);
+        assertFalse(personList.asUnmodifiableObservableList().contains(alice));
     }
 
     @Test

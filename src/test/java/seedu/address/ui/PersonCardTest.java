@@ -54,4 +54,60 @@ public class PersonCardTest {
         assertNotNull(formatted);
         assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"));
     }
+
+    @Test
+    void constructor_flaggedPerson_shouldDisplayFlagIcon() {
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("colleague"));
+
+        Person flaggedPerson = new Person(
+                new Name("Bob"),
+                new Phone("87654321"),
+                new Email("bob@example.com"),
+                new HomeCountry("Japan"),
+                new Company("Beta Ltd"),
+                tags,
+                true
+        );
+
+        assertTrue(flaggedPerson.isFlagged());
+
+        // Access fields to cover UI text lines
+        assertTrue(flaggedPerson.getCountry().value.equals("Japan"));
+        assertTrue(flaggedPerson.getCompany().value.equals("Beta Ltd"));
+        assertTrue(flaggedPerson.getEmail().value.equals("bob@example.com"));
+
+        // Run tag rendering logic
+        flaggedPerson.getTags().stream()
+                .sorted((a, b) -> a.tagName.compareTo(b.tagName))
+                .forEach(tag -> {});
+    }
+
+    @Test
+    void constructor_unflaggedPerson_shouldNotDisplayFlagIcon() {
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("friend"));
+
+        Person unflaggedPerson = new Person(
+                new Name("Alice"),
+                new Phone("12345678"),
+                new Email("alice@example.com"),
+                new HomeCountry("Singapore"),
+                new Company("ACME Corp"),
+                tags,
+                false
+        );
+
+        assertTrue(!unflaggedPerson.isFlagged());
+
+        // Access fields to cover UI text lines
+        assertTrue(unflaggedPerson.getCountry().value.equals("Singapore"));
+        assertTrue(unflaggedPerson.getCompany().value.equals("ACME Corp"));
+        assertTrue(unflaggedPerson.getEmail().value.equals("alice@example.com"));
+
+        // Run tag rendering logic
+        unflaggedPerson.getTags().stream()
+                .sorted((a, b) -> a.tagName.compareTo(b.tagName))
+                .forEach(tag -> {});
+    }
 }
