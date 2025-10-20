@@ -113,7 +113,8 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && country.equals(otherPerson.country)
                 && company.equals(otherPerson.company)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && meetings.equals(otherPerson.meetings);
     }
 
     @Override
