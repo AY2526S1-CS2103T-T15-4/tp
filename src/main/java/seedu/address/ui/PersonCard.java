@@ -72,9 +72,14 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (meetings != null) {
-            person.getMeetings().forEach(meeting ->
-                    meetings.getChildren().add(new Label(meeting.toString()))
-            );
+            int index = 1;
+            for (var meeting : person.getMeetings()) {
+                Label meetingLabel = new Label(index + ". " + meeting.toString());
+                meetingLabel.getStyleClass().add("cell_small_label"); // keep font consistent
+                meetingLabel.setStyle("-fx-padding: 0 0 0 10;"); // optional indent
+                meetings.getChildren().add(meetingLabel);
+                index++;
+            }
         }
         showTime();
 
