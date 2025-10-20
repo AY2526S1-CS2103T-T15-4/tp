@@ -144,6 +144,7 @@ Format: `flag INDEX`
 Examples:
 * `list` followed by `flag 2` flags the 2nd person in the address book given that the contact is unflagged.
 * `find n/Betsy` followed by 'flag 1' flags the 1st person in the result of the `find` command.
+  ![result for 'flag 1'](images/flagCommand.png)
 
 ### Unflagging a person : `unflag`
 
@@ -159,6 +160,7 @@ Format: `unflag INDEX`
 Examples:
 * `list` followed by `unflag 2` unflags the 2nd person in the address book given that the contact is flagged.
 * `find n/Betsy` followed by 'unflag 1' unflags the 1st person in the result of the `find` command.
+  ![result for 'unflag 1'](images/unflagCommand.png)
 
 ### Deleting a person : `delete`
 
