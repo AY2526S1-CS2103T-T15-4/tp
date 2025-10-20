@@ -56,7 +56,6 @@ public class JsonAdaptedMeeting {
         } catch (IllegalValueException e) {
             throw new IllegalValueException(INVALID_MEETING_TIME_MESSAGE, e);
         }
-
         // Description can be null
         return new Meeting(modelMeetingTime, description);
     }
