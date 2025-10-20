@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.TimezoneMapper;
@@ -50,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
+    private VBox meetings;
+    @FXML
     private FlowPane tags;
 
     private Timeline clock;
@@ -68,6 +71,11 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (meetings != null) {
+            person.getMeetings().forEach(meeting ->
+                    meetings.getChildren().add(new Label(meeting.toString()))
+            );
+        }
         showTime();
 
         cardPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
