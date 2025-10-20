@@ -6,6 +6,8 @@ import java.util.Comparator;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -71,7 +73,27 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        updateMeetings();
+
+        if (person.getMeetings() instanceof ObservableList) {
+            ((ObservableList<?>) person.getMeetings()).addListener((ListChangeListener.Change<?> change) -> {
+                updateMeetings();
+            });
+        }
+        showTime();
+
+        cardPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene == null && clock != null) {
+                clock.stop();
+            }
+        });
+    }
+    /**
+     * Updates the meetings displayed in the VBox.
+     */
+    private void updateMeetings() {
         if (meetings != null) {
+            meetings.getChildren().clear(); // Clear existing meeting labels
             int index = 1;
             for (var meeting : person.getMeetings()) {
                 Label meetingLabel = new Label(index + ". " + meeting.toString());
@@ -81,13 +103,6 @@ public class PersonCard extends UiPart<Region> {
                 index++;
             }
         }
-        showTime();
-
-        cardPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if (newScene == null && clock != null) {
-                clock.stop();
-            }
-        });
     }
 
     /**
