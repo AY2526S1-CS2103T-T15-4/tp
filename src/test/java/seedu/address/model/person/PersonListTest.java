@@ -232,8 +232,12 @@ public class PersonListTest {
         boolean foundAlice = false;
         boolean foundDuplicate = false;
         for (Person p : personList) {
-            if (p == alice) foundAlice = true;
-            if (p == aliceDuplicate) foundDuplicate = true;
+            if (p == alice) {
+                foundAlice = true;
+            }
+            if (p == aliceDuplicate) {
+                foundDuplicate = true;
+            }
         }
 
         assertFalse(foundAlice);
