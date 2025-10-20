@@ -81,6 +81,14 @@ public class Person {
         return new Person(name, phone, email, country, company, tags, updatedMeetings);
     }
     /**
+     * Returns a new Person with the specified meeting removed from the set of meetings.
+     */
+    public Person withDeletedMeeting(Meeting meetingToDelete) {
+        Set<Meeting> updatedMeetings = new HashSet<>(meetings);
+        updatedMeetings.remove(meetingToDelete);
+        return new Person(name, phone, email, country, company, tags, updatedMeetings);
+    }
+    /**
      * Returns true if both persons have the same phone or email.
      * This defines a weaker notion of equality between two persons.
      */

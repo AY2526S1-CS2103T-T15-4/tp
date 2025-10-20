@@ -91,6 +91,15 @@ public interface Model {
     void addMeeting(Person target, Meeting meeting);
 
     /**
+     * Deletes a meeting of a person at the specified index in the filtered person list.
+     * The person must exist in the address book, and have the specified meeting
+     *
+     * @param target The person to delete the meeting from
+     * @param meeting The meeting to delete.
+     */
+    void deleteMeeting(Person target, Meeting meeting);
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

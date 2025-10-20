@@ -40,7 +40,8 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddMeetingCommand.MESSAGE_USAGE), pe);
         }
         String meetingInput = argMultimap.getValue(PREFIX_MEETING).get().trim();
         String[] parts = meetingInput.split(" ", 3); // Split on first two spaces (date, time, description)
@@ -55,7 +56,8 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         try {
             meetingTime = ParserUtil.parseMeetingTime(timePart);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddMeetingCommand.MESSAGE_USAGE), pe);
         }
 
         Meeting meeting = new Meeting(meetingTime, description);

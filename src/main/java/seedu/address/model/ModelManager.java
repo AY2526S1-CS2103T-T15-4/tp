@@ -118,6 +118,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, target.withAddedMeeting(meeting));
     }
 
+    @Override
+    public void deleteMeeting(Person target, Meeting meeting) {
+        requireAllNonNull(target, meeting);
+        addressBook.setPerson(target, target.withDeletedMeeting(meeting));
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
