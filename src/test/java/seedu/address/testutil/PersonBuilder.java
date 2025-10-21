@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
+import seedu.address.model.person.Link;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -29,6 +30,7 @@ public class PersonBuilder {
     private Email email;
     private HomeCountry country;
     private Set<Tag> tags;
+    private Link link;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +42,7 @@ public class PersonBuilder {
         country = new HomeCountry(DEFAULT_COUNTRY);
         company = new Company(DEFAULT_COMPANY);
         tags = new HashSet<>();
+        link = null;
     }
 
     /**
@@ -102,7 +105,15 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Link} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLink(String link) {
+        this.link = new Link(link);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, country, company, tags);
+        return new Person(name, phone, email, country, company, tags, null);
     }
 }

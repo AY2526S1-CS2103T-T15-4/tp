@@ -32,7 +32,8 @@ public class PersonCardTest {
                 new Email("alice@example.com"),
                 new HomeCountry("Singapore"),
                 new Company("ACME Corp"),
-                tags
+                tags,
+                null
         );
         person.getTags().stream()
                 .sorted((a, b) -> a.tagName.compareTo(b.tagName))
