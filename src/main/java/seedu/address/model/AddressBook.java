@@ -83,7 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
 
-        persons.setPersonByReference(target, editedPerson);
+        persons.setPerson(target, editedPerson);
     }
 
     /**
@@ -91,7 +91,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
-        persons.removeByReference(key);
+        persons.remove(key);
     }
 
     //// util methods

@@ -42,11 +42,6 @@ public class Person {
         this.isFlagged = isFlagged;
     }
 
-    public Person(Name name, Phone phone, Email email,
-                  HomeCountry country, Company company, Set<Tag> tags) {
-        this(name, phone, email, country, company, tags, false);
-    }
-
     public Name getName() {
         return name;
     }

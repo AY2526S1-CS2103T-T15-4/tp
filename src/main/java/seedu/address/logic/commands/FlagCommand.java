@@ -58,6 +58,7 @@ public class FlagCommand extends Command {
         );
 
         model.setPerson(personToFlag, flaggedPerson);
+
         return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, Messages.format(personToFlag)));
     }
 
