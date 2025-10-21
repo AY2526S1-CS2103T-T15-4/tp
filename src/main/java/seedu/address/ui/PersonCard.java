@@ -50,6 +50,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
+    private Label link;
+    @FXML
     private FlowPane tags;
 
     private Timeline clock;
@@ -65,6 +67,13 @@ public class PersonCard extends UiPart<Region> {
         country.setText(person.getCountry().value);
         company.setText(person.getCompany().value);
         email.setText(person.getEmail().value);
+
+        if (person.getLink() != null) {
+            link.setText(person.getLink().value);
+        } else {
+            link.setVisible(false);
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
