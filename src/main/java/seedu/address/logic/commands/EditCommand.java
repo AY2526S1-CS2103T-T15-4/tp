@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
+import seedu.address.model.person.Link;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -121,8 +122,9 @@ public class EditCommand extends ConfirmableCommand {
         HomeCountry updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
         Company updatedCompany = editPersonDescriptor.getCompany().orElse(personToEdit.getCompany());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Link updatedLink = editPersonDescriptor.getLink().orElse(personToEdit.getLink());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedCountry, updatedCompany, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedCountry, updatedCompany, updatedTags, updatedLink);
     }
 
     @Override
@@ -165,6 +167,7 @@ public class EditCommand extends ConfirmableCommand {
         private HomeCountry country;
         private Company company;
         private Set<Tag> tags;
+        private Link link;
 
         public EditPersonDescriptor() {}
 
@@ -179,13 +182,14 @@ public class EditCommand extends ConfirmableCommand {
             setCountry(toCopy.country);
             setCompany(toCopy.company);
             setTags(toCopy.tags);
+            setLink(toCopy.link);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, country, company, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, country, company, tags, link);
         }
 
         public void setName(Name name) {
@@ -245,6 +249,13 @@ public class EditCommand extends ConfirmableCommand {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setLink(Link link) {
+            this.link = link;
+        }
+        public Optional<Link> getLink() {
+            return Optional.ofNullable(link);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -262,7 +273,8 @@ public class EditCommand extends ConfirmableCommand {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(country, otherEditPersonDescriptor.country)
                     && Objects.equals(company, otherEditPersonDescriptor.company)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(link, otherEditPersonDescriptor.link);
         }
 
         @Override
@@ -274,6 +286,7 @@ public class EditCommand extends ConfirmableCommand {
                     .add("country", country)
                     .add("company", company)
                     .add("tags", tags)
+                    .add("link", link)
                     .toString();
         }
     }
