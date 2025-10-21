@@ -125,8 +125,7 @@ public class Person {
                 .add("email", email)
                 .add("country", country)
                 .add("company", company)
-                .add("tags", tags)
-                .add("link", link);
+                .add("tags", tags);
 
         if (link != null) {
             tsb.add("link", link);
