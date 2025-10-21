@@ -160,7 +160,7 @@ If no contacts match, Wi-Find will show an empty list. Use <code>list</code> to 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/findAlexDavidNewResult.png)
 
 ### Deleting a person : `delete`
 
