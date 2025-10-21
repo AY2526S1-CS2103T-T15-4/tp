@@ -14,6 +14,7 @@ Key features:
 - Set and record meeting times. (coming soon in v1.4)
 - Filter contacts by company, country, meetings. (coming soon in v1.4)
 
+### Table of contents
 Use this table of contents to jump to any section!
 * Table of Contents
 {:toc}
@@ -21,7 +22,7 @@ Use this table of contents to jump to any section!
 
 ## Quick start
 
-1. Install Java 17 or later. Not sure how? Follow this [installation guide for Windows.](https://se-education.org/guides/tutorials/javaInstallationWindows.html))<br>
+1. Install Java 17 or later. Not sure how? Follow this [installation guide for Windows.](https://se-education.org/guides/tutorials/javaInstallationWindows.html)<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T15-4/tp/releases).
