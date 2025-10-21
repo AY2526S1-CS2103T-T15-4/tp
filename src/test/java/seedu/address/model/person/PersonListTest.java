@@ -202,7 +202,7 @@ public class PersonListTest {
 
         personList.add(alice);
         // Replace using the same object reference
-        personList.setPersonByReference(alice, alice);
+        personList.setPerson(alice, alice);
 
         // Still contains the same instance
         assertTrue(personList.asUnmodifiableObservableList().contains(alice));
@@ -214,7 +214,7 @@ public class PersonListTest {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
 
-        assertThrows(PersonNotFoundException.class, () -> personList.setPersonByReference(alice, bob));
+        assertThrows(PersonNotFoundException.class, () -> personList.setPerson(alice, bob));
     }
 
     @Test
@@ -224,7 +224,7 @@ public class PersonListTest {
 
         personList.add(alice);
         // Remove using the same object reference
-        personList.removeByReference(alice);
+        personList.remove(alice);
 
         assertFalse(personList.asUnmodifiableObservableList().contains(alice));
     }
@@ -234,6 +234,6 @@ public class PersonListTest {
         PersonList personList = new PersonList();
         Person alice = new PersonBuilder().withName("Alice").build();
 
-        assertThrows(PersonNotFoundException.class, () -> personList.removeByReference(alice));
+        assertThrows(PersonNotFoundException.class, () -> personList.remove(alice));
     }
 }
