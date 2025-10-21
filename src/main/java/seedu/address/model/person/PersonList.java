@@ -51,7 +51,7 @@ public class PersonList implements Iterable<Person> {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        int index = internalList.indexOf(target);
+        int index = indexOfReference(target);
         if (index == -1) {
             throw new PersonNotFoundException();
         }
@@ -65,9 +65,18 @@ public class PersonList implements Iterable<Person> {
      */
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        int index = indexOfReference(toRemove);
+        if (index == -1) {
             throw new PersonNotFoundException();
         }
+        internalList.remove(index);
+    }
+
+    private int indexOfReference(Person target) {
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i) == target) return i;
+        }
+        return -1; // not found
     }
 
     public void setPersons(PersonList replacement) {
