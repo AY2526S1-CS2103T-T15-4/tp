@@ -15,6 +15,10 @@ Key features:
 - Set and record meeting times. (coming soon in v1.4)
 - Filter contacts by company, country, meetings. (coming soon in v1.4)
 
+Use this table of contents to jump to any section!
+
+* Table of Contents
+  {:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -43,10 +47,6 @@ Key features:
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
-
-Use this table of contents to jump to any section!
-* Table of Contents
-  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -80,15 +80,15 @@ You can refer back to this section anytime while reading about specific commands
 ### Viewing help : `help`
 
 Opens a new window that shows a message explaining how to access the help page.
-![help message](images/helpMessage.png)
-
-<div class="alert alert-primary" markdown="1">
-:exclamation: **Note:**
-If you don't see the Help window, check if it's minimized (see [Known Issues](#known-issues)). 
-</div>
 
 Format: `help`
 
+![help message](images/helpMessage.png)
+
+<div markdown="span" class="alert alert-primary">
+:exclamation: **Note:**
+If you don't see the Help window, check if it's minimized (see [Known Issues](#known-issues)). 
+</div>
 
 ### Adding a person: `add`
 
@@ -130,7 +130,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TA
 * You can **remove all the person’s tags by typing `t/`** without
     specifying any tags after it.
 
-<div class="alert alert-primary">
+<div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**<br>
 If the index given is out of range, Wi-Find will display "The person index provided is invalid" in the command box and no changes will occur.<br>
 If you leave out all optional fields, Wi-Find will prompt you to enter at least one field.
@@ -153,7 +153,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-<div class="alert alert-primary">
+<div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**
 If no contacts match, Wi-Find will show an empty list. Use <code>list</code> to show all contacts again.
 </div>
@@ -173,7 +173,7 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-<div class="alert alert-primary">
+<div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**
 This action cannot be undone!
 </div>
@@ -188,7 +188,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-<div class="alert alert-primary">
+<div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**
 This action cannot be undone!
 </div>
