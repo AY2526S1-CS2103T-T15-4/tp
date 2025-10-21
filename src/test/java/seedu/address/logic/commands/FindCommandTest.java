@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -15,11 +16,11 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.SingleFieldContainsKeywordsPredicate;
-import seedu.address.model.person.SingleFieldContainsKeywordsPredicate.TargetField;
+import seedu.address.model.person.MultiFieldContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -30,10 +31,8 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        SingleFieldContainsKeywordsPredicate firstPredicate =
-                new SingleFieldContainsKeywordsPredicate(TargetField.NAME, Collections.singletonList("first"));
-        SingleFieldContainsKeywordsPredicate secondPredicate =
-                new SingleFieldContainsKeywordsPredicate(TargetField.NAME, Collections.singletonList("second"));
+        MultiFieldContainsKeywordsPredicate firstPredicate = prepareNamePredicate("first");
+        MultiFieldContainsKeywordsPredicate secondPredicate = prepareNamePredicate("second");
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -56,19 +55,19 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        SingleFieldContainsKeywordsPredicate predicate = preparePredicate(" ");
+    public void execute_singleKeyword_personFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        MultiFieldContainsKeywordsPredicate predicate = prepareNamePredicate("Kurz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
     }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        SingleFieldContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        MultiFieldContainsKeywordsPredicate predicate = prepareNamePredicate("Kurz", "Elle", "Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -76,30 +75,41 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_partialNameMatching_personsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        MultiFieldContainsKeywordsPredicate predicate = prepareNamePredicate("urz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_caseInsensitivePartialMatching_personsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        MultiFieldContainsKeywordsPredicate predicate = prepareNamePredicate("uRz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
-        SingleFieldContainsKeywordsPredicate predicate =
-                new SingleFieldContainsKeywordsPredicate(TargetField.NAME, Arrays.asList("keyword"));
+        MultiFieldContainsKeywordsPredicate predicate = prepareNamePredicate("keyword");
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Creates a MultiFieldContainsKeywordsPredicate for name search only.
      */
-    private SingleFieldContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new SingleFieldContainsKeywordsPredicate(
-                TargetField.NAME,
-                Arrays.asList(userInput.split("\\s+")));
-    }
-
-    @Test
-    public void execute_caseInsensitiveMatching_personsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        SingleFieldContainsKeywordsPredicate predicate = preparePredicate("kurz ELLE kunz");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    private MultiFieldContainsKeywordsPredicate prepareNamePredicate(String... keywords) {
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        for (String keyword : keywords) {
+            argMultimap.put(PREFIX_NAME, keyword);
+        }
+        return new MultiFieldContainsKeywordsPredicate(argMultimap);
     }
 }

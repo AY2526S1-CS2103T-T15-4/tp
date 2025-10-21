@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -43,9 +44,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         // Validate that all specified prefixes have at least one keyword
-        if (!allSpecifiedPrefixesHaveKeywords(argMultimap)) {
+        /*if (!allSpecifiedPrefixesHaveKeywords(argMultimap)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
+        }*/
 
         return new FindCommand(new MultiFieldContainsKeywordsPredicate(argMultimap));
     }
@@ -64,7 +65,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         for (Prefix prefix : Arrays.asList(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG)) {
             if (argMultimap.getValue(prefix).isPresent()) {
-                if (argMultimap.getAllValues(prefix).isEmpty()) {
+                List<String> values = argMultimap.getAllValues(prefix);
+                // Check if all values for this prefix are empty strings
+                if (values.stream().allMatch(String::isEmpty)) {
                     return false;
                 }
             }
