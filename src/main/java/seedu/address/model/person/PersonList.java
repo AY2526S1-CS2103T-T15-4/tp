@@ -74,7 +74,9 @@ public class PersonList implements Iterable<Person> {
 
     private int indexOfReference(Person target) {
         for (int i = 0; i < internalList.size(); i++) {
-            if (internalList.get(i) == target) return i;
+            if (internalList.get(i) == target) {
+                return i;
+            }
         }
         return -1; // not found
     }

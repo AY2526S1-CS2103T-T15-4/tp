@@ -124,7 +124,8 @@ public class EditCommand extends ConfirmableCommand {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Link updatedLink = editPersonDescriptor.getLink().orElse(personToEdit.getLink());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedCountry, updatedCompany, updatedTags, updatedLink);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedCountry, updatedCompany, updatedTags,
+                updatedLink);
     }
 
     @Override
