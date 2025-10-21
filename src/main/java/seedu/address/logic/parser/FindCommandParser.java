@@ -20,6 +20,7 @@ import seedu.address.model.person.SingleFieldContainsKeywordsPredicate.TargetFie
 /**
  * Parses input arguments and creates a new FindCommand object
  */
+
 public class FindCommandParser implements Parser<FindCommand> {
 
     /**
@@ -27,7 +28,10 @@ public class FindCommandParser implements Parser<FindCommand> {
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+
     public FindCommand parse(String args) throws ParseException {
+
+
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -80,6 +84,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         return new FindCommand(new SingleFieldContainsKeywordsPredicate(field, keywords));
-    }
 
+
+    }
 }
+
+
