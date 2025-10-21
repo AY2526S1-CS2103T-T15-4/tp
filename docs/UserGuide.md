@@ -3,9 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Wi-Find is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI), intended for freelance workers who manage clients across multiple time zones, needing to manage multitude of contacts so they won't accidentally schedule meetings at 3 a.m!<br>
-To use Wi-Find to its maximum capabilities, it would be beneficial to have basic familiarity with running Java applications through terminal and reading command-line output.<br>
-This guide is for users new to Wi-Find who want to learn how to install, run and use Wi-Find commands efficiently.
+Wi-Find is a **desktop app for managing contacts**, optimized for use via a **Command Line Interface** (CLI),
+It's designed for **freelance workers** who manage clients across multiple time zones, helping them manage multitude of contacts so they won't accidentally schedule meetings at 3 a.m!
 
 Key features:
 - Faster than typical GUI apps if you are able to type fast.
@@ -16,9 +15,8 @@ Key features:
 - Filter contacts by company, country, meetings. (coming soon in v1.4)
 
 Use this table of contents to jump to any section!
-
 * Table of Contents
-  {:toc}
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -95,7 +93,7 @@ If you don't see the Help window, check if it's minimized (see [Known Issues](#k
 Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​`
-<div class="alert alert-primary" markdown="1">
+<div markdown="span" class="alert alert-primary">
 :exclamation: **IMPORTANT:**
 Please check this [list](#list-of-countries) for available countries and their timezones.
 </div>
