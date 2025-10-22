@@ -10,9 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Company {
 
     /*
-     * Length of company should not exceed 50 characters.
+     * Length of company should not exceed 100 characters.
      */
-    public static final int LENGTH_LIMIT = 50;
+    public static final int LENGTH_LIMIT = 100;
 
     public static final String MESSAGE_CONSTRAINTS = "Companies should not be blank and not exceed "
             + LENGTH_LIMIT + " characters, including spaces";
