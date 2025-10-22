@@ -29,6 +29,18 @@ public class TimezoneMapperTest {
     }
 
     @Test
+    public void getZoneIdFromCountry_whitespaceHandling() {
+        assertNotNull(TimezoneMapper.getZoneIdFromCountry("  singapore  "));
+        assertNull(TimezoneMapper.getZoneIdFromCountry("\t\n"));
+    }
+
+    @Test
+    public void getZoneIdFromCountry_mixedCase() {
+        assertEquals(ZoneId.of("Asia/Singapore"),
+                TimezoneMapper.getZoneIdFromCountry("SiNgApOrE"));
+    }
+
+    @Test
     void getSupportedCountries_shouldReturnNonEmptySet() {
         Set<String> supported = TimezoneMapper.getSupportedCountries();
         assertNotNull(supported);
