@@ -83,7 +83,6 @@ public class LinkCommand extends Command {
             resultMessage = String.format(MESSAGE_UPDATE_LINK_SUCCESS, Messages.format(editedPerson));
         }
 
-
         return new CommandResult(resultMessage);
     }
 
@@ -100,7 +99,7 @@ public class LinkCommand extends Command {
 
         LinkCommand otherLinkCommand = (LinkCommand) other;
         return index.equals(otherLinkCommand.index)
-                && link.equals(otherLinkCommand.link);
+                && (link == null ? otherLinkCommand.link == null : link.equals(otherLinkCommand.link));
     }
 
     @Override

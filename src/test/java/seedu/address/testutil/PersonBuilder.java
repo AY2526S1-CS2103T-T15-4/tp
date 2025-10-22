@@ -109,7 +109,11 @@ public class PersonBuilder {
      * Sets the {@code Link} of the {@code Person} that we are building.
      */
     public PersonBuilder withLink(String link) {
-        this.link = new Link(link);
+        if (link == null) {
+            this.link = null;
+        } else {
+            this.link = new Link(link);
+        }
         return this;
     }
 
