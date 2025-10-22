@@ -61,6 +61,6 @@ public class Meeting {
 
     @Override
     public String toString() {
-        return this.meetingTime.toString() + " " + description.orElse("").toString();
+        return this.meetingTime.toString() + " " + description.orElse("");
     }
 }

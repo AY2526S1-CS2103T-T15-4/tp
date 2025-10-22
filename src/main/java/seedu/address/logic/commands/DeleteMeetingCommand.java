@@ -50,11 +50,12 @@ public class DeleteMeetingCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        int zeroBased = targetIndex.getZeroBased();
+        if (zeroBased >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person person = lastShownList.get(targetIndex.getZeroBased());
+        Person person = lastShownList.get(zeroBased);
         Meeting meetingToDelete = person.getMeetings().stream()
                 .filter(meeting -> meeting.getMeetingTime().equals(meetingTime))
                 .findFirst()
