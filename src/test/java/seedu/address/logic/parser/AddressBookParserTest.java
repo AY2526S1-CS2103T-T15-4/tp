@@ -119,6 +119,21 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_confirmationFlow_cancelsOnNonY() throws Exception {
+        Person duplicate = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(duplicate);
+        AddressBookParser.setPendingCommand(addCommand);
+
+        assertThrows(ParseException.class, () -> parser.parseCommand("n"));
+    }
+
+    @Test
+    public void parseCommand_pendingCommandNull_yThrowsException() {
+        AddressBookParser.setPendingCommand(null);
+        assertThrows(ParseException.class, () -> parser.parseCommand("y"));
+    }
+
+    @Test
     public void setPendingCommand_executesAndClears() throws Exception {
         ConfirmableCommand stub = new ConfirmableCommand() {
             @Override
