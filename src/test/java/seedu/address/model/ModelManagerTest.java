@@ -122,7 +122,8 @@ public class ModelManagerTest {
 
     @Test
     public void deleteMeeting_nullArguments_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.deleteMeeting(null, new Meeting(LocalDateTime.now())));
+        assertThrows(NullPointerException.class, () -> modelManager.deleteMeeting(null,
+                new Meeting(LocalDateTime.now())));
         assertThrows(NullPointerException.class, () -> modelManager.deleteMeeting(ALICE, null));
     }
 
