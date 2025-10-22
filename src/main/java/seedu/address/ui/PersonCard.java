@@ -86,6 +86,8 @@ public class PersonCard extends UiPart<Region> {
      * @return ZoneId if valid, else null
      */
     private ZoneId getZoneIdFromCountry(String country) {
+        assert country != null : "Country cannot be null.";
+
         if (country == null || country.isBlank()) {
             return null;
         }
