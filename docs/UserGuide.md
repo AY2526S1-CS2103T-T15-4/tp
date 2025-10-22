@@ -98,6 +98,8 @@ If you don't see the Help window, check if it's minimized (see <a href="#known-i
 Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​`
+
+- Alphanumerics and special characters are allowed in NAME as well as the [local-part](https://en.wikipedia.org/wiki/Email_address#Local-part) of EMAIL.
 <div markdown="span" class="alert alert-primary">
 :exclamation: **IMPORTANT:**
 Please check this <a href="#list-of-supported-countries">list</a> for available countries and their timezones.
