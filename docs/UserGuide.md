@@ -62,7 +62,7 @@ Commands in Wi-Find follow the same flexible format as described below.
 * Items in square brackets are optional.<br>
   - e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple times including zero times. (Unless stated otherwise.)<br>
   - e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -155,8 +155,9 @@ Examples:
 
 Finds persons through searching the parameters with given keywords.
 
-Format: `find PARAMETER/[KEYWORDS]...`
+Format: `find PARAMETER/[KEYWORD]...`
 
+* Find requires at least 1 PARAMETER/[KEYWORD]
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * PARAMETER is any of the fields when adding a contact.
@@ -169,8 +170,8 @@ Editing phone/email of contacts can trigger duplicate detection as well.<br>
 </div>
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidNewResult.png)
 
 ### Deleting a person : `delete`
