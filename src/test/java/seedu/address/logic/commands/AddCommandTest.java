@@ -23,6 +23,13 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        assertThrows(NullPointerException.class, () -> addCommand.execute(null));
+    }
+
+    @Test
     public void execute_duplicateConfirmed_addsPerson() throws Exception {
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
