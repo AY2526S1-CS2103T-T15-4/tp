@@ -11,6 +11,7 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class TimezoneMapper
 
 Class PersonList
 Class Person
@@ -23,6 +24,10 @@ Class Tag
 
 Class I #FFFFFF
 }
+
+note right of TimezoneMapper
+    Utility class for PersonCard
+end note
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model

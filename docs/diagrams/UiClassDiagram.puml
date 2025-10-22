@@ -15,6 +15,7 @@ Class PersonListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class TimeFormatter
 }
 
 package Model <<Rectangle>> {
@@ -47,10 +48,16 @@ PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
+PersonCard ..> TimeFormatter
 PersonCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
+note right of TimeFormatter
+  Utility class for PersonCard
+end note
+
+Model -[hidden]up-> TimeFormatter
 PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
