@@ -54,7 +54,8 @@ public class TimezoneMapper {
      * @return ZoneId if recognized country, null otherwise
      */
     public static ZoneId getZoneIdFromCountry(String country) {
-        if (country == null || country.isBlank()) {
+        assert country != null : "Country cannot be null.";
+        if (country.isBlank()) {
             return null;
         }
         return COUNTRY_TO_ZONE.get(country.trim().toLowerCase());
@@ -74,7 +75,8 @@ public class TimezoneMapper {
      * @return true if country is supported, false otherwise.
      */
     public static boolean isCountrySupported(String country) {
-        if (country == null || country.isBlank()) {
+        assert country != null : "Country cannot be null.";
+        if (country.isBlank()) {
             return false;
         }
         return COUNTRY_TO_ZONE.containsKey(country.trim().toLowerCase());

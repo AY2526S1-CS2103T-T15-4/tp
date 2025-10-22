@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.ZoneId;
@@ -23,9 +24,12 @@ public class TimezoneMapperTest {
 
         //invalid
         assertNull(TimezoneMapper.getZoneIdFromCountry("UnknownLand"));
-        assertNull(TimezoneMapper.getZoneIdFromCountry(null));
         assertNull(TimezoneMapper.getZoneIdFromCountry(""));
         assertNull(TimezoneMapper.getZoneIdFromCountry("   "));
+
+        assertThrows(AssertionError.class, () -> {
+            TimezoneMapper.getZoneIdFromCountry(null);
+        });
     }
 
     @Test
@@ -57,9 +61,12 @@ public class TimezoneMapperTest {
         assertTrue(TimezoneMapper.isCountrySupported("FRANCE"));
 
         //invalid
-        assertFalse(TimezoneMapper.isCountrySupported(null));
         assertFalse(TimezoneMapper.isCountrySupported(""));
         assertFalse(TimezoneMapper.isCountrySupported("   "));
         assertFalse(TimezoneMapper.isCountrySupported("Atlantis"));
+
+        assertThrows(AssertionError.class, () -> {
+            TimezoneMapper.getZoneIdFromCountry(null);
+        });
     }
 }

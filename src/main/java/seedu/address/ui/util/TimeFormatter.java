@@ -21,6 +21,7 @@ public class TimeFormatter {
     }
 
     public static String getFormattedTime(ZoneId zone) {
+        assert zone != null : "Zone cannot be null.";
         return ZonedDateTime.now(zone).format(FORMATTER);
     }
 }
