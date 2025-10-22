@@ -71,6 +71,10 @@ Commands in Wi-Find follow the same flexible format as described below.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   - e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Literal prefix input<br>
+  - To include a token that looks like a prefix (e.g. n/, com/, c/) as part of a field value, wrap that token in square brackets with a leading space inside the brackets (for example [ com/]). The brackets are removed and the token is treated as literal text.
+  - Important: do NOT put a space before the [ - the [ must be adjacent to the preceding text. Examples: add n/James ... c/Singapore[ com/] → country = Singapore com/.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
 
 You can refer back to this section anytime while reading about specific commands.
@@ -86,7 +90,7 @@ Format: `help`
 
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**
-If you don't see the Help window, check if it's minimized (see [Known Issues](#known-issues)). 
+If you don't see the Help window, check if it's minimized (see <a href="#known-issues-as-of-v13">Known Issues</a>). 
 </div>
 
 ### Adding a person: `add`
@@ -96,14 +100,22 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​`
 <div markdown="span" class="alert alert-primary">
 :exclamation: **IMPORTANT:**
-Please check this [list](#list-of-countries) for available countries and their timezones.
+Please check this <a href="#list-of-supported-countries">list</a> for available countries and their timezones.
 </div>
 
 After being successfully added, the GUI should show the added person, with the correct timezone of their country.
 ![successfully added person](images/Addperson.png)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+<div markdown="span" class="alert alert-primary">
+:exclamation: **Note:**<br>
+- Contacts are considered duplicates if they share the same phone number OR the same email address.<br>
+  - For eg, <code>add n/Doe p/98765432</code> and <code>add n/Fish p/98765432</code> will be considered duplicates.
+- Email addresses are automatically lowercased when a contact is added or edited.<br>
+- If a duplicate is detected, Wi-Find will show a warning; the contact will only be added if the user confirms. Users may still add a duplicate by approving the warning.<br>
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+A person can have any number of tags (including 0)<br>
+Duplicate users with either same phone or email will be allowed as long as the user permits it.<br>
 </div>
 
 Examples:
@@ -141,20 +153,19 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons through searching the parameters with given keywords.
 
-Format: `find PARAMETER/ [KEYWORDS]`
+Format: `find PARAMETER/[KEYWORDS]...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * PARAMETER is any of the fields when adding a contact.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Multiple keywords under the same parameter works like `OR` search, while keywords across multiple parameters works like `AND` search. For example, `find n/Alex n/Bob c/Singapore` will display all contacts whose name includes 'Alex' OR 'Bob', AND has 'Singapore' under country parameter.
 
 <div markdown="span" class="alert alert-primary">
-:exclamation: **Note:**
-If no contacts match, Wi-Find will show an empty list. Use <code>list</code> to show all contacts again.
+:exclamation: **Note:**<br>
+If no contacts match, Wi-Find will show an empty list. Use <code>list</code> to show all contacts again.<br>
+Editing phone/email of contacts can trigger duplicate detection as well.<br>
 </div>
 
 Examples:
@@ -244,6 +255,11 @@ Solution 2: The remedy is to manually restore the minimized Help Window.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+
+Some quick notes regarding how commands work:
+- Duplicates: detected by same phone OR same email.
+- Emails are automatically lowercased.
+- User confirmation required to add duplicate contacts.
 
 | Action                                     | Description                       | Format, Examples                                                                                                                                                                 |
 |--------------------------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
