@@ -41,6 +41,8 @@ public class DeleteMeetingCommand extends Command {
      * @param meetingTime Datetime of the meeting to delete.
      */
     public DeleteMeetingCommand(Index targetIndex, LocalDateTime meetingTime) {
+        requireNonNull(targetIndex);
+        requireNonNull(meetingTime);
         this.targetIndex = targetIndex;
         this.meetingTime = meetingTime;
     }

@@ -325,4 +325,42 @@ public class ModelStubs {
             meetingsAdded.add(meeting);
         }
     }
+
+    /**
+     * A Model stub that accepts meeting deletions and records them for assertions.
+     */
+    public static class ModelStubAcceptingMeetingDeleted extends ModelStubs.ModelStub {
+        public final List<Person> persons = new ArrayList<>();
+        public final List<Meeting> meetingsDeleted = new ArrayList<>();
+
+        public ModelStubAcceptingMeetingDeleted(Person person, Meeting meeting) {
+            if (meeting != null) {
+                persons.add(person.withAddedMeeting(meeting));
+            } else {
+                persons.add(person);
+            }
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return FXCollections.observableArrayList(persons);
+        }
+
+        @Override
+        public void deleteMeeting(Person target, Meeting meeting) {
+            meetingsDeleted.add(meeting);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            AddressBook addressBook = new AddressBook();
+            persons.forEach(addressBook::addPerson);
+            return addressBook;
+        }
+
+        public List<Meeting> getMeetingsDeleted() {
+            return meetingsDeleted;
+        }
+    }
 }
+
