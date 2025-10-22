@@ -55,18 +55,22 @@ public class AddCommand extends ConfirmableCommand {
      */
     public AddCommand(Person person) {
         requireNonNull(person);
+        assert person != null : "Person object must not be null after requireNonNull check";
         toAdd = person;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert model != null : "Model must not be null after requireNonNull";
+        assert toAdd != null : "Person to add must not be null";
 
         if (model.hasPerson(toAdd) && !isConfirmed) {
             return new CommandResult(MESSAGE_DUPLICATE_PERSON_WARNING, this);
         }
 
         model.addPerson(toAdd);
+        assert model.hasPerson(toAdd) : "Person should exist in the model after addition";
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
