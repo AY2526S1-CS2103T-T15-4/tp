@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Meeting;
 
 /**
@@ -52,7 +53,7 @@ public class JsonAdaptedMeeting {
         LocalDateTime modelMeetingTime;
         try {
             modelMeetingTime = ParserUtil.parseMeetingTime(meetingTime);
-        } catch (IllegalValueException e) {
+        } catch (ParseException e) {
             throw new IllegalValueException(INVALID_MEETING_TIME_MESSAGE, e);
         }
         // Description can be null

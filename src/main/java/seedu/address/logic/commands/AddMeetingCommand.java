@@ -28,7 +28,6 @@ public class AddMeetingCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New meeting added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_MEETING = "This meeting time is already scheduled for another "
             + "meeting.";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "No person found at index %1$s";
 
     private final Index index;
     private final Meeting meeting;

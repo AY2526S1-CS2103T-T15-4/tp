@@ -1,6 +1,9 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -24,6 +27,7 @@ public class Meeting {
      * @param description The description of the meeting. May be {@code null}.
      */
     public Meeting(LocalDateTime meetingTime, String description) {
+        requireNonNull(meetingTime);
         this.meetingTime = meetingTime;
         this.description = Optional.ofNullable(description);
     }
@@ -42,6 +46,11 @@ public class Meeting {
 
     public Optional<String> getDescription() {
         return description;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(meetingTime);
     }
 
     @Override

@@ -6,8 +6,6 @@ import java.util.Comparator;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -74,14 +72,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         updateMeetings();
-
-        if (person.getMeetings() instanceof ObservableList<?> temp) {
-            temp.addListener((ListChangeListener.Change<?> change) -> {
-                updateMeetings();
-            });
-        }
         showTime();
-
         cardPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene == null && clock != null) {
                 clock.stop();

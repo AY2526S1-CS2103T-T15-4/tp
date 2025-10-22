@@ -1,12 +1,13 @@
 package seedu.address.model.util;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Company;
@@ -86,10 +87,10 @@ public class SampleDataUtil {
                     String[] parts = str.split(" ", 3); // Split on first two spaces (for time and optional description)
                     String timePart = parts[0] + " " + parts[1]; // Combine date and time
                     String description = parts.length > 2 ? parts[2] : null;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
                     try {
-                        LocalDateTime meetingTime = ParserUtil.parseMeetingTime(timePart);
-                        return new Meeting(meetingTime, description);
-                    } catch (Exception e) {
+                        return new Meeting(LocalDateTime.parse(timePart.trim(), formatter), description);
+                    } catch (DateTimeParseException e) {
                         throw new IllegalArgumentException("Invalid meeting time format: " + timePart, e);
                     }
                 })
