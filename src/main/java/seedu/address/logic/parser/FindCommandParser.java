@@ -44,9 +44,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         // Validate that all specified prefixes have at least one keyword
-        /*if (!allSpecifiedPrefixesHaveKeywords(argMultimap)) {
+        if (!allSpecifiedPrefixesHaveKeywords(argMultimap)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }*/
+        }
 
         return new FindCommand(new MultiFieldContainsKeywordsPredicate(argMultimap));
     }
