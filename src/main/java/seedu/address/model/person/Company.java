@@ -9,7 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Company {
 
-    public static final String MESSAGE_CONSTRAINTS = "Companies can take any values, and it should not be blank";
+    /*
+     * Length of company should not exceed 50 characters.
+     */
+    public static final int LENGTH_LIMIT = 50;
+
+    public static final String MESSAGE_CONSTRAINTS = "Companies should not be blank and not exceed "
+            + LENGTH_LIMIT + " characters, including spaces";
 
     /*
      * The first character of the company must not be a whitespace,
@@ -34,7 +40,9 @@ public class Company {
      * Returns true if a given string is a valid company.
      */
     public static boolean isValidCompany(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean result;
+        result = test.matches(VALIDATION_REGEX) && test.length() <= LENGTH_LIMIT;
+        return result;
     }
 
     @Override

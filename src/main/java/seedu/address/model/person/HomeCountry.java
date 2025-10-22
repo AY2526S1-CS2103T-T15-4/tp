@@ -9,7 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class HomeCountry {
 
-    public static final String MESSAGE_CONSTRAINTS = "Countries can take any values, and it should not be blank";
+    /*
+     * Length of country should not exceed 56 characters.
+     */
+    public static final int LENGTH_LIMIT = 56;
+
+    public static final String MESSAGE_CONSTRAINTS = "Countries should not be blank and not exceed "
+            + LENGTH_LIMIT + " characters, including spaces";
 
     /*
      * The first character of the country must not be a whitespace,
@@ -34,7 +40,9 @@ public class HomeCountry {
      * Returns true if a given string is a valid country.
      */
     public static boolean isValidCountry(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean result;
+        result = test.matches(VALIDATION_REGEX) && test.length() <= LENGTH_LIMIT;
+        return result;
     }
 
     @Override
