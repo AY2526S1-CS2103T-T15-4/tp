@@ -15,7 +15,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
