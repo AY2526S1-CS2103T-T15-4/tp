@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.AddressBook;
@@ -203,6 +204,125 @@ public class ModelStubs {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+    }
+
+    /**
+     * A {@code ModelStub} that contains a single {@code Person} with one or more {@code Meeting}s.
+     * This stub supports adding new meetings to the person and retrieving the updated state.
+     */
+    public static class ModelStubWithMeeting extends ModelStub {
+        private final List<Person> persons = new ArrayList<>();
+        private final List<Meeting> meetings = new ArrayList<>();
+
+        /**
+         * Constructs a {@code ModelStubWithMeeting} containing a person with a pre-added meeting.
+         *
+         * @param person  The person to associate with the meeting.
+         * @param meeting The meeting to add to the person.
+         */
+        public ModelStubWithMeeting(Person person, Meeting meeting) {
+            // Create a new Person with the meeting added
+            persons.add(person.withAddedMeeting(meeting));
+            meetings.add(meeting);
+        }
+
+        /**
+         * Returns the list of persons stored in this stub.
+         *
+         * @return An observable list containing the persons.
+         */
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return FXCollections.observableArrayList(persons);
+        }
+
+        /**
+         * Returns an {@code AddressBook} containing all persons stored in this stub.
+         *
+         * @return A read-only view of the address book.
+         */
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            AddressBook addressBook = new AddressBook();
+            addressBook.addPerson(persons.get(0));
+            return addressBook;
+        }
+
+        /**
+         * Adds a {@code Meeting} to the specified {@code Person}.
+         * Updates the internal list of persons with the modified person.
+         *
+         * @param target  The person to add the meeting to.
+         * @param meeting The meeting to add.
+         */
+        @Override
+        public void addMeeting(Person target, Meeting meeting) {
+            // Update the person's meetings by replacing with a new Person instance
+            for (int i = 0; i < persons.size(); i++) {
+                if (persons.get(i).isSamePerson(target)) {
+                    persons.set(i, persons.get(i).withAddedMeeting(meeting));
+                    break;
+                }
+            }
+            meetings.add(meeting);
+        }
+    }
+
+    /**
+     * A {@code ModelStub} that accepts meeting additions and keeps track of added meetings.
+     * Useful for verifying that meetings are correctly created and associated with persons in tests.
+     */
+    public static class ModelStubAcceptingMeetingAdded extends ModelStubs.ModelStub {
+        public final List<Meeting> meetingsAdded = new ArrayList<>();
+        public final List<Person> persons = new ArrayList<>();
+
+        /**
+         * Adds a {@code Person} to this model stub.
+         *
+         * @param person The person to add.
+         */
+        public void addPerson(Person person) {
+            persons.add(person);
+        }
+
+        /**
+         * Returns the list of persons stored in this stub.
+         *
+         * @return An observable list containing the persons.
+         */
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return FXCollections.observableArrayList(persons);
+        }
+
+        /**
+         * Returns an {@code AddressBook} containing all persons stored in this stub.
+         *
+         * @return A read-only view of the address book.
+         */
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            AddressBook addressBook = new AddressBook();
+            persons.forEach(addressBook::addPerson);
+            return addressBook;
+        }
+
+        /**
+         * Adds a {@code Meeting} to the specified {@code Person} and records it in {@code meetingsAdded}.
+         *
+         * @param target  The person to add the meeting to.
+         * @param meeting The meeting to add.
+         */
+        @Override
+        public void addMeeting(Person target, Meeting meeting) {
+            for (int i = 0; i < persons.size(); i++) {
+                if (persons.get(i).isSamePerson(target)) {
+                    persons.set(i, persons.get(i).withAddedMeeting(meeting));
+                    break;
+                }
+            }
+            meetingsAdded.add(meeting);
         }
     }
 }
