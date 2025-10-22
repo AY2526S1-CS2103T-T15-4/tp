@@ -72,7 +72,7 @@ Commands in Wi-Find follow the same flexible format as described below.
   - e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Literal prefix input<br>
-  - To include a token that looks like a prefix (e.g. n/, com/, c/) as part of a field value, wrap that token in square brackets with a leading space inside the brackets (for example [ com/]). The brackets are removed and the token is treated as literal text.
+  - To include a token that looks like a prefix (e.g. n/, com/, c/) as part of a field value, wrap that token in square brackets with a leading space inside the brackets (for eg, [ com/]). The brackets are removed and the token is treated as literal text.
   - Important: do NOT put a space before the [ - the [ must be adjacent to the preceding text. Examples: add n/James ... c/Singapore[ com/] → country = Singapore com/.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
@@ -109,7 +109,7 @@ After being successfully added, the GUI should show the added person, with the c
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**<br>
 - Contacts are considered duplicates if they share the same phone number OR the same email address.<br>
-  - For eg, <code>add n/Doe p/98765432</code> and <code>add n/Fish p/98765432</code> will be considered duplicates.
+- For example, <code>add n/Doe p/98765432</code> and <code>add n/Fish p/98765432</code> will be considered duplicates.<br>
 - Email addresses are automatically lowercased when a contact is added or edited.<br>
 - If a duplicate is detected, Wi-Find will show a warning; the contact will only be added if the user confirms. Users may still add a duplicate by approving the warning.<br>
 </div>
@@ -268,7 +268,7 @@ Some quick notes regarding how commands work:
 | **[Clear](#clearing-all-entries--clear)**  | Clears contacts                   | `clear`                                                                                                                                                                          |
 | **[Delete](#deleting-a-person--delete)**   | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
 | **[Edit](#editing-a-person--edit)**        | Edits specified contact           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **[Find](#locating-persons-by-name-find)** | Filters contacts based on keyword | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                       |
+| **[Find](#locating-persons-by-name-find)** | Filters contacts based on keyword | `find PARAMETER/[KEYWORD]...`<br> e.g., `find James Jake`                                                                                                                       |
 | **[List](#listing-all-persons--list)**     | List all contacts                 | `list`                                                                                                                                                                           |
 | **[Help](#viewing-help--help)**            | Displays help window              | `help`                                                                                                                                                                           |
 
