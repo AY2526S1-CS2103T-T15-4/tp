@@ -149,10 +149,55 @@ public class MultiFieldContainsKeywordsPredicateTest {
 
     // empty/whitespace keyword
     @Test
-    public void testEmail_whitespaceKeyword_matchesFalse() {
+    public void testName_emptyKeyword_matchesFalse() {
+        Person person = new PersonBuilder().withName("Alice").build();
+        ArgumentMultimap map = new ArgumentMultimap();
+        map.put(PREFIX_NAME, "   "); // whitespace only, filtered out → empty list
+        MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
+        assertFalse(p.test(person));
+    }
+
+    @Test
+    public void testPhone_emptyKeyword_matchesFalse() {
+        Person person = new PersonBuilder().withPhone("91234567").build();
+        ArgumentMultimap map = new ArgumentMultimap();
+        map.put(PREFIX_PHONE, "   "); // becomes empty
+        MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
+        assertFalse(p.test(person));
+    }
+
+    @Test
+    public void testEmail_emptyKeyword_matchesFalse() {
         Person person = new PersonBuilder().withEmail("alice@example.com").build();
         ArgumentMultimap map = new ArgumentMultimap();
-        map.put(PREFIX_EMAIL, "   "); // becomes empty after trimming -> returns false in matcher
+        map.put(PREFIX_EMAIL, "   ");
+        MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
+        assertFalse(p.test(person));
+    }
+
+    @Test
+    public void testCountry_emptyKeyword_matchesFalse() {
+        Person person = new PersonBuilder().withCountry("Singapore").build();
+        ArgumentMultimap map = new ArgumentMultimap();
+        map.put(PREFIX_COUNTRY, "   ");
+        MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
+        assertFalse(p.test(person));
+    }
+
+    @Test
+    public void testCompany_emptyKeyword_matchesFalse() {
+        Person person = new PersonBuilder().withCompany("OpenAI").build();
+        ArgumentMultimap map = new ArgumentMultimap();
+        map.put(PREFIX_COMPANY, "   ");
+        MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
+        assertFalse(p.test(person));
+    }
+
+    @Test
+    public void testTags_emptyKeyword_matchesFalse() {
+        Person person = new PersonBuilder().withTags("Friends").build();
+        ArgumentMultimap map = new ArgumentMultimap();
+        map.put(PREFIX_TAG, "   ");
         MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
         assertFalse(p.test(person));
     }
