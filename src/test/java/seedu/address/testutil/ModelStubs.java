@@ -333,6 +333,12 @@ public class ModelStubs {
         public final List<Person> persons = new ArrayList<>();
         public final List<Meeting> meetingsDeleted = new ArrayList<>();
 
+        /**
+         * Constructs a {@code ModelStubAcceptingMeetingDeleted} containing a person with a pre-added meeting.
+         *
+         * @param person  The person to associate with the meeting.
+         * @param meeting The meeting to add to the person.
+         */
         public ModelStubAcceptingMeetingDeleted(Person person, Meeting meeting) {
             if (meeting != null) {
                 persons.add(person.withAddedMeeting(meeting));

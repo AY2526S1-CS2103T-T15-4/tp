@@ -1,11 +1,9 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteMeetingCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 public class DeleteMeetingCommandParserTest {
 
@@ -71,7 +68,8 @@ public class DeleteMeetingCommandParserTest {
         String expectedMessage = "Multiple values specified for the following single-valued field(s): m/";
 
         // duplicate meeting prefix
-        String userInput = "1 " + PREFIX_MEETING + VALID_MEETING_TIME_INPUT + " " + PREFIX_MEETING + VALID_MEETING_TIME_INPUT;
+        String userInput = "1 " + PREFIX_MEETING + VALID_MEETING_TIME_INPUT + " "
+                + PREFIX_MEETING + VALID_MEETING_TIME_INPUT;
         assertParseFailure(parser, userInput, expectedMessage);
     }
 }
