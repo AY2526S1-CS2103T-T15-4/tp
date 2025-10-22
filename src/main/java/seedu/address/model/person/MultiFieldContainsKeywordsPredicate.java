@@ -21,10 +21,21 @@ import seedu.address.model.tag.Tag;
  * Matching is case-insensitive and uses partial/substring matching.
  */
 public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
+
     private final ArgumentMultimap fieldKeywordsMap;
 
     public MultiFieldContainsKeywordsPredicate(ArgumentMultimap fieldKeywordsMap) {
         this.fieldKeywordsMap = fieldKeywordsMap;
+    }
+
+    /**
+     * Filters out any empty String "" or "  " from List<String></String>.
+     */
+    private static List<String> filterEmptyString(List<String> raw) {
+        return raw.stream()
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .toList();
     }
 
     @Override
@@ -34,37 +45,37 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
 
         // Check name field if specified
         if (fieldKeywordsMap.getValue(PREFIX_NAME).isPresent()) {
-            List<String> nameKeywords = fieldKeywordsMap.getAllValues(PREFIX_NAME);
+            List<String> nameKeywords = filterEmptyString(fieldKeywordsMap.getAllValues(PREFIX_NAME));
             matchesAllFields = matchesAllFields && matchesName(person, nameKeywords);
         }
 
         // Check phone field if specified
         if (fieldKeywordsMap.getValue(PREFIX_PHONE).isPresent()) {
-            List<String> phoneKeywords = fieldKeywordsMap.getAllValues(PREFIX_PHONE);
+            List<String> phoneKeywords = filterEmptyString(fieldKeywordsMap.getAllValues(PREFIX_PHONE));
             matchesAllFields = matchesAllFields && matchesPhone(person, phoneKeywords);
         }
 
         // Check email field if specified
         if (fieldKeywordsMap.getValue(PREFIX_EMAIL).isPresent()) {
-            List<String> emailKeywords = fieldKeywordsMap.getAllValues(PREFIX_EMAIL);
+            List<String> emailKeywords = filterEmptyString(fieldKeywordsMap.getAllValues(PREFIX_EMAIL));
             matchesAllFields = matchesAllFields && matchesEmail(person, emailKeywords);
         }
 
         // Check country field if specified
         if (fieldKeywordsMap.getValue(PREFIX_COUNTRY).isPresent()) {
-            List<String> countryKeywords = fieldKeywordsMap.getAllValues(PREFIX_COUNTRY);
+            List<String> countryKeywords = filterEmptyString(fieldKeywordsMap.getAllValues(PREFIX_COUNTRY));
             matchesAllFields = matchesAllFields && matchesCountry(person, countryKeywords);
         }
 
         // Check company field if specified
         if (fieldKeywordsMap.getValue(PREFIX_COMPANY).isPresent()) {
-            List<String> companyKeywords = fieldKeywordsMap.getAllValues(PREFIX_COMPANY);
+            List<String> companyKeywords = filterEmptyString(fieldKeywordsMap.getAllValues(PREFIX_COMPANY));
             matchesAllFields = matchesAllFields && matchesCompany(person, companyKeywords);
         }
 
         // Check tag field if specified
         if (fieldKeywordsMap.getValue(PREFIX_TAG).isPresent()) {
-            List<String> tagKeywords = fieldKeywordsMap.getAllValues(PREFIX_TAG);
+            List<String> tagKeywords = filterEmptyString(fieldKeywordsMap.getAllValues(PREFIX_TAG));
             matchesAllFields = matchesAllFields && matchesTags(person, tagKeywords);
         }
 
@@ -76,6 +87,9 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesName(Person person, List<String> keywords) {
+        if (keywords.isEmpty()) {
+            return false;
+        }
         return keywords.stream()
                 .anyMatch(keyword -> person.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
     }
@@ -85,6 +99,9 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching
      */
     private boolean matchesPhone(Person person, List<String> keywords) {
+        if (keywords.isEmpty()) {
+            return false;
+        }
         return keywords.stream()
                 .anyMatch(keyword -> person.getPhone().value.contains(keyword));
     }
@@ -94,6 +111,9 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesEmail(Person person, List<String> keywords) {
+        if (keywords.isEmpty()) {
+            return false;
+        }
         return keywords.stream()
                 .anyMatch(keyword -> person.getEmail().value.toLowerCase().contains(keyword.toLowerCase()));
     }
@@ -103,6 +123,9 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesCountry(Person person, List<String> keywords) {
+        if (keywords.isEmpty()) {
+            return false;
+        }
         return keywords.stream()
                 .anyMatch(keyword -> person.getCountry().value.toLowerCase().contains(keyword.toLowerCase()));
     }
@@ -112,6 +135,9 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesCompany(Person person, List<String> keywords) {
+        if (keywords.isEmpty()) {
+            return false;
+        }
         return keywords.stream()
                 .anyMatch(keyword -> person.getCompany().value.toLowerCase().contains(keyword.toLowerCase()));
     }
@@ -121,6 +147,9 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesTags(Person person, List<String> keywords) {
+        if (keywords.isEmpty()) {
+            return false;
+        }
         Set<Tag> tags = person.getTags();
         return keywords.stream().anyMatch(keyword ->
                 tags.stream().anyMatch(tag ->
