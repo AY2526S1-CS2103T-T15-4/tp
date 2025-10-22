@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
@@ -19,7 +21,8 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddMeetingCommandTest {
 
-    private static final Meeting VALID_MEETING = new Meeting(LocalDateTime.of(2025, 10, 22, 14, 0), "Team meeting");
+    private static final Meeting VALID_MEETING = new Meeting(LocalDateTime.of(2025, 10, 22,
+            14, 0), "Team meeting");
 
     @Test
     public void execute_validInput_success() {
@@ -65,5 +68,59 @@ public class AddMeetingCommandTest {
     public void execute_nullModel_throwsNullPointerException() {
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(Index.fromOneBased(1), VALID_MEETING);
         assertThrows(NullPointerException.class, () -> addMeetingCommand.execute(null));
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        AddMeetingCommand command = new AddMeetingCommand(Index.fromOneBased(1), VALID_MEETING);
+        assertEquals(command, command); // same object should be equal
+    }
+
+    @Test
+    public void equals_sameValues_returnsTrue() {
+        AddMeetingCommand command1 = new AddMeetingCommand(Index.fromOneBased(1), VALID_MEETING);
+        AddMeetingCommand command2 = new AddMeetingCommand(Index.fromOneBased(1), VALID_MEETING);
+        assertEquals(command1, command2); // different objects with same values should be equal
+    }
+
+    @Test
+    public void equals_differentIndex_returnsFalse() {
+        AddMeetingCommand command1 = new AddMeetingCommand(Index.fromOneBased(1), VALID_MEETING);
+        AddMeetingCommand command2 = new AddMeetingCommand(Index.fromOneBased(2), VALID_MEETING);
+        assertNotEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_differentMeeting_returnsFalse() {
+        Meeting differentMeeting = new Meeting(LocalDateTime.of(2025, 10, 23,
+                14, 0), "Other meeting");
+        AddMeetingCommand command1 = new AddMeetingCommand(Index.fromOneBased(1), VALID_MEETING);
+        AddMeetingCommand command2 = new AddMeetingCommand(Index.fromOneBased(1), differentMeeting);
+        assertNotEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        AddMeetingCommand command = new AddMeetingCommand(Index.fromOneBased(1), VALID_MEETING);
+        assertNotEquals(command, "some string");
+    }
+
+    @Test
+    public void equals_null_returnsFalse() {
+        AddMeetingCommand command = new AddMeetingCommand(Index.fromOneBased(1), VALID_MEETING);
+        assertNotEquals(command, null);
+    }
+
+    @Test
+    public void toString_containsExpectedFields() {
+        AddMeetingCommand command = new AddMeetingCommand(Index.fromOneBased(1), VALID_MEETING);
+        String str = command.toString();
+
+        // It should start with the full class name
+        assertTrue(str.startsWith(AddMeetingCommand.class.getCanonicalName()));
+
+        // It should contain the fields and their values
+        assertTrue(str.contains("targetIndex=" + Index.fromOneBased(1).toString()));
+        assertTrue(str.contains("meetingTime=" + VALID_MEETING.toString()));
     }
 }
