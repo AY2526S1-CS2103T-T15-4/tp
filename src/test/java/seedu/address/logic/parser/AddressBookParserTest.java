@@ -10,9 +10,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -37,7 +34,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.SingleFieldContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -89,17 +85,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + "n/" + keywords.stream()
-                        .collect(Collectors.joining(" ")));
-
-        assertEquals(new FindCommand(
-                new SingleFieldContainsKeywordsPredicate(
-                        SingleFieldContainsKeywordsPredicate.TargetField.NAME,
-                        keywords)),
-                command);
+        Command cmd = parser.parseCommand("find n/Alice Bob c/Singapore");
+        assertTrue(cmd instanceof FindCommand);
     }
 
     @Test

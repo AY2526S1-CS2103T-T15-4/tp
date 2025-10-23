@@ -75,4 +75,22 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ArgumentMultimap)) {
+            return false;
+        }
+
+        ArgumentMultimap otherMultimap = (ArgumentMultimap) other;
+        return argMultimap.equals(otherMultimap.argMultimap);
+    }
+
+    @Override
+    public int hashCode() {
+        return argMultimap.hashCode();
+    }
 }
