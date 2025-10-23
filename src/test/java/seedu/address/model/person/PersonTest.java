@@ -159,20 +159,25 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different flagged status -> returns false
+        editedAlice = new PersonBuilder(ALICE).withFlag(true).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", country=" + ALICE.getCountry() + ", company=" + ALICE.getCompany()
-                + ", tags=" + ALICE.getTags() + "}";
+                + ", tags=" + ALICE.getTags() + ", isFlagged=" + ALICE.isFlagged()
+                + ", meetings=" + ALICE.getMeetings() + "}";
         assertEquals(expected, ALICE.toString());
     }
 
     @Test
     public void hashCode_shouldBeConsistentWithFields() {
         Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.hashCode() == aliceCopy.hashCode());
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
     }
 
 }

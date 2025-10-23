@@ -176,6 +176,38 @@ Examples:
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidNewResult.png)
 
+### Flagging a person : `flag`
+
+Flags the specified person from the address book.
+
+Format: `flag INDEX`
+
+* Flags the person at the specified `INDEX`.
+* If the person is already flagged, an error message will be shown.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `flag 2` flags the 2nd person in the address book given that the contact is unflagged.
+* `find n/Betsy` followed by 'flag 1' flags the 1st person in the result of the `find` command.
+  ![result for 'flag 1'](images/flagCommand.png)
+
+### Unflagging a person : `unflag`
+
+Unflags the specified person from the address book.
+
+Format: `unflag INDEX`
+
+* Unflags the person at the specified `INDEX`.
+* If the person is already unflagged, an error message will be shown.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `unflag 2` unflags the 2nd person in the address book given that the contact is flagged.
+* `find n/Betsy` followed by 'unflag 1' unflags the 1st person in the result of the `find` command.
+  ![result for 'unflag 1'](images/unflagCommand.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -193,7 +225,7 @@ This action cannot be undone!
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 

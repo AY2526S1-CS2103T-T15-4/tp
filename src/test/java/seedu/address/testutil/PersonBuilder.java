@@ -32,6 +32,7 @@ public class PersonBuilder {
     private Email email;
     private HomeCountry country;
     private Set<Tag> tags;
+    private boolean isFlagged;
     private Set<Meeting> meetings;
 
     /**
@@ -44,6 +45,7 @@ public class PersonBuilder {
         country = new HomeCountry(DEFAULT_COUNTRY);
         company = new Company(DEFAULT_COMPANY);
         tags = new HashSet<>();
+        isFlagged = false;
         meetings = new HashSet<>();
     }
 
@@ -57,6 +59,7 @@ public class PersonBuilder {
         country = personToCopy.getCountry();
         company = personToCopy.getCompany();
         tags = new HashSet<>(personToCopy.getTags());
+        isFlagged = personToCopy.isFlagged();
         meetings = new HashSet<>(personToCopy.getMeetings());
     }
 
@@ -109,6 +112,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code isFlagged} status of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFlag(boolean isFlagged) {
+        this.isFlagged = isFlagged;
+        return this;
+    }
+
+    /**
      * Parses the {@code meetings} into a {@code Set<Meeting>} and set it to the {@code Person} that we are building.
      * Each meeting string should be in the format "DD-MM-YYYY HH:MM [description]".
      */
@@ -132,6 +143,6 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, country, company, tags, meetings);
+        return new Person(name, phone, email, country, company, tags, isFlagged, meetings);
     }
 }

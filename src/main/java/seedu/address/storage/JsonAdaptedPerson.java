@@ -32,16 +32,22 @@ class JsonAdaptedPerson {
     private final String country;
     private final String company;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final boolean isFlagged;
     private final List<JsonAdaptedMeeting> meetings = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("country") String country,
-            @JsonProperty("company") String company, @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty(
-                    "meetings") List<JsonAdaptedMeeting> meetings) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("country") String country,
+                             @JsonProperty("company") String company,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("isFlagged") boolean isFlagged,
+                             @JsonProperty("meetings") List<JsonAdaptedMeeting> meetings) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +56,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.isFlagged = isFlagged;
         if (meetings != null) {
             this.meetings.addAll(meetings);
         }
@@ -67,6 +74,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        isFlagged = source.isFlagged();
         meetings.addAll(source.getMeetings().stream()
                 .map(JsonAdaptedMeeting::new)
                 .collect(Collectors.toList()));
@@ -131,7 +139,9 @@ class JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelCountry, modelCompany, modelTags, modelMeetings);
+        return new Person(modelName, modelPhone, modelEmail, modelCountry, modelCompany, modelTags,
+                          isFlagged, modelMeetings);
+
     }
 
 }
