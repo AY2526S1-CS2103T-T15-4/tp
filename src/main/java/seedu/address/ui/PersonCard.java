@@ -54,6 +54,8 @@ public class PersonCard extends UiPart<Region> {
     private VBox meetings;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label flagLabel;
 
     private Timeline clock;
     /**
@@ -68,6 +70,13 @@ public class PersonCard extends UiPart<Region> {
         country.setText(person.getCountry().value);
         company.setText(person.getCompany().value);
         email.setText(person.getEmail().value);
+
+        if (person.isFlagged()) {
+            flagLabel.setText("🚩");
+        } else {
+            flagLabel.setText("");
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

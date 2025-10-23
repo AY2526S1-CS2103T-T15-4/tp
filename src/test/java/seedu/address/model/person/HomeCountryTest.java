@@ -27,6 +27,8 @@ public class HomeCountryTest {
         // invalid countries
         assertFalse(HomeCountry.isValidCountry("")); // empty string
         assertFalse(HomeCountry.isValidCountry(" ")); // spaces only
+        assertFalse(HomeCountry.isValidCountry(
+                "Country that is longer than 56 characters including spaces")); // too long string
 
         // valid countries
         assertTrue(HomeCountry.isValidCountry("Singapore"));

@@ -25,13 +25,14 @@ public class Person {
     private final HomeCountry country;
     private final Company company;
     private final Set<Tag> tags = new HashSet<>();
+    private final boolean isFlagged;
     private final Set<Meeting> meetings = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, HomeCountry country, Company company, Set<Tag> tags,
-                  Set<Meeting> meetings) {
+                  boolean isFlagged, Set<Meeting> meetings) {
         requireAllNonNull(name, phone, email, country, company, tags, meetings);
         this.name = name;
         this.phone = phone;
@@ -39,6 +40,7 @@ public class Person {
         this.country = country;
         this.company = company;
         this.tags.addAll(tags);
+        this.isFlagged = isFlagged;
         this.meetings.addAll(meetings);
     }
 
@@ -69,25 +71,32 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public boolean isFlagged() {
+        return isFlagged;
+    }
+
     public Set<Meeting> getMeetings() {
         return Collections.unmodifiableSet(meetings);
     }
+
     /**
      * Returns a new Person with an updated set of meetings including the new meeting.
      */
     public Person withAddedMeeting(Meeting newMeeting) {
         Set<Meeting> updatedMeetings = new HashSet<>(meetings);
         updatedMeetings.add(newMeeting);
-        return new Person(name, phone, email, country, company, tags, updatedMeetings);
+        return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings);
     }
+
     /**
      * Returns a new Person with the specified meeting removed from the set of meetings.
      */
     public Person withDeletedMeeting(Meeting meetingToDelete) {
         Set<Meeting> updatedMeetings = new HashSet<>(meetings);
         updatedMeetings.remove(meetingToDelete);
-        return new Person(name, phone, email, country, company, tags, updatedMeetings);
+        return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings);
     }
+
     /**
      * Returns true if both persons have the same phone or email.
      * This defines a weaker notion of equality between two persons.
@@ -122,13 +131,14 @@ public class Person {
                 && country.equals(otherPerson.country)
                 && company.equals(otherPerson.company)
                 && tags.equals(otherPerson.tags)
+                && isFlagged == otherPerson.isFlagged
                 && meetings.equals(otherPerson.meetings);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, country, company, tags);
+        return Objects.hash(name, phone, email, country, company, tags, isFlagged, meetings);
     }
 
     @Override
@@ -140,6 +150,8 @@ public class Person {
                 .add("country", country)
                 .add("company", company)
                 .add("tags", tags)
+                .add("isFlagged", isFlagged)
+                .add("meetings", meetings)
                 .toString();
     }
 
