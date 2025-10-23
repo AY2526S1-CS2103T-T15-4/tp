@@ -146,7 +146,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TA
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**<br>
 If the index given is out of range, Wi-Find will display "The person index provided is invalid" in the command box and no changes will occur.<br>
-If you leave out all optional fields, Wi-Find will prompt you to enter at least one field.
+If you leave out all optional fields, Wi-Find will prompt you to enter at least one field.<br>
+Editing phone/email of contacts can trigger duplicate detection as well.<br>
 </div>
 
 Examples:
@@ -168,7 +169,6 @@ Format: `find PARAMETER/[KEYWORD]...`
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**<br>
 If no contacts match, Wi-Find will show an empty list. Use <code>list</code> to show all contacts again.<br>
-Editing phone/email of contacts can trigger duplicate detection as well.<br>
 </div>
 
 Examples:
