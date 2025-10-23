@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 
 /**
@@ -78,6 +79,25 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Adds a meeting to the person at the specified index in the filtered person list.
+     * The person must exist in the address book, and the meeting time must not already be scheduled for that person.
+     *
+     * @param target The Person to add meeting to.
+     * @param meeting The meeting to add.
+     * @throws IllegalArgumentException if the index is invalid or the meeting time is already scheduled.
+     */
+    void addMeeting(Person target, Meeting meeting);
+
+    /**
+     * Deletes a meeting of a person at the specified index in the filtered person list.
+     * The person must exist in the address book, and have the specified meeting
+     *
+     * @param target The person to delete the meeting from
+     * @param meeting The meeting to delete.
+     */
+    void deleteMeeting(Person target, Meeting meeting);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

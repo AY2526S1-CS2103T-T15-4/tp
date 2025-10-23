@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.TimezoneMapper;
@@ -50,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
+    private VBox meetings;
+    @FXML
     private FlowPane tags;
 
     private Timeline clock;
@@ -68,13 +71,29 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        updateMeetings();
         showTime();
-
         cardPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene == null && clock != null) {
                 clock.stop();
             }
         });
+    }
+    /**
+     * Updates the meetings displayed in the VBox.
+     */
+    private void updateMeetings() {
+        if (meetings != null) {
+            meetings.getChildren().clear(); // Clear existing meeting labels
+            int index = 1;
+            for (var meeting : person.getMeetings()) {
+                Label meetingLabel = new Label(index + ". " + meeting.toString());
+                meetingLabel.getStyleClass().add("cell_small_label"); // keep font consistent
+                meetingLabel.setStyle("-fx-padding: 0 0 0 10;"); // optional indent
+                meetings.getChildren().add(meetingLabel);
+                index++;
+            }
+        }
     }
 
     /**
@@ -88,7 +107,7 @@ public class PersonCard extends UiPart<Region> {
     private ZoneId getZoneIdFromCountry(String country) {
         assert country != null : "Country cannot be null.";
 
-        if (country.isBlank()) {
+        if (country == null || country.isBlank()) {
             return null;
         }
 
