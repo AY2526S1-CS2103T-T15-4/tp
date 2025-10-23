@@ -15,11 +15,11 @@ public class LinkCommandParserTest {
     private final LinkCommandParser parser = new LinkCommandParser();
 
     // Test data
-    private static final String VALID_LINK_GOOGLE = "https://google.com";
-    private static final String VALID_LINK_YOUTUBE = "https://youtube.com";
     private static final Index INDEX_FIRST_PERSON = Index.fromOneBased(1);
     private static final Index INDEX_SECOND_PERSON = Index.fromOneBased(2);
-    private static final String INVALID_LINK = "invalid_link"; // violates Link constraints
+    private static final String INVALID_LINK = "invalid_link";
+    private static final String VALID_LINK_GOOGLE = "https://google.com";
+    private static final String VALID_LINK_YOUTUBE = "https://youtube.com";
 
     @Test
     public void parse_validArgsWithoutLink_success() {

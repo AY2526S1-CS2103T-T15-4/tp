@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -42,7 +41,6 @@ public class LinkCommandTest {
 
         CommandResult result = linkCommand.execute(model);
 
-        // Assert
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(editedPerson, model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
     }
@@ -139,7 +137,8 @@ public class LinkCommandTest {
     public void toStringMethod() {
         Link link = new Link("https://example.com");
         LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_PERSON, link);
-        String expected = LinkCommand.class.getCanonicalName() + "{index=" + INDEX_FIRST_PERSON + ", link=" + link + "}";
+        String expected = LinkCommand.class.getCanonicalName() + "{index=" + INDEX_FIRST_PERSON + ", "
+                + "link=" + link + "}";
         assertEquals(expected, linkCommand.toString());
     }
 }
