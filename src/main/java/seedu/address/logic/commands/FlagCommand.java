@@ -58,6 +58,7 @@ public class FlagCommand extends Command {
                 personToFlag.getMeetings()
         );
 
+        assert flaggedPerson.isFlagged() : "Flagged person should have isFlagged=true";
         model.setPerson(personToFlag, flaggedPerson);
 
         return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, Messages.format(personToFlag)));
