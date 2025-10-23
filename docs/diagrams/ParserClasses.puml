@@ -43,7 +43,6 @@ XYZCommand ..> MultiFieldContainsKeywordsPredicate : <<use>>
 note right of XYZCommand
   MultiFieldContainsKeywordsPredicate
   is only used by FindCommand.
-
 end note
 
 @enduml
