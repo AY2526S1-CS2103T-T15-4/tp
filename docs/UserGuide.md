@@ -11,8 +11,8 @@ Key features:
 - Contact management through both country and company.
 - Automatic timezone awareness.
 - Fast text-based commands with immediate feedback.
-- Set and record meeting times. (coming soon in v1.4)
-- Filter contacts by company, country, meetings. (coming soon in v1.4)
+- Set meetings with contacts
+- Find contacts by company, country, meetings.
 
 ### Table of contents
 Use this table of contents to jump to any section!
@@ -208,6 +208,44 @@ Examples:
 * `find n/Betsy` followed by 'unflag 1' unflags the 1st person in the result of the `find` command.
   ![result for 'unflag 1'](images/unflagCommand.png)
 
+### Adding a meeting to a person : `addm`
+
+Adds a meeting to the person.
+
+Format `addm INDEX m/dd-MM-YYYY HH:MM description`
+
+* Adds a meeting to the person at the specified `INDEX`.
+* If there already exists a meeting with any person in the addressbook, an error message will be shown.
+* The index refers to the index number shown in the displayed person list
+* The index **must be a positive integer** 1, 2, 3, …​
+* The meeting time provided must follow the format dd-MM-YYYY HH:MM
+* The description is optional
+
+Examples:
+* `list` followed by `addm 1 m/20-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
+  there are no meetings scheduled at that time for all contacts.
+
+![result for addm 1 m/20-10-2025 14:30 Project discussion](images/addmeeting-example.png)
+
+
+### Deleting a meeting from a person : `deletem`
+
+Deletes a meeting with a specified date and time from a person.
+
+Format `deletem INDEX m/dd-MM-YYYY HH:MM`
+
+* Deletes a meeting to the person at the specified `INDEX`.
+* If the person does not have a meeting with the specified date and time, an error will be shown.
+* The index refers to the index number shown in the displayed person list
+* The index **must be a positive integer** 1, 2, 3, …​
+* The meeting time provided must follow the format dd-MM-YYYY HH:MM
+
+Examples:
+* `list` followed by `deletem 1 m/20-10-2025 14:30` deletes a meeting from the first contact, given that there exists 
+  a meeting at that date and time for that contact.
+
+![result for deletem 1 m/20-10-2025 14:30](images/DeleteMeetingCommandExample.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -307,6 +345,8 @@ Some quick notes regarding how commands work:
 | **[Unflag](#unflagging-a-person--unflag)** | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
 | **[List](#listing-all-persons--list)**     | List all contacts                 | `list`                                                                                                                                                                           |
 | **[Help](#viewing-help--help)**            | Displays help window              | `help`                                                                                                                                                                           |
+| **[Add Meeting](#)**                       | Add Meeting to a contact     | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm m/12-02-2020 12:30 Project Star`                                                                                     |
+| **[Delete Meeting](#)**                   | Delete Meeting from a contact | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem m/12-02-2020 12:30`                                                                                                        |
 
 ## List of supported countries
 
