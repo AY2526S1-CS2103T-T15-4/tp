@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -25,6 +26,7 @@ public class PersonCardTest {
         // Create a simple Person with tags
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("friend"));
+        Set<Meeting> meetings = new HashSet<>();
 
         Person person = new Person(
                 new Name("Alice"),
@@ -33,7 +35,8 @@ public class PersonCardTest {
                 new HomeCountry("Singapore"),
                 new Company("ACME Corp"),
                 tags,
-                false
+                false,
+                meetings
         );
         person.getTags().stream()
                 .sorted((a, b) -> a.tagName.compareTo(b.tagName))

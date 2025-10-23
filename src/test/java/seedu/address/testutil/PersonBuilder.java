@@ -1,11 +1,14 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -30,6 +33,7 @@ public class PersonBuilder {
     private HomeCountry country;
     private Set<Tag> tags;
     private boolean isFlagged;
+    private Set<Meeting> meetings;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -42,6 +46,7 @@ public class PersonBuilder {
         company = new Company(DEFAULT_COMPANY);
         tags = new HashSet<>();
         isFlagged = false;
+        meetings = new HashSet<>();
     }
 
     /**
@@ -55,6 +60,7 @@ public class PersonBuilder {
         company = personToCopy.getCompany();
         tags = new HashSet<>(personToCopy.getTags());
         isFlagged = personToCopy.isFlagged();
+        meetings = new HashSet<>(personToCopy.getMeetings());
     }
 
     /**
@@ -112,8 +118,31 @@ public class PersonBuilder {
         this.isFlagged = isFlagged;
         return this;
     }
+  
+    /**
+     * Parses the {@code meetings} into a {@code Set<Meeting>} and set it to the {@code Person} that we are building.
+     * Each meeting string should be in the format "DD-MM-YYYY HH:MM [description]".
+     */
+    public PersonBuilder withMeetings(String... meetings) {
+        this.meetings = new HashSet<>();
+        for (String meeting : meetings) {
+            String[] parts = meeting.split(" ", 3); // Split on first two spaces (date, time, description)
+            if (parts.length < 2) {
+                throw new IllegalArgumentException("Meeting must include date and time: " + meeting);
+            }
+            String timePart = parts[0] + " " + parts[1]; // Combine date and time
+            String description = parts.length > 2 ? parts[2] : null;
+            try {
+                LocalDateTime meetingTime = ParserUtil.parseMeetingTime(timePart);
+                this.meetings.add(new Meeting(meetingTime, description));
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Invalid meeting time format: " + timePart, e);
+            }
+        }
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, country, company, tags, isFlagged);
+        return new Person(name, phone, email, country, company, tags, isFlagged, meetings);
     }
 }

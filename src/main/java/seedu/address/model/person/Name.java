@@ -9,8 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
+    /*
+     * Length of name should not exceed 70 characters.
+     */
+    public static final int LENGTH_LIMIT = 70;
+
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should should not be blank";
+            "Names should should not be blank and not exceed " + LENGTH_LIMIT + " characters, including spaces";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -35,7 +40,9 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean result;
+        result = test.matches(VALIDATION_REGEX) && test.length() <= LENGTH_LIMIT;
+        return result;
     }
 
 

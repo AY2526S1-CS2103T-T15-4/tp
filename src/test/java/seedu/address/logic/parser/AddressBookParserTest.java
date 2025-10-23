@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,11 +18,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ConfirmableCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteMeetingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -31,6 +35,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.UnflagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.SingleFieldContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -87,7 +92,8 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
 
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + "n/" + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + "n/" + keywords.stream()
+                        .collect(Collectors.joining(" ")));
 
         assertEquals(new FindCommand(
                 new SingleFieldContainsKeywordsPredicate(
@@ -118,6 +124,35 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addMeeting() throws Exception {
+        // Example: "addm 1 m/20-10-2025 14:30"
+        LocalDateTime meetingTime = LocalDateTime.of(2025, 10, 20, 14, 30);
+        Meeting meeting = new Meeting(meetingTime);
+        AddMeetingCommand expectedCommand = new AddMeetingCommand(INDEX_FIRST_PERSON, meeting);
+
+        AddMeetingCommand command = (AddMeetingCommand) parser.parseCommand(
+                AddMeetingCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_MEETING + "20-10-2025 14:30");
+
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_deleteMeeting() throws Exception {
+        // Example: "deletem 1 m/20-10-2025 14:30"
+        LocalDateTime meetingTime = LocalDateTime.of(2025, 10, 20, 14, 30);
+        DeleteMeetingCommand expectedCommand = new DeleteMeetingCommand(INDEX_FIRST_PERSON, meetingTime);
+
+        DeleteMeetingCommand command = (DeleteMeetingCommand) parser.parseCommand(
+                DeleteMeetingCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_MEETING + "20-10-2025 14:30");
+
+        assertEquals(expectedCommand, command);
     }
 
     @Test

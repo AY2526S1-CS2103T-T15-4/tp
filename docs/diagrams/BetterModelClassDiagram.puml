@@ -9,6 +9,7 @@ AddressBook *-right-> "1" PersonList
 PersonList -right-> "*" Person
 
 Person *--> "*" Tag
+Person *--> "*" Meeting
 
 Person *--> Name
 Person *--> Phone

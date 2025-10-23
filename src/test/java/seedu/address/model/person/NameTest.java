@@ -27,6 +27,8 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
+        assertFalse(Name.isValidName("Name that is longer than 70 characters including spaces "
+                + "Name that is longer than 70 characters including spaces")); // too long String
 
         // valid name
         assertTrue(Name.isValidName("peter*")); // contains non-alphanumeric characters
