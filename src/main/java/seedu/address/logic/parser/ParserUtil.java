@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +25,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_MEETING_TIME = "Meeting time must be in the format DD-MM-YYYY HH:MM";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -136,5 +140,27 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+    /**
+     * Parses a string representing a meeting time into a {@link LocalDateTime} object.
+     * <p>
+     * The expected format of the input string is {@code "dd-MM-yyyy HH:mm"} (e.g. {@code "25-12-2025 14:30"}).
+     * Leading and trailing whitespace will be ignored.
+     * </p>
+     *
+     * @param meetingTime The string containing the meeting time to parse. Must not be {@code null}.
+     * @return A {@code LocalDateTime} representing the parsed meeting time.
+     * @throws ParseException If the input string is {@code null}, does not match the expected format,
+     *                        or cannot be parsed into a valid {@code LocalDateTime}.
+     */
+    public static LocalDateTime parseMeetingTime(String meetingTime) throws ParseException {
+        requireNonNull(meetingTime);
+        String trimmedTime = meetingTime.trim();
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            return LocalDateTime.parse(trimmedTime, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_MEETING_TIME, e);
+        }
     }
 }
