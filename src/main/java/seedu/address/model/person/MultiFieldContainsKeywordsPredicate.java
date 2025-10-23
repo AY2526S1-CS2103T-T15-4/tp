@@ -91,7 +91,6 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesName(Person person, List<String> keywords) {
-        assert person != null;
         requireNonNull(person);
         assert !keywords.isEmpty();
         return keywords.stream()
@@ -103,7 +102,6 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching
      */
     private boolean matchesPhone(Person person, List<String> keywords) {
-        assert person != null;
         requireNonNull(person);
         assert !keywords.isEmpty();
         return keywords.stream()
@@ -115,7 +113,6 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesEmail(Person person, List<String> keywords) {
-        assert person != null;
         requireNonNull(person);
         assert !keywords.isEmpty();
         return keywords.stream()
@@ -127,7 +124,6 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesCountry(Person person, List<String> keywords) {
-        assert person != null;
         requireNonNull(person);
         assert !keywords.isEmpty();
         return keywords.stream()
@@ -139,7 +135,6 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesCompany(Person person, List<String> keywords) {
-        assert person != null;
         requireNonNull(person);
         assert !keywords.isEmpty();
         return keywords.stream()
@@ -151,7 +146,6 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesTags(Person person, List<String> keywords) {
-        assert person != null;
         requireNonNull(person);
         assert !keywords.isEmpty();
         Set<Tag> tags = person.getTags();
