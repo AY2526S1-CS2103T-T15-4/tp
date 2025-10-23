@@ -63,6 +63,7 @@ public class AddMeetingCommand extends Command {
         }
 
         Person personToUpdate = lastShownList.get(index.getZeroBased());
+        assert personToUpdate != null;
         if (model.getAddressBook().getPersonList().stream()
                 .anyMatch(person-> person.getMeetings().stream()
                         .anyMatch(currentMeeting -> currentMeeting.equals(meeting)))) {
