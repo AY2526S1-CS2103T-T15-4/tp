@@ -133,6 +133,8 @@
 }
 
 .link-label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
     -fx-text-fill: #3399FF !important;
     -fx-underline: true;
 }
