@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -40,6 +41,9 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        assert person != null;
+        requireNonNull(person);
+
         // Start with always true and combine with AND logic for each specified field
         boolean matchesAllFields = true;
 
@@ -87,6 +91,8 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesName(Person person, List<String> keywords) {
+        assert person != null;
+        requireNonNull(person);
         if (keywords.isEmpty()) {
             return false;
         }
@@ -99,6 +105,8 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching
      */
     private boolean matchesPhone(Person person, List<String> keywords) {
+        assert person != null;
+        requireNonNull(person);
         if (keywords.isEmpty()) {
             return false;
         }
@@ -111,6 +119,8 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesEmail(Person person, List<String> keywords) {
+        assert person != null;
+        requireNonNull(person);
         if (keywords.isEmpty()) {
             return false;
         }
@@ -123,6 +133,8 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesCountry(Person person, List<String> keywords) {
+        assert person != null;
+        requireNonNull(person);
         if (keywords.isEmpty()) {
             return false;
         }
@@ -135,6 +147,8 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesCompany(Person person, List<String> keywords) {
+        assert person != null;
+        requireNonNull(person);
         if (keywords.isEmpty()) {
             return false;
         }
@@ -147,6 +161,8 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
      * Uses partial matching (case-insensitive)
      */
     private boolean matchesTags(Person person, List<String> keywords) {
+        assert person != null;
+        requireNonNull(person);
         if (keywords.isEmpty()) {
             return false;
         }
