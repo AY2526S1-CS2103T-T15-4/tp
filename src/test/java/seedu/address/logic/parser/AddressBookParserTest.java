@@ -20,6 +20,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -76,20 +77,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        /*List<String> keywords = Arrays.asList("foo", "bar", "baz");
-
-        ArgumentMultimap expectedArgMultimap = new ArgumentMultimap();
-        for (String keyword : keywords) {
-            expectedArgMultimap.put(PREFIX_NAME, keyword);
-        }
-
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + "n/" + keywords.stream().collect(Collectors.joining(" n/")));
-
-        assertEquals(new FindCommand(
-                        new MultiFieldContainsKeywordsPredicate(expectedArgMultimap)),
-                command);*/
-        // test cases not made yet for FindCommand.
+        Command cmd = parser.parseCommand("find n/Alice Bob c/Singapore");
+        assertTrue(cmd instanceof FindCommand);
     }
 
     @Test
