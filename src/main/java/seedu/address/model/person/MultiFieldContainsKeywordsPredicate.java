@@ -93,9 +93,7 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
     private boolean matchesName(Person person, List<String> keywords) {
         assert person != null;
         requireNonNull(person);
-        if (keywords.isEmpty()) {
-            return false;
-        }
+        assert !keywords.isEmpty();
         return keywords.stream()
                 .anyMatch(keyword -> person.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
     }
@@ -107,9 +105,7 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
     private boolean matchesPhone(Person person, List<String> keywords) {
         assert person != null;
         requireNonNull(person);
-        if (keywords.isEmpty()) {
-            return false;
-        }
+        assert !keywords.isEmpty();
         return keywords.stream()
                 .anyMatch(keyword -> person.getPhone().value.contains(keyword));
     }
@@ -121,9 +117,7 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
     private boolean matchesEmail(Person person, List<String> keywords) {
         assert person != null;
         requireNonNull(person);
-        if (keywords.isEmpty()) {
-            return false;
-        }
+        assert !keywords.isEmpty();
         return keywords.stream()
                 .anyMatch(keyword -> person.getEmail().value.toLowerCase().contains(keyword.toLowerCase()));
     }
@@ -135,9 +129,7 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
     private boolean matchesCountry(Person person, List<String> keywords) {
         assert person != null;
         requireNonNull(person);
-        if (keywords.isEmpty()) {
-            return false;
-        }
+        assert !keywords.isEmpty();
         return keywords.stream()
                 .anyMatch(keyword -> person.getCountry().value.toLowerCase().contains(keyword.toLowerCase()));
     }
@@ -149,9 +141,7 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
     private boolean matchesCompany(Person person, List<String> keywords) {
         assert person != null;
         requireNonNull(person);
-        if (keywords.isEmpty()) {
-            return false;
-        }
+        assert !keywords.isEmpty();
         return keywords.stream()
                 .anyMatch(keyword -> person.getCompany().value.toLowerCase().contains(keyword.toLowerCase()));
     }
@@ -163,9 +153,7 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
     private boolean matchesTags(Person person, List<String> keywords) {
         assert person != null;
         requireNonNull(person);
-        if (keywords.isEmpty()) {
-            return false;
-        }
+        assert !keywords.isEmpty();
         Set<Tag> tags = person.getTags();
         return keywords.stream().anyMatch(keyword ->
                 tags.stream().anyMatch(tag ->
