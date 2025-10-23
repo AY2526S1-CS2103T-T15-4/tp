@@ -53,6 +53,16 @@ public class PersonListTest {
     }
 
     @Test
+    public void add_duplicatePhone_allowsAdd() {
+        Person p1 = new PersonBuilder().withPhone("12345678").withEmail("a@test.com").build();
+        Person p2 = new PersonBuilder().withPhone("12345678").withEmail("b@test.com").build();
+
+        personList.add(p1);
+        personList.add(p2);
+        assertEquals(2, personList.asUnmodifiableObservableList().size());
+    }
+
+    @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> personList.setPerson(null, ALICE));
     }

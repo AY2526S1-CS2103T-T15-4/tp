@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -17,6 +18,12 @@ public class EmailTest {
     public void constructor_invalidEmail_throwsIllegalArgumentException() {
         String invalidEmail = "";
         assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
+    }
+
+    @Test
+    public void constructor_lowerCasesEmail() {
+        Email email = new Email("TEST@EXAMPLE.COM");
+        assertEquals("test@example.com", email.value);
     }
 
     @Test
@@ -84,5 +91,12 @@ public class EmailTest {
 
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
+    }
+
+    @Test
+    public void equals_ignoresCase() {
+        Email email1 = new Email("test@example.com");
+        Email email2 = new Email("TEST@EXAMPLE.COM");
+        assertTrue(email1.equals(email2));
     }
 }

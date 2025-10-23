@@ -51,6 +51,15 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_sameValues_throwsNoChangeException() {
+        Person person = model.getFilteredPersonList().get(0);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditCommand command = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(command, model, EditCommand.MESSAGE_NO_CHANGE);
+    }
+
+    @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
