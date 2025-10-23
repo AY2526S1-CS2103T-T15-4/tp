@@ -27,6 +27,9 @@ public class CompanyTest {
         // invalid companies
         assertFalse(Company.isValidCompany("")); // empty string
         assertFalse(Company.isValidCompany(" ")); // spaces only
+        assertFalse(Company.isValidCompany(
+                "Company Name that is longer than 100 characters including spaces "
+                        + "Company Name that is longer than 100 characters including spaces")); // too long string
 
         // valid companies
         assertTrue(Company.isValidCompany("Shopee"));
