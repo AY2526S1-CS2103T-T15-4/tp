@@ -12,14 +12,13 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.model.person.MultiFieldContainsKeywordsPredicate;
 import seedu.address.model.person.Meeting;
+import seedu.address.model.person.MultiFieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
