@@ -63,6 +63,7 @@ public class PersonCardTest {
     void constructor_flaggedPerson_shouldDisplayFlagIcon() {
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("colleague"));
+        Set<Meeting> meetings = new HashSet<>();
 
         Person flaggedPerson = new Person(
                 new Name("Bob"),
@@ -71,7 +72,8 @@ public class PersonCardTest {
                 new HomeCountry("Japan"),
                 new Company("Beta Ltd"),
                 tags,
-                true
+                true,
+                meetings
         );
 
         assertTrue(flaggedPerson.isFlagged());
@@ -91,6 +93,7 @@ public class PersonCardTest {
     void constructor_unflaggedPerson_shouldNotDisplayFlagIcon() {
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("friend"));
+        Set<Meeting> meetings = new HashSet<>();
 
         Person unflaggedPerson = new Person(
                 new Name("Alice"),
@@ -99,7 +102,8 @@ public class PersonCardTest {
                 new HomeCountry("Singapore"),
                 new Company("ACME Corp"),
                 tags,
-                false
+                false,
+                meetings
         );
 
         assertTrue(!unflaggedPerson.isFlagged());

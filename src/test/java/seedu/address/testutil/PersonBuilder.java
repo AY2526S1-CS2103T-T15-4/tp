@@ -118,7 +118,7 @@ public class PersonBuilder {
         this.isFlagged = isFlagged;
         return this;
     }
-  
+
     /**
      * Parses the {@code meetings} into a {@code Set<Meeting>} and set it to the {@code Person} that we are building.
      * Each meeting string should be in the format "DD-MM-YYYY HH:MM [description]".

@@ -78,25 +78,25 @@ public class Person {
     public Set<Meeting> getMeetings() {
         return Collections.unmodifiableSet(meetings);
     }
-  
+
     /**
      * Returns a new Person with an updated set of meetings including the new meeting.
      */
     public Person withAddedMeeting(Meeting newMeeting) {
         Set<Meeting> updatedMeetings = new HashSet<>(meetings);
         updatedMeetings.add(newMeeting);
-        return new Person(name, phone, email, country, company, tags, updatedMeetings);
+        return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings);
     }
-  
+
     /**
      * Returns a new Person with the specified meeting removed from the set of meetings.
      */
     public Person withDeletedMeeting(Meeting meetingToDelete) {
         Set<Meeting> updatedMeetings = new HashSet<>(meetings);
         updatedMeetings.remove(meetingToDelete);
-        return new Person(name, phone, email, country, company, tags, updatedMeetings);
+        return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings);
     }
-  
+
     /**
      * Returns true if both persons have the same phone or email.
      * This defines a weaker notion of equality between two persons.
@@ -131,14 +131,14 @@ public class Person {
                 && country.equals(otherPerson.country)
                 && company.equals(otherPerson.company)
                 && tags.equals(otherPerson.tags)
-                && isFlagged == otherPerson.isFlagged;
+                && isFlagged == otherPerson.isFlagged
                 && meetings.equals(otherPerson.meetings);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, country, company, tags, isFlagged);
+        return Objects.hash(name, phone, email, country, company, tags, isFlagged, meetings);
     }
 
     @Override
@@ -151,6 +151,7 @@ public class Person {
                 .add("company", company)
                 .add("tags", tags)
                 .add("isFlagged", isFlagged)
+                .add("meetings", meetings)
                 .toString();
     }
 

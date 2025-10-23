@@ -54,7 +54,8 @@ public class UnflagCommand extends Command {
                 personToUnflag.getCountry(),
                 personToUnflag.getCompany(),
                 personToUnflag.getTags(),
-                false
+                false,
+                personToUnflag.getMeetings()
         );
 
         model.setPerson(personToUnflag, unflaggedPerson);

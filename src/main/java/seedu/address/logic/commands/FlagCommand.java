@@ -54,7 +54,8 @@ public class FlagCommand extends Command {
                 personToFlag.getCountry(),
                 personToFlag.getCompany(),
                 personToFlag.getTags(),
-                true
+                true,
+                personToFlag.getMeetings()
         );
 
         model.setPerson(personToFlag, flaggedPerson);

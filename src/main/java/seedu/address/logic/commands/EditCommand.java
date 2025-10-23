@@ -126,7 +126,7 @@ public class EditCommand extends ConfirmableCommand {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Boolean updatedIsFlagged = editPersonDescriptor.getIsFlagged().orElse(personToEdit.isFlagged());
         Set<Meeting> unchangedMeetings = personToEdit.getMeetings();
-      
+
         return new Person(
                 updatedName,
                 updatedPhone,
