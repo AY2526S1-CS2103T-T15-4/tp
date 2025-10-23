@@ -79,6 +79,13 @@ public class DeleteMeetingCommandTest {
     }
 
     @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        DeleteMeetingCommand command = new DeleteMeetingCommand(Index.fromOneBased(1),
+                LocalDateTime.of(2025, 10, 20, 14, 30));
+        assertThrows(NullPointerException.class, () -> command.execute(null));
+    }
+
+    @Test
     public void equals() {
         Index firstIndex = Index.fromOneBased(1);
         Index secondIndex = Index.fromOneBased(2);
