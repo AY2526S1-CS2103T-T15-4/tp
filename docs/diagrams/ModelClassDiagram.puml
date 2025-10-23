@@ -21,6 +21,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Meeting
 
 Class I #FFFFFF
 }
@@ -49,13 +50,12 @@ Person *--> Email
 Person *--> HomeCountry
 Person *--> Company
 Person *--> "*" Tag
+Person *--> "*" Meeting
 
 Person -[hidden]up--> I
 PersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 @enduml
