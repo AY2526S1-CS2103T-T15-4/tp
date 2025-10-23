@@ -6,48 +6,55 @@
     "email" : "alice@example.com",
     "country" : "China",
     "company": "Google",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "link" : null
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "country" : "Singapore",
     "company": "Shopee",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "link": "https://www.benson.com"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "country" : "Australia",
     "company": "Grab",
-    "tags" : [ ]
+    "tags" : [ ],
+    "link" : null
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "country" : "Russia",
     "company": "Shopee",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "link" : null
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "country" : "Germany",
     "company": "Microsoft",
-    "tags" : [ ]
+    "tags" : [ ],
+    "link" : null
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "country" : "Singapore",
     "company": "DBS",
-    "tags" : [ ]
+    "tags" : [ ],
+    "link" : null
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "country" : "Japan",
     "company": "Meta",
-    "tags" : [ ]
+    "tags" : [ ],
+    "link" : null
   } ]
 }

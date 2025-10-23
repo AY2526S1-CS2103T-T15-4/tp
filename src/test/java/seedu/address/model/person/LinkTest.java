@@ -74,4 +74,23 @@ public class LinkTest {
         // different values -> returns false
         assertFalse(link.equals(new Link("https://other.com")));
     }
+
+    @Test
+    public void constructor_trimsWhitespace() {
+        Link link = new Link("  https://example.com  ");
+        assertTrue(link.value.equals("https://example.com"));
+    }
+
+    @Test
+    public void toString_returnsLinkValue() {
+        Link link = new Link("https://example.com");
+        assertTrue(link.toString().equals("https://example.com"));
+    }
+
+    @Test
+    public void hashCode_sameValue_sameHash() {
+        Link link1 = new Link("https://example.com");
+        Link link2 = new Link("https://example.com");
+        assertTrue(link1.hashCode() == link2.hashCode());
+    }
 }
