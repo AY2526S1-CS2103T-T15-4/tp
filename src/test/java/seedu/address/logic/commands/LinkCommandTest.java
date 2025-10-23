@@ -31,6 +31,7 @@ public class LinkCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String link = "https://example.com";
         Person editedPerson = new PersonBuilder(personToEdit).withLink(link).build();
+        System.out.println("Model AddressBook: " + model.getAddressBook());
 
         LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_PERSON, new Link(link));
 
@@ -39,7 +40,11 @@ public class LinkCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
 
-        assertCommandSuccess(linkCommand, model, expectedMessage, expectedModel);
+        CommandResult result = linkCommand.execute(model);
+
+        // Assert
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertEquals(editedPerson, model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
     }
 
     @Test

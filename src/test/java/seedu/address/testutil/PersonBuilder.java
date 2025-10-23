@@ -55,6 +55,7 @@ public class PersonBuilder {
         country = personToCopy.getCountry();
         company = personToCopy.getCompany();
         tags = new HashSet<>(personToCopy.getTags());
+        link = personToCopy.getLink();
     }
 
     /**
@@ -118,6 +119,6 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, country, company, tags, null);
+        return new Person(name, phone, email, country, company, tags, link);
     }
 }
