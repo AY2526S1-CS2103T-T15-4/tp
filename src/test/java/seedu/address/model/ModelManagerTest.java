@@ -3,6 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -10,13 +11,18 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.SingleFieldContainsKeywordsPredicate;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.model.person.Meeting;
+import seedu.address.model.person.MultiFieldContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
+
 
 public class ModelManagerTest {
 
@@ -94,6 +100,53 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void addMeeting_nullArguments_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addMeeting(null, new Meeting(LocalDateTime.now())));
+        assertThrows(NullPointerException.class, () -> modelManager.addMeeting(ALICE, null));
+    }
+
+    @Test
+    public void addMeeting_validMeeting_meetingAddedToPerson() {
+        // Prepare test data
+        Person alice = new PersonBuilder(ALICE).build();
+        modelManager.addPerson(alice);
+        Meeting meeting = new Meeting(LocalDateTime.of(2025, 10, 22, 10, 0), "Project Discussion");
+
+        // Add meeting
+        modelManager.addMeeting(alice, meeting);
+
+        // Fetch updated Alice
+        Person updatedAlice = modelManager.getFilteredPersonList().get(0);
+
+        // Verify meeting was added
+        assertTrue(updatedAlice.getMeetings().contains(meeting));
+    }
+
+    @Test
+    public void deleteMeeting_nullArguments_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteMeeting(null,
+                new Meeting(LocalDateTime.now())));
+        assertThrows(NullPointerException.class, () -> modelManager.deleteMeeting(ALICE, null));
+    }
+
+    @Test
+    public void deleteMeeting_validMeeting_meetingRemovedFromPerson() {
+        // Prepare test data
+        Meeting meeting = new Meeting(LocalDateTime.of(2025, 10, 22, 10, 0), "Project Discussion");
+        Person aliceWithMeeting = new PersonBuilder(ALICE).build().withAddedMeeting(meeting);
+        modelManager.addPerson(aliceWithMeeting);
+
+        // Delete meeting
+        modelManager.deleteMeeting(aliceWithMeeting, meeting);
+
+        // Fetch updated Alice
+        Person updatedAlice = modelManager.getFilteredPersonList().get(0);
+
+        // Verify meeting was removed
+        assertFalse(updatedAlice.getMeetings().contains(meeting));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -118,8 +171,12 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new SingleFieldContainsKeywordsPredicate(
-                SingleFieldContainsKeywordsPredicate.TargetField.NAME, Arrays.asList(keywords)));
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        for (String keyword : keywords) {
+            argMultimap.put(PREFIX_NAME, keyword);
+        }
+
+        modelManager.updateFilteredPersonList(new MultiFieldContainsKeywordsPredicate(argMultimap));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

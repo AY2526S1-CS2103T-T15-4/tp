@@ -1,93 +1,56 @@
 package seedu.address.logic.parser;
 
+
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.SingleFieldContainsKeywordsPredicate;
-import seedu.address.model.person.SingleFieldContainsKeywordsPredicate.TargetField;
+import seedu.address.model.person.MultiFieldContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
+    public void parse_validNamePrefix_returnsFindCommand() {
+        String userInput = " n/Alice ";
+        ArgumentMultimap expectedMap = ArgumentTokenizer.tokenize(
+                userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG);
+        FindCommand expected = new FindCommand(new MultiFieldContainsKeywordsPredicate(expectedMap));
+        assertParseSuccess(parser, userInput, expected);
+    }
+
+    @Test
+    public void parse_multipleValidPrefixes_returnsFindCommand() {
+        String userInput = " n/Alice p/9123 e/@ex r/pore co/Open t/owes ";
+        ArgumentMultimap expectedMap = ArgumentTokenizer.tokenize(
+                userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG);
+        FindCommand expected = new FindCommand(new MultiFieldContainsKeywordsPredicate(expectedMap));
+        assertParseSuccess(parser, userInput, expected);
+    }
+
+    @Test
+    public void parse_repeatedPrefix_returnsFindCommand() {
+        String userInput = " t/friend t/owes ";
+        ArgumentMultimap expectedMap = ArgumentTokenizer.tokenize(
+                userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG);
+        FindCommand expected = new FindCommand(new MultiFieldContainsKeywordsPredicate(expectedMap));
+        assertParseSuccess(parser, userInput, expected);
+    }
+
+    @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new SingleFieldContainsKeywordsPredicate(
-                        TargetField.NAME, Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "n/Alice Bob", expectedFindCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n n/Alice \n \t Bob  \t", expectedFindCommand);
-    }
-
-    @Test
-    public void parse_namePrefix_returnsFindCommand() {
-        FindCommand expected =
-                new FindCommand(new SingleFieldContainsKeywordsPredicate(
-                        TargetField.NAME, Arrays.asList("Alice")));
-        assertParseSuccess(parser, "n/Alice", expected);
-    }
-
-    @Test
-    public void parse_phonePrefix_returnsFindCommand() {
-        FindCommand expected =
-                new FindCommand(new SingleFieldContainsKeywordsPredicate(
-                        TargetField.PHONE, Arrays.asList("12345678", "23456789")));
-        assertParseSuccess(parser, "p/   12345678  23456789", expected);
-    }
-
-    @Test
-    public void parse_emailPrefix_returnsFindCommand() {
-        FindCommand expected =
-                new FindCommand(new SingleFieldContainsKeywordsPredicate(
-                        TargetField.EMAIL, Arrays.asList("alice@example.com")));
-        assertParseSuccess(parser, "e/alice@example.com", expected);
-    }
-
-    @Test
-    public void parse_countryPrefix_returnsFindCommand() {
-        FindCommand expected =
-                new FindCommand(new SingleFieldContainsKeywordsPredicate(
-                        TargetField.COUNTRY, Arrays.asList("Singapore", "SG")));
-        assertParseSuccess(parser, "c/Singapore SG", expected);
-    }
-
-    @Test
-    public void parse_companyPrefix_returnsFindCommand() {
-        FindCommand expected =
-                new FindCommand(new SingleFieldContainsKeywordsPredicate(
-                        TargetField.COMPANY, Arrays.asList("OpenAI")));
-        assertParseSuccess(parser, "com/OpenAI", expected);
-    }
-
-    @Test
-    public void parse_tagPrefix_returnsFindCommand() {
-        FindCommand expected =
-                new FindCommand(new SingleFieldContainsKeywordsPredicate(
-                        TargetField.TAG, Arrays.asList("friends")));
-        assertParseSuccess(parser, "t/friends", expected);
-    }
-
-    @Test
-    public void parse_collectsAllKeywords_returnsFindCommand() {
-        FindCommand expected =
-                new FindCommand(new SingleFieldContainsKeywordsPredicate(
-                        TargetField.NAME, Arrays.asList("Alice", "Bob", "Charlie")));
-        assertParseSuccess(parser, "n/   Alice\tBob\nCharlie  ", expected);
     }
 
     @Test
@@ -113,6 +76,13 @@ public class FindCommandParserTest {
     @Test
     public void parse_prefixCaseIsSensitive_throwsParseException() {
         assertParseFailure(parser, "N/Alice",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_allSpecifiedPrefixesHaveKeywordsAllEmpty_throwsParseException() {
+        String userInput = " n/ e/ ";
+        assertParseFailure(parser, userInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 }

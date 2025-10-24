@@ -11,8 +11,8 @@ Key features:
 - Contact management through both country and company.
 - Automatic timezone awareness.
 - Fast text-based commands with immediate feedback.
-- Set and record meeting times. (coming soon in v1.4)
-- Filter contacts by company, country, meetings. (coming soon in v1.4)
+- Set meetings with contacts
+- Find contacts by company, country, meetings.
 
 ### Table of contents
 Use this table of contents to jump to any section!
@@ -146,7 +146,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TA
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**<br>
 If the index given is out of range, Wi-Find will display "The person index provided is invalid" in the command box and no changes will occur.<br>
-If you leave out all optional fields, Wi-Find will prompt you to enter at least one field.
+If you leave out all optional fields, Wi-Find will prompt you to enter at least one field.<br>
+Editing phone/email of contacts can trigger duplicate detection as well.<br>
 </div>
 
 Examples:
@@ -168,13 +169,82 @@ Format: `find PARAMETER/[KEYWORD]...`
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**<br>
 If no contacts match, Wi-Find will show an empty list. Use <code>list</code> to show all contacts again.<br>
-Editing phone/email of contacts can trigger duplicate detection as well.<br>
 </div>
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidNewResult.png)
+
+### Flagging a person : `flag`
+
+Flags the specified person from the address book.
+
+Format: `flag INDEX`
+
+* Flags the person at the specified `INDEX`.
+* If the person is already flagged, an error message will be shown.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `flag 2` flags the 2nd person in the address book given that the contact is unflagged.
+* `find n/Betsy` followed by 'flag 1' flags the 1st person in the result of the `find` command.
+  ![result for 'flag 1'](images/flagCommand.png)
+
+### Unflagging a person : `unflag`
+
+Unflags the specified person from the address book.
+
+Format: `unflag INDEX`
+
+* Unflags the person at the specified `INDEX`.
+* If the person is already unflagged, an error message will be shown.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `unflag 2` unflags the 2nd person in the address book given that the contact is flagged.
+* `find n/Betsy` followed by 'unflag 1' unflags the 1st person in the result of the `find` command.
+  ![result for 'unflag 1'](images/unflagCommand.png)
+
+### Adding a meeting to a person : `addm`
+
+Adds a meeting to the person.
+
+Format `addm INDEX m/dd-MM-YYYY HH:MM description`
+
+* Adds a meeting to the person at the specified `INDEX`.
+* If there already exists a meeting with any person in the addressbook, an error message will be shown.
+* The index refers to the index number shown in the displayed person list
+* The index **must be a positive integer** 1, 2, 3, …​
+* The meeting time provided must follow the format dd-MM-YYYY HH:MM
+* The description is optional
+
+Examples:
+* `list` followed by `addm 1 m/20-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
+  there are no meetings scheduled at that time for all contacts.
+
+![result for addm 1 m/20-10-2025 14:30 Project discussion](images/addmeeting-example.png)
+
+
+### Deleting a meeting from a person : `deletem`
+
+Deletes a meeting with a specified date and time from a person.
+
+Format `deletem INDEX m/dd-MM-YYYY HH:MM`
+
+* Deletes a meeting to the person at the specified `INDEX`.
+* If the person does not have a meeting with the specified date and time, an error will be shown.
+* The index refers to the index number shown in the displayed person list
+* The index **must be a positive integer** 1, 2, 3, …​
+* The meeting time provided must follow the format dd-MM-YYYY HH:MM
+
+Examples:
+* `list` followed by `deletem 1 m/20-10-2025 14:30` deletes a meeting from the first contact, given that there exists 
+  a meeting at that date and time for that contact.
+
+![result for deletem 1 m/20-10-2025 14:30](images/DeleteMeetingCommandExample.png)
 
 ### Deleting a person : `delete`
 
@@ -193,7 +263,7 @@ This action cannot be undone!
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -271,8 +341,12 @@ Some quick notes regarding how commands work:
 | **[Delete](#deleting-a-person--delete)**   | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
 | **[Edit](#editing-a-person--edit)**        | Edits specified contact           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
 | **[Find](#locating-persons-by-name-find)** | Filters contacts based on keyword | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                    |
+| **[Flag](#flagging-a-person--flag)**       | Flags contact                     | `flag INDEX`                                                                                                                                                                     |
+| **[Unflag](#unflagging-a-person--unflag)** | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
 | **[List](#listing-all-persons--list)**     | List all contacts                 | `list`                                                                                                                                                                           |
 | **[Help](#viewing-help--help)**            | Displays help window              | `help`                                                                                                                                                                           |
+| **[Add Meeting](#)**                       | Add Meeting to a contact     | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm m/12-02-2020 12:30 Project Star`                                                                                     |
+| **[Delete Meeting](#)**                   | Delete Meeting from a contact | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem m/12-02-2020 12:30`                                                                                                        |
 
 ## List of supported countries
 

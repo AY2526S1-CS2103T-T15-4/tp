@@ -26,6 +26,7 @@ import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
 import seedu.address.model.person.Link;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -40,7 +41,9 @@ public class EditCommand extends ConfirmableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing values will be overwritten by the input values. "
+            + "Meetings cannot be edited with this command; use the addm command instead.\n"
+            // PLACEHOLDER ABOVE, EDIT MEETINGS TO BE IMPLEMENTED
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -122,9 +125,19 @@ public class EditCommand extends ConfirmableCommand {
         HomeCountry updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
         Company updatedCompany = editPersonDescriptor.getCompany().orElse(personToEdit.getCompany());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Boolean updatedIsFlagged = editPersonDescriptor.getIsFlagged().orElse(personToEdit.isFlagged());
+        Set<Meeting> unchangedMeetings = personToEdit.getMeetings();
         Link updatedLink = editPersonDescriptor.getLink().orElse(personToEdit.getLink());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedCountry, updatedCompany, updatedTags,
+        return new Person(
+                updatedName,
+                updatedPhone,
+                updatedEmail,
+                updatedCountry,
+                updatedCompany,
+                updatedTags,
+                updatedIsFlagged,
+                unchangedMeetings,
                 updatedLink);
     }
 
@@ -168,6 +181,7 @@ public class EditCommand extends ConfirmableCommand {
         private HomeCountry country;
         private Company company;
         private Set<Tag> tags;
+        private Boolean isFlagged;
         private Link link;
 
         public EditPersonDescriptor() {}
@@ -183,6 +197,7 @@ public class EditCommand extends ConfirmableCommand {
             setCountry(toCopy.country);
             setCompany(toCopy.company);
             setTags(toCopy.tags);
+            setIsFlagged(toCopy.isFlagged);
             setLink(toCopy.link);
         }
 
@@ -190,7 +205,7 @@ public class EditCommand extends ConfirmableCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, country, company, tags, link);
+            return CollectionUtil.isAnyNonNull(name, phone, email, country, company, tags, isFlagged, link);
         }
 
         public void setName(Name name) {
@@ -250,12 +265,21 @@ public class EditCommand extends ConfirmableCommand {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setIsFlagged(Boolean isFlagged) {
+            this.isFlagged = isFlagged;
+        }
+
+        public Optional<Boolean> getIsFlagged() {
+            return Optional.ofNullable(isFlagged);
+        }
+
         public void setLink(Link link) {
             this.link = link;
         }
+
         public Optional<Link> getLink() {
             return Optional.ofNullable(link);
-        }
+            }
 
         @Override
         public boolean equals(Object other) {
@@ -275,6 +299,7 @@ public class EditCommand extends ConfirmableCommand {
                     && Objects.equals(country, otherEditPersonDescriptor.country)
                     && Objects.equals(company, otherEditPersonDescriptor.company)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(isFlagged, otherEditPersonDescriptor.isFlagged)
                     && Objects.equals(link, otherEditPersonDescriptor.link);
         }
 
@@ -287,6 +312,7 @@ public class EditCommand extends ConfirmableCommand {
                     .add("country", country)
                     .add("company", company)
                     .add("tags", tags)
+                    .add("isFlagged", isFlagged)
                     .add("link", link)
                     .toString();
         }

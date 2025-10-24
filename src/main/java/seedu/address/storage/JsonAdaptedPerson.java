@@ -14,6 +14,7 @@ import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
 import seedu.address.model.person.Link;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -33,6 +34,8 @@ class JsonAdaptedPerson {
     private final String company;
     private final String link;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final boolean isFlagged;
+    private final List<JsonAdaptedMeeting> meetings = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -44,7 +47,10 @@ class JsonAdaptedPerson {
                              @JsonProperty("country") String country,
                              @JsonProperty("company") String company,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("isFlagged") boolean isFlagged,
+                             @JsonProperty("meetings") List<JsonAdaptedMeeting> meetings,
                              @JsonProperty("link") String link) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +59,10 @@ class JsonAdaptedPerson {
         this.link = link;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        this.isFlagged = isFlagged;
+        if (meetings != null) {
+            this.meetings.addAll(meetings);
         }
     }
 
@@ -68,11 +78,19 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        isFlagged = source.isFlagged();
+        meetings.addAll(source.getMeetings().stream()
+                .map(JsonAdaptedMeeting::new)
+                .collect(Collectors.toList()));
         if (source.getLink() != null) {
             link = source.getLink().value;
         } else {
             link = null;
         }
+        isFlagged = source.isFlagged();
+        meetings.addAll(source.getMeetings().stream()
+                .map(JsonAdaptedMeeting::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -128,6 +146,11 @@ class JsonAdaptedPerson {
         }
         final Company modelCompany = new Company(company);
 
+        final Set<Meeting> modelMeetings = new HashSet<>();
+        for (JsonAdaptedMeeting meeting : meetings) {
+            modelMeetings.add(meeting.toModelType());
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final Link modelLink;
@@ -140,7 +163,8 @@ class JsonAdaptedPerson {
             modelLink = null;
         }
 
-        return new Person(modelName, modelPhone, modelEmail, modelCountry, modelCompany, modelTags, modelLink);
+        return new Person(modelName, modelPhone, modelEmail, modelCountry, modelCompany, modelTags,
+                          isFlagged, modelMeetings, modelLink);
     }
 
 }

@@ -26,6 +26,11 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="flagLabel" text="">
+          <padding>
+            <Insets top="0" right="0" bottom="0" left="6" />
+          </padding>
+        </Label>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
@@ -33,7 +38,8 @@
       <Label fx:id="company" styleClass="cell_small_label" text="\$company" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="link" styleClass="link-label" text="\$link" />
-    </VBox>
+      <Label text="Meetings:" styleClass="cell_small_label" />
+      <VBox fx:id="meetings" spacing="2" />    </VBox>
     <VBox alignment="TOP_RIGHT" minWidth="80" GridPane.columnIndex="1">
       <padding>
         <Insets top="5" right="10" bottom="5" left="5" />
