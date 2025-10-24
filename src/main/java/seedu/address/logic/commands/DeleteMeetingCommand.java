@@ -64,7 +64,7 @@ public class DeleteMeetingCommand extends Command {
                 .orElseThrow(() -> new CommandException(MESSAGE_MEETING_NOT_FOUND));
 
         model.deleteMeeting(person, meetingToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_MEETING_SUCCESS, meetingToDelete, format(person)));
+        return new CommandResult(String.format(MESSAGE_DELETE_MEETING_SUCCESS, meetingToDelete, person.getName()));
     }
 
     @Override
