@@ -74,7 +74,7 @@ public class PersonCardTest {
                 new Company("Beta Ltd"),
                 tags,
                 true,
-                meetings, 
+                meetings,
                 null
         );
 
