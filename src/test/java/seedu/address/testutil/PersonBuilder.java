@@ -8,6 +8,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
+import seedu.address.model.person.Link;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -34,6 +35,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private boolean isFlagged;
     private Set<Meeting> meetings;
+    private Link link;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -47,6 +49,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         isFlagged = false;
         meetings = new HashSet<>();
+        link = null;
     }
 
     /**
@@ -61,6 +64,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         isFlagged = personToCopy.isFlagged();
         meetings = new HashSet<>(personToCopy.getMeetings());
+        link = personToCopy.getLink();
     }
 
     /**
@@ -142,7 +146,19 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Link} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLink(String link) {
+        if (link == null) {
+            this.link = null;
+        } else {
+            this.link = new Link(link);
+        }
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, country, company, tags, isFlagged, meetings);
+        return new Person(name, phone, email, country, company, tags, isFlagged, meetings, link);
     }
 }

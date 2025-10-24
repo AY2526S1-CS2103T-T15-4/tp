@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
+import seedu.address.model.person.Link;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String country;
     private final String company;
+    private final String link;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final boolean isFlagged;
     private final List<JsonAdaptedMeeting> meetings = new ArrayList<>();
@@ -46,13 +48,15 @@ class JsonAdaptedPerson {
                              @JsonProperty("company") String company,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("isFlagged") boolean isFlagged,
-                             @JsonProperty("meetings") List<JsonAdaptedMeeting> meetings) {
+                             @JsonProperty("meetings") List<JsonAdaptedMeeting> meetings,
+                             @JsonProperty("link") String link) {
 
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.country = country;
         this.company = company;
+        this.link = link;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -78,6 +82,11 @@ class JsonAdaptedPerson {
         meetings.addAll(source.getMeetings().stream()
                 .map(JsonAdaptedMeeting::new)
                 .collect(Collectors.toList()));
+        if (source.getLink() != null) {
+            link = source.getLink().value;
+        } else {
+            link = null;
+        }
     }
 
     /**
@@ -139,9 +148,19 @@ class JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelCountry, modelCompany, modelTags,
-                          isFlagged, modelMeetings);
 
+        final Link modelLink;
+        if (link != null) {
+            if (!Link.isValidLink(link)) {
+                throw new IllegalValueException(Link.MESSAGE_CONSTRAINTS);
+            }
+            modelLink = new Link(link);
+        } else {
+            modelLink = null;
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelCountry, modelCompany, modelTags,
+                          isFlagged, modelMeetings, modelLink);
     }
 
 }

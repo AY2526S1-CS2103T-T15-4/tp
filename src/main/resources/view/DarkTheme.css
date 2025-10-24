@@ -132,6 +132,13 @@
     -fx-text-fill: #010504;
 }
 
+.link-label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #3399FF !important;
+    -fx-underline: true;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }

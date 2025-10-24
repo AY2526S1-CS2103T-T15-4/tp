@@ -27,12 +27,13 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final boolean isFlagged;
     private final Set<Meeting> meetings = new HashSet<>();
+    private final Link link;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, HomeCountry country, Company company, Set<Tag> tags,
-                  boolean isFlagged, Set<Meeting> meetings) {
+                  boolean isFlagged, Set<Meeting> meetings, Link link) {
         requireAllNonNull(name, phone, email, country, company, tags, meetings);
         this.name = name;
         this.phone = phone;
@@ -42,6 +43,7 @@ public class Person {
         this.tags.addAll(tags);
         this.isFlagged = isFlagged;
         this.meetings.addAll(meetings);
+        this.link = link;
     }
 
     public Name getName() {
@@ -79,13 +81,17 @@ public class Person {
         return Collections.unmodifiableSet(meetings);
     }
 
+    public Link getLink() {
+        return link;
+    }
+
     /**
      * Returns a new Person with an updated set of meetings including the new meeting.
      */
     public Person withAddedMeeting(Meeting newMeeting) {
         Set<Meeting> updatedMeetings = new HashSet<>(meetings);
         updatedMeetings.add(newMeeting);
-        return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings);
+        return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings, link);
     }
 
     /**
@@ -94,8 +100,10 @@ public class Person {
     public Person withDeletedMeeting(Meeting meetingToDelete) {
         Set<Meeting> updatedMeetings = new HashSet<>(meetings);
         updatedMeetings.remove(meetingToDelete);
-        return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings);
+        return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings, link);
     }
+
+
 
     /**
      * Returns true if both persons have the same phone or email.
@@ -132,18 +140,19 @@ public class Person {
                 && company.equals(otherPerson.company)
                 && tags.equals(otherPerson.tags)
                 && isFlagged == otherPerson.isFlagged
-                && meetings.equals(otherPerson.meetings);
+                && meetings.equals(otherPerson.meetings)
+                && Objects.equals(link, otherPerson.link);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, country, company, tags, isFlagged, meetings);
+        return Objects.hash(name, phone, email, country, company, tags, isFlagged, meetings, link);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder tsb = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
@@ -151,8 +160,12 @@ public class Person {
                 .add("company", company)
                 .add("tags", tags)
                 .add("isFlagged", isFlagged)
-                .add("meetings", meetings)
-                .toString();
-    }
+                .add("meetings", meetings);
 
+        if (link != null) {
+            tsb.add("link", link);
+        }
+
+        return tsb.toString();
+    }
 }

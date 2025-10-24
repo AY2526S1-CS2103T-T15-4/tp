@@ -72,17 +72,13 @@ public class PersonList implements Iterable<Person> {
         internalList.remove(index);
     }
 
-    /**
-     * Returns the index of the exact object (reference equality) in the list.
-     * Returns -1 if not found.
-     */
     private int indexOfReference(Person target) {
         for (int i = 0; i < internalList.size(); i++) {
-            if (internalList.get(i) == target) { // reference equality
+            if (internalList.get(i) == target) {
                 return i;
             }
         }
-        return -1;
+        return -1; // not found
     }
 
     public void setPersons(PersonList replacement) {

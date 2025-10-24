@@ -51,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
+    private Label link;
+    @FXML
     private VBox meetings;
     @FXML
     private FlowPane tags;
@@ -75,6 +77,12 @@ public class PersonCard extends UiPart<Region> {
             flagLabel.setText("🚩");
         } else {
             flagLabel.setText("");
+        }
+
+        if (person.getLink() != null) {
+            link.setText(person.getLink().value);
+        } else {
+            link.setVisible(false);
         }
 
         person.getTags().stream()

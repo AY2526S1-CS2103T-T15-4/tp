@@ -246,6 +246,24 @@ Examples:
 
 ![result for deletem 1 m/20-10-2025 14:30](images/DeleteMeetingCommandExample.png)
 
+### Adding a link to a person : `link`
+
+Adds a link to the specified person from the address book.
+
+Format: `link INDEX LINK`
+
+* Adds a link to the person at the specified `INDEX`.
+* If the person already has a link, the link will be updated to the latest input from user. 
+* To remove the link from a person, use `link INDEX` without the link input.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The link provided by user must be a valid link. 
+
+Examples:
+* `list` followed by `link 2` removes the link from the 2nd person listed in the address book given that the contact has a link previously..
+* `find n/Betsy` followed by `link 1 https://betsy.com/123` adds the link to the 1st person in the result of the `find` command.
+  ![result for 'link 1 https://betsy.com/123'](images/linkCommand.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -334,19 +352,20 @@ Some quick notes regarding how commands work:
 - Emails are automatically lowercased.
 - User confirmation required to add duplicate contacts.
 
-| Action                                     | Description                       | Format, Examples                                                                                                                                                                 |
-|--------------------------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-person-add)**            | Adds contact                      | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
-| **[Clear](#clearing-all-entries--clear)**  | Clears contacts                   | `clear`                                                                                                                                                                          |
-| **[Delete](#deleting-a-person--delete)**   | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
-| **[Edit](#editing-a-person--edit)**        | Edits specified contact           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **[Find](#locating-persons-by-name-find)** | Filters contacts based on keyword | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                    |
-| **[Flag](#flagging-a-person--flag)**       | Flags contact                     | `flag INDEX`                                                                                                                                                                     |
-| **[Unflag](#unflagging-a-person--unflag)** | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
-| **[List](#listing-all-persons--list)**     | List all contacts                 | `list`                                                                                                                                                                           |
-| **[Help](#viewing-help--help)**            | Displays help window              | `help`                                                                                                                                                                           |
-| **[Add Meeting](#)**                       | Add Meeting to a contact     | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm m/12-02-2020 12:30 Project Star`                                                                                     |
-| **[Delete Meeting](#)**                   | Delete Meeting from a contact | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem m/12-02-2020 12:30`                                                                                                        |
+| Action                                       | Description                       | Format, Examples                                                                                                                                                                 |
+|----------------------------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-person-add)**              | Adds contact                      | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
+| **[Clear](#clearing-all-entries--clear)**    | Clears contacts                   | `clear`                                                                                                                                                                          |
+| **[Delete](#deleting-a-person--delete)**     | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
+| **[Edit](#editing-a-person--edit)**          | Edits specified contact           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
+| **[Find](#locating-persons-by-name-find)**   | Filters contacts based on keyword | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                    |
+| **[Flag](#flagging-a-person--flag)**         | Flags contact                     | `flag INDEX`                                                                                                                                                                     |
+| **[Unflag](#unflagging-a-person--unflag)**   | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
+| **[List](#listing-all-persons--list)**       | List all contacts                 | `list`                                                                                                                                                                           |
+| **[Help](#viewing-help--help)**              | Displays help window              | `help`                                                                                                                                                                           |
+| **[Add Meeting](#)**                         | Add Meeting to a contact          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm m/12-02-2020 12:30 Project Star`                                                                                     |
+| **[Delete Meeting](#)**                      | Delete Meeting from a contact     | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem m/12-02-2020 12:30`                                                                                                        |
+| **[Link](#adding-a-link-to-a-person--link)** | Adds/Updates/Removes a link       | `link INDEX LINK`                                                                                                                                                                |
 
 ## List of supported countries
 

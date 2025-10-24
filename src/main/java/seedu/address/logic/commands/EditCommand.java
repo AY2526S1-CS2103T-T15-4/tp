@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
+import seedu.address.model.person.Link;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -126,6 +127,7 @@ public class EditCommand extends ConfirmableCommand {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Boolean updatedIsFlagged = editPersonDescriptor.getIsFlagged().orElse(personToEdit.isFlagged());
         Set<Meeting> unchangedMeetings = personToEdit.getMeetings();
+        Link updatedLink = editPersonDescriptor.getLink().orElse(personToEdit.getLink());
 
         return new Person(
                 updatedName,
@@ -135,7 +137,8 @@ public class EditCommand extends ConfirmableCommand {
                 updatedCompany,
                 updatedTags,
                 updatedIsFlagged,
-                unchangedMeetings);
+                unchangedMeetings,
+                updatedLink);
     }
 
     @Override
@@ -179,6 +182,7 @@ public class EditCommand extends ConfirmableCommand {
         private Company company;
         private Set<Tag> tags;
         private Boolean isFlagged;
+        private Link link;
 
         public EditPersonDescriptor() {}
 
@@ -194,13 +198,14 @@ public class EditCommand extends ConfirmableCommand {
             setCompany(toCopy.company);
             setTags(toCopy.tags);
             setIsFlagged(toCopy.isFlagged);
+            setLink(toCopy.link);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, country, company, tags, isFlagged);
+            return CollectionUtil.isAnyNonNull(name, phone, email, country, company, tags, isFlagged, link);
         }
 
         public void setName(Name name) {
@@ -268,6 +273,14 @@ public class EditCommand extends ConfirmableCommand {
             return Optional.ofNullable(isFlagged);
         }
 
+        public void setLink(Link link) {
+            this.link = link;
+        }
+
+        public Optional<Link> getLink() {
+            return Optional.ofNullable(link);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -286,7 +299,8 @@ public class EditCommand extends ConfirmableCommand {
                     && Objects.equals(country, otherEditPersonDescriptor.country)
                     && Objects.equals(company, otherEditPersonDescriptor.company)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(isFlagged, otherEditPersonDescriptor.isFlagged);
+                    && Objects.equals(isFlagged, otherEditPersonDescriptor.isFlagged)
+                    && Objects.equals(link, otherEditPersonDescriptor.link);
         }
 
         @Override
@@ -299,6 +313,7 @@ public class EditCommand extends ConfirmableCommand {
                     .add("company", company)
                     .add("tags", tags)
                     .add("isFlagged", isFlagged)
+                    .add("link", link)
                     .toString();
         }
     }

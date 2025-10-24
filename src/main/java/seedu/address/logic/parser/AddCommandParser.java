@@ -52,7 +52,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, country, company, tagList, false, new HashSet<Meeting>());
+        Person person = new Person(name, phone, email, country, company, tagList, false,
+                new HashSet<Meeting>(), null);
 
         return new AddCommand(person);
     }

@@ -36,7 +36,8 @@ public class PersonCardTest {
                 new Company("ACME Corp"),
                 tags,
                 false,
-                meetings
+                meetings,
+                null
         );
         person.getTags().stream()
                 .sorted((a, b) -> a.tagName.compareTo(b.tagName))
@@ -73,7 +74,8 @@ public class PersonCardTest {
                 new Company("Beta Ltd"),
                 tags,
                 true,
-                meetings
+                meetings,
+                null
         );
 
         assertTrue(flaggedPerson.isFlagged());
@@ -103,7 +105,8 @@ public class PersonCardTest {
                 new Company("ACME Corp"),
                 tags,
                 false,
-                meetings
+                meetings,
+                null
         );
 
         assertTrue(!unflaggedPerson.isFlagged());
