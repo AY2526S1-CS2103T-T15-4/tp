@@ -16,4 +16,5 @@ Person *--> Phone
 Person *--> Email
 Person *--> Company
 Person *--> HomeCountry
+Person *--> Link
 @enduml

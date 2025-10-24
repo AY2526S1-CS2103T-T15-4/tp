@@ -22,6 +22,7 @@ Class Name
 Class Phone
 Class Tag
 Class Meeting
+Class Link
 
 Class I #FFFFFF
 }
@@ -49,6 +50,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> HomeCountry
 Person *--> Company
+Person *--> Link
 Person *--> "*" Tag
 Person *--> "*" Meeting
 
