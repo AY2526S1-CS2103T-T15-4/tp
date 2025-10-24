@@ -13,6 +13,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
+import seedu.address.model.person.Link;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -34,7 +35,7 @@ public class SampleDataUtil {
                 new HomeCountry("Korea"),
                 new Company("Meta"),
                 getTagSet("colleagues", "friends"), false,
-                getMeetingSet("03-11-2025 09:00 Team Sync"), null),
+                getMeetingSet("03-11-2025 09:00 Team Sync"), new Link("https://example.com")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new HomeCountry("Switzerland"),
                 new Company("Google"),
@@ -44,7 +45,7 @@ public class SampleDataUtil {
                 new HomeCountry("China"),
                 new Company("Amazon"),
                 getTagSet("family"), false,
-                getMeetingSet("04-11-2025 15:00 Family Call"), null),
+                getMeetingSet("04-11-2025 15:00 Family Call"), new Link("http://david.com/mycompany")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new HomeCountry("Russia"),
                 new Company("Apple"),
