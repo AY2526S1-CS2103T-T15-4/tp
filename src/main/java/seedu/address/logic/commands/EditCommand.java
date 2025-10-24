@@ -279,7 +279,7 @@ public class EditCommand extends ConfirmableCommand {
 
         public Optional<Link> getLink() {
             return Optional.ofNullable(link);
-            }
+        }
 
         @Override
         public boolean equals(Object other) {

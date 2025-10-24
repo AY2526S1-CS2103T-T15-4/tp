@@ -55,7 +55,8 @@ public class FlagCommand extends Command {
                 personToFlag.getCompany(),
                 personToFlag.getTags(),
                 true,
-                personToFlag.getMeetings()
+                personToFlag.getMeetings(),
+                null
         );
 
         assert flaggedPerson.isFlagged() : "Flagged person should have isFlagged=true";

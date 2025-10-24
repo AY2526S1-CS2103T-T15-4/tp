@@ -82,7 +82,7 @@ public class Person {
     }
 
     public Link getLink() {
-            return link;
+        return link;
     }
 
     /**

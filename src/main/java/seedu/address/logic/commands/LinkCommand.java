@@ -63,6 +63,8 @@ public class LinkCommand extends Command {
                 personToEdit.getCountry(),
                 personToEdit.getCompany(),
                 personToEdit.getTags(),
+                personToEdit.isFlagged(),
+                personToEdit.getMeetings(),
                 link
         );
 
