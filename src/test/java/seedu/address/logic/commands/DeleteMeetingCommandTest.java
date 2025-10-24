@@ -44,7 +44,7 @@ public class DeleteMeetingCommandTest {
                 personWithMeeting, meeting);
         DeleteMeetingCommand command = new DeleteMeetingCommand(Index.fromOneBased(1), meetingTime);
 
-        String expectedMessage = String.format(MESSAGE_DELETE_MEETING_SUCCESS, meeting, format(personWithMeeting));
+        String expectedMessage = String.format(MESSAGE_DELETE_MEETING_SUCCESS, meeting, personWithMeeting.getName());
 
         CommandResult result = command.execute(modelStub);
         assertEquals(expectedMessage, result.getFeedbackToUser());
