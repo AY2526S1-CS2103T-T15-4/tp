@@ -50,7 +50,7 @@ public class SampleDataUtil {
                 new HomeCountry("Russia"),
                 new Company("Apple"),
                 getTagSet("classmates"), false,
-                getMeetingSet("02-03-2025"), null),
+                getMeetingSet("02-03-2025 04:30"), null),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new HomeCountry("Germany"),
                 new Company("Microsoft"),
