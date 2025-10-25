@@ -70,7 +70,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'Wi-Find.jar'
 }
 
 defaultTasks 'clean', 'test'
