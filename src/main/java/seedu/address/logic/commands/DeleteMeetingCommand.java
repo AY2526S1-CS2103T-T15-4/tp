@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.format;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 
 import java.time.LocalDateTime;
@@ -64,7 +63,7 @@ public class DeleteMeetingCommand extends Command {
                 .orElseThrow(() -> new CommandException(MESSAGE_MEETING_NOT_FOUND));
 
         model.deleteMeeting(person, meetingToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_MEETING_SUCCESS, meetingToDelete, format(person)));
+        return new CommandResult(String.format(MESSAGE_DELETE_MEETING_SUCCESS, meetingToDelete, person.getName()));
     }
 
     @Override

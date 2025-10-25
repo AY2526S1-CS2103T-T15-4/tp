@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.format;
 import static seedu.address.logic.commands.DeleteMeetingCommand.MESSAGE_DELETE_MEETING_SUCCESS;
 import static seedu.address.logic.commands.DeleteMeetingCommand.MESSAGE_MEETING_NOT_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -44,7 +43,7 @@ public class DeleteMeetingCommandTest {
                 personWithMeeting, meeting);
         DeleteMeetingCommand command = new DeleteMeetingCommand(Index.fromOneBased(1), meetingTime);
 
-        String expectedMessage = String.format(MESSAGE_DELETE_MEETING_SUCCESS, meeting, format(personWithMeeting));
+        String expectedMessage = String.format(MESSAGE_DELETE_MEETING_SUCCESS, meeting, personWithMeeting.getName());
 
         CommandResult result = command.execute(modelStub);
         assertEquals(expectedMessage, result.getFeedbackToUser());
