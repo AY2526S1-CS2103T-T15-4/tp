@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
 /**
  * Adds a {@link Meeting} to a {@link Person} in the address book.
  */
-public class AddMeetingCommand extends Command {
+public class AddMeetingCommand extends ConfirmableCommand {
     public static final String COMMAND_WORD = "addm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting time to a person in the address book. "
@@ -26,11 +26,16 @@ public class AddMeetingCommand extends Command {
             + PREFIX_MEETING + "20-10-2025 14:30";
 
     public static final String MESSAGE_SUCCESS = "New meeting added for %1$s: %2$s";
-    public static final String MESSAGE_DUPLICATE_MEETING = "This meeting time is already scheduled for another "
-            + "meeting.";
+    public static final String MESSAGE_DUPLICATE_MEETING_WARNING =
+            """
+            Warning: A duplicate meeting already exists in the address book.
+            Please confirm if this meeting should still be added.
+            Enter 'y' to confirm or enter any other input to cancel.
+            """;
 
     private final Index index;
     private final Meeting meeting;
+    private boolean isConfirmed = false;
 
     /**
      * Creates an {@code AddMeetingCommand} to add the specified {@code Meeting}
@@ -66,8 +71,8 @@ public class AddMeetingCommand extends Command {
         assert personToUpdate != null;
         if (model.getAddressBook().getPersonList().stream()
                 .anyMatch(person-> person.getMeetings().stream()
-                        .anyMatch(currentMeeting -> currentMeeting.equals(meeting)))) {
-            throw new CommandException(MESSAGE_DUPLICATE_MEETING);
+                        .anyMatch(currentMeeting -> currentMeeting.equals(meeting))) && !isConfirmed) {
+            return new CommandResult(MESSAGE_DUPLICATE_MEETING_WARNING, this);
         }
 
         model.addMeeting(personToUpdate, meeting);
@@ -98,4 +103,8 @@ public class AddMeetingCommand extends Command {
                 .toString();
     }
 
+    @Override
+    public void confirm() {
+        isConfirmed = true;
+    }
 }

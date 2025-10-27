@@ -45,13 +45,13 @@ public class AddMeetingCommandTest {
     }
 
     @Test
-    public void execute_duplicateMeeting_throwsCommandException() {
+    public void execute_duplicateMeeting_throwsCommandException() throws CommandException {
         Person validPerson = new PersonBuilder().build();
         ModelStubs.ModelStubWithMeeting modelStub = new ModelStubs.ModelStubWithMeeting(validPerson, VALID_MEETING);
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand(Index.fromOneBased(1), VALID_MEETING);
+        CommandResult result = addMeetingCommand.execute(modelStub);
 
-        assertThrows(CommandException.class, AddMeetingCommand.MESSAGE_DUPLICATE_MEETING, () ->
-                addMeetingCommand.execute(modelStub));
+        assertEquals(AddMeetingCommand.MESSAGE_DUPLICATE_MEETING_WARNING, result.getFeedbackToUser());
     }
 
     @Test
