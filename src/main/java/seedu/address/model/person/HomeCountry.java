@@ -14,8 +14,8 @@ public class HomeCountry {
      */
     public static final int LENGTH_LIMIT = 56;
 
-    public static final String MESSAGE_CONSTRAINTS = "Countries should only be alphanumeric, not be blank and not " +
-            "exceed " + LENGTH_LIMIT + " characters, including spaces.a";
+    public static final String MESSAGE_CONSTRAINTS = "Countries should only be alphanumeric, not be blank and not "
+            + "exceed " + LENGTH_LIMIT + " characters, including spaces.";
 
     /*
      * The first character of the country must not be a whitespace,
