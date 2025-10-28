@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -90,6 +91,12 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
             matchesAllFields = matchesAllFields && matchesMeeting(person, meetingKeywords);
         }
 
+        // Check link field if specified
+        if (fieldKeywordsMap.getValue(PREFIX_LINK).isPresent()) {
+            List<String> linkKeywords = filterEmptyString(fieldKeywordsMap.getAllValues(PREFIX_LINK));
+            matchesAllFields = matchesAllFields && matchesLink(person, linkKeywords);
+        }
+
         return matchesAllFields;
     }
 
@@ -172,6 +179,20 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream().anyMatch(keyword ->
                 meetings.stream().anyMatch(tag ->
                         meetings.toString().toLowerCase().contains(keyword.toLowerCase())));
+    }
+
+    /**
+     * Checks if the person's link contain ANY of the keywords (OR logic within tags)
+     * Uses partial matching (case-insensitive)
+     */
+    private boolean matchesLink(Person person, List<String> keywords) {
+        requireNonNull(person);
+        assert !keywords.isEmpty();
+
+        Link link = person.getLink();
+        String linkValue = (link == null) ? "" : link.value.toLowerCase();
+        return keywords.stream()
+                .anyMatch(keyword -> linkValue.contains(keyword.toLowerCase()));
     }
 
     @Override
