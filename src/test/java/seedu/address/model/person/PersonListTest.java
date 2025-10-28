@@ -107,17 +107,17 @@ public class PersonListTest {
     }
 
     @Test
-    public void remove_Reference_nullPerson_throwsNullPointerException() {
+    public void remove_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> personList.removeReference(null));
     }
 
     @Test
-    public void remove_Reference_personDoesNotExist_throwsPersonNotFoundException() {
+    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
         assertThrows(PersonNotFoundException.class, () -> personList.removeReference(ALICE));
     }
 
     @Test
-    public void remove_Reference_existingPerson_removesPerson() {
+    public void remove_existingPerson_removesPerson() {
         personList.add(ALICE);
         personList.removeReference(ALICE);
         PersonList expectedPersonList = new PersonList();
