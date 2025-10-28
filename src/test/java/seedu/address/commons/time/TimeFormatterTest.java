@@ -1,4 +1,4 @@
-package seedu.address.ui.util;
+package seedu.address.commons.time;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -8,12 +8,10 @@ import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.time.TimeFormatter;
-
 public class TimeFormatterTest {
 
     @Test
-    public void getFormattedTime_FromZone_shouldReturnValidFormat() {
+    public void getFormattedTimeFromZone_shouldReturnValidFormat() {
         String time = TimeFormatter.getFormattedCurrentTime();
         assertNotNull(time, "Formatted time should not be null");
         assertTrue(time.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"),
@@ -21,7 +19,7 @@ public class TimeFormatterTest {
     }
 
     @Test
-    public void getFormattedTime_FromZone_withZone_shouldReturnValidFormat() {
+    public void getFormattedTimeFromZone_withZone_shouldReturnValidFormat() {
         ZoneId zone = ZoneId.of("Asia/Singapore");
         String time = TimeFormatter.getFormattedTimeFromZone(zone);
         assertNotNull(time, "Formatted time with zone should not be null");
@@ -30,7 +28,7 @@ public class TimeFormatterTest {
     }
 
     @Test
-    public void getFormattedTime_FromZone_withDifferentZone_shouldReturnDifferentTimes() {
+    public void getFormattedTimeFromZone_withDifferentZone_shouldReturnDifferentTimes() {
         ZoneId sg = ZoneId.of("Asia/Singapore");
         ZoneId ny = ZoneId.of("America/New_York");
 
@@ -41,7 +39,7 @@ public class TimeFormatterTest {
     }
 
     @Test
-    public void getFormattedTime_FromZone_atMidnight_shouldFormatCorrectly() {
+    public void getFormattedTimeFromZone_atMidnight_shouldFormatCorrectly() {
         ZoneId zone = ZoneId.of("UTC");
         String formatted = TimeFormatter.getFormattedTimeFromZone(zone);
 
