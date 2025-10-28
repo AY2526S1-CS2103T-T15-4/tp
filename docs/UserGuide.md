@@ -49,6 +49,30 @@ Use this table of contents to jump to any section!
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Command summary
+
+Some quick notes regarding how commands work:
+- Duplicates: detected by same phone OR same email.
+- Emails are automatically lowercased.
+- User confirmation required to add duplicate contacts.
+
+| Action                                       | Description                       | Format, Examples                                                                                                                                                                 |
+|----------------------------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-person-add)**              | Adds contact                      | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
+| **[Clear](#clearing-all-entries--clear)**    | Clears contacts                   | `clear`                                                                                                                                                                          |
+| **[Delete](#deleting-a-person--delete)**     | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
+| **[Edit](#editing-a-person--edit)**          | Edits specified contact           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
+| **[Find](#locating-persons-by-name-find)**   | Filters contacts based on keyword | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                    |
+| **[Flag](#flagging-a-person--flag)**         | Flags contact                     | `flag INDEX`                                                                                                                                                                     |
+| **[Unflag](#unflagging-a-person--unflag)**   | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
+| **[List](#listing-all-persons--list)**       | List all contacts                 | `list`                                                                                                                                                                           |
+| **[Help](#viewing-help--help)**              | Displays help window              | `help`                                                                                                                                                                           |
+| **[Add Meeting](#)**                         | Add Meeting to a contact          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm m/12-02-2020 12:30 Project Star`                                                                                     |
+| **[Delete Meeting](#)**                      | Delete Meeting from a contact     | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem m/12-02-2020 12:30`                                                                                                        |
+| **[Link](#adding-a-link-to-a-person--link)** | Adds/Updates/Removes a link       | `link INDEX LINK`                                                                                                                                                                |
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -71,9 +95,28 @@ Commands in Wi-Find follow the same flexible format as described below.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   - e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Literal prefix input<br>
-  - To include a token that looks like a prefix (e.g. n/, com/, c/) as part of a field value, wrap that token in square brackets with a leading space inside the brackets (for eg, [ com/]). The brackets are removed and the token is treated as literal text.
-  - Important: do NOT put a space before the [ - the [ must be adjacent to the preceding text. Examples: add n/James ... c/Singapore[ com/] → country = Singapore com/.
+* **Literal prefix input**<br>
+  <br>
+  **When you need this:** If your input contains text that looks like a command prefix (e.g., "n/", "com/", "c/"), Wi-Find might misinterpret it as a new parameter.<br>
+  <br>
+  **Solution:** Wrap the prefix-like text in square brackets with a space before it: <code>[ prefix/]</code><br>
+  <br>
+  **Format rules:**<br>
+  - Add a space INSIDE the opening bracket: <code>[ com/]</code> ✓<br>
+  - The brackets will be removed automatically, leaving only the text<br>
+  - If a prefix-like text is **attached directly** to other text, e.g., <code>c/Singaporecom/</code>, it will be saved **as is** → <code>Singaporecom/</code><br>
+  <br>
+  **Examples:**<br>
+  - <code>add n/John Smith c/Singapore[ com/] p/12345678 e/john@example.com com/TechCorp</code><br>
+    → Country will be saved as: "Singapore com/"<br>
+  - <code>add n/Jane[ n/a] Doe c/Canada p/98765432 e/jane@example.com com/StartupInc</code><br>
+    → Name will be saved as: "Jane n/a Doe"<br>
+  <br>
+  **Important:**<br>
+    - A space **before** the opening bracket, like <code>text [ com/]</code>, will result in <code>text  com/</code> (with double space).<br>
+    - Always put the space **inside** the bracket: <code>[ com/]</code><br>
+  <br>
+  **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket notation, "Singapore com/" would be interpreted as country "Singapore" followed by a new company field.<br>
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
 
@@ -108,21 +151,31 @@ Please check this <a href="#list-of-supported-countries">list</a> for available 
 After being successfully added, the GUI should show the added person, with the correct timezone of their country.
 ![successfully added person](images/Addperson.png)
 
-<div markdown="span" class="alert alert-primary">
-:exclamation: **Note:**<br>
-- Contacts are considered duplicates if they share the same phone number OR the same email address.<br>
-- For example, <code>add n/Doe p/98765432</code> and <code>add n/Fish p/98765432</code> will be considered duplicates.<br>
-- Email addresses are automatically lowercased when a contact is added or edited.<br>
-- If a duplicate is detected, Wi-Find will show a warning; the contact will only be added if the user confirms. Users may still add a duplicate by approving the warning.<br>
-</div>
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
-A person can have any number of tags (including 0)<br>
-Duplicate users with either same phone or email will be allowed as long as the user permits it.<br>
-</div>
-
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com c/United States com/Riot Games`
 * `add n/Betsy Crowe t/friend com/Jail e/betsycrowe@example.com c/United Kingdom p/1234567 t/criminal`
+
+<div markdown="span" class="alert alert-primary">
+:exclamation: **Note:**<br>
+- Contacts are considered duplicates if they share the same phone number OR the same email address with an existing contact.<br>
+- Email addresses are automatically lowercased when a contact is added or edited.<br>
+</div>
+
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Duplicate Detection:**<br>
+When you attempt to add a contact that shares a phone number or email with an existing contact, Wi-Find will:<br>
+1. Display a warning showing the conflicting details<br>
+2. Prompt you to confirm whether you want to proceed<br>
+3. Add the contact only after you approve the warning<br>
+<br>
+**Example:** If you have John Doe (phone: 98765432) in your contacts and you try to add Jane Doe with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding Jane Doe.<br>
+<br>
+This feature helps prevent accidental duplicates while allowing you to intentionally add contacts with shared phone numbers or emails (e.g., family members sharing a phone, employees sharing a company email).
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+A person can have any number of tags (including 0).
+</div>
 
 ### Listing all persons : `list`
 
@@ -260,7 +313,7 @@ Format: `link INDEX LINK`
 * The link provided by user must be a valid link. 
 
 Examples:
-* `list` followed by `link 2` removes the link from the 2nd person listed in the address book given that the contact has a link previously..
+* `list` followed by `link 2` removes the link from the 2nd person listed in the address book given that the contact has a link previously.
 * `find n/Betsy` followed by `link 1 https://betsy.com/123` adds the link to the 1st person in the result of the `find` command.
   ![result for 'link 1 https://betsy.com/123'](images/linkCommand.png)
 
@@ -344,28 +397,6 @@ Issue 2: **If you minimize the Help Window** and then run the `help` command (or
 Solution 2: The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Some quick notes regarding how commands work:
-- Duplicates: detected by same phone OR same email.
-- Emails are automatically lowercased.
-- User confirmation required to add duplicate contacts.
-
-| Action                                       | Description                       | Format, Examples                                                                                                                                                                 |
-|----------------------------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-person-add)**              | Adds contact                      | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
-| **[Clear](#clearing-all-entries--clear)**    | Clears contacts                   | `clear`                                                                                                                                                                          |
-| **[Delete](#deleting-a-person--delete)**     | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
-| **[Edit](#editing-a-person--edit)**          | Edits specified contact           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **[Find](#locating-persons-by-name-find)**   | Filters contacts based on keyword | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                    |
-| **[Flag](#flagging-a-person--flag)**         | Flags contact                     | `flag INDEX`                                                                                                                                                                     |
-| **[Unflag](#unflagging-a-person--unflag)**   | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
-| **[List](#listing-all-persons--list)**       | List all contacts                 | `list`                                                                                                                                                                           |
-| **[Help](#viewing-help--help)**              | Displays help window              | `help`                                                                                                                                                                           |
-| **[Add Meeting](#)**                         | Add Meeting to a contact          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm m/12-02-2020 12:30 Project Star`                                                                                     |
-| **[Delete Meeting](#)**                      | Delete Meeting from a contact     | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem m/12-02-2020 12:30`                                                                                                        |
-| **[Link](#adding-a-link-to-a-person--link)** | Adds/Updates/Removes a link       | `link INDEX LINK`                                                                                                                                                                |
 
 ## List of supported countries
 
