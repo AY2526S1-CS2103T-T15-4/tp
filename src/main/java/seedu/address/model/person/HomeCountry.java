@@ -14,14 +14,14 @@ public class HomeCountry {
      */
     public static final int LENGTH_LIMIT = 56;
 
-    public static final String MESSAGE_CONSTRAINTS = "Countries should not be blank and not exceed "
-            + LENGTH_LIMIT + " characters, including spaces";
+    public static final String MESSAGE_CONSTRAINTS = "Countries should only be alphanumeric, not be blank and not "
+            + "exceed " + LENGTH_LIMIT + " characters, including spaces.";
 
     /*
      * The first character of the country must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9][A-Za-z0-9 ]*$";
 
     public final String value;
 
