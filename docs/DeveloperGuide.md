@@ -276,27 +276,27 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​        | I want to …​                                       | So that I can…​                                         |
-|----------|----------------|----------------------------------------------------|---------------------------------------------------------|
-| * * *    | user           | add new contacts with their relevant information   | check and contact relevant personnel when necessary.    |
-| * * *    | user           | delete a person                                    | remove contacts that I no longer need.                  |
-| * * *    | user           | save and read contacts on shutdown/startup         | maintain contact information across instances of usage. |
-| * * *    | busy user      | search contacts by company                         | sift through contacts easily.                           |
-| * *      | user           | set reminders on clients                           | stay alert on upcoming meetings.                        |
-| * *      | user           | check client's local time zone                     | contact them at appropriate times.                      |
-| * *      | user           | edit my contacts                                   | update client information easily.                       |
-| * *      | user           | attach tags to clients                             | recall connections to the client.                       |
-| * *      | user           | get alerts for clashing meetings                   | prevent double booking.                                 |
-| * *      | user           | search contacts by country                         | contact groups of people under the filter               |
-| * *      | user           | search contacts by tag                             | contact groups of people under the filter.              |
-| * *      | user           | search contacts by name                            | contact groups of people under the filter.              |
-| * *      | user           | Search contacts by projects they are working on    | contact groups of people under the filter.              |
-| *        | user           | import contacts from other communication platforms | add contacts easily.                                    |
-| *        | user           | check the last date of interaction with clients    | set up meetings for possible future opportunities.      |
-| *        | user           | set multiple tags on one contact                   | maintain overlapping projects without confusion.        |
-| *        | user           | merge duplicate contacts                           | maintain accurate contacts.                             |
-| *        | impatient user | see my frequently contacted users                  | save time.                                              |
-| *        | user           | auto-convert meeting times into my timezone        | prevent making scheduling mistakes.                     |
+| Priority | As a …​        | I want to …​                                     | So that I can…​                                         |
+|----------|----------------|--------------------------------------------------|---------------------------------------------------------|
+| * * *    | user           | add new contacts with their relevant information | check and contact relevant personnel when necessary.    |
+| * * *    | user           | delete a person                                  | remove contacts that I no longer need.                  |
+| * * *    | user           | save and read contacts on shutdown/startup       | maintain contact information across instances of usage. |
+| * * *    | busy user      | search contacts by company                       | sift through contacts easily.                           |
+| * * *    | user           | add meetings to clients                          | be reminded of our next meeting.                        |
+| * * *    | user           | delete past meetings                             | de-clutter the contact list.                            |
+| * *      | user           | check client's local time zone                   | contact them at appropriate times.                      |
+| * *      | user           | edit my contacts                                 | update client information easily.                       |
+| * *      | user           | attach tags to clients                           | recall connections to the client.                       |
+| * *      | user           | get alerts for clashing meetings                 | prevent double booking.                                 |
+| * *      | user           | search contacts by country                       | contact groups of people under the filter               |
+| * *      | user           | search contacts by tag                           | contact groups of people under the filter.              |
+| * *      | user           | search contacts by name                          | contact groups of people under the filter.              |
+| * *      | user           | Search contacts by phone number                  | contact groups of people under the filter.              |
+| *        | user           | attach links to clients                          | go to their websites easily.                            |
+| *        | user           | flag some clients                                | quickly find them in the list.                          |
+| *        | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
+| *        | impatient user | see my frequently contacted users                | save time.                                              |
+| *        | user           | auto-convert meeting times into my timezone      | prevent making scheduling mistakes.                     |
 
 ### Use cases
 
@@ -509,7 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Environment Requirements
-    - Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+    - Should work on any _mainstream OS_ as long as it has Java `17`.
     - Should be runnable without requiring installation.
     - Should not depend on any remote server.
 2.  Data Requirements
