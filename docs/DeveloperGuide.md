@@ -300,14 +300,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
 **Use case: UC01 - Add a contact**
 
 **MSS**
 
-1.  User requests to add a new contact with name, company, and contact information
-2.  Wi-Find validates the fields (name, company, contact info).
+1.  User requests to add a new contact.
+2.  Wi-Find validates the fields.
 3.  Wi-Find adds the new contact.
 4.  Wi-Find displays a success message.
 
@@ -321,34 +319,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2b. The input format for name, company or contact info is invalid.
+* 2b. The input format for one or more of fields are invalid.
 
     * 2b1. Wi-Find shows an error message.
 
       Use case ends.
 
-* 2c. The contact already exists (duplicate name or contact number).
+* 2c. The contact already exists (duplicate contact number or email).
 
-    * 2c1. Wi-Find shows an error message.
+    * 2c1. Wi-Find warns and asks for confirmation from user to proceed with adding contact.
+    * 2c2. User confirms.
+    * 2c3. Wi-Find adds the new contact.
+    * 2c4. Wi-Find displays a success message.
 
       Use case ends.
 
 **Use case: UC02 - Delete a contact**
 
+**Preconditions: There exists at least one person in the list**
+
 **MSS**
 
-1. User requests to list contacts
-2. Wi-Find shows a list of contacts
-3. User requests to delete a specific contact in the list
-4. Wi-Find deletes the contact
+1. User requests to list contacts.
+2. Wi-Find shows a list of contacts.
+3. User requests to delete a specific contact in the list.
+4. Wi-Find deletes the contact.
+5. Wi-Find shows a success message.
 
     Use case ends.
 
 **Extensions**
-
-* 2a. The list is empty.
-
-    There is no contact to delete. Use case ends.
 
 * 3a. The given identifier is invalid (no contact found).
 
@@ -356,67 +356,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3b. Multiple contacts match the identifier.
-
-    * 3b1. Wi-Find shows an error message indicating ambiguity.
-
-      Use case ends.
-
-* 3c. User deletes from a filtered list.
-
-    * 3c1. Deletion only applies to the filtered view's index.
-
-      Step 3 and 4 carries out normally. Use case ends.
-
 **Use case: Save and read contacts on shutdown/startup**
 
 **MSS**
 
-1. User interacts with Wi-Find by adding, deleting, or editing contacts.
-2. Wi-Find automatically saves the updated contact list after each command.
-3. User shuts down the application.
-4. User restarts the application.
-5. Wi-Find automatically reads and loads the previously saved contact list.
+1. User boots up Wi-Find.
+2. Wi-Find loads the previously saved contact list.
+3. User interacts with Wi-Find.
+4. Wi-Find automatically saves the updated contact list after each command.
+5. User shuts down the application.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Saving fails due to missing file.
+* 1a. Saving fails due to missing file.
 
     * 2a1. Wi-Find requests permission to create a new file.
 
-    * 2a2. If permission is granted, Wi-Find creates a new file.
+    * 2a2. If permission is granted, Wi-Find creates a new file with sample contacts.
 
       Use case resumes at step 2.
 
-* 2b. Saving or reading fails due to lack of permission.
+* 1b. Wi-find is unable to read due to lack of permission.
 
-    * 2b1. Wi-Find requests permission to read/write
+    * 1b1. Wi-Find requests permission to read/write.
 
-      Use case resumes at step 2 if saving, step 5 if reading.
+    * 1b2. User approves.
+
+      Use case resumes at step 2.
 
 **Use case: UC03 Search contacts by company**
 
 **MSS**
 
-1. User requests to search for contacts by entering a company name.
-2. Wi-Find validates the company name input.
-3. Wi-Find displays all contacts whose company matches the given name.
+1. User requests to find contacts with a specified field.
+2. Wi-Find displays all contacts whose company matches the given name.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The company name is empty.
+* 1a. One or more of the inputs are invalid
 
     * 2a1. Wi-Find shows an error message.
-
-      Use case ends.
-
-* 2b. The company name contains invalid special characters.
-
-    * 2b1. Wi-Find shows an error message.
 
       Use case ends.
 
