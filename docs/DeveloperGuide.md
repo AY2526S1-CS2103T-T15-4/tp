@@ -328,11 +328,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2c. The contact already exists (duplicate contact number or email).
 
     * 2c1. Wi-Find warns and asks for confirmation from user to proceed with adding contact.
-    * 2c2. User confirms.
-    * 2c3. Wi-Find adds the new contact.
-    * 2c4. Wi-Find displays a success message.
-
-      Use case ends.
+    * If user cancels, use case ends.
+    * Else use case continues from step 3.
 
 **Use case: UC02 - Delete a contact**
 
@@ -388,6 +385,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC03 Search contacts by company**
 
+**Preconditions: There exists at least one person in the list**
+
 **MSS**
 
 1. User requests to find contacts with a specified field.
@@ -410,6 +409,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **Use case: UC04 - Add meeting to a contact**
+
+**Preconditions: There exists at least one person in the list**
 
 **MSS**
 
@@ -442,6 +443,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC05 - Delete meeting from a contact**
 
+**Preconditions: There exists at least one person in the list**
+
 **MSS**
 
 1. User requests to list contacts.
@@ -471,6 +474,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC06 - Edit the information of a contact**
+
+**Preconditions: There exists at least one person in the list**
+
+**MSS**
+
+1. User requests to edit fields of a contact.
+2. Wi-Find edits the contact.
+3. Wi-Find displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. One or more of the fields provided is of invalid format.
+
+    * 3a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1b. The given identifier is invalid (no contact found).
+
+    * 1b1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1c. The field the user is trying to change is the identifier and already exists.
+
+    * 1c1. Wi-Find warns and asks for confirmation from user to proceed with editing contact.
+    * If user cancels, use case ends.
+    * Else use case continues from step 2.
+
 ### Non-Functional Requirements
 
 1.  Environment Requirements
@@ -479,7 +514,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Should not depend on any remote server.
 2.  Data Requirements
     - User data should be locally in a human-editable text file.
-    - Data should be automatically saved after each modifications to prevent accidental loss.
+    - Data should be automatically saved after each modification to prevent accidental loss.
 3.  Performance Requirements
     - The system should start up within 3 seconds on a modern computer.
     - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
