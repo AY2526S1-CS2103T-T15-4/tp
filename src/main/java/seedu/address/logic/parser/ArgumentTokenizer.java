@@ -186,6 +186,7 @@ public class ArgumentTokenizer {
         private int startPosition;
         private final Prefix prefix;
 
+
         PrefixPosition(Prefix prefix, int startPosition) {
             this.prefix = prefix;
             this.startPosition = startPosition;

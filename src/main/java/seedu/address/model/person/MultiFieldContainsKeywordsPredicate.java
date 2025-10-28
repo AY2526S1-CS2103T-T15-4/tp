@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -83,6 +84,12 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
             matchesAllFields = matchesAllFields && matchesTags(person, tagKeywords);
         }
 
+        // Check meeting field if specified
+        if (fieldKeywordsMap.getValue(PREFIX_MEETING).isPresent()) {
+            List<String> meetingKeywords = filterEmptyString(fieldKeywordsMap.getAllValues(PREFIX_MEETING));
+            matchesAllFields = matchesAllFields && matchesMeeting(person, meetingKeywords);
+        }
+
         return matchesAllFields;
     }
 
@@ -152,6 +159,19 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream().anyMatch(keyword ->
                 tags.stream().anyMatch(tag ->
                         tag.tagName.toLowerCase().contains(keyword.toLowerCase())));
+    }
+
+    /**
+     * Checks if the person's meetings contain ANY of the keywords (OR logic within tags)
+     * Uses partial matching (case-insensitive)
+     */
+    private boolean matchesMeeting(Person person, List<String> keywords) {
+        requireNonNull(person);
+        assert !keywords.isEmpty();
+        Set<Meeting> meetings = person.getMeetings();
+        return keywords.stream().anyMatch(keyword ->
+                meetings.stream().anyMatch(tag ->
+                        meetings.toString().toLowerCase().contains(keyword.toLowerCase())));
     }
 
     @Override
