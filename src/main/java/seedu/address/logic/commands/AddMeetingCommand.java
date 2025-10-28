@@ -19,11 +19,11 @@ import seedu.address.model.person.Person;
 public class AddMeetingCommand extends ConfirmableCommand {
     public static final String COMMAND_WORD = "addm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting time to a person in the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting time to a person in the address book.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_MEETING + "MEETING_TIME (in dd-MM-yyyy HH:mm)\n"
+            + PREFIX_MEETING + "MEETING_TIME (format: DD-MM-YYYY HH:MM) Description(optional)\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_MEETING + "20-10-2025 14:30";
+            + PREFIX_MEETING + "20-10-2025 14:30 Project LinkUp";
 
     public static final String MESSAGE_SUCCESS = "New meeting added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_MEETING_WARNING =
