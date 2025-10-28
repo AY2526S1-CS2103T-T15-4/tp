@@ -396,7 +396,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2 if saving, step 5 if reading.
 
-**Use case: UC-03 Search contacts by company**
+**Use case: UC03 Search contacts by company**
 
 **MSS**
 
@@ -423,6 +423,68 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. No contacts match the company name.
 
     * 3a1. Wi-Find shows an empty list message.
+
+      Use case ends.
+
+**Use case: UC04 - Add meeting to a contact**
+
+**MSS**
+
+1. User requests to list contacts.
+2. Wi-Find shows a list of contacts.
+3. User requests to add a meeting to a specific contact in the list.
+4. Wi-Find adds the meeting provided to the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The meeting provided is of invalid format.
+
+    * 3a1. Wi-Find shows an error message.
+
+        Use case ends.
+
+* 3b. The given identifier is invalid (no contact found).
+
+    * 3b1. Wi-Find shows an error message.
+
+        Use case ends.
+
+* 3c. The meeting time provided clashes with another meeting.
+
+    * 3c1. Wi-Find shows an error message.
+
+        Use case ends.
+
+**Use case: UC05 - Delete meeting from a contact**
+
+**MSS**
+
+1. User requests to list contacts.
+2. Wi-Find shows a list of contacts.
+3. User requests to delete a meeting from a specific contact in the list.
+4. Wi-Find deletes the meeting provided from the contact.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The meeting provided is of invalid format.
+
+    * 3a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 3b. The given identifier is invalid (no contact found).
+
+    * 3b1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 3c. The contact does not have a meeting with the meeting time provided.
+
+    * 3c1. Wi-Find shows an error message.
 
       Use case ends.
 
