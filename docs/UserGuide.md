@@ -372,6 +372,11 @@ Some quick notes regarding how commands work:
 The following countries are supported for assigning a contact's location and corresponding timezone.<br>
 Wi-Find uses these time zones to automatically display each contact's local time.
 
+<div markdown="span" class="alert alert-primary">
+:exclamation: **IMPORTANT:**<br>
+UTC Offset given below does not accurately provide time difference, due to the usage of DST in some countries. For more information, check <a href="https://www.iana.org/time-zones" target="_blank">here.</a>
+</div>
+
 | Region   | Country Name      | Timezone              | UTC Offset |
 |----------|-----------------|----------------------|------------|
 | Africa   | Egypt           | `Africa/Cairo`         | UTC +02:00 |
