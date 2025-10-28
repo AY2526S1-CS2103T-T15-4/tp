@@ -72,6 +72,6 @@ public class Meeting {
 
     @Override
     public String toString() {
-        return TimeFormatter.getFormattedTimeFromInput(meetingTime) + " " + description.orElse("");
+        return TimeFormatter.getFormattedTimeWithYearsFromInput(meetingTime) + " " + description.orElse("");
     }
 }

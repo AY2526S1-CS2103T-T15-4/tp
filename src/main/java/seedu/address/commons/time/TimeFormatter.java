@@ -19,6 +19,9 @@ public class TimeFormatter {
     /** Formatter used to produce output in the pattern "dd MMM HH:mm". */
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM HH:mm");
 
+    private static final DateTimeFormatter OUTPUT_FORMATTER_WITH_YEARS = DateTimeFormatter.ofPattern("dd MMM "
+            + "YYYY HH:mm");
+
     /** Private constructor to prevent instantiation of this utility class. */
     private TimeFormatter() {}
 
@@ -52,10 +55,10 @@ public class TimeFormatter {
      *
      * @param input the {@code LocalDateTime} to format; must not be {@code null}.
      * @return a formatted string representing the given time,
-     *         e.g., {@code "28 Oct 17:45"}.
+     *         e.g., {@code "28 Oct 2012 17:45"}.
      * @throws NullPointerException if {@code input} is {@code null}.
      */
-    public static String getFormattedTimeFromInput(LocalDateTime input) {
-        return input.format(OUTPUT_FORMATTER);
+    public static String getFormattedTimeWithYearsFromInput(LocalDateTime input) {
+        return input.format(OUTPUT_FORMATTER_WITH_YEARS);
     }
 }
