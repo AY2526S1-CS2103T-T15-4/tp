@@ -239,10 +239,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -276,38 +272,36 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​        | I want to …​                                       | So that I can…​                                         |
-|----------|----------------|----------------------------------------------------|---------------------------------------------------------|
-| * * *    | user           | add new contacts with their relevant information   | check and contact relevant personnel when necessary.    |
-| * * *    | user           | delete a person                                    | remove contacts that I no longer need.                  |
-| * * *    | user           | save and read contacts on shutdown/startup         | maintain contact information across instances of usage. |
-| * * *    | busy user      | search contacts by company                         | sift through contacts easily.                           |
-| * *      | user           | set reminders on clients                           | stay alert on upcoming meetings.                        |
-| * *      | user           | check client's local time zone                     | contact them at appropriate times.                      |
-| * *      | user           | edit my contacts                                   | update client information easily.                       |
-| * *      | user           | attach tags to clients                             | recall connections to the client.                       |
-| * *      | user           | get alerts for clashing meetings                   | prevent double booking.                                 |
-| * *      | user           | search contacts by country                         | contact groups of people under the filter               |
-| * *      | user           | search contacts by tag                             | contact groups of people under the filter.              |
-| * *      | user           | search contacts by name                            | contact groups of people under the filter.              |
-| * *      | user           | Search contacts by projects they are working on    | contact groups of people under the filter.              |
-| *        | user           | import contacts from other communication platforms | add contacts easily.                                    |
-| *        | user           | check the last date of interaction with clients    | set up meetings for possible future opportunities.      |
-| *        | user           | set multiple tags on one contact                   | maintain overlapping projects without confusion.        |
-| *        | user           | merge duplicate contacts                           | maintain accurate contacts.                             |
-| *        | impatient user | see my frequently contacted users                  | save time.                                              |
-| *        | user           | auto-convert meeting times into my timezone        | prevent making scheduling mistakes.                     |
+| Priority | As a …​        | I want to …​                                     | So that I can…​                                         |
+|----------|----------------|--------------------------------------------------|---------------------------------------------------------|
+| * * *    | user           | add new contacts with their relevant information | check and contact relevant personnel when necessary.    |
+| * * *    | user           | delete a person                                  | remove contacts that I no longer need.                  |
+| * * *    | user           | save and read contacts on shutdown/startup       | maintain contact information across instances of usage. |
+| * * *    | busy user      | search contacts by company                       | sift through contacts easily.                           |
+| * * *    | user           | add meetings to clients                          | be reminded of our next meeting.                        |
+| * * *    | user           | delete past meetings                             | de-clutter the contact list.                            |
+| * *      | user           | check client's local time zone                   | contact them at appropriate times.                      |
+| * *      | user           | edit my contacts                                 | update client information easily.                       |
+| * *      | user           | attach tags to clients                           | recall connections to the client.                       |
+| * *      | user           | get alerts for clashing meetings                 | prevent double booking.                                 |
+| * *      | user           | search contacts by country                       | contact groups of people under the filter               |
+| * *      | user           | search contacts by tag                           | contact groups of people under the filter.              |
+| * *      | user           | search contacts by name                          | contact groups of people under the filter.              |
+| * *      | user           | Search contacts by phone number                  | contact groups of people under the filter.              |
+| *        | user           | attach links to clients                          | go to their websites easily.                            |
+| *        | user           | flag some clients                                | quickly find them in the list.                          |
+| *        | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
+| *        | impatient user | see my frequently contacted users                | save time.                                              |
+| *        | user           | auto-convert meeting times into my timezone      | prevent making scheduling mistakes.                     |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Add a contact**
+**Use case: UC01 - Add a contact**
 
 **MSS**
 
-1.  User requests to add a new contact with name, company, and contact information
-2.  Wi-Find validates the fields (name, company, contact info).
+1.  User requests to add a new contact.
+2.  Wi-Find validates the fields.
 3.  Wi-Find adds the new contact.
 4.  Wi-Find displays a success message.
 
@@ -321,34 +315,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2b. The input format for name, company or contact info is invalid.
+* 2b. The input format for one or more of fields are invalid.
 
     * 2b1. Wi-Find shows an error message.
 
       Use case ends.
 
-* 2c. The contact already exists (duplicate name or contact number).
+* 2c. The contact already exists (duplicate contact number or email).
 
-    * 2c1. Wi-Find shows an error message.
+    * 2c1. Wi-Find warns and asks for confirmation from user to proceed with adding contact.
+    * If user cancels, use case ends.
+    * Else use case continues from step 3.
 
-      Use case ends.
+**Use case: UC02 - Delete a contact**
 
-**Use case: Delete a contact**
+**Preconditions: There exists at least one person in the list**
 
 **MSS**
 
-1. User requests to list contacts
-2. Wi-Find shows a list of contacts
-3. User requests to delete a specific contact in the list
-4. Wi-Find deletes the contact
+1. User requests to list contacts.
+2. Wi-Find shows a list of contacts.
+3. User requests to delete a specific contact in the list.
+4. Wi-Find deletes the contact.
+5. Wi-Find shows a success message.
 
     Use case ends.
 
 **Extensions**
-
-* 2a. The list is empty.
-
-    There is no contact to delete. Use case ends.
 
 * 3a. The given identifier is invalid (no contact found).
 
@@ -356,67 +349,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3b. Multiple contacts match the identifier.
-
-    * 3b1. Wi-Find shows an error message indicating ambiguity.
-
-      Use case ends.
-
-* 3c. User deletes from a filtered list.
-
-    * 3c1. Deletion only applies to the filtered view's index.
-
-      Step 3 and 4 carries out normally. Use case ends.
-
 **Use case: Save and read contacts on shutdown/startup**
 
 **MSS**
 
-1. User interacts with Wi-Find by adding, deleting, or editing contacts.
-2. Wi-Find automatically saves the updated contact list after each command.
-3. User shuts down the application.
-4. User restarts the application.
-5. Wi-Find automatically reads and loads the previously saved contact list.
+1. User boots up Wi-Find.
+2. Wi-Find loads the previously saved contact list.
+3. User interacts with Wi-Find.
+4. Wi-Find automatically saves the updated contact list after each command.
+5. User shuts down the application.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Saving fails due to missing file.
+* 1a. Saving fails due to missing file.
 
     * 2a1. Wi-Find requests permission to create a new file.
 
-    * 2a2. If permission is granted, Wi-Find creates a new file.
+    * 2a2. If permission is granted, Wi-Find creates a new file with sample contacts.
 
       Use case resumes at step 2.
 
-* 2b. Saving or reading fails due to lack of permission.
+* 1b. Wi-find is unable to read due to lack of permission.
 
-    * 2b1. Wi-Find requests permission to read/write
+    * 1b1. Wi-Find requests permission to read/write.
 
-      Use case resumes at step 2 if saving, step 5 if reading.
+    * 1b2. User approves.
 
-**Use case: Search contacts by company**
+      Use case resumes at step 2.
+
+**Use case: UC03 Search contacts by company**
+
+**Preconditions: There exists at least one person in the list**
 
 **MSS**
 
-1. User requests to search for contacts by entering a company name.
-2. Wi-Find validates the company name input.
-3. Wi-Find displays all contacts whose company matches the given name.
+1. User requests to find contacts with a specified field.
+2. Wi-Find displays all contacts whose company matches the given name.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The company name is empty.
+* 1a. One or more of the inputs are invalid
 
     * 2a1. Wi-Find shows an error message.
-
-      Use case ends.
-
-* 2b. The company name contains invalid special characters.
-
-    * 2b1. Wi-Find shows an error message.
 
       Use case ends.
 
@@ -426,15 +404,113 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC04 - Add meeting to a contact**
+
+**Preconditions: There exists at least one person in the list**
+
+**MSS**
+
+1. User requests to list contacts.
+2. Wi-Find shows a list of contacts.
+3. User requests to add a meeting to a specific contact in the list.
+4. Wi-Find adds the meeting provided to the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The meeting provided is of invalid format.
+
+    * 3a1. Wi-Find shows an error message.
+
+        Use case ends.
+
+* 3b. The given identifier is invalid (no contact found).
+
+    * 3b1. Wi-Find shows an error message.
+
+        Use case ends.
+
+* 3c. The meeting time provided clashes with another meeting.
+
+    * 3c1. Wi-Find shows an error message.
+
+        Use case ends.
+
+**Use case: UC05 - Delete meeting from a contact**
+
+**Preconditions: There exists at least one person in the list**
+
+**MSS**
+
+1. User requests to list contacts.
+2. Wi-Find shows a list of contacts.
+3. User requests to delete a meeting from a specific contact in the list.
+4. Wi-Find deletes the meeting provided from the contact.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The meeting provided is of invalid format.
+
+    * 3a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 3b. The given identifier is invalid (no contact found).
+
+    * 3b1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 3c. The contact does not have a meeting with the meeting time provided.
+
+    * 3c1. Wi-Find shows an error message.
+
+      Use case ends.
+
+**Use case: UC06 - Edit the information of a contact**
+
+**Preconditions: There exists at least one person in the list**
+
+**MSS**
+
+1. User requests to edit fields of a contact.
+2. Wi-Find edits the contact.
+3. Wi-Find displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. One or more of the fields provided is of invalid format.
+
+    * 3a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1b. The given identifier is invalid (no contact found).
+
+    * 1b1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1c. The field the user is trying to change is the identifier and already exists.
+
+    * 1c1. Wi-Find warns and asks for confirmation from user to proceed with editing contact.
+    * If user cancels, use case ends.
+    * Else use case continues from step 2.
+
 ### Non-Functional Requirements
 
 1.  Environment Requirements
-    - Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+    - Should work on any _mainstream OS_ as long as it has Java `17`.
     - Should be runnable without requiring installation.
     - Should not depend on any remote server.
 2.  Data Requirements
     - User data should be locally in a human-editable text file.
-    - Data should be automatically saved after each modifications to prevent accidental loss.
+    - Data should be automatically saved after each modification to prevent accidental loss.
 3.  Performance Requirements
     - The system should start up within 3 seconds on a modern computer.
     - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.

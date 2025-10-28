@@ -13,9 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import seedu.address.commons.time.TimeFormatter;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.TimezoneMapper;
-import seedu.address.ui.util.TimeFormatter;
 
 /**
  * A UI component that displays information of a {@code Person}.
@@ -165,7 +165,7 @@ public class PersonCard extends UiPart<Region> {
         }
 
         time.setVisible(true);
-        String formattedTime = TimeFormatter.getFormattedTime(zone);
+        String formattedTime = TimeFormatter.getFormattedTimeFromZone(zone);
         time.setText("Local time: " + formattedTime);
     }
 }
