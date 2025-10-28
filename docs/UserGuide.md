@@ -75,53 +75,38 @@ Some quick notes regarding how commands work:
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-Commands in Wi-Find follow the same flexible format as described below.
+Commands in Wi-Find follow a flexible format as described below.
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Command Format Notes:**
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  - e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* **Parameters:** Words in `UPPER_CASE` are placeholders for your input.
+  - Example: `add n/Name` → use as `add n/John Doe`
 
-* Items in square brackets are optional.<br>
-  - e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* **Optional items:** Square brackets `[ ]` indicate optional parameters.
+  - Example: `n/NAME [t/TAG]` → use as `n/John Doe t/friend` or just `n/John Doe`
 
-* Items with `…`​ after them can be used multiple times including zero times. (Unless stated otherwise.)<br>
-  - e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* **Multiple items:** `...` means a parameter can be repeated (including zero times unless stated otherwise).
+  - Example: `[t/TAG]...` → use as nothing, `t/friend`, or `t/friend t/family`
 
-* Parameters can be in any order.<br>
-  - e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* **Parameter order:** Parameters can appear in any order.
+  - Example: `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` both work
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  - e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* **Extra parameters:** Commands like `help`, `list`, `exit`, and `clear` ignore extra input.
+  - Example: `help 123` is interpreted as `help`
 
-* **Literal prefix input**<br>
-  <br>
-  **When you need this:** If your input contains text that looks like a command prefix (e.g., "n/", "com/", "c/"), Wi-Find might misinterpret it as a new parameter.<br>
-  <br>
-  **Solution:** Wrap the prefix-like text in square brackets with a space before it: <code>[ prefix/]</code><br>
-  <br>
-  **Format rules:**<br>
-  - Add a space INSIDE the opening bracket: <code>[ com/]</code> ✓<br>
-  - The brackets will be removed automatically, leaving only the text<br>
-  - If a prefix-like text is **attached directly** to other text, e.g., <code>c/Singaporecom/</code>, it will be saved **as is** → <code>Singaporecom/</code><br>
-  <br>
-  **Examples:**<br>
-  - <code>add n/John Smith c/Singapore[ com/] p/12345678 e/john@example.com com/TechCorp</code><br>
-    → Country will be saved as: "Singapore com/"<br>
-  - <code>add n/Jane[ n/a] Doe c/Canada p/98765432 e/jane@example.com com/StartupInc</code><br>
-    → Name will be saved as: "Jane n/a Doe"<br>
-  <br>
-  **Important:**<br>
-    - A space **before** the opening bracket, like <code>text [ com/]</code>, will result in <code>text  com/</code> (with double space).<br>
-    - Always put the space **inside** the bracket: <code>[ com/]</code><br>
-  <br>
-  **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket notation, "Singapore com/" would be interpreted as country "Singapore" followed by a new company field.<br>
+* **Literal prefix input** If your input contains text that looks like a prefix (e.g., "n/", "com/"), wrap it in brackets with a leading space: <code>[ prefix/]</code>
+  - Format: Space goes INSIDE the opening bracket: <code>[ com/]</code> ✓
+  - The brackets are removed automatically, leaving only the text
+  - Prefix-like text attached to other text (e.g., <code>Singaporecom/</code>) is saved **as is**
+  - Examples:
+    - `add n/John c/Singapore[ com/]` → Country: "Singapore com/"
+    - `add n/Jane[ n/a] Doe` → Name: "Jane n/a Doe"
+  - **Important:** Space **before** the opening bracket creates double-spacing. Always use <code>[ prefix/]</code> format.
+  - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket notation, "Singapore com/" would be interpreted as country "Singapore" followed by a new company field.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
+* **PDF Warning:** When copying multi-line commands from PDF, spaces around line breaks may be lost
 
 You can refer back to this section anytime while reading about specific commands.
-</div>
 
 ### Viewing help : `help`
 
@@ -159,6 +144,7 @@ Examples:
 :exclamation: **Note:**<br>
 - Contacts are considered duplicates if they share the same phone number OR the same email address with an existing contact.<br>
 - Email addresses are automatically lowercased when a contact is added or edited.<br>
+- A person can have any number of tags (including 0).<br>
 </div>
 
 <div markdown="span" class="alert alert-warning">
@@ -171,10 +157,6 @@ When you attempt to add a contact that shares a phone number or email with an ex
 **Example:** If you have John Doe (phone: 98765432) in your contacts and you try to add Jane Doe with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding Jane Doe.<br>
 <br>
 This feature helps prevent accidental duplicates while allowing you to intentionally add contacts with shared phone numbers or emails (e.g., family members sharing a phone, employees sharing a company email).
-</div>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
-A person can have any number of tags (including 0).
 </div>
 
 ### Listing all persons : `list`
