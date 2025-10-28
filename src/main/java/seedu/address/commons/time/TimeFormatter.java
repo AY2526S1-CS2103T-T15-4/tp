@@ -6,22 +6,56 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents the Time of Person's country time zone.
- * The time displayed currently in this version is only
- * of the OS of the user opening the application.
+ * Utility class for formatting date and time values.
+ * <p>
+ * Provides methods to obtain formatted time strings based on the current system time,
+ * a specified time zone, or a given {@link LocalDateTime} instance.
+ * The formatted output follows the pattern {@code "dd MMM HH:mm"} (e.g., {@code "28 Oct 17:45"}).
+ * <p>
+ * Note: The current version formats time according to the operating system's default time zone.
  */
 public class TimeFormatter {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM HH:mm");
+    /** Formatter used to produce output in the pattern "dd MMM HH:mm". */
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM HH:mm");
 
+    /** Private constructor to prevent instantiation of this utility class. */
     private TimeFormatter() {}
 
-    public static String getFormattedTime() {
-        return LocalDateTime.now().format(FORMATTER);
+    /**
+     * Returns the current system time formatted using the {@link #OUTPUT_FORMATTER}.
+     * <p>
+     * The time displayed is based on the operating system's default time zone.
+     *
+     * @return a formatted string representing the current system time,
+     *         e.g., {@code "28 Oct 17:45"}.
+     */
+    public static String getFormattedCurrentTime() {
+        return LocalDateTime.now().format(OUTPUT_FORMATTER);
     }
 
-    public static String getFormattedTime(ZoneId zone) {
+    /**
+     * Returns the current time in the specified time zone, formatted using the {@link #OUTPUT_FORMATTER}.
+     *
+     * @param zone the {@link ZoneId} representing the desired time zone; must not be {@code null}.
+     * @return a formatted string representing the current time in the specified zone,
+     *         e.g., {@code "28 Oct 10:45"} for {@code ZoneId.of("Europe/London")}.
+     * @throws AssertionError if {@code zone} is {@code null}.
+     */
+    public static String getFormattedTimeFromZone(ZoneId zone) {
         assert zone != null : "Zone cannot be null.";
-        return ZonedDateTime.now(zone).format(FORMATTER);
+        return ZonedDateTime.now(zone).format(OUTPUT_FORMATTER);
+    }
+
+    /**
+     * Formats the given {@link LocalDateTime} using the {@link #OUTPUT_FORMATTER}.
+     *
+     * @param input the {@code LocalDateTime} to format; must not be {@code null}.
+     * @return a formatted string representing the given time,
+     *         e.g., {@code "28 Oct 17:45"}.
+     * @throws NullPointerException if {@code input} is {@code null}.
+     */
+    public static String getFormattedTimeFromInput(LocalDateTime input) {
+        return input.format(OUTPUT_FORMATTER);
     }
 }

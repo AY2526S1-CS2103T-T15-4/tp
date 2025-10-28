@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.commons.time.TimeFormatter;
+
 /**
  * Represents a meeting associated with a person in the address book.
  * A meeting consists of a {@link LocalDateTime} indicating when it occurs,
@@ -70,6 +72,6 @@ public class Meeting {
 
     @Override
     public String toString() {
-        return this.meetingTime.toString() + " " + description.orElse("");
+        return TimeFormatter.getFormattedTimeFromInput(meetingTime) + " " + description.orElse("");
     }
 }

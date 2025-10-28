@@ -8,40 +8,42 @@ import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.time.TimeFormatter;
+
 public class TimeFormatterTest {
 
     @Test
-    public void getFormattedTime_shouldReturnValidFormat() {
-        String time = TimeFormatter.getFormattedTime();
+    public void getFormattedTime_FromZone_shouldReturnValidFormat() {
+        String time = TimeFormatter.getFormattedCurrentTime();
         assertNotNull(time, "Formatted time should not be null");
         assertTrue(time.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"),
                 "Formatted time should match pattern 'dd MMM HH:mm', got: " + time);
     }
 
     @Test
-    public void getFormattedTime_withZone_shouldReturnValidFormat() {
+    public void getFormattedTime_FromZone_withZone_shouldReturnValidFormat() {
         ZoneId zone = ZoneId.of("Asia/Singapore");
-        String time = TimeFormatter.getFormattedTime(zone);
+        String time = TimeFormatter.getFormattedTimeFromZone(zone);
         assertNotNull(time, "Formatted time with zone should not be null");
         assertTrue(time.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"),
                 "Formatted time with zone should match pattern 'dd MMM HH:mm', got: " + time);
     }
 
     @Test
-    public void getFormattedTime_withDifferentZone_shouldReturnDifferentTimes() {
+    public void getFormattedTime_FromZone_withDifferentZone_shouldReturnDifferentTimes() {
         ZoneId sg = ZoneId.of("Asia/Singapore");
         ZoneId ny = ZoneId.of("America/New_York");
 
-        String timeSG = TimeFormatter.getFormattedTime(sg);
-        String timeNY = TimeFormatter.getFormattedTime(ny);
+        String timeSG = TimeFormatter.getFormattedTimeFromZone(sg);
+        String timeNY = TimeFormatter.getFormattedTimeFromZone(ny);
 
         assertNotEquals(timeSG, timeNY, "Times in different zones should not be equal (most of the time)");
     }
 
     @Test
-    public void getFormattedTime_atMidnight_shouldFormatCorrectly() {
+    public void getFormattedTime_FromZone_atMidnight_shouldFormatCorrectly() {
         ZoneId zone = ZoneId.of("UTC");
-        String formatted = TimeFormatter.getFormattedTime(zone);
+        String formatted = TimeFormatter.getFormattedTimeFromZone(zone);
 
         assertNotNull(formatted);
         assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"));

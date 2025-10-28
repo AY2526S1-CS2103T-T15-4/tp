@@ -165,7 +165,7 @@ public class PersonCard extends UiPart<Region> {
         }
 
         time.setVisible(true);
-        String formattedTime = TimeFormatter.getFormattedTime(zone);
+        String formattedTime = TimeFormatter.getFormattedTimeFromZone(zone);
         time.setText("Local time: " + formattedTime);
     }
 }
