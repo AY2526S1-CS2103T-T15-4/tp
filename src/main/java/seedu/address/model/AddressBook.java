@@ -91,7 +91,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
-        persons.remove(key);
+        persons.removeReference(key);
     }
 
     //// util methods

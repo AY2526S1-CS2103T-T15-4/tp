@@ -53,9 +53,7 @@ public class Email {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        boolean result;
-        result = test.matches(VALIDATION_REGEX) && test.length() <= LENGTH_LIMIT;
-        return result;
+        return test.matches(VALIDATION_REGEX) && test.length() <= LENGTH_LIMIT;
     }
 
     @Override

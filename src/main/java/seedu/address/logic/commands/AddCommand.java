@@ -48,15 +48,28 @@ public class AddCommand extends ConfirmableCommand {
             """;
 
     private final Person toAdd;
-    private boolean isConfirmed = false;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddCommand(Person person) {
+        super(false);
         requireNonNull(person);
         assert person != null : "Person object must not be null after requireNonNull check";
-        toAdd = person;
+        this.toAdd = person;
+    }
+
+    // Private constructor used to create a confirmed copy
+    private AddCommand(Person person, boolean confirmed) {
+        super(confirmed);
+        requireNonNull(person);
+        assert person != null : "Person object must not be null after requireNonNull check";
+        this.toAdd = person;
+    }
+
+    @Override
+    public ConfirmableCommand withConfirmed() {
+        return new AddCommand(this.toAdd, true);
     }
 
     @Override
@@ -65,8 +78,8 @@ public class AddCommand extends ConfirmableCommand {
         assert model != null : "Model must not be null after requireNonNull";
         assert toAdd != null : "Person to add must not be null";
 
-        if (model.hasPerson(toAdd) && !isConfirmed) {
-            return new CommandResult(MESSAGE_DUPLICATE_PERSON_WARNING, this);
+        if (model.hasPerson(toAdd) && !isConfirmed()) {
+            return new CommandResult(MESSAGE_DUPLICATE_PERSON_WARNING, this.withConfirmed());
         }
 
         model.addPerson(toAdd);
@@ -94,10 +107,5 @@ public class AddCommand extends ConfirmableCommand {
         return new ToStringBuilder(this)
                 .add("toAdd", toAdd)
                 .toString();
-    }
-
-    @Override
-    public void confirm() {
-        isConfirmed = true;
     }
 }

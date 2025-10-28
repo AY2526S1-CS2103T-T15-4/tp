@@ -67,18 +67,31 @@ public class EditCommand extends ConfirmableCommand {
             """;
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
-    private boolean isConfirmed = false;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+        super(false);
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
+
+    private EditCommand(Index index, EditPersonDescriptor editPersonDescriptor, boolean confirmed) {
+        super(confirmed);
+        requireNonNull(index);
+        requireNonNull(editPersonDescriptor);
+        this.index = index;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
+
+    @Override
+    public ConfirmableCommand withConfirmed() {
+        return new EditCommand(this.index, this.editPersonDescriptor, true);
     }
 
     @Override
@@ -103,8 +116,8 @@ public class EditCommand extends ConfirmableCommand {
                                 currentPerson -> !currentPerson.equals(personToEdit)
                                         && (currentPerson.isSamePerson(editedPerson)));
 
-        if (hasSameFields && !isConfirmed) {
-            return new CommandResult(MESSAGE_DUPLICATE_PERSON_WARNING, this);
+        if (hasSameFields && !this.isConfirmed()) {
+            return new CommandResult(MESSAGE_DUPLICATE_PERSON_WARNING, this.withConfirmed());
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -163,11 +176,6 @@ public class EditCommand extends ConfirmableCommand {
                 .add("index", index)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
-    }
-
-    @Override
-    public void confirm() {
-        this.isConfirmed = true;
     }
 
     /**

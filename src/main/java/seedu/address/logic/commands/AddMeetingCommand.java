@@ -35,7 +35,6 @@ public class AddMeetingCommand extends ConfirmableCommand {
 
     private final Index index;
     private final Meeting meeting;
-    private boolean isConfirmed = false;
 
     /**
      * Creates an {@code AddMeetingCommand} to add the specified {@code Meeting}
@@ -45,10 +44,24 @@ public class AddMeetingCommand extends ConfirmableCommand {
      * @param meeting Meeting to be added.
      */
     public AddMeetingCommand(Index targetIndex, Meeting meeting) {
+        super(false);
         requireNonNull(targetIndex);
         requireNonNull(meeting);
         this.index = targetIndex;
         this.meeting = meeting;
+    }
+
+    private AddMeetingCommand(Index targetIndex, Meeting meeting, boolean confirmed) {
+        super(confirmed);
+        requireNonNull(targetIndex);
+        requireNonNull(meeting);
+        this.index = targetIndex;
+        this.meeting = meeting;
+    }
+
+    @Override
+    public ConfirmableCommand withConfirmed() {
+        return new AddMeetingCommand(this.index, this.meeting, true);
     }
 
     /**
@@ -71,8 +84,8 @@ public class AddMeetingCommand extends ConfirmableCommand {
         assert personToUpdate != null;
         if (model.getAddressBook().getPersonList().stream()
                 .anyMatch(person-> person.getMeetings().stream()
-                        .anyMatch(currentMeeting -> currentMeeting.equals(meeting))) && !isConfirmed) {
-            return new CommandResult(MESSAGE_DUPLICATE_MEETING_WARNING, this);
+                        .anyMatch(currentMeeting -> currentMeeting.equals(meeting))) && !this.isConfirmed()) {
+            return new CommandResult(MESSAGE_DUPLICATE_MEETING_WARNING, this.withConfirmed());
         }
 
         model.addMeeting(personToUpdate, meeting);
@@ -101,10 +114,5 @@ public class AddMeetingCommand extends ConfirmableCommand {
                 .add("targetIndex", index)
                 .add("meetingTime", meeting)
                 .toString();
-    }
-
-    @Override
-    public void confirm() {
-        isConfirmed = true;
     }
 }

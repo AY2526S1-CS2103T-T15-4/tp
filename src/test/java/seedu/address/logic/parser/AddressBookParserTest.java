@@ -170,10 +170,10 @@ public class AddressBookParserTest {
 
     @Test
     public void setPendingCommand_executesAndClears() throws Exception {
-        ConfirmableCommand stub = new ConfirmableCommand() {
+        ConfirmableCommand stub = new ConfirmableCommand(false) {
             @Override
-            public void confirm() {
-                // empty as not needed for this test
+            public ConfirmableCommand withConfirmed() {
+                return this; // for this test, we can return itself
             }
 
             @Override

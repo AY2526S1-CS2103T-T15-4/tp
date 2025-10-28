@@ -1,5 +1,7 @@
 package seedu.address;
 
+import static java.util.Objects.requireNonNull;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -31,6 +33,7 @@ public class AppParameters {
      * Parses the application command-line parameters.
      */
     public static AppParameters parse(Application.Parameters parameters) {
+        requireNonNull(parameters);
         AppParameters appParameters = new AppParameters();
         Map<String, String> namedParameters = parameters.getNamed();
 
@@ -61,7 +64,7 @@ public class AppParameters {
 
     @Override
     public int hashCode() {
-        return configPath.hashCode();
+        return Objects.hashCode(configPath);
     }
 
     @Override
