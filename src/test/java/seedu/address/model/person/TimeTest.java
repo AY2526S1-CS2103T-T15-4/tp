@@ -7,13 +7,13 @@ import java.time.ZoneId;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.ui.util.TimeFormatter;
+import seedu.address.commons.time.TimeFormatter;
 
 public class TimeTest {
 
     @Test
     void getFormattedTime_shouldReturnCorrectFormat() {
-        String formatted = TimeFormatter.getFormattedTime();
+        String formatted = TimeFormatter.getFormattedCurrentTime();
         String pattern = "\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}";
 
         assertTrue(formatted.matches(pattern),
@@ -23,7 +23,7 @@ public class TimeTest {
     @Test
     void getFormattedTime_withZone_shouldReturnCorrectFormat() {
         ZoneId zone = ZoneId.of("Asia/Singapore");
-        String formatted = TimeFormatter.getFormattedTime(zone);
+        String formatted = TimeFormatter.getFormattedTimeFromZone(zone);
         String pattern = "\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}";
 
         assertTrue(formatted.matches(pattern),
@@ -32,10 +32,10 @@ public class TimeTest {
 
     @Test
     void time_shouldChangeAfterOneMinute() throws InterruptedException {
-        String t1 = TimeFormatter.getFormattedTime();
+        String t1 = TimeFormatter.getFormattedCurrentTime();
 
         Thread.sleep(61_000);
-        String t2 = TimeFormatter.getFormattedTime();
+        String t2 = TimeFormatter.getFormattedCurrentTime();
 
         assertNotEquals(t1, t2, "Time should update after one minute");
     }

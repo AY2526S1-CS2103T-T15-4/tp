@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.time.TimeFormatter;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
@@ -17,7 +18,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.util.TimeFormatter;
 
 public class PersonCardTest {
 
@@ -43,19 +43,19 @@ public class PersonCardTest {
                 .sorted((a, b) -> a.tagName.compareTo(b.tagName))
                 .forEach(tag -> {});
 
-        TimeFormatter.getFormattedTime();
+        TimeFormatter.getFormattedCurrentTime();
     }
 
     @Test
     void timeFormatter_shouldReturnValidFormat() {
-        String formatted = TimeFormatter.getFormattedTime(ZoneId.of("Asia/Singapore"));
+        String formatted = TimeFormatter.getFormattedTimeFromZone(ZoneId.of("Asia/Singapore"));
         assertNotNull(formatted);
         assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"));
     }
 
     @Test
     void timeFormatter_shouldReturnValidFormatForDefaultZone() {
-        String formatted = TimeFormatter.getFormattedTime();
+        String formatted = TimeFormatter.getFormattedCurrentTime();
         assertNotNull(formatted);
         assertTrue(formatted.matches("\\d{2} [A-Za-z]{3} \\d{2}:\\d{2}"));
     }
