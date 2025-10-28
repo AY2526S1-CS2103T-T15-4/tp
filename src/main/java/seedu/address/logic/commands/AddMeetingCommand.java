@@ -21,7 +21,7 @@ public class AddMeetingCommand extends ConfirmableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting time to a person in the address book. "
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_MEETING + "MEETING_TIME\n"
+            + PREFIX_MEETING + "MEETING_TIME (in dd-MM-yyyy HH:mm)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_MEETING + "20-10-2025 14:30";
 
