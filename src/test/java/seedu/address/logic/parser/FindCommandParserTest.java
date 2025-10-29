@@ -5,6 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -24,7 +26,8 @@ public class FindCommandParserTest {
     public void parse_validNamePrefix_returnsFindCommand() {
         String userInput = " n/Alice ";
         ArgumentMultimap expectedMap = ArgumentTokenizer.tokenize(
-                userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG);
+                userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY,
+                PREFIX_COMPANY, PREFIX_TAG, PREFIX_MEETING, PREFIX_LINK);
         FindCommand expected = new FindCommand(new MultiFieldContainsKeywordsPredicate(expectedMap));
         assertParseSuccess(parser, userInput, expected);
     }
@@ -33,7 +36,8 @@ public class FindCommandParserTest {
     public void parse_multipleValidPrefixes_returnsFindCommand() {
         String userInput = " n/Alice p/9123 e/@ex r/pore co/Open t/owes ";
         ArgumentMultimap expectedMap = ArgumentTokenizer.tokenize(
-                userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG);
+                userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY,
+                PREFIX_COMPANY, PREFIX_TAG, PREFIX_MEETING, PREFIX_LINK);
         FindCommand expected = new FindCommand(new MultiFieldContainsKeywordsPredicate(expectedMap));
         assertParseSuccess(parser, userInput, expected);
     }
@@ -42,7 +46,8 @@ public class FindCommandParserTest {
     public void parse_repeatedPrefix_returnsFindCommand() {
         String userInput = " t/friend t/owes ";
         ArgumentMultimap expectedMap = ArgumentTokenizer.tokenize(
-                userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG);
+                userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY,
+                PREFIX_COMPANY, PREFIX_TAG, PREFIX_MEETING, PREFIX_LINK);
         FindCommand expected = new FindCommand(new MultiFieldContainsKeywordsPredicate(expectedMap));
         assertParseSuccess(parser, userInput, expected);
     }

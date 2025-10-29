@@ -125,9 +125,9 @@ public class EditCommand extends ConfirmableCommand {
         HomeCountry updatedCountry = editPersonDescriptor.getCountry().orElse(personToEdit.getCountry());
         Company updatedCompany = editPersonDescriptor.getCompany().orElse(personToEdit.getCompany());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Boolean updatedIsFlagged = editPersonDescriptor.getIsFlagged().orElse(personToEdit.isFlagged());
+        Boolean updatedIsFlagged = personToEdit.isFlagged();
         Set<Meeting> unchangedMeetings = personToEdit.getMeetings();
-        Link updatedLink = editPersonDescriptor.getLink().orElse(personToEdit.getLink());
+        Link updatedLink = personToEdit.getLink();
 
         return new Person(
                 updatedName,
@@ -181,8 +181,6 @@ public class EditCommand extends ConfirmableCommand {
         private HomeCountry country;
         private Company company;
         private Set<Tag> tags;
-        private Boolean isFlagged;
-        private Link link;
 
         public EditPersonDescriptor() {}
 
@@ -197,15 +195,13 @@ public class EditCommand extends ConfirmableCommand {
             setCountry(toCopy.country);
             setCompany(toCopy.company);
             setTags(toCopy.tags);
-            setIsFlagged(toCopy.isFlagged);
-            setLink(toCopy.link);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, country, company, tags, isFlagged, link);
+            return CollectionUtil.isAnyNonNull(name, phone, email, country, company, tags);
         }
 
         public void setName(Name name) {
@@ -265,22 +261,6 @@ public class EditCommand extends ConfirmableCommand {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setIsFlagged(Boolean isFlagged) {
-            this.isFlagged = isFlagged;
-        }
-
-        public Optional<Boolean> getIsFlagged() {
-            return Optional.ofNullable(isFlagged);
-        }
-
-        public void setLink(Link link) {
-            this.link = link;
-        }
-
-        public Optional<Link> getLink() {
-            return Optional.ofNullable(link);
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -298,9 +278,7 @@ public class EditCommand extends ConfirmableCommand {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(country, otherEditPersonDescriptor.country)
                     && Objects.equals(company, otherEditPersonDescriptor.company)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(isFlagged, otherEditPersonDescriptor.isFlagged)
-                    && Objects.equals(link, otherEditPersonDescriptor.link);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
         @Override
@@ -312,8 +290,6 @@ public class EditCommand extends ConfirmableCommand {
                     .add("country", country)
                     .add("company", company)
                     .add("tags", tags)
-                    .add("isFlagged", isFlagged)
-                    .add("link", link)
                     .toString();
         }
     }

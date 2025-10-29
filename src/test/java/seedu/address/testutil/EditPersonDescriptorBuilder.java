@@ -8,7 +8,6 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Company;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HomeCountry;
-import seedu.address.model.person.Link;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -40,7 +39,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setCountry(person.getCountry());
         descriptor.setCompany(person.getCompany());
         descriptor.setTags(person.getTags());
-        descriptor.setLink(person.getLink());
     }
 
     /**
@@ -90,14 +88,6 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Link} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withLink(String link) {
-        descriptor.setLink(new Link(link));
         return this;
     }
 
