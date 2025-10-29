@@ -28,6 +28,11 @@ public class ListMeetingCommand extends Command {
 
     private final Index index;
 
+    /**
+     * Creates an {@code ListMeetingCommand} to list all previous {@code Meetings}
+     *      * to the person at the provided {@code Index}.
+     * @param targetIndex index of contact
+     */
     public ListMeetingCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.index = targetIndex;
