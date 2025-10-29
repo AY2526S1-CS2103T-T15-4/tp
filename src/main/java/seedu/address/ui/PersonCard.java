@@ -103,12 +103,16 @@ public class PersonCard extends UiPart<Region> {
         if (meetings != null) {
             meetings.getChildren().clear(); // Clear existing meeting labels
             int index = 1;
+            LocalDateTime now = LocalDateTime.now();
+
             for (var meeting : person.getMeetings()) {
-                Label meetingLabel = new Label(index + ". " + meeting.toString());
-                meetingLabel.getStyleClass().add("cell_small_label"); // keep font consistent
-                meetingLabel.setStyle("-fx-padding: 0 0 0 10;"); // optional indent
-                meetings.getChildren().add(meetingLabel);
-                index++;
+                if (meeting.getMeetingTime().isAfter(now)) {
+                    Label meetingLabel = new Label(index + ". " + meeting.toString());
+                    meetingLabel.getStyleClass().add("cell_small_label"); // keep font consistent
+                    meetingLabel.setStyle("-fx-padding: 0 0 0 10;"); // optional indent
+                    meetings.getChildren().add(meetingLabel);
+                    index++;
+                }
             }
         }
     }
