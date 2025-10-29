@@ -29,6 +29,7 @@ public class ListMeetingCommand extends Command {
     private final Index index;
 
     public ListMeetingCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.index = targetIndex;
     }
 
