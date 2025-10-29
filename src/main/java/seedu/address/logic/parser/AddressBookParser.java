@@ -65,8 +65,7 @@ public class AddressBookParser {
 
         if (pendingCommand != null) {
             if (commandWord.equalsIgnoreCase("y")) {
-                pendingCommand.confirm();
-                Command toConfirm = pendingCommand;
+                Command toConfirm = pendingCommand.withConfirmed();
                 pendingCommand = null;
                 return toConfirm;
             } else {

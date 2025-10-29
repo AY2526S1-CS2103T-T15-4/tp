@@ -11,10 +11,10 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}.
- * The removal of a person uses Person#equals(Object) to ensure that the person
- * with exactly the same fields will be removed.
+ * A list of persons that does not allow nulls and allows duplicates.
+ * Two persons are considered duplicates by comparing using {@code Person#isSamePerson(Person)}.
+ * The removal of a person uses reference equality to ensure that the
+ * exact desired person will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -36,7 +36,7 @@ public class PersonList implements Iterable<Person> {
 
     /**
      * Adds a person to the list.
-     * The person can exist in the list.
+     * This method does not check for duplicates, that responsibility lies with the user.
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
@@ -60,10 +60,10 @@ public class PersonList implements Iterable<Person> {
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the exact instance person from the list (reference equality).
      * The person must exist in the list.
      */
-    public void remove(Person toRemove) {
+    public void removeReference(Person toRemove) {
         requireNonNull(toRemove);
         int index = indexOfReference(toRemove);
         if (index == -1) {
@@ -104,7 +104,7 @@ public class PersonList implements Iterable<Person> {
 
     @Override
     public Iterator<Person> iterator() {
-        return internalList.iterator();
+        return internalUnmodifiableList.iterator();
     }
 
     @Override

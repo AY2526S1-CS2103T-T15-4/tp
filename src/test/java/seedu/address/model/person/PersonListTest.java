@@ -108,18 +108,18 @@ public class PersonListTest {
 
     @Test
     public void remove_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> personList.remove(null));
+        assertThrows(NullPointerException.class, () -> personList.removeReference(null));
     }
 
     @Test
     public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> personList.remove(ALICE));
+        assertThrows(PersonNotFoundException.class, () -> personList.removeReference(ALICE));
     }
 
     @Test
     public void remove_existingPerson_removesPerson() {
         personList.add(ALICE);
-        personList.remove(ALICE);
+        personList.removeReference(ALICE);
         PersonList expectedPersonList = new PersonList();
         assertEquals(expectedPersonList, personList);
     }
@@ -228,22 +228,22 @@ public class PersonListTest {
     }
 
     @Test
-    public void removeByReference_sameReference_removesCorrectInstance() {
+    public void removeReferenceByReference_sameReference_removesCorrectInstance() {
         PersonList personList = new PersonList();
         Person alice = new PersonBuilder().withName("Alice").build();
 
         personList.add(alice);
         // Remove using the same object reference
-        personList.remove(alice);
+        personList.removeReference(alice);
 
         assertFalse(personList.asUnmodifiableObservableList().contains(alice));
     }
 
     @Test
-    public void removeByReference_nonExistingPerson_throwsException() {
+    public void removeReferenceByReference_nonExistingPerson_throwsException() {
         PersonList personList = new PersonList();
         Person alice = new PersonBuilder().withName("Alice").build();
 
-        assertThrows(PersonNotFoundException.class, () -> personList.remove(alice));
+        assertThrows(PersonNotFoundException.class, () -> personList.removeReference(alice));
     }
 }

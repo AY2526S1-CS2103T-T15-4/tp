@@ -40,9 +40,7 @@ public class AddCommandTest {
         CommandResult firstResult = addCommand.execute(modelStub);
         assertEquals(AddCommand.MESSAGE_DUPLICATE_PERSON_WARNING, firstResult.getFeedbackToUser());
 
-        addCommand.confirm();
-
-        CommandResult confirmedResult = addCommand.execute(modelStub);
+        CommandResult confirmedResult = addCommand.withConfirmed().execute(modelStub);
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 confirmedResult.getFeedbackToUser());
     }
