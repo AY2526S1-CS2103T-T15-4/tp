@@ -13,7 +13,7 @@ import seedu.address.model.person.MultiFieldContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose specified parameter contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 
 public class FindCommand extends Command {

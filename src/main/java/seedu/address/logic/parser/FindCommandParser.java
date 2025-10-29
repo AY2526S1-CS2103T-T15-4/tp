@@ -4,6 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -35,11 +37,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG);
+                args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG, PREFIX_MEETING, PREFIX_LINK);
 
         // Check if any prefixes are present
         if (!anyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG)) {
+                PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG, PREFIX_MEETING, PREFIX_LINK)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
@@ -63,7 +66,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     private static boolean allSpecifiedPrefixesHaveKeywords(ArgumentMultimap argMultimap) {
         for (Prefix prefix : Arrays.asList(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG)) {
+                PREFIX_COUNTRY, PREFIX_COMPANY, PREFIX_TAG, PREFIX_MEETING, PREFIX_LINK)) {
             if (argMultimap.getValue(prefix).isPresent()) {
                 List<String> values = argMultimap.getAllValues(prefix);
                 // Check if all values for this prefix are empty strings
