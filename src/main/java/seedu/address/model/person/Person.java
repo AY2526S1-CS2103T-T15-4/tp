@@ -103,7 +103,22 @@ public class Person {
         return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings, link);
     }
 
-
+    /**
+     * Returns a new flagged Person.
+     */
+    public Person flag() {
+        return new Person(
+                this.getName(),
+                this.getPhone(),
+                this.getEmail(),
+                this.getCountry(),
+                this.getCompany(),
+                this.getTags(),
+                true,
+                this.getMeetings(),
+                this.getLink()
+        );
+    }
 
     /**
      * Returns true if both persons have the same phone or email.
