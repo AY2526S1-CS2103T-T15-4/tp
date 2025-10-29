@@ -31,7 +31,7 @@ Use this table of contents to jump to any section!
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar WiFind.jar` command to run the application. (Ensure file name matches exactly when you type it in, else it won't work.)<br>
    A GUI similar to the below should appear in a few seconds, preloaded with sample data.<br>
-   ![UIDesc](images/Ui%20Desc.png)
+   ![UIDesc](images/Ui Desc.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    [Commands](#command-summary) follow the pattern of ```command parameter/prefix value```. Here are some example commands you can try:
@@ -257,10 +257,10 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM description`
 * The description is optional
 
 Examples:
-* `list` followed by `addm 1 m/20-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
+* `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
   there are no meetings scheduled at that time for all contacts.
 
-![result for addm 1 m/20-10-2025 14:30 Project discussion](images/addmeeting-example.png)
+![result for addm 1 m/30-10-2025 14:30 Project discussion](images/addmeeting-example.png)
 
 
 ### Deleting a meeting from a person : `deletem`
