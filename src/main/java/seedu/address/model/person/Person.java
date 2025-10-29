@@ -121,6 +121,23 @@ public class Person {
     }
 
     /**
+     * Returns a new unflagged Person.
+     */
+    public Person unflag() {
+        return new Person(
+                this.getName(),
+                this.getPhone(),
+                this.getEmail(),
+                this.getCountry(),
+                this.getCompany(),
+                this.getTags(),
+                false,
+                this.getMeetings(),
+                this.getLink()
+        );
+    }
+
+    /**
      * Returns true if both persons have the same phone or email.
      * This defines a weaker notion of equality between two persons.
      */
