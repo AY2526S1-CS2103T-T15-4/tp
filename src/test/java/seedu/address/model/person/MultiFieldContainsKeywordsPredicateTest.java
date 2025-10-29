@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -108,6 +110,46 @@ public class MultiFieldContainsKeywordsPredicateTest {
         Person person = new PersonBuilder().withTags("Friends", "owesMoney").build();
         ArgumentMultimap map = new ArgumentMultimap();
         map.put(PREFIX_TAG, "colleague"); // not contained in any tag
+        MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
+        assertFalse(p.test(person));
+    }
+
+    // meetings
+    @Test
+    public void testMeetings_validKeyword_matchesTrue() {
+        Person person = new PersonBuilder().withMeetings(
+                "25-10-2025 14:30 Project meeting", "27-08-2025 08:30 Product review").build();
+        ArgumentMultimap map = new ArgumentMultimap();
+        map.put(PREFIX_MEETING, "2025-10-25T14:30"); // matches "2025-10-25 14:30 Project meeting"
+        MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
+        assertTrue(p.test(person));
+    }
+
+    @Test
+    public void testMeetings_invalidKeyword_matchesFalse() {
+        Person person = new PersonBuilder().withMeetings(
+                "25-10-2025 14:30 Project meeting", "27-08-2025 08:30 Product review").build();
+        ArgumentMultimap map = new ArgumentMultimap();
+        map.put(PREFIX_MEETING, "2024"); // not contained in any meetings
+        MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
+        assertFalse(p.test(person));
+    }
+
+    // link
+    @Test
+    public void testLink_validKeyword_matchesTrue() {
+        Person person = new PersonBuilder().withLink("https://example.com/").build();
+        ArgumentMultimap map = new ArgumentMultimap();
+        map.put(PREFIX_LINK, "exam"); // case-insensitive substring
+        MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
+        assertTrue(p.test(person));
+    }
+
+    @Test
+    public void testLink_invalidKeyword_matchesFalse() {
+        Person person = new PersonBuilder().withLink("https://example.com/").build();
+        ArgumentMultimap map = new ArgumentMultimap();
+        map.put(PREFIX_LINK, "notInside"); // not contained
         MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
         assertFalse(p.test(person));
     }
