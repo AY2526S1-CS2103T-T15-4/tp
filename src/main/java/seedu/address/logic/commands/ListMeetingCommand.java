@@ -30,7 +30,7 @@ public class ListMeetingCommand extends Command {
 
     /**
      * Creates an {@code ListMeetingCommand} to list all previous {@code Meetings}
-     *      * to the person at the provided {@code Index}.
+     * to the person at the provided {@code Index}.
      * @param targetIndex index of contact
      */
     public ListMeetingCommand(Index targetIndex) {

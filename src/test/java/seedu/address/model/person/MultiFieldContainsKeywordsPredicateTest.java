@@ -120,7 +120,7 @@ public class MultiFieldContainsKeywordsPredicateTest {
         Person person = new PersonBuilder().withMeetings(
                 "25-10-2025 14:30 Project meeting", "27-08-2025 08:30 Product review").build();
         ArgumentMultimap map = new ArgumentMultimap();
-        map.put(PREFIX_MEETING, "2025-10-25T14:30"); // matches "2025-10-25 14:30 Project meeting"
+        map.put(PREFIX_MEETING, "25 Oct 2025 14:30"); // matches "2025-10-25 14:30 Project meeting"
         MultiFieldContainsKeywordsPredicate p = new MultiFieldContainsKeywordsPredicate(map);
         assertTrue(p.test(person));
     }
