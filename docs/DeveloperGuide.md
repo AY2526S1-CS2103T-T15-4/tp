@@ -486,7 +486,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. One or more of the fields provided is of invalid format.
 
-    * 3a1. Wi-Find shows an error message.
+    * 1a1. Wi-Find shows an error message.
 
       Use case ends.
 
@@ -501,6 +501,162 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. Wi-Find warns and asks for confirmation from user to proceed with editing contact.
     * If user cancels, use case ends.
     * Else use case continues from step 2.
+
+**Use case: UC07 - Flag a contact**
+
+**Preconditions: There exists at least one person in the list**
+
+**MSS**
+
+1. User requests to flag a contact.
+2. Wi-Find flags the contact.
+3. Wi-Find displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The field provided is of invalid format.
+
+    * 1a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1b. The given identifier is invalid (no contact found).
+
+    * 1b1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1c. The contact is already flagged.
+
+    * 1c1. Wi-Find shows an error message. 
+      
+      Use case ends.
+
+**Use case: UC08 - Unflag a contact**
+
+**Preconditions: There exists at least one person in the list**
+
+**MSS**
+
+1. User requests to unflag a contact.
+2. Wi-Find unflags the contact.
+3. Wi-Find displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The field provided is of invalid format.
+
+    * 1a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1b. The given identifier is invalid (no contact found).
+
+    * 1b1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1c. The contact is already unflagged.
+
+    * 1c1. Wi-Find shows an error message.
+
+      Use case ends.
+
+**Use case: UC09 - Update a link to a contact**
+
+**Preconditions: There exists at least one person in the list**
+
+**MSS**
+
+1. User requests to update a link to a contact.
+2. Wi-Find updates the link to the contact.
+3. Wi-Find displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The field provided is of invalid format.
+
+    * 1a1. Wi-Find shows an error message.
+
+      Use case ends.
+  
+* 1b. The given identifier is invalid (no contact found).
+
+    * 1b1. Wi-Find shows an error message.
+
+      Use case ends.
+
+**Use case: UC10 - Removes a link from a contact**
+
+**Preconditions: There exists at least one person in the list**
+
+**MSS**
+
+1. User requests to remove a link from a contact.
+2. Wi-Find removes the link from the contact.
+3. Wi-Find displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The field provided is of invalid format.
+
+    * 1a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1b. The given identifier is invalid (no contact found).
+
+    * 1b1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1c. The contact does not have a link.
+
+    * 1c1. Wi-Find shows an error message.
+
+      Use case ends.
+
+**Use case: UC11 - Add a link to a contact**
+
+**Preconditions: There exists at least one person in the list**
+
+**MSS**
+
+1. User requests to add a link to a contact.
+2. Wi-Find adds the link to the contact.
+3. Wi-Find displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The field provided is of invalid format.
+
+    * 1a1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1b. The given identifier is invalid (no contact found).
+
+    * 1b1. Wi-Find shows an error message.
+
+      Use case ends.
+
+* 1c. The contact already has a link.
+
+    * 1c1. Wi-Find <u>updates the link of the contact (UC09)</u>.
+
+* 1d. The link field provided is empty.
+
+    * 1d1. Wi-Find <u>removes the link from the contact (UC10)</u>.
 
 ### Non-Functional Requirements
 
