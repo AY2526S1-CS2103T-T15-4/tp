@@ -106,7 +106,7 @@ public class Person {
     /**
      * Returns a new flagged Person.
      */
-    public Person flag() {
+    public Person withFlag() {
         return new Person(
                 this.getName(),
                 this.getPhone(),
@@ -123,7 +123,7 @@ public class Person {
     /**
      * Returns a new unflagged Person.
      */
-    public Person unflag() {
+    public Person withUnflag() {
         return new Person(
                 this.getName(),
                 this.getPhone(),
