@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
@@ -15,7 +15,9 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.model.person.Link;
+import seedu.address.model.person.Meeting;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**

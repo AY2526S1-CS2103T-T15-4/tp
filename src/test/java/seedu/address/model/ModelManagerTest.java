@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.MultiFieldContainsKeywordsPredicate;
 import seedu.address.model.person.Meeting;
-import seedu.address.model.person.MultiFieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;

@@ -1,19 +1,17 @@
 ---
 layout: page
-title: Wi-Find — Smart Contact & Meeting Manager
+title: Wi-Find - Contact & Meeting Manager
 ---
 
-<!-- Hero Section -->
 <div align="center">
 
   <h1 style="font-size:2.5em; font-weight:700; margin-bottom:0.5rem;">Wi-Find</h1>
-  <p style="font-size:1.2em; color:#555; margin-top:0;">Smart Contact & Meeting Manager for Busy Professionals</p>
+  <p style="font-size:1.2em; color:#555; margin-top:0;">Contact & Meeting Manager for Busy Professionals</p>
 
 </div>
 
 ---
 
-<!-- Feature Highlights -->
 ## Why Wi-Find?
 
 Wi-Find helps you stay effortlessly connected - manage contacts, track meetings, and flag important people, all from one simple interface.
@@ -30,7 +28,6 @@ Wi-Find helps you stay effortlessly connected - manage contacts, track meetings,
 
 ---
 
-<!-- Quick Links -->
 ## Get Started
 
 - [User Guide](https://ay2526s1-cs2103t-t15-4.github.io/tp/UserGuide.html) - Learn how to install and use Wi-Find

@@ -56,21 +56,21 @@ Some quick notes regarding how commands work:
 - Emails are automatically lowercased.
 - User confirmation required to add duplicate contacts.
 
-| Action                                                                                                                       | Description                           | Format, Examples                                                                                                                                                                     |
-|------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-person-add)**                                                                                              | Adds contact                          | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague`     |
-| **[Edit](#editing-a-person--edit)**                                                                                          | Edits specified contact               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
-| **[Delete](#deleting-a-person--delete)**                                                                                     | Deletes specified contact             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                  |
-| **[List](#listing-all-persons--list)**                                                                                       | List all contacts                     | `list`                                                                                                                                                                               |
-| **[Find](#locating-persons-by-name-find)**                                                                                   | Filters contacts based on keyword     | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                        |
-| **[Flag](#flagging-a-person--flag)**                                                                                         | Flags contact                         | `flag INDEX`                                                                                                                                                                         |
-| **[Unflag](#unflagging-a-person--unflag)**                                                                                   | Unflags contact                       | `unflag INDEX`                                                                                                                                                                       |
-| **[Add Meeting](#adding-a-meeting-to-a-person--addm)**                                                                       | Add Meeting to a contact              | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm m/12-02-2020 12:30 Project Star`                                                                                         |
-| **[Delete Meeting](#deleting-a-meeting-from-a-person--deletem)**                                                             | Delete Meeting from a contact         | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem m/12-02-2020 12:30`                                                                                                            |
-| **[List Meeting](#list-previous-meetings-of-a-person--listm)**                                                               | List past meetings of contact         | `listm INDEX`                                                                                                                                                                        |
-| **[Link](#adding-a-link-to-a-person--link)**                                                                                 | Adds/Updates/Removes a link           | `link INDEX LINK`                                                                                                                                                                    |
-| **[Clear](#clearing-all-entries--clear)**                                                                                    | Clears contacts                       | `clear`                                                                                                                                                                              |
-| **[Help](#viewing-help--help)**                                                                                              | Displays help window                  | `help`                                                                                                                                                                               |
+| Action                                                                                                                       | Description                           | Format, Examples                                                                                                                                                                 |
+|------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-person-add)**                                                                                              | Adds contact                          | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
+| **[Edit](#editing-a-person--edit)**                                                                                          | Edits specified contact               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] {t/TAG}…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
+| **[Delete](#deleting-a-person--delete)**                                                                                     | Deletes specified contact             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
+| **[List](#listing-all-persons--list)**                                                                                       | List all contacts                     | `list`                                                                                                                                                                           |
+| **[Find](#locating-persons-by-name-find)**                                                                                   | Filters contacts based on keyword     | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                    |
+| **[Flag](#flagging-a-person--flag)**                                                                                         | Flags contact                         | `flag INDEX`                                                                                                                                                                     |
+| **[Unflag](#unflagging-a-person--unflag)**                                                                                   | Unflags contact                       | `unflag INDEX`                                                                                                                                                                   |
+| **[Add Meeting](#adding-a-meeting-to-a-person--addm)**                                                                       | Add Meeting to a contact              | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm 1 m/12-02-2020 12:30 Project Star`                                                                                   |
+| **[Delete Meeting](#deleting-a-meeting-from-a-person--deletem)**                                                             | Delete Meeting from a contact         | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem 1 m/12-02-2020 12:30`                                                                                                      |
+| **[List Meeting](#list-previous-meetings-of-a-person--listm)**                                                               | List past meetings of contact         | `listm INDEX`                                                                                                                                                                    |
+| **[Link](#adding-a-link-to-a-person--link)**                                                                                 | Adds/Updates/Removes a link           | `link INDEX LINK`                                                                                                                                                                |
+| **[Clear](#clearing-all-entries--clear)**                                                                                    | Clears contacts                       | `clear`                                                                                                                                                                          |
+| **[Help](#viewing-help--help)**                                                                                              | Displays help window                  | `help`                                                                                                                                                                           |
 
 ## Features
 
@@ -81,11 +81,11 @@ Commands in Wi-Find follow a flexible format as described below.
 * **Parameters:** Words in `UPPER_CASE` are placeholders for your input.
   - Example: `add n/Name` → use as `add n/John Doe`
 
-* **Optional items:** Square brackets `[ ]` indicate optional parameters.
-  - Example: `n/NAME [t/TAG]` → use as `n/John Doe t/friend` or just `n/John Doe`
+* **Optional items:** Squiggly brackets `{ }` indicate optional parameters.
+  - Example: `n/NAME {t/TAG}` → use as `n/John Doe t/friend` or just `n/John Doe`
 
 * **Multiple items:** `...` means a parameter can be repeated (including zero times unless stated otherwise).
-  - Example: `[t/TAG]...` → use as nothing, `t/friend`, or `t/friend t/family`
+  - Example: `{t/TAG}...` → use as nothing, `t/friend`, or `t/friend t/family`
 
 * **Parameter order:** Parameters can appear in any order.
   - Example: `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` both work
@@ -124,7 +124,7 @@ If you don't see the Help window, check if it's minimized (see <a href="#known-i
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
 - Alphanumerics and special characters are allowed in NAME as well as the [local-part](https://en.wikipedia.org/wiki/Email_address#Local-part) of EMAIL.
 <div markdown="span" class="alert alert-primary">
@@ -162,7 +162,7 @@ This feature helps prevent accidental duplicates while allowing you to intention
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COUNTRY] [com/COMPANY] {t/TAG}…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -219,6 +219,7 @@ Format: `find PARAMETER/[KEYWORD]...`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * PARAMETER is any of the fields when adding a contact.
 * Multiple keywords under the same parameter works like `OR` search, while keywords across multiple parameters works like `AND` search. For example, `find n/Alex n/Bob c/Singapore` will display all contacts whose name includes 'Alex' OR 'Bob', AND has 'Singapore' under country parameter.
+* When searching for meetings, use `DD MMM YYYY HH:MM <Description>` format, as displayed on the contact list.
 
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**<br>
@@ -243,8 +244,8 @@ Format: `flag INDEX`
 
 Examples:
 * `list` followed by `flag 2` flags the 2nd person in the address book given that the contact is unflagged.
-* `find n/Betsy` followed by 'flag 1' flags the 1st person in the result of the `find` command.
-  ![result for 'flag 1'](images/flagCommand.png)
+* `find n/Alex` followed by 'flag 1' flags the 1st person in the result of the `find` command.
+  ![result for 'flag 1'](images/flag-example.png)
 
 ### Unflagging a person : `unflag`
 
@@ -259,7 +260,7 @@ Format: `unflag INDEX`
 
 Examples:
 * `list` followed by `unflag 2` unflags the 2nd person in the address book given that the contact is flagged.
-* `find n/Betsy` followed by 'unflag 1' unflags the 1st person in the result of the `find` command.
+* `find n/Alex` followed by 'unflag 1' unflags the 1st person in the result of the `find` command.
   ![result for 'unflag 1'](images/unflagCommand.png)
 
 ### Adding a meeting to a person : `addm`
@@ -269,13 +270,13 @@ Adds a meeting to the person.
 Format `addm INDEX m/dd-MM-YYYY HH:MM description`
 
 * Adds a meeting to the person at the specified `INDEX`.
-* If there already exists a meeting with any person in Wi-Find, an error message will be shown.
+* If there already exists a meeting with any person in Wi-Find, confirmation will be required by the user, similar to add.
 * The index refers to the index number shown in the displayed person list
 * The index **must be a positive integer** 1, 2, 3, …​
 * The meeting time provided must follow the format dd-MM-YYYY HH:MM
 * The description is optional
 * Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using 
-  localtime, hence it is highly recommended to put meetings in your local time.
+  your local time, hence it is highly recommended to put meetings in your local time.
 * Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
 
 Examples:
@@ -312,6 +313,8 @@ Format: `listm INDEX`
 Example:
 ![listm example](images/ListMeetingCommand%20example.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a link to a person : `link`
 
 Adds a link to the specified person from the address book.
@@ -327,8 +330,10 @@ Format: `link INDEX LINK`
 
 Examples:
 * `list` followed by `link 2` removes the link from the 2nd person listed in the address book given that the contact has a link previously.
-* `find n/Betsy` followed by `link 1 https://betsy.com/123` adds the link to the 1st person in the result of the `find` command.
-  ![result for 'link 1 https://betsy.com/123'](images/linkCommand.png)
+* `find n/Alex` followed by `link 1 https://example.com` adds the link to the 1st person in the result of the `find` command.
+  ![result for 'link 1 https://example.com/'](images/linkCommand.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 

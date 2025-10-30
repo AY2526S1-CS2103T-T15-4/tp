@@ -4,12 +4,22 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project was adapted from the [AddressBook-Level3 (AB3)](https://github.com/se-edu/addressbook-level3) project by the [SE-EDU initiative](https://se-education.org/).
+  We thank the SE-EDU teaching team for providing the foundational architecture, testing framework, and documentation templates used in Wi-Find.
+
+* This project also uses the following open-source libraries and tools:
+  - [JavaFX](https://openjfx.io/) - for building the Graphical User Interface (GUI).
+  - [Jackson](https://github.com/FasterXML/jackson) - for JSON serialization and deserialization. 
+  - [JUnit 5](https://junit.org/junit5/) - for automated testing. 
+  - [Java 17 SDK](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) - for compiling and running the program. 
+  - [Checkstyle](https://checkstyle.sourceforge.io/) - for enforcing consistent coding style. 
+  - [Gradle](https://gradle.org/) - for build automation and dependency management. 
+  - [GitHub Actions](https://github.com/features/actions) - for Continuous Integration (CI) testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -66,6 +76,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -101,10 +113,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -114,10 +126,12 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="650" />
 
 
 The `Model` component,
@@ -155,90 +169,12 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Duplicate checking for person
+Wi-find checks for Duplicates using email and phone number. If either of these already exist in the database, they are considered duplicates. Duplicate checking is checked in the Person class using the isSamePerson() method, and is handled in respective parsers by asking for confirmation.
 
-#### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
+### Find command supporting multiple variables
+Find command in Wi-Find supports filtering across multiple parameters. If two or more keywords of the same type of parameters are present, it works like a ‘OR’ search, displaying the contact as long as one of the keywords are present. For keywords of different parameters, it works like ‘AND’ search, where the contact is displayed only when all of the conditions are satisfied across the parameters.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,25 +210,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​        | I want to …​                                     | So that I can…​                                         |
 |----------|----------------|--------------------------------------------------|---------------------------------------------------------|
-| * * *    | user           | add new contacts with their relevant information | check and contact relevant personnel when necessary.    |
-| * * *    | user           | delete a person                                  | remove contacts that I no longer need.                  |
-| * * *    | user           | save and read contacts on shutdown/startup       | maintain contact information across instances of usage. |
-| * * *    | busy user      | search contacts by company                       | sift through contacts easily.                           |
-| * * *    | user           | add meetings to clients                          | be reminded of our next meeting.                        |
-| * * *    | user           | delete past meetings                             | de-clutter the contact list.                            |
-| * *      | user           | check client's local time zone                   | contact them at appropriate times.                      |
-| * *      | user           | edit my contacts                                 | update client information easily.                       |
-| * *      | user           | attach tags to clients                           | recall connections to the client.                       |
-| * *      | user           | get alerts for clashing meetings                 | prevent double booking.                                 |
-| * *      | user           | search contacts by country                       | contact groups of people under the filter               |
-| * *      | user           | search contacts by tag                           | contact groups of people under the filter.              |
-| * *      | user           | search contacts by name                          | contact groups of people under the filter.              |
-| * *      | user           | Search contacts by phone number                  | contact groups of people under the filter.              |
-| *        | user           | attach links to clients                          | go to their websites easily.                            |
-| *        | user           | flag some clients                                | quickly find them in the list.                          |
-| *        | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
-| *        | impatient user | see my frequently contacted users                | save time.                                              |
-| *        | user           | auto-convert meeting times into my timezone      | prevent making scheduling mistakes.                     |
+| `* * *`    | user           | add new contacts with their relevant information | check and contact relevant personnel when necessary.    |
+| `* * *`    | user           | delete a person                                  | remove contacts that I no longer need.                  |
+| `* * *`    | user           | save and read contacts on shutdown/startup       | maintain contact information across instances of usage. |
+| `* * *`    | busy user      | search contacts by company                       | sift through contacts easily.                           |
+| `* * *`    | user           | add meetings to clients                          | be reminded of our next meeting.                        |
+| `* * *`    | user           | delete past meetings                             | de-clutter the contact list.                            |
+| `* *`      | user           | check client's local time zone                   | contact them at appropriate times.                      |
+| `* *`      | user           | edit my contacts                                 | update client information easily.                       |
+| `* *`      | user           | attach tags to clients                           | recall connections to the client.                       |
+| `* *`      | user           | get alerts for clashing meetings                 | prevent double booking.                                 |
+| `* *`      | user           | search contacts by country                       | contact groups of people under the filter               |
+| `* *`      | user           | search contacts by tag                           | contact groups of people under the filter.              |
+| `* *`      | user           | search contacts by name                          | contact groups of people under the filter.              |
+| `* *`      | user           | Search contacts by phone number                  | contact groups of people under the filter.              |
+| `*`        | user           | attach links to clients                          | go to their websites easily.                            |
+| `*`        | user           | flag some clients                                | quickly find them in the list.                          |
+| `*`        | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
+| `*`        | impatient user | see my frequently contacted users                | save time.                                              |
+| `*`        | user           | auto-convert meeting times into my timezone      | prevent making scheduling mistakes.                     |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -689,8 +627,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: An individual or entity whose information (e.g. name, phone number, email, company) is stored in the app.
+* **Meeting**: A scheduled appointment associated with a specific contact, containing date, time, and optional description.
+* **Tag**: A keyword or label that can be attached to contacts to group them (e.g. “Investor”, “Client”, “Overseas”).
+* **Link**: A web or file reference (e.g. LinkedIn profile, company site) attached to a contact.
+* **Field**: A specific piece of information within a contact’s record (e.g. name, phone, email).
+* **Identifier**: A unique value (usually index or name) used to reference a contact when executing commands.
+* **Command**: A textual instruction entered by the user in the command line to perform an action. (e.g. add, delete, edit)
+* **Command Result**: The response or feedback shown after executing a command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -707,16 +654,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -724,21 +669,96 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a person
 
-### Saving data
+1. Adding a person
 
-1. Dealing with missing/corrupted data files
+   1. Test case: `add n/Joe Lim p/12345678 e/Joe@google.com c/Singapore com/Starbucks t/friend` <br>
+      Expected: New contact created with Name: Joe Lim, Phone: 12345678, Email: Joe@google.com, Country: Singapore, Company: Starbucks, tags: [friend]
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   2. Test case: `add n/Joe Lim p/12345678 e/Joe@google.com c/Singapore com/Starbucks t/friend` followed by `add n/Jacky Loh p/12345678 e/Jacky@google.com c/China com/Taobao t/supplier` <br>
+      Expected: Wi-Find warns about duplicate persons already existing in the database. Enter y to confirm addition or any other input to cancel
 
-1. _{ more test cases …​ }_
+   3. Test case: `add n/Joe Lim p/12 e/Joe@google.com c/Singapore com/Starbucks t/friend`<br>
+      Expected: Wi-Find displays error message as phone number needs to be at least 3 characters long
+
+   4. Other incorrect add commands to try: `add n/Joe Lim p/12345678 e/Joe c/Singapore com/Starbucks t/friend`, `add n/ p/12345678 e/Joe@google.com c/Singapore com/Starbucks t/friend`, `add n/Joe Lim p/12345678 e/Joe@google.com c/Singapore! com/Starbucks t/friend`<br>
+      Expected: Wi-Find displays an error for fields that are wrong or missing .
+
+### Finding a person
+
+1. Finding with a single keyword
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, including a person with name: Jake phone: 12345678 email: jake@example.com country: Singapore company: Google. Can be added with command `add n/Jake p/12345678 e/jake@example.com c/Singapore com/Google`.
+
+   2. Test case: `find n/Jake`<br>
+      Expected: All contacts with `Jake` under the name parameter will be displayed.
+
+   3. Test case: `find y/Jake`<br>
+      Expected: Wi-Find displays an error message as an invalid prefix is provided.
+
+2. Finding with multiple keywords
+
+   1. Prerequisites: Same as `Finding with a single keyword`.
+
+   2. Test case: `find n/Jake n/Bob c/Singapore`<br>
+      Expected: All contacts with `Jake` or `Bob` under the name parameter and has `Singapore` under the country parameter will be displayed.
+
+   3. Test case: `find n/Jake Bob c/Singapore`
+      Expected: All contacts with `Jake Bob` under the name parameter and has `Singapore` under the country parameter will be displayed. `Jake` added on prerequisites will not be displayed, as the name parameter must specifically include `Jake Bob` in their name.
+
+### Flagging a person
+
+1. Flagging a person
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list and they are all unflagged.
+
+   2. Test case: `flag 0`<br>
+      Expected: No contact is flagged. Error details shown in the status message.
+
+   3. Other incorrect flag commands to try: `flag`, `flag x` (where x is larger than the list size)<br>
+
+
+
+## **Appendix B - Effort**
+
+Team size: 5
+
+Challenges faced: With a more narrow target audience, our project had to cater harder specific features targeted to this audience unlike AB3 which had a broad audience with basic features. We had to make sure contact information is both easy to understand and information dense to improve convenience.
+
+What was reused:
+
+1. AB3 Command-commandParser structure
+2. AB3 Model and Model-Manager
+3. AB3 Storage
+4. AB3 UI design choice
+5. AB3 JUnit tests unaffected by our changes
+
+Achievements:
+
+1. Country and Company attributes added to contacts.
+2. Added correct duplicate handling, AB3 used names as unique identifiers, while we used phone numbers and email.
+3. Added confirmable commands, to allow users to add duplicates, while still warning them that there already are contacts with the respective phone or email in the database.
+4. Added links, flags and meetings to a contacts field.
+5. Updated Find command to support searching across multiple parameters and searching by substrings.
+6. Updated Add command to accept alphanumeric characters for name and email.
+7. Included special prefix ‘[ prefix/]’ in CRUD commands to allow prefixes as inputs.
+8. Tags and emails are now lowercase regardless of input.
+9. Tags are now limited to 32 characters.
+
+## **Planned Enhancements**
+- Upcoming meetings listed should be sorted.
+- Implement correct parsing of leap years.
+- Add more countries to timezonemapper.
+- Fix link and edit command to not reset the filtered list back to unfiltered list after execution.
+- Allow filtering of flagged contacts.
+- Implement compatibility for meetings in dd-mm-yyyy in find command instead of just dd mmm yyyy.

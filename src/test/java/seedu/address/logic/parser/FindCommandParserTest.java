@@ -16,7 +16,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.MultiFieldContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
