@@ -56,22 +56,21 @@ Some quick notes regarding how commands work:
 - Emails are automatically lowercased.
 - User confirmation required to add duplicate contacts.
 
-| Action                                       | Description                       | Format, Examples                                                                                                                                                                 |
-|----------------------------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-person-add)**              | Adds contact                      | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
-| **[Clear](#clearing-all-entries--clear)**    | Clears contacts                   | `clear`                                                                                                                                                                          |
-| **[Delete](#deleting-a-person--delete)**     | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
-| **[Edit](#editing-a-person--edit)**          | Edits specified contact           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **[Find](#locating-persons-by-name-find)**   | Filters contacts based on keyword | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                    |
-| **[Flag](#flagging-a-person--flag)**         | Flags contact                     | `flag INDEX`                                                                                                                                                                     |
-| **[Unflag](#unflagging-a-person--unflag)**   | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
-| **[List](#listing-all-persons--list)**       | List all contacts                 | `list`                                                                                                                                                                           |
-| **[Help](#viewing-help--help)**              | Displays help window              | `help`                                                                                                                                                                           |
-| **[Add Meeting](#)**                         | Add Meeting to a contact          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm m/12-02-2020 12:30 Project Star`                                                                                     |
-| **[Delete Meeting](#)**                      | Delete Meeting from a contact     | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem m/12-02-2020 12:30`                                                                                                        |
-| **[Link](#adding-a-link-to-a-person--link)** | Adds/Updates/Removes a link       | `link INDEX LINK`                                                                                                                                                                |
-
---------------------------------------------------------------------------------------------------------------------
+| Action                                                                                                                       | Description                           | Format, Examples                                                                                                                                                                     |
+|------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-person-add)**                                                                                              | Adds contact                          | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague`     |
+| **[Edit](#editing-a-person--edit)**                                                                                          | Edits specified contact               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
+| **[Delete](#deleting-a-person--delete)**                                                                                     | Deletes specified contact             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                  |
+| **[List](#listing-all-persons--list)**                                                                                       | List all contacts                     | `list`                                                                                                                                                                               |
+| **[Find](#locating-persons-by-name-find)**                                                                                   | Filters contacts based on keyword     | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                        |
+| **[Flag](#flagging-a-person--flag)**                                                                                         | Flags contact                         | `flag INDEX`                                                                                                                                                                         |
+| **[Unflag](#unflagging-a-person--unflag)**                                                                                   | Unflags contact                       | `unflag INDEX`                                                                                                                                                                       |
+| **[Add Meeting](#adding-a-meeting-to-a-person--addm)**                                                                       | Add Meeting to a contact              | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm m/12-02-2020 12:30 Project Star`                                                                                         |
+| **[Delete Meeting](#deleting-a-meeting-from-a-person--deletem)**                                                             | Delete Meeting from a contact         | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem m/12-02-2020 12:30`                                                                                                            |
+| **[List Meeting](#list-previous-meetings-of-a-person--listm)**                                                               | List past meetings of contact         | `listm INDEX`                                                                                                                                                                        |
+| **[Link](#adding-a-link-to-a-person--link)**                                                                                 | Adds/Updates/Removes a link           | `link INDEX LINK`                                                                                                                                                                    |
+| **[Clear](#clearing-all-entries--clear)**                                                                                    | Clears contacts                       | `clear`                                                                                                                                                                              |
+| **[Help](#viewing-help--help)**                                                                                              | Displays help window                  | `help`                                                                                                                                                                               |
 
 ## Features
 
@@ -159,12 +158,6 @@ When you attempt to add a contact that shares a phone number or email with an ex
 This feature helps prevent accidental duplicates while allowing you to intentionally add contacts with shared phone numbers or emails (e.g., family members sharing a phone, employees sharing a company email).
 </div>
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -188,6 +181,32 @@ Editing phone/email of contacts can trigger duplicate detection as well.<br>
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+### Deleting a person : `delete`
+
+Deletes the specified person from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">
+:exclamation: **Note:**
+This action cannot be undone!
+</div>
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
 
 ### Locating persons by name: `find`
 
@@ -259,9 +278,7 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM description`
 Examples:
 * `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
   there are no meetings scheduled at that time for all contacts.
-
-![result for addm 1 m/30-10-2025 14:30 Project discussion](images/addmeeting-example.png)
-
+  ![result for addm 1 m/30-10-2025 14:30 Project discussion](images/addmeeting-example.png)
 
 ### Deleting a meeting from a person : `deletem`
 
@@ -278,8 +295,19 @@ Format `deletem INDEX m/dd-MM-YYYY HH:MM`
 Examples:
 * `list` followed by `deletem 1 m/20-10-2025 14:30` deletes a meeting from the first contact, given that there exists 
   a meeting at that date and time for that contact.
+  ![result for deletem 1 m/20-10-2025 14:30](images/DeleteMeetingCommandExample.png)
 
-![result for deletem 1 m/20-10-2025 14:30](images/DeleteMeetingCommandExample.png)
+### List previous meetings of a person : `listm`
+
+Lists all past meetings with specified person.
+
+Format: `listm INDEX`
+
+* The index refers to the index number shown in the displayed person list
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+![listm example](images/ListMeetingCommand%20example.png)
 
 ### Adding a link to a person : `link`
 
@@ -298,25 +326,6 @@ Examples:
 * `list` followed by `link 2` removes the link from the 2nd person listed in the address book given that the contact has a link previously.
 * `find n/Betsy` followed by `link 1 https://betsy.com/123` adds the link to the 1st person in the result of the `find` command.
   ![result for 'link 1 https://betsy.com/123'](images/linkCommand.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-<div markdown="span" class="alert alert-primary">
-:exclamation: **Note:**
-This action cannot be undone!
-</div>
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -370,7 +379,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues (as of v1.3)
+## Known issues (as of v1.5)
 
 Issue 1: **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
 Solution 1: The remedy is to delete the `preferences.json` file created by the application before running the application again.
