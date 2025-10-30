@@ -58,8 +58,8 @@ Some quick notes regarding how commands work:
 
 | Action                                                                                                                       | Description                           | Format, Examples                                                                                                                                                                 |
 |------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-person-add)**                                                                                              | Adds contact                          | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
-| **[Edit](#editing-a-person--edit)**                                                                                          | Edits specified contact               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
+| **[Add](#adding-a-person-add)**                                                                                              | Adds contact                          | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
+| **[Edit](#editing-a-person--edit)**                                                                                          | Edits specified contact               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] {t/TAG}…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
 | **[Delete](#deleting-a-person--delete)**                                                                                     | Deletes specified contact             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
 | **[List](#listing-all-persons--list)**                                                                                       | List all contacts                     | `list`                                                                                                                                                                           |
 | **[Find](#locating-persons-by-name-find)**                                                                                   | Filters contacts based on keyword     | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                    |
@@ -81,11 +81,11 @@ Commands in Wi-Find follow a flexible format as described below.
 * **Parameters:** Words in `UPPER_CASE` are placeholders for your input.
   - Example: `add n/Name` → use as `add n/John Doe`
 
-* **Optional items:** Square brackets `[ ]` indicate optional parameters.
-  - Example: `n/NAME [t/TAG]` → use as `n/John Doe t/friend` or just `n/John Doe`
+* **Optional items:** Squiggly brackets `{ }` indicate optional parameters.
+  - Example: `n/NAME {t/TAG}` → use as `n/John Doe t/friend` or just `n/John Doe`
 
 * **Multiple items:** `...` means a parameter can be repeated (including zero times unless stated otherwise).
-  - Example: `[t/TAG]...` → use as nothing, `t/friend`, or `t/friend t/family`
+  - Example: `{t/TAG}...` → use as nothing, `t/friend`, or `t/friend t/family`
 
 * **Parameter order:** Parameters can appear in any order.
   - Example: `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` both work
@@ -124,7 +124,7 @@ If you don't see the Help window, check if it's minimized (see <a href="#known-i
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
 - Alphanumerics and special characters are allowed in NAME as well as the [local-part](https://en.wikipedia.org/wiki/Email_address#Local-part) of EMAIL.
 <div markdown="span" class="alert alert-primary">
@@ -162,7 +162,7 @@ This feature helps prevent accidental duplicates while allowing you to intention
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COUNTRY] [com/COMPANY] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COUNTRY] [com/COMPANY] {t/TAG}…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
