@@ -165,11 +165,11 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### **Duplicate checking for person**
+### Duplicate checking for person
 Wi-find checks for Duplicates using email and phone number. If either of these already exist in the database, they are considered duplicates. Duplicate checking is checked in the Person class using the isSamePerson() method, and is handled in respective parsers by asking for confirmation.
 
 
-### **Find command supporting multiple variables**
+### Find command supporting multiple variables
 Find command in Wi-Find supports filtering across multiple parameters. If two or more keywords of the same type of parameters are present, it works like a ‘OR’ search, displaying the contact as long as one of the keywords are present. For keywords of different parameters, it works like ‘AND’ search, where the contact is displayed only when all of the conditions are satisfied across the parameters.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -754,4 +754,4 @@ Achievements:
 - Add more countries to timezonemapper.
 - Fix link and edit command to not reset the filtered list back to unfiltered list after execution.
 - Allow filtering of flagged contacts.
-- Implement compatibility for meetings in dd-mm-yyyy in find command instead of just dd-mmm-yyyy.
+- Implement compatibility for meetings in dd-mm-yyyy in find command instead of just dd mmm yyyy.
