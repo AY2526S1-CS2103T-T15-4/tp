@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.model.Model;
 import seedu.address.logic.parser.MultiFieldContainsKeywordsPredicate;
+import seedu.address.model.Model;
 
 /**
  * Finds and lists all persons in address book whose specified parameter contains any of the argument keywords.
