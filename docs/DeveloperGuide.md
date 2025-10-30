@@ -187,7 +187,6 @@ Find command in Wi-Find supports filtering across multiple parameters. If two or
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
