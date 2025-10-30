@@ -219,6 +219,7 @@ Format: `find PARAMETER/[KEYWORD]...`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * PARAMETER is any of the fields when adding a contact.
 * Multiple keywords under the same parameter works like `OR` search, while keywords across multiple parameters works like `AND` search. For example, `find n/Alex n/Bob c/Singapore` will display all contacts whose name includes 'Alex' OR 'Bob', AND has 'Singapore' under country parameter.
+* When searching for meetings, use `DD MMM YYYY HH:MM <Description>` format, as displayed on the contact list.
 
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**<br>
