@@ -47,17 +47,7 @@ public class FlagCommand extends Command {
             throw new CommandException(MESSAGE_ALREADY_FLAGGED);
         }
 
-        Person flaggedPerson = new Person(
-                personToFlag.getName(),
-                personToFlag.getPhone(),
-                personToFlag.getEmail(),
-                personToFlag.getCountry(),
-                personToFlag.getCompany(),
-                personToFlag.getTags(),
-                true,
-                personToFlag.getMeetings(),
-                null
-        );
+        Person flaggedPerson = personToFlag.flag();
 
         assert flaggedPerson.isFlagged() : "Flagged person should have isFlagged=true";
         model.setPerson(personToFlag, flaggedPerson);

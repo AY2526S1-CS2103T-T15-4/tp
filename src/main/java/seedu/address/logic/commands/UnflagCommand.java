@@ -47,17 +47,7 @@ public class UnflagCommand extends Command {
             throw new CommandException(MESSAGE_ALREADY_UNFLAGGED);
         }
 
-        Person unflaggedPerson = new Person(
-                personToUnflag.getName(),
-                personToUnflag.getPhone(),
-                personToUnflag.getEmail(),
-                personToUnflag.getCountry(),
-                personToUnflag.getCompany(),
-                personToUnflag.getTags(),
-                false,
-                personToUnflag.getMeetings(),
-                null
-        );
+        Person unflaggedPerson = personToUnflag.unflag();
 
         model.setPerson(personToUnflag, unflaggedPerson);
         return new CommandResult(String.format(MESSAGE_UNFLAG_PERSON_SUCCESS, Messages.format(personToUnflag)));
