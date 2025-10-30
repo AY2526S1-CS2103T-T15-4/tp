@@ -323,8 +323,6 @@ Format: `listm INDEX`
 Example:
 ![listm example](images/ListMeetingCommand%20example.png)
 
-<div style="page-break-after: always;"></div>
-
 ### Adding a link to a person : `link`
 
 Adds a link to the specified person from the address book.
