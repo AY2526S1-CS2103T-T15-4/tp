@@ -313,6 +313,8 @@ Format: `listm INDEX`
 Example:
 ![listm example](images/ListMeetingCommand%20example.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a link to a person : `link`
 
 Adds a link to the specified person from the address book.
@@ -330,6 +332,8 @@ Examples:
 * `list` followed by `link 2` removes the link from the 2nd person listed in the address book given that the contact has a link previously.
 * `find n/Alex` followed by `link 1 https://example.com` adds the link to the 1st person in the result of the `find` command.
   ![result for 'link 1 https://example.com/'](images/linkCommand.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -366,6 +370,8 @@ Furthermore, certain edits can cause Wi-Find to behave in unexpected ways (e.g.,
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
