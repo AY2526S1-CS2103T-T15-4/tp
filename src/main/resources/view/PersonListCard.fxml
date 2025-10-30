@@ -38,7 +38,7 @@
       <Label fx:id="company" styleClass="cell_small_label" text="\$company" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="link" styleClass="link-label" text="\$link" />
-      <Label text="Meetings (In local time):" styleClass="cell_small_label" />
+      <Label text="Upcoming meetings (Based on local time):" styleClass="cell_small_label" />
       <VBox fx:id="meetings" spacing="2" />    </VBox>
     <VBox alignment="TOP_RIGHT" minWidth="80" GridPane.columnIndex="1">
       <padding>

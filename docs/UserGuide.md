@@ -276,6 +276,7 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM description`
 * The description is optional
 * Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using 
   localtime, hence it is highly recommended to put meetings in your local time.
+* Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
 
 Examples:
 * `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
