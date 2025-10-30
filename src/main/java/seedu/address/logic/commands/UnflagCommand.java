@@ -47,10 +47,10 @@ public class UnflagCommand extends Command {
             throw new CommandException(MESSAGE_ALREADY_UNFLAGGED);
         }
 
-        Person unflaggedPerson = personToUnflag.unflag();
+        Person unflaggedPerson = personToUnflag.withUnflag();
 
         model.setPerson(personToUnflag, unflaggedPerson);
-        return new CommandResult(String.format(MESSAGE_UNFLAG_PERSON_SUCCESS, Messages.format(personToUnflag)));
+        return new CommandResult(String.format(MESSAGE_UNFLAG_PERSON_SUCCESS, Messages.format(unflaggedPerson)));
     }
 
     @Override

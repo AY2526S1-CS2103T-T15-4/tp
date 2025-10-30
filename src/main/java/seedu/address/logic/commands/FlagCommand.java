@@ -47,12 +47,12 @@ public class FlagCommand extends Command {
             throw new CommandException(MESSAGE_ALREADY_FLAGGED);
         }
 
-        Person flaggedPerson = personToFlag.flag();
+        Person flaggedPerson = personToFlag.withFlag();
 
         assert flaggedPerson.isFlagged() : "Flagged person should have isFlagged=true";
         model.setPerson(personToFlag, flaggedPerson);
 
-        return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, Messages.format(personToFlag)));
+        return new CommandResult(String.format(MESSAGE_FLAG_PERSON_SUCCESS, Messages.format(flaggedPerson)));
     }
 
     @Override
