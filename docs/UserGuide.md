@@ -371,8 +371,6 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## FAQ
 
 **Q**: How do I check my Java version?<br>
