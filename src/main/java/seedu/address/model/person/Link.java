@@ -9,12 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Link {
 
+    public static final int LENGTH_LIMIT = 255;
     public static final String MESSAGE_CONSTRAINTS = "Links should adhere to the following constraints:\n"
             + "1. Must start with 'http://' or 'https://'.\n"
             + "2. The domain name must consist of alphanumeric characters and hyphens, "
             + "and end with a top-level domain (TLD) of at least 2 letters (e.g., '.com', '.sg').\n"
             + "3. May optionally include a port number (e.g., ':8080').\n"
-            + "4. May include an optional path, query, or fragment, containing common URL-safe characters.";
+            + "4. May include an optional path, query, or fragment, containing common URL-safe characters.\n"
+            + "5. Length of link should not exceed " + LENGTH_LIMIT + " characters.";
     public static final String VALIDATION_REGEX;
 
     private static final String URL_SAFE_CHARACTERS = "\\w\\-._~:/?#@!$&'()*+,;=%";
@@ -46,7 +48,7 @@ public class Link {
      * Returns if a given string is a valid link.
      */
     public static boolean isValidLink(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= LENGTH_LIMIT;
     }
 
     @Override
