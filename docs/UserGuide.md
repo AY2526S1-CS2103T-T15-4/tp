@@ -276,7 +276,7 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM description`
 * The meeting time provided must follow the format dd-MM-YYYY HH:MM
 * The description is optional
 * Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using 
-  localtime, hence it is highly recommended to put meetings in your local time.
+  your local time, hence it is highly recommended to put meetings in your local time.
 * Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
 
 Examples:
