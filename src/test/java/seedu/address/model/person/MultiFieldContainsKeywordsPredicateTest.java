@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.MultiFieldContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 
 
