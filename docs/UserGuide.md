@@ -274,7 +274,7 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM description`
 * The index **must be a positive integer** 1, 2, 3, …​
 * The meeting time provided must follow the format dd-MM-YYYY HH:MM
 * The description is optional
-* Meeting times will be displayed as you input it, Wi-Find will determine whether it has already past using 
+* Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using 
   localtime, hence it is highly recommended to put meetings in your local time.
 
 Examples:
