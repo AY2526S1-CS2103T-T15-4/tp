@@ -269,11 +269,14 @@ Adds a meeting to the person.
 Format `addm INDEX m/dd-MM-YYYY HH:MM description`
 
 * Adds a meeting to the person at the specified `INDEX`.
-* If there already exists a meeting with any person in the addressbook, an error message will be shown.
+* If there already exists a meeting with any person in Wi-Find, an error message will be shown.
 * The index refers to the index number shown in the displayed person list
 * The index **must be a positive integer** 1, 2, 3, …​
 * The meeting time provided must follow the format dd-MM-YYYY HH:MM
 * The description is optional
+* Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using 
+  localtime, hence it is highly recommended to put meetings in your local time.
+* Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
 
 Examples:
 * `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
