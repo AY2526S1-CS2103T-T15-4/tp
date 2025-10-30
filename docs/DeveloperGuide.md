@@ -28,6 +28,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -95,6 +96,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -141,12 +144,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -164,6 +162,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -177,6 +176,7 @@ Wi-find checks for Duplicates using email and phone number. If either of these a
 Find command in Wi-Find supports filtering across multiple parameters. If two or more keywords of the same type of parameters are present, it works like a ‘OR’ search, displaying the contact as long as one of the keywords are present. For keywords of different parameters, it works like ‘AND’ search, where the contact is displayed only when all of the conditions are satisfied across the parameters.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -187,6 +187,7 @@ Find command in Wi-Find supports filtering across multiple parameters. If two or
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -596,6 +597,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1d1. Wi-Find <u>removes the link from the contact (UC10)</u>.
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1.  Environment Requirements
@@ -622,6 +625,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7.  Reliability Requirements
     - The system should not crash under normal usage (adding, editing, deleting contacts).
     - Invalid input should not cause data corruption or loss.
+
+<div style="page-break-after: always;"></div>
 
 ### Glossary
 
@@ -727,7 +732,7 @@ testers are expected to do more *exploratory* testing.
 
    3. Other incorrect flag commands to try: `flag`, `flag x` (where x is larger than the list size)<br>
 
-
+<div style="page-break-after: always;"></div>
 
 ## **Appendix B - Effort**
 
@@ -754,6 +759,8 @@ Achievements:
 7. Included special prefix ‘[ prefix/]’ in CRUD commands to allow prefixes as inputs.
 8. Tags and emails are now lowercase regardless of input.
 9. Tags are now limited to 32 characters.
+
+<div style="page-break-after: always;"></div>
 
 ## **Planned Enhancements**
 - Upcoming meetings listed should be sorted.

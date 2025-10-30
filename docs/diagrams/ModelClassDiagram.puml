@@ -13,7 +13,7 @@ Class ModelManager
 Class UserPrefs
 Class TimezoneMapper
 
-Class PersonList
+Class UniquePersonList
 Class Person
 Class HomeCountry
 Class Company
@@ -43,8 +43,8 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" PersonList
-PersonList --> "~* all" Person
+AddressBook *--> "1" UniquePersonList
+UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
