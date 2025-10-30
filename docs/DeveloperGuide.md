@@ -722,7 +722,7 @@ testers are expected to do more *exploratory* testing.
 
 
 
-## Appendix B - Effort
+## **Appendix B - Effort**
 
 Team size: 5
 
@@ -748,7 +748,7 @@ Achievements:
 8. Tags and emails are now lowercase regardless of input.
 9. Tags are now limited to 32 characters.
 
-## Planned Enhancements
+## **Planned Enhancements**
 - Upcoming meetings listed should be sorted.
 - Implement correct parsing of leap years.
 - Add more countries to timezonemapper.
