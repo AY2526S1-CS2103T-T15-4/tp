@@ -278,8 +278,7 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM description`
 Examples:
 * `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
   there are no meetings scheduled at that time for all contacts.
-
-![result for addm 1 m/30-10-2025 14:30 Project discussion](images/addmeeting-example.png)
+  ![result for addm 1 m/30-10-2025 14:30 Project discussion](images/addmeeting-example.png)
 
 ### Deleting a meeting from a person : `deletem`
 
@@ -296,8 +295,7 @@ Format `deletem INDEX m/dd-MM-YYYY HH:MM`
 Examples:
 * `list` followed by `deletem 1 m/20-10-2025 14:30` deletes a meeting from the first contact, given that there exists 
   a meeting at that date and time for that contact.
-
-![result for deletem 1 m/20-10-2025 14:30](images/DeleteMeetingCommandExample.png)
+  ![result for deletem 1 m/20-10-2025 14:30](images/DeleteMeetingCommandExample.png)
 
 ### List previous meetings of a person : `listm`
 
@@ -309,7 +307,6 @@ Format: `listm INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-
 ![listm example](images/ListMeetingCommand%20example.png)
 
 ### Adding a link to a person : `link`
