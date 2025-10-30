@@ -693,20 +693,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, including a person with name: Jake phone: 12345678 email: jake@example.com country: Singapore company: Google. Can be added with command `add n/Jake p/12345678 e/jake@example.com c/Singapore com/Google`.
 
-   2. Test case: `Find n/Jake`<br>
+   2. Test case: `find n/Jake`<br>
       Expected: All contacts with `Jake` under the name parameter will be displayed.
 
-   3. Test case: `Find y/Jake`<br>
+   3. Test case: `find y/Jake`<br>
       Expected: Wi-Find displays an error message as an invalid prefix is provided.
 
 2. Finding with multiple keywords
 
    1. Prerequisites: Same as `Finding with a single keyword`.
 
-   2. Test case: `Find n/Jake n/Bob c/Singapore`<br>
+   2. Test case: `find n/Jake n/Bob c/Singapore`<br>
       Expected: All contacts with `Jake` or `Bob` under the name parameter and has `Singapore` under the country parameter will be displayed.
 
-   3. Test case: `Find n/Jake Bob c/Singapore`
+   3. Test case: `find n/Jake Bob c/Singapore`
       Expected: All contacts with `Jake Bob` under the name parameter and has `Singapore` under the country parameter will be displayed. `Jake` added on prerequisites will not be displayed, as the name parameter must specifically include `Jake Bob` in their name.
 
 ### Flagging a person
