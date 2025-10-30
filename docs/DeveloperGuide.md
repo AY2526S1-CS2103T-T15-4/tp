@@ -684,7 +684,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `add n/Joe Lim p/12 e/Joe@google.com c/Singapore com/Starbucks t/friend`<br>
       Expected: Wi-Find displays error message as phone number needs to be at least 3 characters long
 
-   4. Other incorrect delete commands to try: `add n/Joe Lim p/12345678 e/Joe c/Singapore com/Starbucks t/friend`, `add n/ p/12345678 e/Joe@google.com c/Singapore com/Starbucks t/friend`, `add n/Joe Lim p/12345678 e/Joe@google.com c/Singapore! com/Starbucks t/friend`<br>
+   4. Other incorrect add commands to try: `add n/Joe Lim p/12345678 e/Joe c/Singapore com/Starbucks t/friend`, `add n/ p/12345678 e/Joe@google.com c/Singapore com/Starbucks t/friend`, `add n/Joe Lim p/12345678 e/Joe@google.com c/Singapore! com/Starbucks t/friend`<br>
       Expected: Wi-Find displays an error for fields that are wrong or missing .
 
 ### Finding a person
