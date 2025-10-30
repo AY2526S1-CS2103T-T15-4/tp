@@ -5,7 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `hansonpohcoc@gmail.com`
 
 ## Project team
 
@@ -26,7 +26,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/max.md)]
 
 * Role: Developer
-* Responsibilities: UI
 
 ### Javier Lua
 
@@ -44,7 +43,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/serenelwt.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Lee Junwon
 
@@ -52,3 +50,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/NownuJ)]
 [[portfolio](team/nownuj.md)]
+
+* Role: Developer
