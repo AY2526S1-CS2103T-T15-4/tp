@@ -14,11 +14,17 @@ Key features:
 - Set meetings with contacts
 - Find contacts by company, country, meetings.
 
+<div style="page-break-after: always;"></div>
+
+
 ### Table of contents
 Use this table of contents to jump to any section!
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 
 ## Quick start
 
@@ -49,6 +55,8 @@ Use this table of contents to jump to any section!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 Some quick notes regarding how commands work:
@@ -71,6 +79,8 @@ Some quick notes regarding how commands work:
 | **[Link](#adding-a-link-to-a-person--link)**                                                                                 | Adds/Updates/Removes a link           | `link INDEX LINK`                                                                                                                                                                |
 | **[Clear](#clearing-all-entries--clear)**                                                                                    | Clears contacts                       | `clear`                                                                                                                                                                          |
 | **[Help](#viewing-help--help)**                                                                                              | Displays help window                  | `help`                                                                                                                                                                           |
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -107,6 +117,8 @@ Commands in Wi-Find follow a flexible format as described below.
 
 You can refer back to this section anytime while reading about specific commands.
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Opens a new window that shows a message explaining how to access the help page.
@@ -119,6 +131,8 @@ Format: `help`
 :exclamation: **Note:**
 If you don't see the Help window, check if it's minimized (see <a href="#known-issues-as-of-v13">Known Issues</a>). 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a person: `add`
 
@@ -158,6 +172,8 @@ When you attempt to add a contact that shares a phone number or email with an ex
 This feature helps prevent accidental duplicates while allowing you to intentionally add contacts with shared phone numbers or emails (e.g., family members sharing a phone, employees sharing a company email).
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -182,6 +198,8 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -201,12 +219,15 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+<div style="page-break-after: always;"></div>
 
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+<div style="page-break-after: always;"></div>
 
 ### Locating persons by name: `find`
 
@@ -231,6 +252,8 @@ Examples:
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidNewResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Flagging a person : `flag`
 
 Flags the specified person from the address book.
@@ -247,6 +270,8 @@ Examples:
 * `find n/Alex` followed by 'flag 1' flags the 1st person in the result of the `find` command.
   ![result for 'flag 1'](images/flag-example.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Unflagging a person : `unflag`
 
 Unflags the specified person from the address book.
@@ -262,6 +287,8 @@ Examples:
 * `list` followed by `unflag 2` unflags the 2nd person in the address book given that the contact is flagged.
 * `find n/Alex` followed by 'unflag 1' unflags the 1st person in the result of the `find` command.
   ![result for 'unflag 1'](images/unflagCommand.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a meeting to a person : `addm`
 
@@ -284,6 +311,8 @@ Examples:
   there are no meetings scheduled at that time for all contacts.
   ![result for addm 1 m/30-10-2025 14:30 Project discussion](images/addmeeting-example.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a meeting from a person : `deletem`
 
 Deletes a meeting with a specified date and time from a person.
@@ -300,6 +329,8 @@ Examples:
 * `list` followed by `deletem 1 m/20-10-2025 14:30` deletes a meeting from the first contact, given that there exists 
   a meeting at that date and time for that contact.
   ![result for deletem 1 m/20-10-2025 14:30](images/DeleteMeetingCommandExample.png)
+
+<div style="page-break-after: always;"></div>
 
 ### List previous meetings of a person : `listm`
 
@@ -346,6 +377,8 @@ Format: `clear`
 This action cannot be undone!
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the program : `exit`
 
 Exits the program safely.
@@ -371,6 +404,8 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I check my Java version?<br>
@@ -387,6 +422,8 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Known issues (as of v1.5)
 
 Issue 1: **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
@@ -396,6 +433,8 @@ Issue 2: **If you minimize the Help Window** and then run the `help` command (or
 Solution 2: The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## List of supported countries
 
