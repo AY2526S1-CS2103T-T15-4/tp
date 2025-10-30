@@ -14,11 +14,17 @@ Key features:
 - Set meetings with contacts
 - Find contacts by company, country, meetings.
 
+<div style="page-break-after: always;"></div>
+
+
 ### Table of contents
 Use this table of contents to jump to any section!
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 
 ## Quick start
 
@@ -49,6 +55,8 @@ Use this table of contents to jump to any section!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 Some quick notes regarding how commands work:
@@ -71,6 +79,8 @@ Some quick notes regarding how commands work:
 | **[Link](#adding-a-link-to-a-person--link)**                                                                                 | Adds/Updates/Removes a link           | `link INDEX LINK`                                                                                                                                                                |
 | **[Clear](#clearing-all-entries--clear)**                                                                                    | Clears contacts                       | `clear`                                                                                                                                                                          |
 | **[Help](#viewing-help--help)**                                                                                              | Displays help window                  | `help`                                                                                                                                                                           |
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
