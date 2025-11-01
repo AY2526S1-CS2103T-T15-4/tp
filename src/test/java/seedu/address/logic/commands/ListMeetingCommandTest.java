@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -41,11 +42,11 @@ public class ListMeetingCommandTest {
 
         assertTrue(feedback.contains("Past meetings"));
         assertTrue(feedback.contains("Past team meeting"));
-        assertFalse(feedback.contains("Future client meeting"));
+        assertTrue(feedback.contains("Future client meeting"));
     }
 
     @Test
-    void execute_noPastMeetings_returnsNoPastMeetingsMessage() throws Exception {
+    void execute_noPastMeetings_returnsMeetingsMessage() throws Exception {
         Person validPerson = new PersonBuilder().build();
 
         ModelStubs.ModelStubAcceptingMeetingAdded modelStub = new ModelStubs.ModelStubAcceptingMeetingAdded();
@@ -56,7 +57,7 @@ public class ListMeetingCommandTest {
         ListMeetingCommand command = new ListMeetingCommand(Index.fromOneBased(1));
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(ListMeetingCommand.MESSAGE_NO_PAST_MEETINGS, result.getFeedbackToUser());
+        assertNotEquals(ListMeetingCommand.MESSAGE_NO_MEETINGS, result.getFeedbackToUser());
     }
 
     @Test

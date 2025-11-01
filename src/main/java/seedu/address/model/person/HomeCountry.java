@@ -14,14 +14,14 @@ public class HomeCountry {
      */
     public static final int LENGTH_LIMIT = 56;
 
-    public static final String MESSAGE_CONSTRAINTS = "Countries should only be alphanumeric, not be blank and not "
+    public static final String MESSAGE_CONSTRAINTS = "Countries should only be alphabetical, not be blank and not "
             + "exceed " + LENGTH_LIMIT + " characters, including spaces.";
 
     /*
      * The first character of the country must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9][A-Za-z0-9 ]*$";
+    public static final String VALIDATION_REGEX = "^[A-Za-z][A-Za-z ]*$";
 
     public final String value;
 
@@ -40,9 +40,7 @@ public class HomeCountry {
      * Returns true if a given string is a valid country.
      */
     public static boolean isValidCountry(String test) {
-        boolean result;
-        result = test.matches(VALIDATION_REGEX) && test.length() <= LENGTH_LIMIT;
-        return result;
+        return test.matches(VALIDATION_REGEX) && test.length() <= LENGTH_LIMIT;
     }
 
     @Override
