@@ -270,7 +270,7 @@ Format: `find {n/NAME}…​ {p/PHONE_NUMBER}…​ {e/EMAIL}…​ {c/COUNTRY}�
 
 * <code>find</code> requires at least 1 Prefix-Parameter Pair
 * The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the parameter does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is done by substring searching. e.g. `an` will match `Hans`
 * Multiple keywords under the same prefix works like `OR` search, while keywords across multiple prefixes works like `AND` search. For example, `find n/Alex n/Bob c/Singapore` will display all contacts whose name includes 'Alex' OR 'Bob', AND has 'Singapore' under country prefix.
 * When searching for meetings, use `DD MMM YYYY HH:MM <Description>` format, as displayed on the contact list.
 
@@ -281,6 +281,7 @@ If no contacts match, Wi-Find will show an empty list. Use <code>list</code> to 
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
+* `find n/Bri` return `Brian Tay`
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidNewResult.png)
 
