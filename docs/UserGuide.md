@@ -70,7 +70,7 @@ Some quick notes regarding how commands work:
 | **[Edit](#editing-a-person--edit)**                              | Edits specified contact           | `edit INDEX {n/NAME} {p/PHONE_NUMBER} {e/EMAIL} {c/COUNTRY} {com/COMPANY} {t/TAG}…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
 | **[Delete](#deleting-a-person--delete)**                         | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
 | **[List](#listing-all-persons--list)**                           | List all contacts                 | `list`                                                                                                                                                                           |
-| **[Find](#locating-persons-by-name-find)**                       | Filters contacts based on keyword | `find PREFIX/PARAMETER...`<br> e.g., `find n/James n/Jake`                                                                                                                       |
+| **[Find](#locating-persons-by-name-find)**                       | Filters contacts based on keyword | `find {n/NAME}…​ {p/PHONE_NUMBER}…​ {e/EMAIL}…​ {c/COUNTRY}…​ {com/COMPANY}…​ {t/TAG}…​ {m/MEETING}…​ {l/LINK}…​`<br> e.g., `find n/James n/Jake`                                |
 | **[Flag](#flagging-a-person--flag)**                             | Flags contact                     | `flag INDEX`                                                                                                                                                                     |
 | **[Unflag](#unflagging-a-person--unflag)**                       | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
 | **[Add Meeting](#adding-a-meeting-to-a-person--addm)**           | Add Meeting to a contact          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm 1 m/12-02-2020 12:30 Project Star`                                                                                   |
@@ -266,7 +266,7 @@ Format: `list`
 
 Finds persons through searching the parameters with given keywords.
 
-Format: `find {n/NAME}... {p/PHONE_NUMBER}... {e/EMAIL}... {c/COUNTRY}... {com/COMPANY}... {t/TAG}...`
+Format: `find {n/NAME}…​ {p/PHONE_NUMBER}…​ {e/EMAIL}…​ {c/COUNTRY}…​ {com/COMPANY}…​ {t/TAG}…​ {m/MEETING}…​ {l/LINK}…​`
 
 * <code>find</code> requires at least 1 Prefix-Parameter Pair
 * The search is case-insensitive. e.g. `hans` will match `Hans`
