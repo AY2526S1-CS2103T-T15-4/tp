@@ -637,7 +637,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Tag**: A keyword or label that can be attached to contacts to group them (e.g. “Investor”, “Client”, “Overseas”).
 * **Link**: A web or file reference (e.g. LinkedIn profile, company site) attached to a contact.
 * **Field**: A specific piece of information within a contact’s record (e.g. name, phone, email).
-* **Identifier**: A unique value (usually index or name) used to reference a contact when executing commands.
+* **Identifier**: A unique value (usually index) used to reference a contact when executing commands.
 * **Command**: A textual instruction entered by the user in the command line to perform an action. (e.g. add, delete, edit)
 * **Command Result**: The response or feedback shown after executing a command.
 
