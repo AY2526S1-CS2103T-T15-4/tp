@@ -343,13 +343,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. One or more of the inputs are invalid
 
-    * 2a1. Wi-Find shows an error message.
+    * 1a1. Wi-Find shows an error message.
 
       Use case ends.
 
-* 3a. No contacts match the company name.
+* 2a. No contacts match the company name.
 
-    * 3a1. Wi-Find shows an empty list message.
+    * 2a1. Wi-Find shows an empty list message.
 
       Use case ends.
 
