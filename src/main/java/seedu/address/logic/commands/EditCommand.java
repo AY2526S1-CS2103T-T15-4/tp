@@ -63,7 +63,7 @@ public class EditCommand extends ConfirmableCommand {
             Warning: A duplicate person already exists in the address book.
             i.e. Same phone or email
             Please confirm if this contact should still be edited.
-            Enter 'y' to confirm or enter any other input to cancel.
+            Enter 'y' to confirm or enter any other input to cancel AND continue normally.
             """;
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

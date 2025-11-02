@@ -169,7 +169,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Duplicate checking for person
-Wi-find checks for Duplicates using email and phone number. 
+Wi-find checks for Duplicates using email or phone number. 
 - If either of these already exist in the database, they are considered duplicates. 
 - Duplicate checking is checked in the Person class using the isSamePerson() method, and is handled in respective parsers by asking for confirmation.
 
