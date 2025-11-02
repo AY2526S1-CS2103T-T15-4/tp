@@ -121,8 +121,8 @@ Commands in Wi-Find follow a flexible format as described below.
   - The brackets are removed automatically, leaving only the text
   - Prefix-like text attached to other text (e.g., <code>Singaporecom/</code>) is saved **as is**
   - Examples:
-    - `add n/John c/Singapore[ com/]` → Country: "Singapore com/"
-    - `add n/Jane[ n/] Doe` → Name: "Jane n/ Doe"
+    - `add n/John p/81234567 e/john@gmail.com c/Singapore com/Shoppee[ c/]` → Company: "Shoppe c/"
+    - `add n/Jane[ n/] Doe p/87654321 e/jane@gmail.com c/China com/Google` → Name: "Jane n/ Doe"
   - **Important:**
     - Text after "/" should be typed **outside** the square brackets → <code>[ prefix/]text</code>✓, <code>[ prefix/text]</code>✗
   - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket notation, "Singapore com/" would be interpreted as country "Singapore" followed by a new company field.
@@ -218,7 +218,7 @@ This feature helps prevent accidental duplicates while allowing you to intention
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX {n/NAME} {p/PHONE} {e/EMAIL} {c/COUNTRY} {com/COMPANY} {t/TAG}…​`
+Format: `edit INDEX {n/NAME} {p/PHONE_NUMBER} {e/EMAIL} {c/COUNTRY} {com/COMPANY} {t/TAG}…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional items must be provided.
@@ -269,7 +269,7 @@ Format: `list`
 
 <div style="page-break-after: always;"></div>
 
-### Locating persons by name: `find`
+### Locating persons: `find`
 
 Finds persons through searching the parameters with given keywords.
 
@@ -344,6 +344,7 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
 * Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using 
   your local time, hence it is highly recommended to put meetings in your local time.
 * Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
+* Upcoming meeting section will be refreshed whenever the user edits that specified contact or reopens the app.
 
 Examples:
 * `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
@@ -389,7 +390,7 @@ Example:
 
 Adds a link to the specified person from the address book.
 
-Format: `link INDEX LINK`
+Format: `link INDEX {LINK}`
 
 * Adds a link to the person at the specified `INDEX`.
 * If the person already has a link, the link will be updated according to the latest input from user. 
