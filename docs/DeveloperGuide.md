@@ -250,9 +250,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add a new contact.
-2.  Wi-Find validates the fields.
-3.  Wi-Find adds the new contact.
-4.  Wi-Find displays a success message.
+2.  User submits the contact details.
+3.  If the input is valid and the contact does not already exist, Wi-Find visibly adds the new contact.
+4.  Wi-Find shows a success message.
 
     Use case ends.
 
@@ -260,19 +260,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. A required field is empty.
 
-    * 2a1. Wi-Find shows an error message and prompts the user to fill it.
-        * After correction, return to step 2.
+    * 2a1. Wi-Find shows an error message for the missing field and prompts the user to fill it.
+    * 2a2. User corrects the input and resubmits.
+      * Return to step 3.
 
-* 2b. The input format for one or more of fields are invalid.
+* 2b. One or more required fields are invalid.
 
     * 2b1. Wi-Find shows an error message for the first invalid field and prompts the user to correct it.
-        * After correction, return to step 2.
+    * 2b2. User corrects the field and resubmits.
+      * Return to step 3.
 
-* 2c. The contact already exists (duplicate contact number or email).
-
-    * 2c1. Wi-Find warns and asks for confirmation from user to proceed with adding contact.
+* 2c. Contact already exists (duplicate contact number or email).
+    * 2c1. Wi-Find warns the user about the duplicate and asks for confirmation.
       * If user cancels, use case ends.
-      * Else use case continues from step 3.
+      * If the user confirms, continue from step 3.
 
 **Use case: UC02 - Delete a contact**
 
