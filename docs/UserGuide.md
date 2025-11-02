@@ -108,8 +108,8 @@ Commands in Wi-Find follow a flexible format as described below.
   - The brackets are removed automatically, leaving only the text
   - Prefix-like text attached to other text (e.g., <code>Singaporecom/</code>) is saved **as is**
   - Examples:
-    - `add n/John c/Singapore[ com/]` → Country: "Singapore com/"
-    - `add n/Jane[ n/a] Doe` → Name: "Jane n/a Doe"
+    - `add n/John p/81234567 e/john@gmail.com c/Singapore com/Shoppee[ c/]` → Company: "Shoppe c/"
+    - `add n/Jane[ n/] Doe p/87654321 e/jane@gmail.com c/China com/Google` → Name: "Jane n/ Doe"
   - **Important:** Space **before** the opening bracket creates double-spacing. Always use <code>[ prefix/]</code> format.
   - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket notation, "Singapore com/" would be interpreted as country "Singapore" followed by a new company field.
 
