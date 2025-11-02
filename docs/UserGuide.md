@@ -350,7 +350,7 @@ Example:
 
 Adds a link to the specified person from the address book.
 
-Format: `link INDEX LINK`
+Format: `link INDEX {LINK}`
 
 * Adds a link to the person at the specified `INDEX`.
 * If the person already has a link, the link will be updated to the latest input from user. 
