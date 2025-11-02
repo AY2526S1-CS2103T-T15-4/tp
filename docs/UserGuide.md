@@ -281,7 +281,8 @@ If no contacts match, Wi-Find will show an empty list. Use <code>list</code> to 
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
-* `find n/Bri` return `Brian Tay`
+* `find n/Bri` returns `Brian Tay`
+* `find m/31 Oct 2025 18:00 Project discussion` returns meeting with meeting time `31 Oct 2025 18:00` and description `Project discussion`
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidNewResult.png)
 
