@@ -156,8 +156,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
 - Alphanumerics and special characters are allowed in NAME.
 
-<div markdown="span" class="alert alert-primary">
-:exclamation: **Email Address Rules (Summary Table)**
+**Email Address Rules (Summary Table)**
 
 **Definitions:**
 - **Local Part:** The portion before the `@` symbol, identifying the user or mailbox.
@@ -171,11 +170,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
 **Allowed special characters in the local part:**  
 <code>! # $ % & ' * + - / = ? ^ ` { | } ~ .</code>
-</div>
 
 <div markdown="span" class="alert alert-primary">
 :exclamation: **IMPORTANT:**
-Please check this <a href="#list-of-supported-countries">list</a> for available countries and their timezones.
+Please check this <a href="#list-of-supported-countries">list</a> for available countries and their timezones, as the <code>COUNTRY</code>
+parameter determines the contact's timezone display on the app.
 </div>
 
 After being successfully added, the GUI should show the added person, with the correct timezone of their country.
@@ -190,6 +189,7 @@ Examples:
 - Contacts are considered duplicates if they share the same phone number OR the same email address with an existing contact.<br>
 - Email addresses are automatically lowercased when a contact is added or edited.<br>
 - A person can have any number of tags (including 0).<br>
+- Tags are unique: adding the same tag multiple times has no effect.<br>
 - Countries are strictly alphabetical.<br>
 </div>
 
