@@ -262,7 +262,7 @@ Format: `list`
 
 <div style="page-break-after: always;"></div>
 
-### Locating persons by name: `find`
+### Locating persons by parameters: `find`
 
 Finds persons through searching the parameters with given keywords.
 
