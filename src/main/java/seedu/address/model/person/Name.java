@@ -15,7 +15,7 @@ public class Name {
     public static final int LENGTH_LIMIT = 70;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should should not be blank and not exceed " + LENGTH_LIMIT + " characters, including spaces";
+            "Names should not be blank and not exceed " + LENGTH_LIMIT + " characters, including spaces";
 
     /*
      * The first character of the address must not be a whitespace,

@@ -30,7 +30,7 @@ public class AddMeetingCommand extends ConfirmableCommand {
             """
             Warning: A duplicate meeting already exists in the address book.
             Please confirm if this meeting should still be added.
-            Enter 'y' to confirm or enter any other input to cancel.
+            Enter 'y' to confirm or enter any other input to cancel AND continue normally.
             """;
 
     private final Index index;

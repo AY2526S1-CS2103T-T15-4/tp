@@ -129,7 +129,10 @@ Commands in Wi-Find follow a flexible format as described below.
 
 * **PDF Warning:** When copying multi-line commands from PDF, spaces around line breaks may be lost
 
+<div markdown="span" class="alert alert-primary">
+:exclamation: **Note:**
 You can refer back to this section anytime while reading about specific commands.
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -155,9 +158,9 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
 - Alphanumerics and special characters are allowed in NAME.
+- Phone numbers should only contain numbers, spaces, or the characters <code>+</code>, <code>-</code>, <code>(</code>, <code>)</code>.
 
-<div markdown="span" class="alert alert-primary">
-:exclamation: **Email Address Rules (Summary Table)**
+**Email Address Rules (Summary Table)**
 
 **Definitions:**
 - **Local Part:** The portion before the `@` symbol, identifying the user or mailbox.
@@ -171,11 +174,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
 **Allowed special characters in the local part:**  
 <code>! # $ % & ' * + - / = ? ^ ` { | } ~ .</code>
-</div>
 
 <div markdown="span" class="alert alert-primary">
 :exclamation: **IMPORTANT:**
-Please check this <a href="#list-of-supported-countries">list</a> for available countries and their timezones.
+Please check this <a href="#list-of-supported-countries">list</a> for available countries and their timezones, as the <code>COUNTRY</code>
+parameter determines the contact's timezone display on the app.
 </div>
 
 After being successfully added, the GUI should show the added person, with the correct timezone of their country.
@@ -190,19 +193,23 @@ Examples:
 - Contacts are considered duplicates if they share the same phone number OR the same email address with an existing contact.<br>
 - Email addresses are automatically lowercased when a contact is added or edited.<br>
 - A person can have any number of tags (including 0).<br>
+- Tags are unique: adding the same tag multiple times has no effect.<br>
 - Countries are strictly alphabetical.<br>
 </div>
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Duplicate Detection:**<br>
 When you attempt to add a contact that shares a phone number or email with an existing contact, Wi-Find will:<br>
+
 1. Display a warning showing the conflicting details<br>
 2. Prompt you to confirm whether you want to proceed<br>
 3. Add the contact only after you approve the warning<br>
 <br>
-**Example:** If you have John Doe (phone: 98765432) in your contacts and you try to add Jane Doe with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding Jane Doe.<br>
+**Example:** If you have <code>John Doe</code>code> **(phone: 98765432)** in your contacts and you try to add <code>Jane Doe</code> with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding <code>Jane Doe</code>.<br>
 <br>
 This feature helps prevent accidental duplicates while allowing you to intentionally add contacts with shared phone numbers or emails (e.g., family members sharing a phone, employees sharing a company email).
+
+**WARNING:** There will be **NO** confirmation message of cancellation when you cancel the warning prompt! (Applies to any command with the same duplicate-handling behaviour)
 </div>
 
 <div style="page-break-after: always;"></div>
