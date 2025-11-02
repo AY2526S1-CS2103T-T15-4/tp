@@ -121,15 +121,18 @@ Commands in Wi-Find follow a flexible format as described below.
   - The brackets are removed automatically, leaving only the text
   - Prefix-like text attached to other text (e.g., <code>Singaporecom/</code>) is saved **as is**
   - Examples:
-    - `add n/John c/Singapore[ com/]` → Country: "Singapore com/"
-    - `add n/Jane[ n/] Doe` → Name: "Jane n/ Doe"
+    - `add n/John p/81234567 e/john@gmail.com c/Singapore com/Shoppee[ c/]` → Company: "Shoppe c/"
+    - `add n/Jane[ n/] Doe p/87654321 e/jane@gmail.com c/China com/Google` → Name: "Jane n/ Doe"
   - **Important:**
     - Text after "/" should be typed **outside** the square brackets → <code>[ prefix/]text</code>✓, <code>[ prefix/text]</code>✗
   - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket notation, "Singapore com/" would be interpreted as country "Singapore" followed by a new company field.
 
 * **PDF Warning:** When copying multi-line commands from PDF, spaces around line breaks may be lost
 
+<div markdown="span" class="alert alert-primary">
+:exclamation: **Note:**
 You can refer back to this section anytime while reading about specific commands.
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -155,9 +158,9 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
 - Alphanumerics and special characters are allowed in NAME.
+- Phone numbers should only contain numbers, spaces, or the characters <code>+</code>, <code>-</code>, <code>(</code>, <code>)</code>.
 
-<div markdown="span" class="alert alert-primary">
-:exclamation: **Email Address Rules (Summary Table)**
+**Email Address Rules (Summary Table)**
 
 **Definitions:**
 - **Local Part:** The portion before the `@` symbol, identifying the user or mailbox.
@@ -171,11 +174,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
 **Allowed special characters in the local part:**  
 <code>! # $ % & ' * + - / = ? ^ ` { | } ~ .</code>
-</div>
 
 <div markdown="span" class="alert alert-primary">
 :exclamation: **IMPORTANT:**
-Please check this <a href="#list-of-supported-countries">list</a> for available countries and their timezones.
+Please check this <a href="#list-of-supported-countries">list</a> for available countries and their timezones, as the <code>COUNTRY</code>
+parameter determines the contact's timezone display on the app.
 </div>
 
 After being successfully added, the GUI should show the added person, with the correct timezone of their country.
@@ -190,19 +193,23 @@ Examples:
 - Contacts are considered duplicates if they share the same phone number OR the same email address with an existing contact.<br>
 - Email addresses are automatically lowercased when a contact is added or edited.<br>
 - A person can have any number of tags (including 0).<br>
+- Tags are unique: adding the same tag multiple times has no effect.<br>
 - Countries are strictly alphabetical.<br>
 </div>
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Duplicate Detection:**<br>
 When you attempt to add a contact that shares a phone number or email with an existing contact, Wi-Find will:<br>
+
 1. Display a warning showing the conflicting details<br>
 2. Prompt you to confirm whether you want to proceed<br>
 3. Add the contact only after you approve the warning<br>
 <br>
-**Example:** If you have John Doe (phone: 98765432) in your contacts and you try to add Jane Doe with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding Jane Doe.<br>
+**Example:** If you have <code>John Doe</code>code> **(phone: 98765432)** in your contacts and you try to add <code>Jane Doe</code> with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding <code>Jane Doe</code>.<br>
 <br>
 This feature helps prevent accidental duplicates while allowing you to intentionally add contacts with shared phone numbers or emails (e.g., family members sharing a phone, employees sharing a company email).
+
+**WARNING:** There will be **NO** confirmation message of cancellation when you cancel the warning prompt! (Applies to any command with the same duplicate-handling behaviour)
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -211,7 +218,7 @@ This feature helps prevent accidental duplicates while allowing you to intention
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX {n/NAME} {p/PHONE} {e/EMAIL} {c/COUNTRY} {com/COMPANY} {t/TAG}…​`
+Format: `edit INDEX {n/NAME} {p/PHONE_NUMBER} {e/EMAIL} {c/COUNTRY} {com/COMPANY} {t/TAG}…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional items must be provided.
@@ -339,6 +346,7 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
 * Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using 
   your local time, hence it is highly recommended to put meetings in your local time.
 * Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
+* Upcoming meeting section will be refreshed whenever the user edits that specified contact or reopens the app.
 
 Examples:
 * `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
@@ -384,7 +392,7 @@ Example:
 
 Adds a link to the specified person from the address book.
 
-Format: `link INDEX LINK`
+Format: `link INDEX {LINK}`
 
 * Adds a link to the person at the specified `INDEX`.
 * If the person already has a link, the link will be updated according to the latest input from user. 

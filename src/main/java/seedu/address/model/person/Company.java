@@ -40,9 +40,7 @@ public class Company {
      * Returns true if a given string is a valid company.
      */
     public static boolean isValidCompany(String test) {
-        boolean result;
-        result = test.matches(VALIDATION_REGEX) && test.length() <= LENGTH_LIMIT;
-        return result;
+        return test.matches(VALIDATION_REGEX) && test.length() <= LENGTH_LIMIT;
     }
 
     @Override

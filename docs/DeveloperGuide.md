@@ -47,7 +47,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2526S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -81,13 +81,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-T15-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -100,7 +100,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -132,7 +132,7 @@ How the parsing works:
 <div style="page-break-after: always;"></div>
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="650" />
 
@@ -148,7 +148,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -169,7 +169,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Duplicate checking for person
-Wi-find checks for Duplicates using email and phone number. 
+Wi-find checks for Duplicates using email or phone number. 
 - If either of these already exist in the database, they are considered duplicates. 
 - Duplicate checking is checked in the Person class using the isSamePerson() method, and is handled in respective parsers by asking for confirmation.
 
@@ -250,9 +250,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add a new contact.
-2.  Wi-Find validates the fields.
-3.  Wi-Find adds the new contact.
-4.  Wi-Find displays a success message.
+2.  User submits the contact details.
+3.  If the input is valid and the contact does not already exist, Wi-Find visibly adds the new contact.
+4.  Wi-Find shows a success message.
 
     Use case ends.
 
@@ -260,21 +260,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. A required field is empty.
 
-    * 2a1. Wi-Find shows an error message.
+    * 2a1. Wi-Find shows an error message for the missing field and prompts the user to fill it.
+    * 2a2. User corrects the input and resubmits.
+      * Return to step 3.
 
-      Use case ends.
+* 2b. One or more required fields are invalid.
 
-* 2b. The input format for one or more of fields are invalid.
+    * 2b1. Wi-Find shows an error message for the first invalid field and prompts the user to correct it.
+    * 2b2. User corrects the field and resubmits.
+      * Return to step 3.
 
-    * 2b1. Wi-Find shows an error message.
-
-      Use case ends.
-
-* 2c. The contact already exists (duplicate contact number or email).
-
-    * 2c1. Wi-Find warns and asks for confirmation from user to proceed with adding contact.
-    * If user cancels, use case ends.
-    * Else use case continues from step 3.
+* 2c. Contact already exists (duplicate contact number or email).
+    * 2c1. Wi-Find warns the user about the duplicate and asks for confirmation.
+      * If user cancels, use case ends.
+      * If the user confirms, continue from step 3.
 
 **Use case: UC02 - Delete a contact**
 
@@ -646,7 +645,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Tag**: A keyword or label that can be attached to contacts to group them (e.g. “Investor”, “Client”, “Overseas”).
 * **Link**: A web or file reference (e.g. LinkedIn profile, company site) attached to a contact.
 * **Field**: A specific piece of information within a contact’s record (e.g. name, phone, email).
-* **Identifier**: A unique value (usually index or name) used to reference a contact when executing commands.
+* **Identifier**: A unique value (usually index) used to reference a contact when executing commands.
 * **Command**: A textual instruction entered by the user in the command line to perform an action. (e.g. add, delete, edit)
 * **Command Result**: The response or feedback shown after executing a command.
 * **Local Part**: The portion of an email before the "@" symbol.
