@@ -260,21 +260,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. A required field is empty.
 
-    * 2a1. Wi-Find shows an error message.
-
-      Use case ends.
+    * 2a1. Wi-Find shows an error message and prompts the user to fill it.
+        * After correction, return to step 2.
 
 * 2b. The input format for one or more of fields are invalid.
 
-    * 2b1. Wi-Find shows an error message.
-
-      Use case ends.
+    * 2b1. Wi-Find shows an error message for the first invalid field and prompts the user to correct it.
+        * After correction, return to step 2.
 
 * 2c. The contact already exists (duplicate contact number or email).
 
     * 2c1. Wi-Find warns and asks for confirmation from user to proceed with adding contact.
-    * If user cancels, use case ends.
-    * Else use case continues from step 3.
+      * If user cancels, use case ends.
+      * Else use case continues from step 3.
 
 **Use case: UC02 - Delete a contact**
 
