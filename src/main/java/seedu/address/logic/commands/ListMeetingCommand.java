@@ -16,15 +16,15 @@ import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 
 /**
- * Lists all past meetings of a contact to the user.
+ * Lists all meetings of a contact to the user.
  */
 public class ListMeetingCommand extends Command {
     public static final String COMMAND_WORD = "listm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all past meetings with the contact. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all meetings with the contact. "
             + "Parameters: INDEX (must be a positive integer)";
 
-    public static final String MESSAGE_NO_PAST_MEETINGS = "There are no past meetings.";
+    public static final String MESSAGE_NO_MEETINGS = "There are no recorded meetings.";
 
     private final Index index;
 
@@ -56,15 +56,20 @@ public class ListMeetingCommand extends Command {
                 .sorted(Comparator.comparing(Meeting::getMeetingTime).reversed())
                 .toList();
 
-        if (pastMeetings.isEmpty()) {
-            return new CommandResult(MESSAGE_NO_PAST_MEETINGS);
+        List<Meeting> currMeetings = personToList.getMeetings().stream()
+                .filter(meeting -> meeting.getMeetingTime().isAfter(now))
+                .sorted(Comparator.comparing(Meeting::getMeetingTime).reversed())
+                .toList();
+
+        if (pastMeetings.isEmpty() && currMeetings.isEmpty()) {
+            return new CommandResult(MESSAGE_NO_MEETINGS);
         }
 
         List<String> lines = new ArrayList<>();
+        lines.add("Upcoming meetings: ");
+        currMeetings.forEach(meeting -> lines.add((lines.size()) + ". " + meeting));
         lines.add("Past meetings: ");
-        for (int i = 0; i < pastMeetings.size(); i++) {
-            lines.add((i + 1) + ". " + pastMeetings.get(i));
-        }
+        pastMeetings.forEach(meeting -> lines.add((lines.size()) + ". " + meeting));
 
         return new CommandResult(String.join("\n", lines));
     }

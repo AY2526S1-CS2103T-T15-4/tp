@@ -169,11 +169,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Duplicate checking for person
-Wi-find checks for Duplicates using email and phone number. If either of these already exist in the database, they are considered duplicates. Duplicate checking is checked in the Person class using the isSamePerson() method, and is handled in respective parsers by asking for confirmation.
+Wi-find checks for Duplicates using email and phone number. 
+- If either of these already exist in the database, they are considered duplicates. 
+- Duplicate checking is checked in the Person class using the isSamePerson() method, and is handled in respective parsers by asking for confirmation.
 
 
 ### Find command supporting multiple variables
-Find command in Wi-Find supports filtering across multiple parameters. If two or more keywords of the same type of parameters are present, it works like a ‘OR’ search, displaying the contact as long as one of the keywords are present. For keywords of different parameters, it works like ‘AND’ search, where the contact is displayed only when all of the conditions are satisfied across the parameters.
+Find command in Wi-Find supports filtering across multiple parameters. 
+- If two or more keywords of the same type of parameters are present, it works like a ‘OR’ search, displaying the contact as long as one of the keywords are present. 
+- For keywords of different parameters, it works like ‘AND’ search, where the contact is displayed only when all of the conditions are satisfied across the parameters.
+
+### <code>yyyy</code> vs <code>uuuu</code> in Strict Parsing
+In Java's <code>DateTimeFormatter</code>, <code>yyyy</code> represents the **year-of-era**, while <code>uuuu</code> represents the **proleptic year**.
+- When using <code>ResolverStyle.STRICT</code>, <code>yyyy</code> can produce a <code>TemporalAccessor</code> that **cannot always be resolved to** <code>LocalDateTime</code>, causing parsing errors.
+- <code>uuuu</code> ensures the year is interpreted in a way that <code>LocalDateTime</code> can always construct correctly, even in strict mode.
+- <code>yyyy</code> is used instead of <code>uuuu</code> in documentation for easier understanding.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -631,7 +641,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Contact**: An individual or entity whose information (e.g. name, phone number, email, company) is stored in the app.
 * **Meeting**: A scheduled appointment associated with a specific contact, containing date, time, and optional description.
 * **Tag**: A keyword or label that can be attached to contacts to group them (e.g. “Investor”, “Client”, “Overseas”).
@@ -640,6 +649,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Identifier**: A unique value (usually index) used to reference a contact when executing commands.
 * **Command**: A textual instruction entered by the user in the command line to perform an action. (e.g. add, delete, edit)
 * **Command Result**: The response or feedback shown after executing a command.
+* **Local Part**: The portion of an email before the "@" symbol.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>

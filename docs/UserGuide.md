@@ -39,8 +39,8 @@ Use this table of contents to jump to any section!
    A GUI similar to the below should appear in a few seconds, preloaded with sample data.<br>
    ![UIDesc](images/Ui Desc.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   [Commands](#command-summary) follow the pattern of ```command parameter/prefix value```. Here are some example commands you can try:
+5. Type the input in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   [Commands](#command-summary) follow the pattern of ```command prefix/parameter...```. Here are some example commands you can try:
    * `list` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com c/Singapore com/Riot Games` : Adds a contact named `John Doe` accompanied by the given details to Wi-Find.
@@ -64,21 +64,21 @@ Some quick notes regarding how commands work:
 - Emails are automatically lowercased.
 - User confirmation required to add duplicate contacts.
 
-| Action                                                                                                                       | Description                           | Format, Examples                                                                                                                                                                 |
-|------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-person-add)**                                                                                              | Adds contact                          | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
-| **[Edit](#editing-a-person--edit)**                                                                                          | Edits specified contact               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] {t/TAG}…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **[Delete](#deleting-a-person--delete)**                                                                                     | Deletes specified contact             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
-| **[List](#listing-all-persons--list)**                                                                                       | List all contacts                     | `list`                                                                                                                                                                           |
-| **[Find](#locating-persons-by-name-find)**                                                                                   | Filters contacts based on keyword     | `find PARAMETER/[KEYWORD]...`<br> e.g., `find n/James n/Jake`                                                                                                                    |
-| **[Flag](#flagging-a-person--flag)**                                                                                         | Flags contact                         | `flag INDEX`                                                                                                                                                                     |
-| **[Unflag](#unflagging-a-person--unflag)**                                                                                   | Unflags contact                       | `unflag INDEX`                                                                                                                                                                   |
-| **[Add Meeting](#adding-a-meeting-to-a-person--addm)**                                                                       | Add Meeting to a contact              | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm 1 m/12-02-2020 12:30 Project Star`                                                                                   |
-| **[Delete Meeting](#deleting-a-meeting-from-a-person--deletem)**                                                             | Delete Meeting from a contact         | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem 1 m/12-02-2020 12:30`                                                                                                      |
-| **[List Meeting](#list-previous-meetings-of-a-person--listm)**                                                               | List past meetings of contact         | `listm INDEX`                                                                                                                                                                    |
-| **[Link](#adding-a-link-to-a-person--link)**                                                                                 | Adds/Updates/Removes a link           | `link INDEX LINK`                                                                                                                                                                |
-| **[Clear](#clearing-all-entries--clear)**                                                                                    | Clears contacts                       | `clear`                                                                                                                                                                          |
-| **[Help](#viewing-help--help)**                                                                                              | Displays help window                  | `help`                                                                                                                                                                           |
+| Action                                                           | Description                       | Format, Examples                                                                                                                                                                 |
+|------------------------------------------------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-person-add)**                                  | Adds contact                      | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
+| **[Edit](#editing-a-person--edit)**                              | Edits specified contact           | `edit INDEX {n/NAME} {p/PHONE_NUMBER} {e/EMAIL} {c/COUNTRY} {com/COMPANY} {t/TAG}…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
+| **[Delete](#deleting-a-person--delete)**                         | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
+| **[List](#listing-all-persons--list)**                           | List all contacts                 | `list`                                                                                                                                                                           |
+| **[Find](#locating-persons-by-name-find)**                       | Filters contacts based on keyword | `find PREFIX/PARAMETER...`<br> e.g., `find n/James n/Jake`                                                                                                                       |
+| **[Flag](#flagging-a-person--flag)**                             | Flags contact                     | `flag INDEX`                                                                                                                                                                     |
+| **[Unflag](#unflagging-a-person--unflag)**                       | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
+| **[Add Meeting](#adding-a-meeting-to-a-person--addm)**           | Add Meeting to a contact          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm 1 m/12-02-2020 12:30 Project Star`                                                                                   |
+| **[Delete Meeting](#deleting-a-meeting-from-a-person--deletem)** | Delete Meeting from a contact     | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem 1 m/12-02-2020 12:30`                                                                                                      |
+| **[List Meeting](#list-previous-meetings-of-a-person--listm)**   | List past meetings of contact     | `listm INDEX`                                                                                                                                                                    |
+| **[Link](#adding-a-link-to-a-person--link)**                     | Adds/Updates/Removes a link       | `link INDEX LINK`                                                                                                                                                                |
+| **[Clear](#clearing-all-entries--clear)**                        | Clears contacts                   | `clear`                                                                                                                                                                          |
+| **[Help](#viewing-help--help)**                                  | Displays help window              | `help`                                                                                                                                                                           |
 
 <div style="page-break-after: always;"></div>
 
@@ -88,29 +88,43 @@ Commands in Wi-Find follow a flexible format as described below.
 
 **:information_source: Command Format Notes:**
 
-* **Parameters:** Words in `UPPER_CASE` are placeholders for your input.
-  - Example: `add n/Name` → use as `add n/John Doe`
+* **Prefix:** Short identifiers followed by a slash <code>/</code>.
+    - Example: `n/`, `c/`, `com/`
+
+* **Parameter:** The actual values provided by the user for a given prefix. A parameter always follows its prefix. 
+  - Words in `UPPER_CASE` are placeholders for the parameter
+    - Example: `add n/NAME` → use as `add n/John Doe`
+
+* **Prefix-Parameter Pair:** A combination of a prefix and its corresponding parameter. This pair represents a single piece of information provided by the user.
+  - Example: `n/John Doe` → `n/` is the prefix, `John Doe` is the parameter; together they form a prefix-parameter pair.
 
 * **Optional items:** Squiggly brackets `{ }` indicate optional parameters.
   - Example: `n/NAME {t/TAG}` → use as `n/John Doe t/friend` or just `n/John Doe`
 
-* **Multiple items:** `...` means a parameter can be repeated (including zero times unless stated otherwise).
+* **Multiple items:** `...` means a prefix-parameter pair can be repeated (including zero times unless stated otherwise).
   - Example: `{t/TAG}...` → use as nothing, `t/friend`, or `t/friend t/family`
 
-* **Parameter order:** Parameters can appear in any order.
+* **Prefix-Parameter Pair order:** Prefix-Parameter Pairs can appear in any order.
   - Example: `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` both work
 
-* **Extra parameters:** Commands like `help`, `list`, `exit`, and `clear` ignore extra input.
+* **Command:** The first word in a user input that specifies the action the application should perform. It tells the program what to do with the provided input.
+    - Example: `add`, `delete`, `find`
+
+* **Extra Command:** Commands like `help`, `list`, `exit`, and `clear` that ignore extra input.
   - Example: `help 123` is interpreted as `help`
 
+* **Input:** The complete string entered by the user into the application. It contains the command and any associated arguments or prefix-parameter pairs.
+    - Example: `help 123` is interpreted as `help`
+
 * **Literal prefix input** If your input contains text that looks like a prefix (e.g., "n/", "com/"), wrap it in brackets with a leading space: <code>[ prefix/]</code>
-  - Format: Space goes INSIDE the opening bracket: <code>[ com/]</code> ✓
+  - Format: One space goes **INSIDE** the opening bracket: <code>[ com/]</code> ✓
   - The brackets are removed automatically, leaving only the text
   - Prefix-like text attached to other text (e.g., <code>Singaporecom/</code>) is saved **as is**
   - Examples:
     - `add n/John p/81234567 e/john@gmail.com c/Singapore com/Shoppee[ c/]` → Company: "Shoppe c/"
     - `add n/Jane[ n/] Doe p/87654321 e/jane@gmail.com c/China com/Google` → Name: "Jane n/ Doe"
-  - **Important:** Space **before** the opening bracket creates double-spacing. Always use <code>[ prefix/]</code> format.
+  - **Important:**
+    - Text after "/" should be typed **outside** the square brackets → <code>[ prefix/]text</code>✓, <code>[ prefix/text]</code>✗
   - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket notation, "Singapore com/" would be interpreted as country "Singapore" followed by a new company field.
 
 * **PDF Warning:** When copying multi-line commands from PDF, spaces around line breaks may be lost
@@ -140,7 +154,25 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
-- Alphanumerics and special characters are allowed in NAME as well as the [local-part](https://en.wikipedia.org/wiki/Email_address#Local-part) of EMAIL.
+- Alphanumerics and special characters are allowed in NAME.
+
+<div markdown="span" class="alert alert-primary">
+:exclamation: **Email Address Rules (Summary Table)**
+
+**Definitions:**
+- **Local Part:** The portion before the `@` symbol, identifying the user or mailbox.
+- **Domain Part:** The portion after the `@` symbol, identifying the mail server or organization.
+
+| Part | Rules | Examples |
+|------|-------|---------|
+| **Local Part** | - Must start with an **alphanumeric character** (A-Z, a-z, 0-9)<br>- **Underscores (`_`) are not allowed**<br>- Must have at least **1 character**<br>- Allowed special characters: see list below | Valid: <code>john</code>, <code>john.doe</code>, <code>jane-doe+mail</code><br>Invalid: <code>_john</code>, <code>john__doe</code>, <code>.john</code> |
+| **Domain Part** | - Made of **domain labels** separated by periods (`.`)<br>- **Ending label:** at least **2 characters long**<br>- Each label must **start and end with alphanumeric characters**<br>- Only **alphanumeric characters** or **hyphens (`-`)** allowed in the middle | Valid: <code>example.com</code>, <code>my-site.org</code>, <code>sub.domain.co</code><br>Invalid: <code>-example.com</code>, <code>example-.com</code>, <code>ex!ample.com</code> |
+| **Full Email** | - Combine local part + `@` + domain part<br>- Maximum length: **255 characters** | Valid: <code>john.doe@example.com</code>, <code>jane-doe+mail@sub.domain.co</code><br>Invalid: <code>_john@example.com</code>, <code>john@-example.com</code>, <code>john@example.c</code> |
+
+**Allowed special characters in the local part:**  
+<code>! # $ % & ' * + - / = ? ^ ` { | } ~ .</code>
+</div>
+
 <div markdown="span" class="alert alert-primary">
 :exclamation: **IMPORTANT:**
 Please check this <a href="#list-of-supported-countries">list</a> for available countries and their timezones.
@@ -158,6 +190,7 @@ Examples:
 - Contacts are considered duplicates if they share the same phone number OR the same email address with an existing contact.<br>
 - Email addresses are automatically lowercased when a contact is added or edited.<br>
 - A person can have any number of tags (including 0).<br>
+- Countries are strictly alphabetical.<br>
 </div>
 
 <div markdown="span" class="alert alert-warning">
@@ -178,11 +211,11 @@ This feature helps prevent accidental duplicates while allowing you to intention
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY] {t/TAG}…​`
+Format: `edit INDEX {n/NAME} {p/PHONE_NUMBER} {e/EMAIL} {c/COUNTRY} {com/COMPANY} {t/TAG}…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* At least one of the optional items must be provided.
+* Existing parameters will be updated to the new parameter values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can **remove all the person’s tags by typing `t/`** without
     specifying any tags after it.
@@ -190,7 +223,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COUNTRY] [com/COMPANY
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**<br>
 If the index given is out of range, Wi-Find will display "The person index provided is invalid" in the command box and no changes will occur.<br>
-If you leave out all optional fields, Wi-Find will prompt you to enter at least one field.<br>
+If you leave out all optional items, Wi-Find will prompt you to enter at least one field.<br>
 Editing phone/email of contacts can trigger duplicate detection as well.<br>
 </div>
 
@@ -233,13 +266,12 @@ Format: `list`
 
 Finds persons through searching the parameters with given keywords.
 
-Format: `find PARAMETER/[KEYWORD]...`
+Format: `find {n/NAME}... {p/PHONE_NUMBER}... {e/EMAIL}... {c/COUNTRY}... {com/COMPANY}... {t/TAG}...`
 
-* Find requires at least 1 PARAMETER/[KEYWORD]
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* PARAMETER is any of the fields when adding a contact.
-* Multiple keywords under the same parameter works like `OR` search, while keywords across multiple parameters works like `AND` search. For example, `find n/Alex n/Bob c/Singapore` will display all contacts whose name includes 'Alex' OR 'Bob', AND has 'Singapore' under country parameter.
+* <code>find</code> requires at least 1 Prefix-Parameter Pair
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The order of the parameter does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Multiple keywords under the same prefix works like `OR` search, while keywords across multiple prefixes works like `AND` search. For example, `find n/Alex n/Bob c/Singapore` will display all contacts whose name includes 'Alex' OR 'Bob', AND has 'Singapore' under country prefix.
 * When searching for meetings, use `DD MMM YYYY HH:MM <Description>` format, as displayed on the contact list.
 
 <div markdown="span" class="alert alert-primary">
@@ -294,7 +326,7 @@ Examples:
 
 Adds a meeting to the person.
 
-Format `addm INDEX m/dd-MM-YYYY HH:MM description`
+Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
 
 * Adds a meeting to the person at the specified `INDEX`.
 * If there already exists a meeting with any person in Wi-Find, confirmation will be required by the user, similar to add.
@@ -328,7 +360,7 @@ Format `deletem INDEX m/dd-MM-YYYY HH:MM`
 
 Examples:
 * `list` followed by `deletem 1 m/20-10-2025 14:30` deletes a meeting from the first contact, given that there exists 
-  a meeting at that date and time for that contact.
+  a meeting at that date and time for that contact. (Note that both past and future meetings can be deleted and follow the same behaviour)
   ![result for deletem 1 m/20-10-2025 14:30](images/DeleteMeetingCommandExample.png)
 
 <div style="page-break-after: always;"></div>
@@ -343,7 +375,7 @@ Format: `listm INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-![listm example](images/ListMeetingCommand%20example.png)
+![ListMeetingCommandExample](images/ListMeetingCommandExample.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -354,8 +386,8 @@ Adds a link to the specified person from the address book.
 Format: `link INDEX {LINK}`
 
 * Adds a link to the person at the specified `INDEX`.
-* If the person already has a link, the link will be updated to the latest input from user. 
-* To remove the link from a person, use `link INDEX` without the link input.
+* If the person already has a link, the link will be updated according to the latest input from user. 
+* To remove the link from a person, use `link INDEX` without the `LINK` parameter.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The link provided by user must be a valid link. 
@@ -392,7 +424,7 @@ Wi-Find data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-Wi-Find data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Wi-Find data are saved automatically as a JSON file `JAR_FILE_LOCATION/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Wi-Find will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
