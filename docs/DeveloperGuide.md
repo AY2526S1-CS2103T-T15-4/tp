@@ -773,8 +773,8 @@ Achievements:
 
 ## **Planned Enhancements**
 - Upcoming meetings listed should be sorted.
-- Implement correct parsing of leap years.
 - Add more countries to timezonemapper.
 - Fix link and edit command to not reset the filtered list back to unfiltered list after execution.
 - Allow filtering of flagged contacts.
 - Implement compatibility for meetings in dd-mm-yyyy in find command instead of just dd mmm yyyy.
+- Make edit only trigger duplicate detection upon editing phone or email fields
