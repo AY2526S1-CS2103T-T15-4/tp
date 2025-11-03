@@ -34,6 +34,7 @@ Use this table of contents to jump to any section!
     to install java
     - Mac users: Follow this [Mac guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) to get 
       the exact version you need.
+    - Linux users: Follow this [Linux guide](https://se-education.org/guides/tutorials/javaInstallationLinux.html)
 
 
 2. Download Wi-Find
