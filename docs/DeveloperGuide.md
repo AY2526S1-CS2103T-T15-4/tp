@@ -297,7 +297,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Save and read contacts on shutdown/startup**
+**Use case: UC-03 - Save and read contacts on shutdown/startup**
 
 **MSS**
 
@@ -327,7 +327,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC03 Search contacts by company**
+* 1c. File is corrupted
+
+    * 1c1. Wi-Find clears the previously saved contact list.
+
+    * Use case resumes at step 3.
+
+**Use case: UC04 - Search contacts by company**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -352,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC04 - Add meeting to a contact**
+**Use case: UC05 - Add meeting to a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -385,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-**Use case: UC05 - Delete meeting from a contact**
+**Use case: UC06 - Delete meeting from a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -418,7 +424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC06 - Edit the information of a contact**
+**Use case: UC07 - Edit the information of a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -450,7 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * If user cancels, use case ends.
     * Else use case continues from step 2.
 
-**Use case: UC07 - Flag a contact**
+**Use case: UC08 - Flag a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -482,7 +488,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
       Use case ends.
 
-**Use case: UC08 - Unflag a contact**
+**Use case: UC09 - Unflag a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -514,7 +520,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC09 - Update a link to a contact**
+**Use case: UC010 - Update a link to a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -540,7 +546,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC10 - Removes a link from a contact**
+**Use case: UC11 - Removes a link from a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -572,7 +578,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC11 - Add a link to a contact**
+**Use case: UC12 - Add a link to a contact**
 
 **Preconditions: There exists at least one person in the list**
 
