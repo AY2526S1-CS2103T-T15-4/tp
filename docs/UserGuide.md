@@ -346,6 +346,8 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
   your local time, hence it is highly recommended to put meetings in your local time.
 * Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
 * Upcoming meeting section will be refreshed whenever the user edits that specified contact or reopens the app.
+* Note: Each contact can have multiple meetings associated with them. Although there is no enforced limit, for optimal 
+  performance and readability, it is recommended to keep the number of meetings per contact below 50.
 
 Examples:
 * `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
