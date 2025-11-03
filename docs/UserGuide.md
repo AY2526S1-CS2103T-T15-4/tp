@@ -415,7 +415,7 @@ Format: `clear`
 
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**
-This action cannot be undone!
+WARNING: There is no confirmation message and this action cannot be undone!
 </div>
 
 <div style="page-break-after: always;"></div>
