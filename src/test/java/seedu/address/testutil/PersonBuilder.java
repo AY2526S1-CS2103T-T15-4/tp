@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class PersonBuilder {
     private HomeCountry country;
     private Set<Tag> tags;
     private boolean isFlagged;
-    private Set<Meeting> meetings;
+    private ArrayList<Meeting> meetings;
     private Link link;
 
     /**
@@ -48,7 +49,7 @@ public class PersonBuilder {
         company = new Company(DEFAULT_COMPANY);
         tags = new HashSet<>();
         isFlagged = false;
-        meetings = new HashSet<>();
+        meetings = new ArrayList<>();
         link = null;
     }
 
@@ -63,7 +64,7 @@ public class PersonBuilder {
         company = personToCopy.getCompany();
         tags = new HashSet<>(personToCopy.getTags());
         isFlagged = personToCopy.isFlagged();
-        meetings = new HashSet<>(personToCopy.getMeetings());
+        meetings = new ArrayList<>(personToCopy.getMeetings());
         link = personToCopy.getLink();
     }
 
@@ -128,7 +129,7 @@ public class PersonBuilder {
      * Each meeting string should be in the format "DD-MM-YYYY HH:MM [description]".
      */
     public PersonBuilder withMeetings(String... meetings) {
-        this.meetings = new HashSet<>();
+        this.meetings = new ArrayList<>();
         for (String meeting : meetings) {
             String[] parts = meeting.split(" ", 3); // Split on first two spaces (date, time, description)
             if (parts.length < 2) {
