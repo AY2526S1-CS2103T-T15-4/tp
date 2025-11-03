@@ -341,7 +341,7 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
 * The index refers to the index number shown in the displayed person list
 * The index **must be a positive integer** 1, 2, 3, …​
 * The meeting time provided must follow the format dd-MM-YYYY HH:MM
-* The description is optional
+* The description is optional and limited to up to 50 characters.
 * Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using 
   your local time, hence it is highly recommended to put meetings in your local time.
 * Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
