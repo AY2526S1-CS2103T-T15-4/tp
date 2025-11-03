@@ -76,7 +76,7 @@ Some quick notes regarding how commands work:
 | **[Add Meeting](#adding-a-meeting-to-a-person--addm)**           | Add Meeting to a contact          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm 1 m/12-02-2020 12:30 Project Star`                                                                                   |
 | **[Delete Meeting](#deleting-a-meeting-from-a-person--deletem)** | Delete Meeting from a contact     | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem 1 m/12-02-2020 12:30`                                                                                                      |
 | **[List Meeting](#list-previous-meetings-of-a-person--listm)**   | List past meetings of contact     | `listm INDEX`                                                                                                                                                                    |
-| **[Link](#adding-a-link-to-a-person--link)**                     | Adds/Updates/Removes a link       | `link INDEX LINK`                                                                                                                                                                |
+| **[Link](#managing-a-link-of-a-person--link)**                   | Adds/Updates/Removes a link       | `link INDEX {LINK}`                                                                                                                                                              |
 | **[Clear](#clearing-all-entries--clear)**                        | Clears contacts                   | `clear`                                                                                                                                                                          |
 | **[Help](#viewing-help--help)**                                  | Displays help window              | `help`                                                                                                                                                                           |
 
@@ -387,13 +387,13 @@ Example:
 
 <div style="page-break-after: always;"></div>
 
-### Adding a link to a person : `link`
+### Managing a link of a person : `link`
 
-Adds a link to the specified person from the address book.
+Adds/updates/remove a link from the specified person from the address book.
 
 Format: `link INDEX {LINK}`
 
-* Adds a link to the person at the specified `INDEX`.
+* Adds a link to the person at the specified `INDEX` using `link INDEX LINK`.
 * If the person already has a link, the link will be updated according to the latest input from user. 
 * To remove the link from a person, use `link INDEX` without the `LINK` parameter.
 * The index refers to the index number shown in the displayed person list.
