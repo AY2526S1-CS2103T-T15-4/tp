@@ -125,7 +125,8 @@ Commands in Wi-Find follow a flexible format as described below.
     - `add n/Jane[ n/] Doe p/87654321 e/jane@gmail.com c/China com/Google` → Name: "Jane n/ Doe"
   - **Important:**
     - Text after "/" should be typed **outside** the square brackets → <code>[ prefix/]text</code>✓, <code>[ prefix/text]</code>✗
-  - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket notation, "Singapore com/" would be interpreted as country "Singapore" followed by a new company field.
+  - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket 
+    notation, "n/Jody p/" would be interpreted as name "Jody" followed by a new phone field instead of name "Jody p/".
 
 * **PDF Warning:** When copying multi-line commands from PDF, spaces around line breaks may be lost
 
@@ -340,7 +341,7 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
 * The index refers to the index number shown in the displayed person list
 * The index **must be a positive integer** 1, 2, 3, …​
 * The meeting time provided must follow the format dd-MM-YYYY HH:MM
-* The description is optional
+* The description is optional and limited to up to 50 characters.
 * Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using 
   your local time, hence it is highly recommended to put meetings in your local time.
 * Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
@@ -414,7 +415,7 @@ Format: `clear`
 
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**
-This action cannot be undone!
+WARNING: There is no confirmation message and this action cannot be undone!
 </div>
 
 <div style="page-break-after: always;"></div>
