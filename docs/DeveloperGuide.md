@@ -376,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The meeting provided is of invalid format.
+* 3a. The meeting provided is of invalid format or description is too long.
 
     * 3a1. Wi-Find shows an error message.
 
