@@ -38,11 +38,7 @@ ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
 XYZCommandParser ..> MultiFieldContainsKeywordsPredicate
 MultiFieldContainsKeywordsPredicate ..> ArgumentMultimap
-XYZCommand ..> MultiFieldContainsKeywordsPredicate : <<use>>
+XYZCommand ..> "0..1" MultiFieldContainsKeywordsPredicate : <<use>>
 
-note right of XYZCommand
-  MultiFieldContainsKeywordsPredicate
-  is only used by FindCommand.
-end note
 
 @enduml
