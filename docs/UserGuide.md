@@ -34,6 +34,7 @@ Use this table of contents to jump to any section!
     to install java
     - Mac users: Follow this [Mac guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) to get 
       the exact version you need.
+    - Linux users: Follow this [Linux guide](https://se-education.org/guides/tutorials/javaInstallationLinux.html)
 
 
 2. Download Wi-Find
@@ -45,7 +46,8 @@ Use this table of contents to jump to any section!
 
 
 3. Run Wi-Find
-   1. Open a command prompt (Windows) or terminal (Mac)
+   1. Open a **command prompt** (Windows), **terminal** (Mac) or **linux terminal/ Konsole** (Linux, depending on 
+      your desktop environment)
    2. Go to the **home folder** you designated for Wi-Find:
    
       ```bash
@@ -98,21 +100,21 @@ Some quick notes regarding how commands work:
 - Emails are automatically lowercased.
 - User confirmation required to add duplicate contacts.
 
-| Action                                                           | Description                                       | Format, Examples                                                                                                                                                                 |
-|------------------------------------------------------------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-person-add)**                                  | Adds contact                                      | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
-| **[Edit](#editing-a-person--edit)**                              | Edits specified contact                           | `edit INDEX {n/NAME} {p/PHONE_NUMBER} {e/EMAIL} {c/COUNTRY} {com/COMPANY} {t/TAG}…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
-| **[Delete](#deleting-a-person--delete)**                         | Deletes specified contact                         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
-| **[List](#listing-all-persons--list)**                           | List all contacts                                 | `list`                                                                                                                                                                           |
-| **[Find](#locating-persons-by-name-find)**                       | Filters contacts based on keyword                 | `find {n/NAME}…​ {p/PHONE_NUMBER}…​ {e/EMAIL}…​ {c/COUNTRY}…​ {com/COMPANY}…​ {t/TAG}…​ {m/MEETING}…​ {l/LINK}…​`<br> e.g., `find n/James n/Jake`                                |
-| **[Flag](#flagging-a-person--flag)**                             | Flags contact or shows a list of flagged contacts | `flag {INDEX}`                                                                                                                                                                   |
-| **[Unflag](#unflagging-a-person--unflag)**                       | Unflags contact                                   | `unflag INDEX`                                                                                                                                                                   |
-| **[Add Meeting](#adding-a-meeting-to-a-person--addm)**           | Add Meeting to a contact                          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm 1 m/12-02-2020 12:30 Project Star`                                                                                   |
-| **[Delete Meeting](#deleting-a-meeting-from-a-person--deletem)** | Delete Meeting from a contact                     | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem 1 m/12-02-2020 12:30`                                                                                                      |
-| **[List Meeting](#list-previous-meetings-of-a-person--listm)**   | List past meetings of contact                     | `listm INDEX`                                                                                                                                                                    |
-| **[Link](#adding-a-link-to-a-person--link)**                     | Adds/Updates/Removes a link                       | `link INDEX LINK`                                                                                                                                                                |
-| **[Clear](#clearing-all-entries--clear)**                        | Clears contacts                                   | `clear`                                                                                                                                                                          |
-| **[Help](#viewing-help--help)**                                  | Displays help window                              | `help`                                                                                                                                                                           |
+| Action                                                           | Description                       | Format, Examples                                                                                                                                                                 |
+|------------------------------------------------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-person-add)**                                  | Adds contact                      | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/Singapore com/Riot Games t/friend t/colleague` |
+| **[Edit](#editing-a-person--edit)**                              | Edits specified contact           | `edit INDEX {n/NAME} {p/PHONE_NUMBER} {e/EMAIL} {c/COUNTRY} {com/COMPANY} {t/TAG}…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
+| **[Delete](#deleting-a-person--delete)**                         | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
+| **[List](#listing-all-persons--list)**                           | List all contacts                 | `list`                                                                                                                                                                           |
+| **[Find](#locating-persons-by-name-find)**                       | Filters contacts based on keyword | `find {n/NAME}…​ {p/PHONE_NUMBER}…​ {e/EMAIL}…​ {c/COUNTRY}…​ {com/COMPANY}…​ {t/TAG}…​ {m/MEETING}…​ {l/LINK}…​`<br> e.g., `find n/James n/Jake`                                |
+| **[Flag](#flagging-a-person--flag)**                             | Flags contact or shows a list of flagged contacts                    | `flag {INDEX}`                                                                                                                                                                   |
+| **[Unflag](#unflagging-a-person--unflag)**                       | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
+| **[Add Meeting](#adding-a-meeting-to-a-person--addm)**           | Add Meeting to a contact          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm 1 m/12-02-2020 12:30 Project Star`                                                                                   |
+| **[Delete Meeting](#deleting-a-meeting-from-a-person--deletem)** | Delete Meeting from a contact     | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem 1 m/12-02-2020 12:30`                                                                                                      |
+| **[List Meeting](#list-previous-meetings-of-a-person--listm)**   | List past meetings of contact     | `listm INDEX`                                                                                                                                                                    |
+| **[Link](#managing-a-link-of-a-person--link)**                   | Manage a link                     | `link INDEX {LINK}`                                                                                                                                                              |
+| **[Clear](#clearing-all-entries--clear)**                        | Clears contacts                   | `clear`                                                                                                                                                                          |
+| **[Help](#viewing-help--help)**                                  | Displays help window              | `help`                                                                                                                                                                           |
 
 <div style="page-break-after: always;"></div>
 
@@ -332,7 +334,7 @@ Examples:
 
 ### Flagging a person : `flag`
 
-Flags the specified person from the address book or show a filtered list of flagged contacts.
+Flags the specified person from the address book for quick identification or show a filtered list of flagged contacts.
 
 Format: `flag {INDEX}`
 
@@ -427,13 +429,13 @@ Example:
 
 <div style="page-break-after: always;"></div>
 
-### Adding a link to a person : `link`
+### Managing a link of a person : `link`
 
-Adds a link to the specified person from the address book.
+Adds/updates/remove a link from the specified person from the address book.
 
 Format: `link INDEX {LINK}`
 
-* Adds a link to the person at the specified `INDEX`.
+* Adds a link to the person at the specified `INDEX` using `link INDEX LINK`.
 * If the person already has a link, the link will be updated according to the latest input from user. 
 * To remove the link from a person, use `link INDEX` without the `LINK` parameter.
 * The index refers to the index number shown in the displayed person list.
@@ -505,13 +507,36 @@ _Details coming soon ..._
 
 <div style="page-break-after: always;"></div>
 
-## Known issues (as of v1.5)
+## Known issues (as of v1.6)
 
 Issue 1: **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
 Solution 1: The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 Issue 2: **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear.<br>
 Solution 2: The remedy is to manually restore the minimized Help Window.
+
+Issue 3: **Non-latin unicode characters** displayed as ▯ on **Linux (Ubuntu)** systems
+
+
+Affected platforms:
+- Linux distributions
+- Wi-Find versions ≤ 1.6
+
+
+Temporary workaround: Install full Unicode-compatible fonts on your Linux system, then restart Wi-Find
+```bash
+sudo apt install fonts-noto fonts-noto-cjk fonts-noto-color-emoji fonts-noto-arabic
+```
+
+If the issue persists, launch Wi-Find using the following command to ensure UTF-8 encoding is enforced:
+```bash
+java -Dfile.encoding=UTF-8 -jar WiFind.jar
+```
+
+Planned Resolution:
+Future versions of Wi-Find will include improved cross-platform font handling to ensure all Unicode characters are 
+displayed correctly by default, regardless of operating system.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -572,6 +597,13 @@ Here’s how to open it:
     - Open **Spotlight Search** (press **Command + Space**)
     - Type `Terminal`, then press **Enter**.
     - A white or black window will appear — that’s your Terminal.
+
+- **Linux**
+    - Press **Ctrl + Alt + T** to open a new terminal window.
+    - Alternatively, you can open it from your applications menu — search for “**Terminal**” or “**Konsole**” 
+      (depending on your desktop environment).
+    - A terminal window will open, ready for commands.
+
 
 #### Step 2: Go to the folder where Wi-Find is
 
