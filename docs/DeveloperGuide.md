@@ -136,6 +136,8 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="650" />
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The arrow from `ModelManager` to `Person` should be labeled '* filtered', and the arrow from `PersonList` to `Person` should be labeled '* all', but they look swapped due to a limitation of PlantUML.
+</div>
 
 The `Model` component,
 
