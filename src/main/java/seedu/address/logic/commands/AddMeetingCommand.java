@@ -21,7 +21,8 @@ public class AddMeetingCommand extends ConfirmableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting time to a person in the address book.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_MEETING + "MEETING_TIME (format: DD-MM-YYYY HH:MM) Description(optional)\n"
+            + PREFIX_MEETING + "MEETING_TIME (format: DD-MM-YYYY HH:MM) Description(optional and less than 50 "
+            + "characters)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_MEETING + "20-10-2025 14:30 Project LinkUp";
 
@@ -56,7 +57,7 @@ public class AddMeetingCommand extends ConfirmableCommand {
      *
      * @param model The model containing the address book and filtered person list.
      * @return A {@code CommandResult} with feedback of the operation.
-     * @throws CommandException If the index is invalid or the meeting already exists.
+     * @throws CommandException If the index is invalid.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
