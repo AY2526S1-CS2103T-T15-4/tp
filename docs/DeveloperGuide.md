@@ -393,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC06 - Delete meeting from a contact**
 
-**Preconditions: There exists at least one person in the list**
+**Preconditions: There exists at least one person in the list with at least one meeting**
 
 **MSS**
 
