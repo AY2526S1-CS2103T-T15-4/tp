@@ -128,6 +128,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* `FindCommandParser` uses `MultiFieldContainsKeywordsPredicate` to use `ArgumentMultimap` to search through the contact list.
 
 <div style="page-break-after: always;"></div>
 
@@ -136,6 +137,8 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="650" />
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The arrow from `ModelManager` to `Person` should be labeled '* filtered', and the arrow from `PersonList` to `Person` should be labeled '* all', but they look swapped due to a limitation of PlantUML.
+</div>
 
 The `Model` component,
 
@@ -222,63 +225,66 @@ In Java's <code>DateTimeFormatter</code>, <code>yyyy</code> represents the **yea
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​        | I want to …​                                     | So that I can…​                                       |
-|----------|----------------|--------------------------------------------------|-------------------------------------------------------|
-| `* * *`    | user           | add new contacts with their relevant information | check and contact relevant personnel when necessary.  |
-| `* * *`    | user           | delete a person                                  | remove contacts that I no longer need.                |
-| `* * *`    | user           | save and read contacts on shutdown/startup       | maintain contact information across instances of usage. |
-| `* * *`    | busy user      | search contacts by company                       | sift through contacts easily.                         |
-| `* * *`    | user           | add meetings to clients                          | be reminded of our next meeting.                      |
-| `* * *`    | user           | delete past meetings                             | de-clutter the contact list.                          |
-| `* *`      | user           | check client's local time zone                   | contact them at appropriate times.                    |
-| `* *`      | user           | edit my contacts                                 | update client information easily.                     |
-| `* *`      | user           | attach tags to clients                           | recall connections to the client.                     |
-| `* *`      | user           | get alerts for clashing meetings                 | prevent double booking.                               |
-| `* *`      | user           | search contacts by country                       | contact groups of people under the filter             |
-| `* *`      | user           | search contacts by tag                           | contact groups of people under the filter.            |
-| `* *`      | user           | search contacts by name                          | contact groups of people under the filter.            |
-| `* *`      | user           | Search contacts by phone number                  | contact groups of people under the filter.            |
-| `*`        | user           | attach links to clients                          | store the related links easily.                       |
-| `*`        | user           | flag some clients                                | quickly find them in the list.                        |
-| `*`        | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.      |
-| `*`        | impatient user | see my frequently contacted users                | save time.                                            |
-| `*`        | user           | auto-convert meeting times into my timezone      | prevent making scheduling mistakes.                   |
+| Priority | As a …​        | I want to …​                                     | So that I can…​                                         |
+|----------|----------------|--------------------------------------------------|---------------------------------------------------------|
+| `* * *`  | user           | add new contacts with their relevant information | check and contact relevant personnel when necessary.    |
+| `* * *`  | user           | delete a person                                  | remove contacts that I no longer need.                  |
+| `* * *`  | user           | save and read contacts on shutdown/startup       | maintain contact information across instances of usage. |
+| `* * *`  | busy user      | search contacts by company                       | sift through contacts easily.                           |
+| `* * *`  | user           | add meetings to clients                          | be reminded of our next meeting.                        |
+| `* * *`  | user           | delete past meetings                             | de-clutter the contact list.                            |
+| `* *`    | user           | check client's local time zone                   | contact them at appropriate times.                      |
+| `* *`    | user           | edit my contacts                                 | update client information easily.                       |
+| `* *`    | user           | attach tags to clients                           | recall connections to the client.                       |
+| `* *`    | user           | get alerts for clashing meetings                 | prevent double booking.                                 |
+| `* *`    | user           | search contacts by country                       | contact groups of people under the filter               |
+| `* *`    | user           | search contacts by tag                           | contact groups of people under the filter.              |
+| `* *`    | user           | search contacts by name                          | contact groups of people under the filter.              |
+| `* *`    | user           | search contacts by phone number                  | contact groups of people under the filter.              |
+| `*`      | user           | attach links to clients                          | store the related links easily.                         |
+| `*`      | user           | flag some clients                                | quickly find them in the list.                          |
+| `*`      | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
+| `*`      | impatient user | see my frequently contacted users                | save time.                                              |
+| `*`      | user           | auto-convert meeting times into my timezone      | prevent making scheduling mistakes.                     |
 
 <div style="page-break-after: always;"></div>
 
 ### Use cases
 
+**Software System: Wi-Find**
+
 **Use case: UC01 - Add a contact**
+
+**Actor: User**
 
 **MSS**
 
 1.  User requests to add a new contact.
-2.  User submits the contact details.
-3.  If the input is valid and the contact does not already exist, Wi-Find visibly adds the new contact.
-4.  Wi-Find shows a success message.
+2.  Wi-Find adds the new contact and shows a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. A required field is empty.
+* 1a. One or more required fields are invalid or empty.
+    * 1b1. Wi-Find shows an error message and prompts the user to correct it.
+    * 1b2. User resubmits new data.
 
-    * 2a1. Wi-Find shows an error message for the missing field and prompts the user to fill it.
-    * 2a2. User corrects the input and resubmits.
-      * Return to step 3.
+      Steps 1b1 to 1b2 are repeated until the all data entered is correct
 
-* 2b. One or more required fields are invalid.
+      Use case resumes from step 2
 
-    * 2b1. Wi-Find shows an error message for the first invalid field and prompts the user to correct it.
-    * 2b2. User corrects the field and resubmits.
-      * Return to step 3.
 
-* 2c. Contact already exists (duplicate contact number or email).
-    * 2c1. Wi-Find warns the user about the duplicate and asks for confirmation.
+* 1b. Contact already exists (duplicate contact number or email).
+    * 1c1. Wi-Find warns the user about the duplicate and asks for confirmation.
       * If user cancels, use case ends.
-      * If the user confirms, continue from step 3.
+      * If the user confirms, use case resumes from step 2.
+
+**Software System: Wi-Find**
 
 **Use case: UC02 - Delete a contact**
+
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -300,7 +306,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
+
 **Use case: UC-03 - Save and read contacts on shutdown/startup**
+
+**Actor: User**
 
 **MSS**
 
@@ -336,7 +346,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * Use case resumes at step 3.
 
+**Software System: Wi-Find**
+
 **Use case: UC04 - Search contacts by company**
+
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -351,17 +365,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. One or more of the inputs are invalid
 
-    * 2a1. Wi-Find shows an error message.
+    * 1a1. Wi-Find shows an error message.
 
       Use case ends.
 
-* 3a. No contacts match the company name.
+* 2a. No contacts match the company name.
 
-    * 3a1. Wi-Find shows an empty list message.
+    * 2a1. Wi-Find shows an empty list message.
 
       Use case ends.
+
+**Software System: Wi-Find**
 
 **Use case: UC05 - Add meeting to a contact**
+
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -394,7 +412,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
+**Software System: Wi-Find**
+
 **Use case: UC06 - Delete meeting from a contact**
+
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list with at least one meeting**
 
@@ -427,7 +449,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
+
 **Use case: UC07 - Edit the information of a contact**
+
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -459,7 +485,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * If user cancels, use case ends.
     * Else use case continues from step 2.
 
+**Software System: Wi-Find**
+
 **Use case: UC08 - Flag a contact**
+
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -491,7 +521,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
       Use case ends.
 
+**Software System: Wi-Find**
+
 **Use case: UC09 - Unflag a contact**
+
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -523,7 +557,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
+
 **Use case: UC010 - Update a link to a contact**
+
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -549,7 +587,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
+
 **Use case: UC11 - Removes a link from a contact**
+
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -581,7 +623,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
+
 **Use case: UC12 - Add a link to a contact**
+
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -629,7 +675,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - On a computer meeting the minimum hardware specifications (Intel i5 10th Gen, 8 GB RAM, SSD, Windows 10 or 
       macOS 12), the system’s startup time — measured from launch command to main interface ready for input — shall not exceed 
       3 seconds in 95% of test runs.
-    - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+    - Should be able to hold up to 1000 persons and 50 meetings per contact without a noticeable sluggishness in 
+      performance for typical usage.
     - Search/filter operations should return results within 1 second for 1000 contacts.
 4.  Usability Requirements
     - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
@@ -642,7 +689,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - The product should be packaged as a single `.jar` file (≤100 MB).
     - Documents should not exceed 15 MB each.
 7.  Reliability Requirements
-    - The system should not crash under normal usage (Managing up to 1000 persons).
+    - The system should not crash under normal usage (Managing up to 1000 persons with 50 meetings each).
     - Invalid input should not cause data corruption or loss.
 8.  Automatic timezone requirements
     - The system should be able to change the local time if user travels overseas.

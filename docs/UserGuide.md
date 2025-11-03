@@ -4,12 +4,13 @@ title: User Guide
 ---
 
 Wi-Find is a **desktop app for managing contacts**, optimized for use via a **Command Line Interface** (CLI),
-It's designed for **freelance workers** who manage clients across multiple time zones, helping them manage multitude of contacts so they won't accidentally schedule meetings at 3 a.m!
+It's designed for **freelance project managers** who need to manage clients across multiple time zones, helping them 
+manage multitude of contacts so they won't accidentally schedule meetings at 3 a.m!
 
 Key features:
 - Faster than typical GUI apps if you are able to type fast.
 - Contact management through both country and company.
-- Automatic timezone awareness.
+- Automatic timezone awareness of contacts, displays their local time.
 - Fast text-based commands with immediate feedback.
 - Set meetings with contacts
 - Find contacts by company, country, meetings.
@@ -28,18 +29,50 @@ Use this table of contents to jump to any section!
 
 ## Quick start
 
-1. Install Java 17 or later. Not sure how? Follow this [installation guide for Windows.](https://se-education.org/guides/tutorials/javaInstallationWindows.html)<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+1. Wi-Find needs Java to run. Not sure how? Don't worry!
+    - Windows users: Follow this [easy step-by-step guide](https://se-education.org/guides/tutorials/javaInstallationWindows.html)
+    to install java
+    - Mac users: Follow this [Mac guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) to get 
+      the exact version you need.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T15-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for Wi-Find.
+2. Download Wi-Find
+   1. Go to the [Wi-Find releases page](https://github.com/AY2526S1-CS2103T-T15-4/tp/releases).<br>
+   2. Click on the latest version and download WiFind.jar.
+   3. Choose a "Home" for Wi-Find<br>
+   Pick a folder on your computer where you'd like Wi-Find to live - this is your **home folder**<br>
+   Move the WiFind.jar file you just downloaded into that folder.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar WiFind.jar` command to run the application. (Ensure file name matches exactly when you type it in, else it won't work.)<br>
-   A GUI similar to the below should appear in a few seconds, preloaded with sample data.<br>
+
+3. Run Wi-Find
+   1. Open a command prompt (Windows) or terminal (Mac)
+   2. Go to the **home folder** you designated for Wi-Find:
+   
+      ```bash
+      cd path/to/your/folder
+      ``` 
+   
+        Note: Never used a terminal before? Don't worry, click [here](#detailed-guide-on-how-to-open-wi-find) to go to 
+   our easy step-by-step guide on how to navigate the terminal.<br>
+
+   3. Start Wi-Find by typing:
+       ```bash
+       java -jar WiFind.jar
+       ```
+   
+      Ensure file name matches exactly when you type it in. If it doesn't open, double-check the spelling!
+
+
+4. You're in!<br>
+
+   After a few seconds, the Wi-Find window will appear - already loaded with sample data for you to explore!
+
    ![UIDesc](images/Ui Desc.png)
 
-5. Type the input in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   
+5. Get familiar with Wi-Find! <br>
+   Type the input in the command box and press Enter to execute it. e.g. typing **`help`** 
+   and pressing Enter will open the help window.<br>
    [Commands](#command-summary) follow the pattern of ```command prefix/parameter...```. Here are some example commands you can try:
    * `list` : Lists all contacts.
 
@@ -51,7 +84,8 @@ Use this table of contents to jump to any section!
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+
+6. Refer to the [Features](#features) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -70,7 +104,7 @@ Some quick notes regarding how commands work:
 | **[Edit](#editing-a-person--edit)**                              | Edits specified contact           | `edit INDEX {n/NAME} {p/PHONE_NUMBER} {e/EMAIL} {c/COUNTRY} {com/COMPANY} {t/TAG}…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
 | **[Delete](#deleting-a-person--delete)**                         | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
 | **[List](#listing-all-persons--list)**                           | List all contacts                 | `list`                                                                                                                                                                           |
-| **[Find](#locating-persons-by-name-find)**                       | Filters contacts based on keyword | `find PREFIX/PARAMETER...`<br> e.g., `find n/James n/Jake`                                                                                                                       |
+| **[Find](#locating-persons-by-name-find)**                       | Filters contacts based on keyword | `find {n/NAME}…​ {p/PHONE_NUMBER}…​ {e/EMAIL}…​ {c/COUNTRY}…​ {com/COMPANY}…​ {t/TAG}…​ {m/MEETING}…​ {l/LINK}…​`<br> e.g., `find n/James n/Jake`                                |
 | **[Flag](#flagging-a-person--flag)**                             | Flags contact                     | `flag INDEX`                                                                                                                                                                     |
 | **[Unflag](#unflagging-a-person--unflag)**                       | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
 | **[Add Meeting](#adding-a-meeting-to-a-person--addm)**           | Add Meeting to a contact          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm 1 m/12-02-2020 12:30 Project Star`                                                                                   |
@@ -270,15 +304,15 @@ Format: `list`
 
 <div style="page-break-after: always;"></div>
 
-### Locating persons: `find`
+### Locating persons by parameters: `find`
 
 Finds persons through searching the parameters with given keywords.
 
-Format: `find {n/NAME}... {p/PHONE_NUMBER}... {e/EMAIL}... {c/COUNTRY}... {com/COMPANY}... {t/TAG}...`
+Format: `find {n/NAME}…​ {p/PHONE_NUMBER}…​ {e/EMAIL}…​ {c/COUNTRY}…​ {com/COMPANY}…​ {t/TAG}…​ {m/MEETING}…​ {l/LINK}…​`
 
 * <code>find</code> requires at least 1 Prefix-Parameter Pair
 * The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the parameter does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is done by substring searching. e.g. `an` will match `Hans`
 * Multiple keywords under the same prefix works like `OR` search, while keywords across multiple prefixes works like `AND` search. For example, `find n/Alex n/Bob c/Singapore` will display all contacts whose name includes 'Alex' OR 'Bob', AND has 'Singapore' under country prefix.
 * When searching for meetings, use `DD MMM YYYY HH:MM <Description>` format, as displayed on the contact list.
 
@@ -289,6 +323,8 @@ If no contacts match, Wi-Find will show an empty list. Use <code>list</code> to 
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
+* `find n/Bri` returns `Brian Tay`
+* `find m/31 Oct 2025 18:00 Project discussion` returns meeting with meeting time `31 Oct 2025 18:00` and description `Project discussion`
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidNewResult.png)
 
@@ -346,6 +382,8 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
   your local time, hence it is highly recommended to put meetings in your local time.
 * Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
 * Upcoming meeting section will be refreshed whenever the user edits that specified contact or reopens the app.
+* Note: Each contact can have multiple meetings associated with them. Although there is no enforced limit, for optimal 
+  performance and readability, it is recommended to keep the number of meetings per contact below 50.
 
 Examples:
 * `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
@@ -513,4 +551,42 @@ UTC Offset given below does not accurately provide time difference, due to the u
 |          | Sweden          | `Europe/Stockholm`     | UTC +01:00 |
 |          | United Kingdom  | `Europe/London`        | UTC +00:00 |
 | Oceania  | Australia       | `Australia/Sydney`     | UTC +10:00 |
+
+--- 
+
+# Detailed guide on how to open Wi-Find
+
+
+####  Step 1: Open a terminal (also called a “command prompt”)
+
+The **terminal** is a small window where you can type commands for your computer.  
+Here’s how to open it:
+
+- **Windows:**
+    - Press **Windows + R**, type `cmd`, and hit **Enter**.
+    - A black window will appear — that’s your Command Prompt.
+
+- **Mac:**
+    - Open **Spotlight Search** (press **Command + Space**)
+    - Type `Terminal`, then press **Enter**.
+    - A white or black window will appear — that’s your Terminal.
+
+#### Step 2: Go to the folder where Wi-Find is
+
+In the terminal, type `cd` followed by the path to the **home folder** where you saved `WiFind.jar` previously.
+For example:
+```bash
+    cd Desktop/WiFindHomeFolder
+```
+
+Tip: You can also drag the folder into the terminal window, it will automatically fill in the correct path!
+
+#### Step 3: Start Wi-Find by typing:
+```bash
+java -jar WiFind.jar
+```
+
+   Ensure file name matches exactly when you type it in. If it doesn't open, double-check the spelling!
+
+All done! Get familiar with WiFind continuing with step 4 in [Quick Start](#quick-start)!
 
