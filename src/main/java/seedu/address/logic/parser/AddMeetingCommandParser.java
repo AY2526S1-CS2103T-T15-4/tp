@@ -14,12 +14,17 @@ import seedu.address.model.person.Meeting;
 /**
  * Parses input arguments and creates a new {@link AddMeetingCommand} object.
  * <p>
- * Expected format: {@code addm INDEX m/MEETING_TIME [DESCRIPTION]}
+ * Expected format: {@code addm INDEX m/MEETING_TIME DESCRIPTION}
  * <br>
  * Example: {@code addm 1 m/20-10-2025 14:30 Project discussion}
  */
 public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
 
+    public static final String MESSAGE_INVALID_DESCRIPTION_LENGTH =
+            "Meeting description cannot be longer than 50 characters.";
+    public static final String MESSAGE_INVALID_MEETING_FORMAT =
+            "Meeting must follow the format DD-MM-YYYY HH:MM\n"
+            + "eg. 30-10-2020 12:30";
     /**
      * Parses the given {@code String} of arguments and returns an {@code AddMeetingCommand} object.
      *
@@ -46,18 +51,24 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         String meetingInput = argMultimap.getValue(PREFIX_MEETING).get().trim();
         String[] parts = meetingInput.split(" ", 3); // Split on first two spaces (date, time, description)
         if (parts.length < 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_MEETING_FORMAT));
         }
 
         String timePart = parts[0] + " " + parts[1]; // Combine date and time (DD-MM-YYYY HH:MM)
-        String description = parts.length > 2 ? parts[2] : null; // Description is optional
+        String description = null;
 
         LocalDateTime meetingTime;
         try {
             meetingTime = ParserUtil.parseMeetingTime(timePart);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddMeetingCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_MEETING_FORMAT), pe);
+        }
+
+        if (parts.length > 2) {
+            description = parts[2];
+            if (description.length() > 50) {
+                throw new ParseException(String.format(MESSAGE_INVALID_DESCRIPTION_LENGTH));
+            }
         }
 
         Meeting meeting = new Meeting(meetingTime, description);

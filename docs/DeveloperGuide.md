@@ -171,7 +171,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Duplicate checking for person
-Wi-find checks for Duplicates using email or phone number. 
+Wi-Find checks for Duplicates using email or phone number. 
 - If either of these already exist in the database, they are considered duplicates. 
 - Duplicate checking is checked in the Person class using the isSamePerson() method, and is handled in respective parsers by asking for confirmation.
 
@@ -180,6 +180,9 @@ Wi-find checks for Duplicates using email or phone number.
 Find command in Wi-Find supports filtering across multiple parameters. 
 - If two or more keywords of the same type of parameters are present, it works like a ‘OR’ search, displaying the contact as long as one of the keywords are present. 
 - For keywords of different parameters, it works like ‘AND’ search, where the contact is displayed only when all of the conditions are satisfied across the parameters.
+
+### Description for meetings
+Description field for adding meetings are optional and limited to 50 characters.
 
 ### <code>yyyy</code> vs <code>uuuu</code> in Strict Parsing
 In Java's <code>DateTimeFormatter</code>, <code>yyyy</code> represents the **year-of-era**, while <code>uuuu</code> represents the **proleptic year**.
@@ -208,7 +211,7 @@ In Java's <code>DateTimeFormatter</code>, <code>yyyy</code> represents the **yea
 *Target user profile*:
 
 * has a need to manage a significant number of contacts
-* contacts are from many different time zones and communication platforms
+* contacts are from many different time zones
 * contacts are also both long and short term
 * can type fast
 * prefers typing to mouse interactions
@@ -299,7 +302,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Save and read contacts on shutdown/startup**
+**Use case: UC-03 - Save and read contacts on shutdown/startup**
 
 **MSS**
 
@@ -313,7 +316,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Saving fails due to missing file.
+* 1a. Loading fails due to missing file.
 
     * 2a1. Wi-Find requests permission to create a new file.
 
@@ -321,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 1b. Wi-find is unable to read due to lack of permission.
+* 1b. Wi-Find is unable to read due to lack of permission.
 
     * 1b1. Wi-Find requests permission to read/write.
 
@@ -329,7 +332,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC03 Search contacts by company**
+* 1c. File is corrupted
+
+    * 1c1. Wi-Find clears the previously saved contact list.
+
+    * Use case resumes at step 3.
+
+**Use case: UC04 - Search contacts by company**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -354,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC04 - Add meeting to a contact**
+**Use case: UC05 - Add meeting to a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -369,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The meeting provided is of invalid format.
+* 3a. The meeting provided is of invalid format or description is too long.
 
     * 3a1. Wi-Find shows an error message.
 
@@ -387,9 +396,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-**Use case: UC05 - Delete meeting from a contact**
+**Use case: UC06 - Delete meeting from a contact**
 
-**Preconditions: There exists at least one person in the list**
+**Preconditions: There exists at least one person in the list with at least one meeting**
 
 **MSS**
 
@@ -420,7 +429,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC06 - Edit the information of a contact**
+**Use case: UC07 - Edit the information of a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -452,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * If user cancels, use case ends.
     * Else use case continues from step 2.
 
-**Use case: UC07 - Flag a contact**
+**Use case: UC08 - Flag a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -484,7 +493,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
       Use case ends.
 
-**Use case: UC08 - Unflag a contact**
+**Use case: UC09 - Unflag a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -516,7 +525,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC09 - Update a link to a contact**
+**Use case: UC010 - Update a link to a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -542,7 +551,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC10 - Removes a link from a contact**
+**Use case: UC11 - Removes a link from a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -574,7 +583,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC11 - Add a link to a contact**
+**Use case: UC12 - Add a link to a contact**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -613,14 +622,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Environment Requirements
-    - Should work on any _mainstream OS_ as long as it has Java `17`.
-    - Should be runnable without requiring installation.
+    - Should work on either Windows, Linux and macOS as long as it has Java `17`.
     - Should not depend on any remote server.
 2.  Data Requirements
     - User data should be locally in a human-editable text file.
     - Data should be automatically saved after each modification to prevent accidental loss.
 3.  Performance Requirements
-    - The system should start up within 3 seconds on a modern computer.
+    - On a computer meeting the minimum hardware specifications (Intel i5 10th Gen, 8 GB RAM, SSD, Windows 10 or 
+      macOS 12), the system’s startup time — measured from launch command to main interface ready for input — shall not exceed 
+      3 seconds in 95% of test runs.
     - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
     - Search/filter operations should return results within 1 second for 1000 contacts.
 4.  Usability Requirements
@@ -629,13 +639,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - The GUI should remain usable across standard screen resolutions (≥1280x720) and scaling settings (100%, 125%, 150%).
 5.  Maintainability Requirements
     - The system should follow object-oriented principles to support modularity and extensibility.
-    - Code should follow a consistent style guide.
+    - Code should follow the SE-EDU code style.
 6.  Portability Requirements
     - The product should be packaged as a single `.jar` file (≤100 MB).
     - Documents should not exceed 15 MB each.
 7.  Reliability Requirements
-    - The system should not crash under normal usage (adding, editing, deleting contacts).
+    - The system should not crash under normal usage (Managing up to 1000 persons).
     - Invalid input should not cause data corruption or loss.
+8.  Automatic timezone requirements
+    - The system should be able to change the local time if user travels overseas.
 
 <div style="page-break-after: always;"></div>
 
@@ -775,8 +787,9 @@ Achievements:
 
 ## **Planned Enhancements**
 - Upcoming meetings listed should be sorted.
-- Implement correct parsing of leap years.
 - Add more countries to timezonemapper.
 - Fix link and edit command to not reset the filtered list back to unfiltered list after execution.
 - Allow filtering of flagged contacts.
 - Implement compatibility for meetings in dd-mm-yyyy in find command instead of just dd mmm yyyy.
+- Make edit only trigger duplicate detection upon editing phone or email fields
+- Implement automatic conversion of meeting times into clients timezone
