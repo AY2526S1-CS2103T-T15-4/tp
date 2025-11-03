@@ -620,14 +620,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Environment Requirements
-    - Should work on any _mainstream OS_ as long as it has Java `17`.
-    - Should be runnable without requiring installation.
+    - Should work on either Windows, Linux and macOS as long as it has Java `17`.
     - Should not depend on any remote server.
 2.  Data Requirements
     - User data should be locally in a human-editable text file.
     - Data should be automatically saved after each modification to prevent accidental loss.
 3.  Performance Requirements
-    - The system should start up within 3 seconds on a modern computer.
+    - On a computer meeting the minimum hardware specifications (Intel i5 10th Gen, 8 GB RAM, SSD, Windows 10 or 
+      macOS 12), the system’s startup time — measured from launch command to main interface ready for input — shall not exceed 
+      3 seconds in 95% of test runs.
     - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
     - Search/filter operations should return results within 1 second for 1000 contacts.
 4.  Usability Requirements
@@ -636,13 +637,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - The GUI should remain usable across standard screen resolutions (≥1280x720) and scaling settings (100%, 125%, 150%).
 5.  Maintainability Requirements
     - The system should follow object-oriented principles to support modularity and extensibility.
-    - Code should follow a consistent style guide.
+    - Code should follow the SE-EDU code style.
 6.  Portability Requirements
     - The product should be packaged as a single `.jar` file (≤100 MB).
     - Documents should not exceed 15 MB each.
 7.  Reliability Requirements
-    - The system should not crash under normal usage (adding, editing, deleting contacts).
+    - The system should not crash under normal usage (Managing up to 1000 persons).
     - Invalid input should not cause data corruption or loss.
+8.  Automatic timezone requirements
+    - The system should be able to change the local time if user travels overseas.
 
 <div style="page-break-after: always;"></div>
 
