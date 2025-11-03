@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,6 +15,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import seedu.address.commons.time.TimeFormatter;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.TimezoneMapper;
 
@@ -105,7 +107,16 @@ public class PersonCard extends UiPart<Region> {
             int index = 1;
             LocalDateTime now = LocalDateTime.now();
 
-            for (var meeting : person.getMeetings()) {
+            List<Meeting> sortedMeeting = person.getMeetings().stream()
+                    .filter(m -> !m.getMeetingTime().isBefore(now)) // >= now
+                    .sorted(
+                            Comparator.comparing(Meeting::getMeetingTime)
+                                    .thenComparing(m -> m.getDescription().orElse(""),
+                                            Comparator.nullsLast(String::compareToIgnoreCase))
+                    )
+                    .toList();
+
+            for (var meeting : sortedMeeting) {
                 if (meeting.getMeetingTime().isAfter(now)) {
                     Label meetingLabel = new Label(index + ". " + meeting.toString());
                     meetingLabel.getStyleClass().add("cell_small_label"); // keep font consistent
