@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,14 +28,14 @@ public class Person {
     private final Company company;
     private final Set<Tag> tags = new HashSet<>();
     private final boolean isFlagged;
-    private final Set<Meeting> meetings = new HashSet<>();
+    private final List<Meeting> meetings;
     private final Link link;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, HomeCountry country, Company company, Set<Tag> tags,
-                  boolean isFlagged, Set<Meeting> meetings, Link link) {
+                  boolean isFlagged, List<Meeting> meetings, Link link) {
         requireAllNonNull(name, phone, email, country, company, tags, meetings);
         this.name = name;
         this.phone = phone;
@@ -42,7 +44,7 @@ public class Person {
         this.company = company;
         this.tags.addAll(tags);
         this.isFlagged = isFlagged;
-        this.meetings.addAll(meetings);
+        this.meetings = new ArrayList<>(meetings);
         this.link = link;
     }
 
@@ -77,8 +79,8 @@ public class Person {
         return isFlagged;
     }
 
-    public Set<Meeting> getMeetings() {
-        return Collections.unmodifiableSet(meetings);
+    public List<Meeting> getMeetings() {
+        return Collections.unmodifiableList(meetings);
     }
 
     public Link getLink() {
@@ -89,7 +91,7 @@ public class Person {
      * Returns a new Person with an updated set of meetings including the new meeting.
      */
     public Person withAddedMeeting(Meeting newMeeting) {
-        Set<Meeting> updatedMeetings = new HashSet<>(meetings);
+        List<Meeting> updatedMeetings = new ArrayList<>(meetings);
         updatedMeetings.add(newMeeting);
         return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings, link);
     }
@@ -98,7 +100,7 @@ public class Person {
      * Returns a new Person with the specified meeting removed from the set of meetings.
      */
     public Person withDeletedMeeting(Meeting meetingToDelete) {
-        Set<Meeting> updatedMeetings = new HashSet<>(meetings);
+        List<Meeting> updatedMeetings = new ArrayList<>(meetings);
         updatedMeetings.remove(meetingToDelete);
         return new Person(name, phone, email, country, company, tags, isFlagged, updatedMeetings, link);
     }

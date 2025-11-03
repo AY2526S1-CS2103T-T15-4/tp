@@ -241,6 +241,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user           | search contacts by tag                           | contact groups of people under the filter.              |
 | `* *`    | user           | search contacts by name                          | contact groups of people under the filter.              |
 | `* *`    | user           | search contacts by phone number                  | contact groups of people under the filter.              |
+| `* *`    | user           | list all contacts                                | check through the complete list of my contacts.         |
+| `* *`    | user           | list meetings of a contact                       | check for upcoming meetings or refer to past meetings.  |
 | `*`      | user           | attach links to clients                          | go to their websites easily.                            |
 | `*`      | user           | flag some clients                                | quickly find them in the list.                          |
 | `*`      | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
@@ -408,9 +410,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3c. The meeting time provided clashes with another meeting.
 
-    * 3c1. Wi-Find shows an error message.
-
-        Use case ends.
+    * 3c1. Wi-Find warns the user about the duplicate and asks for confirmation.
+        * If user cancels, use case ends.
+        * else, use case resumes from step 4.
+      
+*  3d. The meeting time provided is of the past (before current time).
+    * 3d1. Wi-Find warns the user about past meeting.
+        * If user cancels, use case ends.
+        * else, use case resumes from step 4.
+        * to view the past meeting, user needs to use `listm` feature.
 
 **Software System: Wi-Find**
 
@@ -661,6 +669,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1d1. Wi-Find <u>removes the link from the contact (UC10)</u>.
 
+**Software System: Wi-Find**
+
+**Use case: UC13 - Listing all meetings of a contact**
+
+**Actor: User**
+
+**Preconditions: There exists at least one person in the list**
+
+**MSS**
+
+1. User requests to list meetings of a contact.
+2. Wi-Find lists all the upcoming and past meetings of the contact.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The field provided is of invalid format.
+
+    * 1a1. Wi-Find shows an error message.
+
+      Use case ends.
+
 <div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
@@ -743,7 +774,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.

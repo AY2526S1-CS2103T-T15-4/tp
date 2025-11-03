@@ -52,7 +52,7 @@ public class Meeting {
 
     @Override
     public int hashCode() {
-        return Objects.hash(meetingTime);
+        return Objects.hash(meetingTime, description);
     }
 
     @Override

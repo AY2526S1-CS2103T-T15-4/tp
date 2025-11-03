@@ -139,7 +139,7 @@ public class EditCommand extends ConfirmableCommand {
         Company updatedCompany = editPersonDescriptor.getCompany().orElse(personToEdit.getCompany());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Boolean updatedIsFlagged = personToEdit.isFlagged();
-        Set<Meeting> unchangedMeetings = personToEdit.getMeetings();
+        List<Meeting> unchangedMeetings = personToEdit.getMeetings();
         Link updatedLink = personToEdit.getLink();
 
         return new Person(

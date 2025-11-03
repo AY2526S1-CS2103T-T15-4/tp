@@ -3,8 +3,10 @@ package seedu.address.model.util;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -81,7 +83,7 @@ public class SampleDataUtil {
      * Each string should be in the format "DD-MM-YYYY HH:MM [description]".
      * If no description is provided, the meeting will have no description.
      */
-    public static Set<Meeting> getMeetingSet(String... strings) {
+    public static List<Meeting> getMeetingSet(String... strings) {
         return Arrays.stream(strings)
                 .map(str -> {
                     String[] parts = str.split(" ", 3); // Split on first two spaces (for time and optional description)
@@ -94,7 +96,7 @@ public class SampleDataUtil {
                         throw new IllegalArgumentException("Invalid meeting time format: " + timePart, e);
                     }
                 })
-                .collect(Collectors.toCollection(HashSet::new));
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
 }

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -30,6 +31,13 @@ public class AddMeetingCommand extends ConfirmableCommand {
     public static final String MESSAGE_DUPLICATE_MEETING_WARNING =
             """
             Warning: A duplicate meeting already exists in the address book.
+            Please confirm if this meeting should still be added.
+            Enter 'y' to confirm or enter any other input to cancel AND continue normally.
+            """;
+
+    public static final String MESSAGE_PAST_MEETING_WARNING =
+            """
+            Warning: You are adding a meeting scheduled in the past.
             Please confirm if this meeting should still be added.
             Enter 'y' to confirm or enter any other input to cancel AND continue normally.
             """;
@@ -87,6 +95,10 @@ public class AddMeetingCommand extends ConfirmableCommand {
                 .anyMatch(person-> person.getMeetings().stream()
                         .anyMatch(currentMeeting -> currentMeeting.equals(meeting))) && !this.isConfirmed()) {
             return new CommandResult(MESSAGE_DUPLICATE_MEETING_WARNING, this.withConfirmed());
+        }
+
+        if (meeting.getMeetingTime().isBefore(LocalDateTime.now()) && !this.isConfirmed()) {
+            return new CommandResult(MESSAGE_PAST_MEETING_WARNING, this.withConfirmed());
         }
 
         model.addMeeting(personToUpdate, meeting);
