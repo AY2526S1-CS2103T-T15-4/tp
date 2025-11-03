@@ -243,7 +243,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user           | search contacts by phone number                  | contact groups of people under the filter.              |
 | `* *`    | user           | list all contacts                                | check through the complete list of my contacts.         |
 | `* *`    | user           | list meetings of a contact                       | check for upcoming meetings or refer to past meetings.  |
-| `*`      | user           | attach links to clients                          | go to their websites easily.                            |
+| `*`      | user           | attach links to clients                          | store the related links easily.                         |
 | `*`      | user           | flag some clients                                | quickly find them in the list.                          |
 | `*`      | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
 | `*`      | impatient user | see my frequently contacted users                | save time.                                              |
