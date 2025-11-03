@@ -514,6 +514,8 @@ Issue 2: **If you minimize the Help Window** and then run the `help` command (or
 Solution 2: The remedy is to manually restore the minimized Help Window.
 
 Issue 3: **Non-latin unicode characters** displayed as ▯ on **Linux (Ubuntu)** systems
+
+
 Affected platforms:
 - Linux distributions
 - Wi-Find versions ≤ 1.6
