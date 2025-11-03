@@ -46,7 +46,8 @@ Use this table of contents to jump to any section!
 
 
 3. Run Wi-Find
-   1. Open a command prompt (Windows) or terminal (Mac)
+   1. Open a **command prompt** (Windows), **terminal** (Mac) or **linux terminal/ Konsole** (Linux, depending on 
+      your desktop environment)
    2. Go to the **home folder** you designated for Wi-Find:
    
       ```bash
@@ -571,6 +572,13 @@ Here’s how to open it:
     - Open **Spotlight Search** (press **Command + Space**)
     - Type `Terminal`, then press **Enter**.
     - A white or black window will appear — that’s your Terminal.
+
+- **Linux**
+    - Press **Ctrl + Alt + T** to open a new terminal window.
+    - Alternatively, you can open it from your applications menu — search for “**Terminal**” or “**Konsole**” 
+      (depending on your desktop environment).
+    - A terminal window will open, ready for commands.
+
 
 #### Step 2: Go to the folder where Wi-Find is
 
