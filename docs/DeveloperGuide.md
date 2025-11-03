@@ -179,6 +179,9 @@ Find command in Wi-Find supports filtering across multiple parameters.
 - If two or more keywords of the same type of parameters are present, it works like a ‘OR’ search, displaying the contact as long as one of the keywords are present. 
 - For keywords of different parameters, it works like ‘AND’ search, where the contact is displayed only when all of the conditions are satisfied across the parameters.
 
+### Description for meetings
+Description field for adding meetings are optional and limited to 50 characters.
+
 ### <code>yyyy</code> vs <code>uuuu</code> in Strict Parsing
 In Java's <code>DateTimeFormatter</code>, <code>yyyy</code> represents the **year-of-era**, while <code>uuuu</code> represents the **proleptic year**.
 - When using <code>ResolverStyle.STRICT</code>, <code>yyyy</code> can produce a <code>TemporalAccessor</code> that **cannot always be resolved to** <code>LocalDateTime</code>, causing parsing errors.
