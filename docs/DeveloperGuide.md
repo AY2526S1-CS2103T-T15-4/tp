@@ -314,7 +314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Saving fails due to missing file.
+* 1a. Loading fails due to missing file.
 
     * 2a1. Wi-Find requests permission to create a new file.
 
