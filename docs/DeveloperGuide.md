@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 1b. Wi-find is unable to read due to lack of permission.
+* 1b. Wi-Find is unable to read due to lack of permission.
 
     * 1b1. Wi-Find requests permission to read/write.
 
