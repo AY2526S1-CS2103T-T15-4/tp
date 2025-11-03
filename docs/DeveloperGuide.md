@@ -209,7 +209,7 @@ In Java's <code>DateTimeFormatter</code>, <code>yyyy</code> represents the **yea
 *Target user profile*:
 
 * has a need to manage a significant number of contacts
-* contacts are from many different time zones and communication platforms
+* contacts are from many different time zones
 * contacts are also both long and short term
 * can type fast
 * prefers typing to mouse interactions
