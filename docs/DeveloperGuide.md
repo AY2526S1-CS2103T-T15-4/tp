@@ -787,3 +787,4 @@ Achievements:
 - Allow filtering of flagged contacts.
 - Implement compatibility for meetings in dd-mm-yyyy in find command instead of just dd mmm yyyy.
 - Make edit only trigger duplicate detection upon editing phone or email fields
+- Implement automatic conversion of meeting times into clients timezone
