@@ -114,7 +114,7 @@ Commands in Wi-Find follow a flexible format as described below.
   - Example: `help 123` is interpreted as `help`
 
 * **Input:** The complete string entered by the user into the application. It contains the command and any associated arguments or prefix-parameter pairs.
-    - Example: `help 123` is interpreted as `help`
+    - Example: `add n/John Doe p/98765432 e/johnd@example.com c/Singapore com/Shopee t/friends t/owesMoney`
 
 * **Literal prefix input** If your input contains text that looks like a prefix (e.g., "n/", "com/"), wrap it in brackets with a leading space: <code>[ prefix/]</code>
   - Format: One space goes **INSIDE** the opening bracket: <code>[ com/]</code> ✓
