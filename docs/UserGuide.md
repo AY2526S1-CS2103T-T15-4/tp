@@ -125,7 +125,8 @@ Commands in Wi-Find follow a flexible format as described below.
     - `add n/Jane[ n/] Doe p/87654321 e/jane@gmail.com c/China com/Google` → Name: "Jane n/ Doe"
   - **Important:**
     - Text after "/" should be typed **outside** the square brackets → <code>[ prefix/]text</code>✓, <code>[ prefix/text]</code>✗
-  - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket notation, "Singapore com/" would be interpreted as country "Singapore" followed by a new company field.
+  - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket 
+    notation, "n/Jody p/" would be interpreted as name "Jody" followed by a new phone field instead of name "Jody p/".
 
 * **PDF Warning:** When copying multi-line commands from PDF, spaces around line breaks may be lost
 
