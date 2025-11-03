@@ -66,6 +66,7 @@ Use this table of contents to jump to any section!
 4. You're in!<br>
 
    After a few seconds, the Wi-Find window will appear - already loaded with sample data for you to explore!
+
    ![UIDesc](images/Ui Desc.png)
 
    
@@ -578,5 +579,12 @@ For example:
 
 Tip: You can also drag the folder into the terminal window, it will automatically fill in the correct path!
 
-Almost done! You're ready to continue with step 4 in [Quick Start](#quick-start)
+#### Step 3: Start Wi-Find by typing:
+```bash
+java -jar WiFind.jar
+```
+
+   Ensure file name matches exactly when you type it in. If it doesn't open, double-check the spelling!
+
+All done! Get familiar with WiFind continuing with step 4 in [Quick Start](#quick-start)!
 
