@@ -629,7 +629,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - On a computer meeting the minimum hardware specifications (Intel i5 10th Gen, 8 GB RAM, SSD, Windows 10 or 
       macOS 12), the system’s startup time — measured from launch command to main interface ready for input — shall not exceed 
       3 seconds in 95% of test runs.
-    - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+    - Should be able to hold up to 1000 persons and 50 meetings per contact without a noticeable sluggishness in 
+      performance for typical usage.
     - Search/filter operations should return results within 1 second for 1000 contacts.
 4.  Usability Requirements
     - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
@@ -642,7 +643,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - The product should be packaged as a single `.jar` file (≤100 MB).
     - Documents should not exceed 15 MB each.
 7.  Reliability Requirements
-    - The system should not crash under normal usage (Managing up to 1000 persons).
+    - The system should not crash under normal usage (Managing up to 1000 persons with 50 meetings each).
     - Invalid input should not cause data corruption or loss.
 8.  Automatic timezone requirements
     - The system should be able to change the local time if user travels overseas.
