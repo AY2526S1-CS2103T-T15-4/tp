@@ -107,7 +107,7 @@ Some quick notes regarding how commands work:
 | **[Delete](#deleting-a-person--delete)**                         | Deletes specified contact         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
 | **[List](#listing-all-persons--list)**                           | List all contacts                 | `list`                                                                                                                                                                           |
 | **[Find](#locating-persons-by-name-find)**                       | Filters contacts based on keyword | `find {n/NAME}…​ {p/PHONE_NUMBER}…​ {e/EMAIL}…​ {c/COUNTRY}…​ {com/COMPANY}…​ {t/TAG}…​ {m/MEETING}…​ {l/LINK}…​`<br> e.g., `find n/James n/Jake`                                |
-| **[Flag](#flagging-a-person--flag)**                             | Flags contact                     | `flag INDEX`                                                                                                                                                                     |
+| **[Flag](#flagging-a-person--flag)**                             | Flags contact or shows a list of flagged contacts                    | `flag {INDEX}`                                                                                                                                                                   |
 | **[Unflag](#unflagging-a-person--unflag)**                       | Unflags contact                   | `unflag INDEX`                                                                                                                                                                   |
 | **[Add Meeting](#adding-a-meeting-to-a-person--addm)**           | Add Meeting to a contact          | `addm INDEX m/dd-MM-YYYY HH:MM Description` <br> e.g.` addm 1 m/12-02-2020 12:30 Project Star`                                                                                   |
 | **[Delete Meeting](#deleting-a-meeting-from-a-person--deletem)** | Delete Meeting from a contact     | `deletem INDEX m/dd-MM-YYYY HH:MM` <br> e.g. `deletem 1 m/12-02-2020 12:30`                                                                                                      |
@@ -334,17 +334,19 @@ Examples:
 
 ### Flagging a person : `flag`
 
-Flags the specified person from the address book for quick identification.
+Flags the specified person from the address book for quick identification or show a filtered list of flagged contacts.
 
-Format: `flag INDEX`
+Format: `flag {INDEX}`
 
-* Flags the person at the specified `INDEX`.
+* Flags the person at the specified `INDEX` using the command `flag INDEX`.
 * If the person is already flagged, an error message will be shown.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* To show a filtered list of flagged contacts, use the command `flag` without the `INDEX`.
 
 Examples:
 * `list` followed by `flag 2` flags the 2nd person in the address book given that the contact is unflagged.
+* `list` followed by `flag` shows a filtered list of flagged contacts.
 * `find n/Alex` followed by 'flag 1' flags the 1st person in the result of the `find` command.
   ![result for 'flag 1'](images/flag-example.png)
 
