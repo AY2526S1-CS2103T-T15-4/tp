@@ -505,13 +505,34 @@ _Details coming soon ..._
 
 <div style="page-break-after: always;"></div>
 
-## Known issues (as of v1.5)
+## Known issues (as of v1.6)
 
 Issue 1: **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
 Solution 1: The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 Issue 2: **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear.<br>
 Solution 2: The remedy is to manually restore the minimized Help Window.
+
+Issue 3: **Non-latin unicode characters** displayed as ▯ on **Linux (Ubuntu)** systems
+Affected platforms:
+- Linux distributions
+- Wi-Find versions ≤ 1.6
+
+
+Workaround: Install full Unicode-compatible fonts on your Linux system, then restart Wi-Find
+```bash
+sudo apt install fonts-noto fonts-noto-cjk fonts-noto-color-emoji fonts-noto-arabic
+```
+
+If the issue persists, launch Wi-Find using the following command to ensure UTF-8 encoding is enforced:
+```bash
+java -Dfile.encoding=UTF-8 -jar WiFind.jar
+```
+
+Planned Resolution:
+Future versions of Wi-Find will include improved cross-platform font handling to ensure all Unicode characters are 
+displayed correctly by default, regardless of operating system.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
