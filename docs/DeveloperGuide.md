@@ -248,7 +248,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+**Software System: Wi-Find**
 **Use case: UC01 - Add a contact**
+**Actor: User**
 
 **MSS**
 
@@ -278,7 +280,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       * If user cancels, use case ends.
       * If the user confirms, continue from step 3.
 
+**Software System: Wi-Find**
 **Use case: UC02 - Delete a contact**
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -300,7 +304,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
 **Use case: UC-03 - Save and read contacts on shutdown/startup**
+**Actor: User**
 
 **MSS**
 
@@ -336,7 +342,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * Use case resumes at step 3.
 
+**Software System: Wi-Find**
 **Use case: UC04 - Search contacts by company**
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -361,7 +369,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
 **Use case: UC05 - Add meeting to a contact**
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -394,7 +404,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
+**Software System: Wi-Find**
 **Use case: UC06 - Delete meeting from a contact**
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list with at least one meeting**
 
@@ -427,7 +439,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
 **Use case: UC07 - Edit the information of a contact**
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -459,7 +473,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * If user cancels, use case ends.
     * Else use case continues from step 2.
 
+**Software System: Wi-Find**
 **Use case: UC08 - Flag a contact**
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -491,7 +507,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
       Use case ends.
 
+**Software System: Wi-Find**
 **Use case: UC09 - Unflag a contact**
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -523,7 +541,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
 **Use case: UC010 - Update a link to a contact**
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -549,7 +569,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
 **Use case: UC11 - Removes a link from a contact**
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
@@ -581,7 +603,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Software System: Wi-Find**
 **Use case: UC12 - Add a link to a contact**
+**Actor: User**
 
 **Preconditions: There exists at least one person in the list**
 
