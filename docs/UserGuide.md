@@ -521,7 +521,7 @@ Affected platforms:
 - Wi-Find versions ≤ 1.6
 
 
-Workaround: Install full Unicode-compatible fonts on your Linux system, then restart Wi-Find
+Temporary workaround: Install full Unicode-compatible fonts on your Linux system, then restart Wi-Find
 ```bash
 sudo apt install fonts-noto fonts-noto-cjk fonts-noto-color-emoji fonts-noto-arabic
 ```
