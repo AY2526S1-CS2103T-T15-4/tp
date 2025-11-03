@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.AddMeetingCommandParser.MESSAGE_INVALID_DESCRIPTION_LENGTH;
+import static seedu.address.logic.parser.AddMeetingCommandParser.MESSAGE_INVALID_MEETING_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -20,6 +22,9 @@ public class AddMeetingCommandParserTest {
     private static final String INVALID_INDEX_NON_NUMERIC = "a";
     private static final String INVALID_MEETING_MISSING_TIME = " m/20-10-2025";
     private static final String INVALID_MEETING_INVALID_DATE = " m/32-13-2025 14:30";
+    private static final String INVALID_MEETING_INVALID_DESCRIPTION = " m/30-10-2025 14:30 "
+            + "afkasdnfsnfnsdjfnsajfjfjsnjfnsjnfsafnjasfsfnjsnfjsanjfsanjfnjsfnjsnfjnsjanfjasnfj"
+            + "fsafadsfsdfdsafsafsdafasdfadsfasdfadsfsadfadsfadsfasdfdsafafdsfadsfsafsadfasdfasd";
     private static final String INVALID_MEETING_INVALID_FORMAT = " m/invalid";
     private static final String VALID_INDEX = "1";
     private static final String PREAMBLE_NON_EMPTY = "extra ";
@@ -93,7 +98,7 @@ public class AddMeetingCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidIndexValue_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetingCommand.MESSAGE_USAGE);
 
         // invalid index - zero
@@ -102,20 +107,32 @@ public class AddMeetingCommandParserTest {
         // invalid index - non-numeric
         assertParseFailure(parser, INVALID_INDEX_NON_NUMERIC + VALID_MEETING_WITH_DESC, expectedMessage);
 
-        // invalid meeting - missing time part
-        assertParseFailure(parser, VALID_INDEX + INVALID_MEETING_MISSING_TIME, expectedMessage);
-
-        // invalid meeting - invalid date
-        assertParseFailure(parser, VALID_INDEX + INVALID_MEETING_INVALID_DATE, expectedMessage);
-
-        // invalid meeting - invalid format
-        assertParseFailure(parser, VALID_INDEX + INVALID_MEETING_INVALID_FORMAT, expectedMessage);
-
         // two invalid values, only first reported (but since wrapped, expects format message)
         assertParseFailure(parser, INVALID_INDEX_ZERO + INVALID_MEETING_INVALID_FORMAT, expectedMessage);
 
         // non-empty preamble with extra
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + VALID_INDEX + VALID_MEETING_WITH_DESC, expectedMessage);
+
+
+    }
+
+    @Test
+    public void parse_invalidMeetingValue_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_MEETING_FORMAT);
+        // invalid meeting - invalid date
+        assertParseFailure(parser, VALID_INDEX + INVALID_MEETING_INVALID_DATE, expectedMessage);
+        // invalid meeting - missing time part
+        assertParseFailure(parser, VALID_INDEX + INVALID_MEETING_MISSING_TIME, expectedMessage);
+        // invalid meeting - invalid format
+        assertParseFailure(parser, VALID_INDEX + INVALID_MEETING_INVALID_FORMAT, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidDescriptionLength_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_DESCRIPTION_LENGTH);
+        // invalid meeting - invalid description
+        assertParseFailure(parser, VALID_INDEX + INVALID_MEETING_INVALID_DESCRIPTION, expectedMessage);
+
     }
 
     @Test
