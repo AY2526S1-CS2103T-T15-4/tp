@@ -296,7 +296,7 @@ Examples:
 
 ### Flagging a person : `flag`
 
-Flags the specified person from the address book.
+Flags the specified person from the address book for quick identification.
 
 Format: `flag INDEX`
 
