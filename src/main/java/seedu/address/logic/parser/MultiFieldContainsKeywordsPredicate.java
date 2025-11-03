@@ -177,7 +177,7 @@ public class MultiFieldContainsKeywordsPredicate implements Predicate<Person> {
     private boolean matchesMeeting(Person person, List<String> keywords) {
         requireNonNull(person);
         assert !keywords.isEmpty();
-        Set<Meeting> meetings = person.getMeetings();
+        List<Meeting> meetings = person.getMeetings();
         return keywords.stream().anyMatch(keyword ->
                 meetings.stream().anyMatch(tag ->
                         meetings.toString().toLowerCase().contains(keyword.toLowerCase())));

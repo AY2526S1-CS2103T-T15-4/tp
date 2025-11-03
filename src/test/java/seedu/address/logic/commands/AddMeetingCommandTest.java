@@ -21,7 +21,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddMeetingCommandTest {
 
-    private static final Meeting VALID_MEETING = new Meeting(LocalDateTime.of(2025, 10, 22,
+    private static final Meeting VALID_MEETING = new Meeting(LocalDateTime.of(2025, 12, 28,
             14, 0), "Team meeting");
 
     @Test

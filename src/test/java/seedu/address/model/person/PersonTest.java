@@ -58,9 +58,7 @@ public class PersonTest {
         // Act
         Person updatedPerson = originalPerson.withAddedMeeting(meeting);
 
-        // Assert
-        // Should not add duplicates
-        assertEquals(1, updatedPerson.getMeetings().size());
+        assertEquals(2, updatedPerson.getMeetings().size());
         assertTrue(updatedPerson.getMeetings().contains(meeting));
     }
 

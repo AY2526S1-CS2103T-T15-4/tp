@@ -375,7 +375,7 @@ Adds a meeting to the person.
 Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
 
 * Adds a meeting to the person at the specified `INDEX`.
-* If there already exists a meeting with any person in Wi-Find, confirmation will be required by the user, similar to add.
+* If there already exists a meeting with any person (i.e Meetings that have same date and time) in Wi-Find, confirmation will be required by the user, similar to add.
 * The index refers to the index number shown in the displayed person list
 * The index **must be a positive integer** 1, 2, 3, …​
 * The meeting time provided must follow the format dd-MM-YYYY HH:MM

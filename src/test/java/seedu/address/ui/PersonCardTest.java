@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,7 @@ public class PersonCardTest {
         // Create a simple Person with tags
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("friend"));
-        Set<Meeting> meetings = new HashSet<>();
+        List<Meeting> meetings = new ArrayList<>();
 
         Person person = new Person(
                 new Name("Alice"),
@@ -64,7 +66,7 @@ public class PersonCardTest {
     void constructor_flaggedPerson_shouldDisplayFlagIcon() {
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("colleague"));
-        Set<Meeting> meetings = new HashSet<>();
+        List<Meeting> meetings = new ArrayList<>();
 
         Person flaggedPerson = new Person(
                 new Name("Bob"),
@@ -95,7 +97,7 @@ public class PersonCardTest {
     void constructor_unflaggedPerson_shouldNotDisplayFlagIcon() {
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("friend"));
-        Set<Meeting> meetings = new HashSet<>();
+        List<Meeting> meetings = new ArrayList<>();
 
         Person unflaggedPerson = new Person(
                 new Name("Alice"),

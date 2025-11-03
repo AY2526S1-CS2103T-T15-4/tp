@@ -116,6 +116,7 @@ public class ModelManager implements Model {
     public void addMeeting(Person target, Meeting meeting) {
         requireAllNonNull(target, meeting);
         addressBook.setPerson(target, target.withAddedMeeting(meeting));
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
