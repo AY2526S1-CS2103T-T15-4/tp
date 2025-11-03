@@ -128,6 +128,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* `FindCommandParser` uses `MultiFieldContainsKeywordsPredicate` to use `ArgumentMultimap` to search through the contact list.
 
 <div style="page-break-after: always;"></div>
 
@@ -136,6 +137,8 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="650" />
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The arrow from `ModelManager` to `Person` should be labeled '* filtered', and the arrow from `PersonList` to `Person` should be labeled '* all', but they look swapped due to a limitation of PlantUML.
+</div>
 
 The `Model` component,
 
@@ -224,25 +227,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​        | I want to …​                                     | So that I can…​                                         |
 |----------|----------------|--------------------------------------------------|---------------------------------------------------------|
-| `* * *`    | user           | add new contacts with their relevant information | check and contact relevant personnel when necessary.    |
-| `* * *`    | user           | delete a person                                  | remove contacts that I no longer need.                  |
-| `* * *`    | user           | save and read contacts on shutdown/startup       | maintain contact information across instances of usage. |
-| `* * *`    | busy user      | search contacts by company                       | sift through contacts easily.                           |
-| `* * *`    | user           | add meetings to clients                          | be reminded of our next meeting.                        |
-| `* * *`    | user           | delete past meetings                             | de-clutter the contact list.                            |
-| `* *`      | user           | check client's local time zone                   | contact them at appropriate times.                      |
-| `* *`      | user           | edit my contacts                                 | update client information easily.                       |
-| `* *`      | user           | attach tags to clients                           | recall connections to the client.                       |
-| `* *`      | user           | get alerts for clashing meetings                 | prevent double booking.                                 |
-| `* *`      | user           | search contacts by country                       | contact groups of people under the filter               |
-| `* *`      | user           | search contacts by tag                           | contact groups of people under the filter.              |
-| `* *`      | user           | search contacts by name                          | contact groups of people under the filter.              |
-| `* *`      | user           | Search contacts by phone number                  | contact groups of people under the filter.              |
-| `*`        | user           | attach links to clients                          | go to their websites easily.                            |
-| `*`        | user           | flag some clients                                | quickly find them in the list.                          |
-| `*`        | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
-| `*`        | impatient user | see my frequently contacted users                | save time.                                              |
-| `*`        | user           | auto-convert meeting times into my timezone      | prevent making scheduling mistakes.                     |
+| `* * *`  | user           | add new contacts with their relevant information | check and contact relevant personnel when necessary.    |
+| `* * *`  | user           | delete a person                                  | remove contacts that I no longer need.                  |
+| `* * *`  | user           | save and read contacts on shutdown/startup       | maintain contact information across instances of usage. |
+| `* * *`  | busy user      | search contacts by company                       | sift through contacts easily.                           |
+| `* * *`  | user           | add meetings to clients                          | be reminded of our next meeting.                        |
+| `* * *`  | user           | delete past meetings                             | de-clutter the contact list.                            |
+| `* *`    | user           | check client's local time zone                   | contact them at appropriate times.                      |
+| `* *`    | user           | edit my contacts                                 | update client information easily.                       |
+| `* *`    | user           | attach tags to clients                           | recall connections to the client.                       |
+| `* *`    | user           | get alerts for clashing meetings                 | prevent double booking.                                 |
+| `* *`    | user           | search contacts by country                       | contact groups of people under the filter               |
+| `* *`    | user           | search contacts by tag                           | contact groups of people under the filter.              |
+| `* *`    | user           | search contacts by name                          | contact groups of people under the filter.              |
+| `* *`    | user           | search contacts by phone number                  | contact groups of people under the filter.              |
+| `*`      | user           | attach links to clients                          | go to their websites easily.                            |
+| `*`      | user           | flag some clients                                | quickly find them in the list.                          |
+| `*`      | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
+| `*`      | impatient user | see my frequently contacted users                | save time.                                              |
+| `*`      | user           | auto-convert meeting times into my timezone      | prevent making scheduling mistakes.                     |
 
 <div style="page-break-after: always;"></div>
 
@@ -362,13 +365,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. One or more of the inputs are invalid
 
-    * 2a1. Wi-Find shows an error message.
+    * 1a1. Wi-Find shows an error message.
 
       Use case ends.
 
-* 3a. No contacts match the company name.
+* 2a. No contacts match the company name.
 
-    * 3a1. Wi-Find shows an empty list message.
+    * 2a1. Wi-Find shows an empty list message.
 
       Use case ends.
 

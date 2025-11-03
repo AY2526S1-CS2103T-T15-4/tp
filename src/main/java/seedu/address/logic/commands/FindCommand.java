@@ -4,7 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -23,7 +27,16 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all people whose selected parameter contain "
             + "any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Multiple fields are combined with AND logic. Keywords within the same field use OR logic.\n"
-            + "Parameters: PREFIX KEYWORD [MORE_KEYWORDS]...\n"
+            + "There must be at least 1 parameter to search for.\n"
+            + "Parameters: "
+            + "{" + PREFIX_NAME + "NAME}... "
+            + "{" + PREFIX_PHONE + "PHONE}... "
+            + "{" + PREFIX_EMAIL + "EMAIL}... "
+            + "{" + PREFIX_COUNTRY + "COUNTRY}... "
+            + "{" + PREFIX_COMPANY + "COMPANY}... "
+            + "{" + PREFIX_TAG + "TAG}... "
+            + "{" + PREFIX_MEETING + "MEETING}... "
+            + "{" + PREFIX_LINK + "LINK}... \n"
             + "Examples:\n"
             + "• " + COMMAND_WORD + " " + PREFIX_NAME + "john " + PREFIX_COUNTRY + "singapore\n"
             + "   (Finds people named 'john' AND from 'singapore')\n"
