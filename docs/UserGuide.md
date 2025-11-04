@@ -242,7 +242,7 @@ When you attempt to add a contact that shares a phone number or email with an ex
 2. Prompt you to confirm whether you want to proceed<br>
 3. Add the contact only after you approve the warning<br>
 <br>
-**Example:** If you have <code>John Doe</code> **(phone: 98765432)** in your contacts and you try to add <code>Jane Doe</code> with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding <code>Jane Doe</code>.<br>
+**Example:** If you have <code>John Doe</code>code> **(phone: 98765432)** in your contacts and you try to add <code>Jane Doe</code> with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding <code>Jane Doe</code>.<br>
 <br>
 This feature helps prevent accidental duplicates while allowing you to intentionally add contacts with shared phone numbers or emails (e.g., family members sharing a phone, employees sharing a company email).
 
@@ -374,7 +374,7 @@ Examples:
 
 Adds a meeting to the person.
 
-Format: `addm INDEX m/dd-MM-YYYY HH:MM {description}`
+Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
 
 * Adds a meeting to the person at the specified `INDEX`.
 * If there already exists a meeting with any person (i.e Meetings that have same date and time) in Wi-Find, confirmation will be required by the user, similar to add.
@@ -400,7 +400,7 @@ Examples:
 
 Deletes a meeting with a specified date and time from a person.
 
-Format: `deletem INDEX m/dd-MM-YYYY HH:MM`
+Format `deletem INDEX m/dd-MM-YYYY HH:MM`
 
 * Deletes a meeting to the person at the specified `INDEX`.
 * If the person does not have a meeting with the specified date and time, an error will be shown.
@@ -417,14 +417,14 @@ Examples:
 
 ### List previous meetings of a person : `listm`
 
-Lists all upcoming and past meetings with specified person.
+Lists all past meetings with specified person.
 
 Format: `listm INDEX`
 
 * The index refers to the index number shown in the displayed person list
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Example:<br>
+Example:
 ![ListMeetingCommandExample](images/ListMeetingCommandExample.png)
 
 <div style="page-break-after: always;"></div>
@@ -580,9 +580,9 @@ UTC Offset given below does not accurately provide time difference, due to the u
 | Oceania  | Australia       | `Australia/Sydney`     | UTC +10:00 |
 
 --- 
-<div style="page-break-after: always;"></div>
 
 # Detailed guide on how to open Wi-Find
+
 
 ####  Step 1: Open a terminal (also called a “command prompt”)
 
@@ -615,12 +615,12 @@ For example:
 
 Tip: You can also drag the folder into the terminal window, it will automatically fill in the correct path!
 
-<div style="page-break-after: always;"></div>
-
 #### Step 3: Start Wi-Find by typing:
 ```bash
 java -jar WiFind.jar
 ```
+
    Ensure file name matches exactly when you type it in. If it doesn't open, double-check the spelling!
 
 All done! Get familiar with WiFind continuing with step 4 in [Quick Start](#quick-start)!
+
