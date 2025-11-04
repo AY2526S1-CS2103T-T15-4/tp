@@ -374,7 +374,7 @@ Examples:
 
 Adds a meeting to the person.
 
-Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
+Format: `addm INDEX m/dd-MM-YYYY HH:MM {description}`
 
 * Adds a meeting to the person at the specified `INDEX`.
 * If there already exists a meeting with any person (i.e Meetings that have same date and time) in Wi-Find, confirmation will be required by the user, similar to add.
@@ -400,7 +400,7 @@ Examples:
 
 Deletes a meeting with a specified date and time from a person.
 
-Format `deletem INDEX m/dd-MM-YYYY HH:MM`
+Format: `deletem INDEX m/dd-MM-YYYY HH:MM`
 
 * Deletes a meeting to the person at the specified `INDEX`.
 * If the person does not have a meeting with the specified date and time, an error will be shown.
