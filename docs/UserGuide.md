@@ -247,7 +247,7 @@ When you attempt to add a contact that shares a phone number or email with an ex
 2. Prompt you to confirm whether you want to proceed<br>
 3. Add the contact only after you approve the warning<br>
 <br>
-**Example:** If you have <code>John Doe</code>code **(phone: 98765432)** in your contacts and you try to add <code>Jane Doe</code> with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding <code>Jane Doe</code>.<br>
+**Example:** If you have <code>John Doe</code> **(phone: 98765432)** in your contacts and you try to add <code>Jane Doe</code> with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding <code>Jane Doe</code>.<br>
 <br>
 This feature helps prevent accidental duplicates while allowing you to intentionally add contacts with shared phone numbers or emails (e.g., family members sharing a phone, employees sharing a company email).
 
