@@ -191,7 +191,6 @@ In Java's <code>DateTimeFormatter</code>, <code>yyyy</code> represents the **yea
 - <code>uuuu</code> ensures the year is interpreted in a way that <code>LocalDateTime</code> can always construct correctly, even in strict mode.
 - <code>yyyy</code> is used instead of <code>uuuu</code> in documentation for easier understanding.
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -248,8 +247,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
 | `*`      | impatient user | see my frequently contacted users                | save time.                                              |
 | `*`      | user           | auto-convert meeting times into my timezone      | prevent making scheduling mistakes.                     |
-
-<div style="page-break-after: always;"></div>
 
 ### Use cases
 
