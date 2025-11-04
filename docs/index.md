@@ -38,7 +38,7 @@ Wi-Find helps you stay effortlessly connected - manage contacts, track meetings,
 
 **Acknowledgements**
 
-Built with [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), and [JUnit5](https://github.com/junit-team/junit5).  
+Built with [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), and [JUnit5](https://github.com/junit-team/junit5).
 Inspired by the [SE-EDU initiative](https://se-education.org).
 
 <div style="margin-top:1rem;">

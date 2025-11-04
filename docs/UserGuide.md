@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 Wi-Find is a **desktop app for managing contacts**, optimized for use via a **Command Line Interface** (CLI),
-It's designed for **freelance project managers** who need to manage clients across multiple time zones, helping them 
+It's designed for **freelance project managers** who need to manage clients across multiple time zones, helping them
 manage multitude of contacts so they won't accidentally schedule meetings at 3 a.m!
 
 Key features:
@@ -32,7 +32,7 @@ Use this table of contents to jump to any section!
 1. Wi-Find needs Java to run. Not sure how? Don't worry!
     - Windows users: Follow this [easy step-by-step guide](https://se-education.org/guides/tutorials/javaInstallationWindows.html)
     to install java
-    - Mac users: Follow this [Mac guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) to get 
+    - Mac users: Follow this [Mac guide](https://se-education.org/guides/tutorials/javaInstallationMac.html) to get
       the exact version you need.
     - Linux users: Follow this [Linux guide](https://se-education.org/guides/tutorials/javaInstallationLinux.html)
 
@@ -46,22 +46,22 @@ Use this table of contents to jump to any section!
 
 
 3. Run Wi-Find
-   1. Open a **command prompt** (Windows), **terminal** (Mac) or **linux terminal/ Konsole** (Linux, depending on 
+   1. Open a **command prompt** (Windows), **terminal** (Mac) or **linux terminal/ Konsole** (Linux, depending on
       your desktop environment)
    2. Go to the **home folder** you designated for Wi-Find:
-   
+
       ```bash
       cd path/to/your/folder
-      ``` 
-   
-        Note: Never used a terminal before? Don't worry, click [here](#detailed-guide-on-how-to-open-wi-find) to go to 
+      ```
+
+        Note: Never used a terminal before? Don't worry, click [here](#detailed-guide-on-how-to-open-wi-find) to go to
    our easy step-by-step guide on how to navigate the terminal.<br>
 
    3. Start Wi-Find by typing:
        ```bash
        java -jar WiFind.jar
        ```
-   
+
       Ensure file name matches exactly when you type it in. If it doesn't open, double-check the spelling!
 
 
@@ -71,9 +71,8 @@ Use this table of contents to jump to any section!
 
    ![UIDesc](images/Ui Desc.png)
 
-   
 5. Get familiar with Wi-Find! <br>
-   Type the input in the command box and press Enter to execute it. e.g. typing **`help`** 
+   Type the input in the command box and press Enter to execute it. e.g. typing **`help`**
    and pressing Enter will open the help window.<br>
    [Commands](#command-summary) follow the pattern of ```command prefix/parameter...```. Here are some example commands you can try:
    * `list` : Lists all contacts.
@@ -127,7 +126,7 @@ Commands in Wi-Find follow a flexible format as described below.
 * **Prefix:** Short identifiers followed by a slash <code>/</code>.
     - Example: `n/`, `c/`, `com/`
 
-* **Parameter:** The actual values provided by the user for a given prefix. A parameter always follows its prefix. 
+* **Parameter:** The actual values provided by the user for a given prefix. A parameter always follows its prefix.
   - Words in `UPPER_CASE` are placeholders for the parameter
     - Example: `add n/NAME` → use as `add n/John Doe`
 
@@ -161,7 +160,7 @@ Commands in Wi-Find follow a flexible format as described below.
     - `add n/Jane[ n/] Doe p/87654321 e/jane@gmail.com c/China com/Google` → Name: "Jane n/ Doe"
   - **Important:**
     - Text after "/" should be typed **outside** the square brackets → <code>[ prefix/]text</code>✓, <code>[ prefix/text]</code>✗
-  - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket 
+  - **Why this happens:** Wi-Find uses prefixes like "n/" and "c/" to identify different fields. Without the bracket
     notation, "n/Jody p/" would be interpreted as name "Jody" followed by a new phone field instead of name "Jody p/".
 
 * **PDF Warning:** When copying multi-line commands from PDF, spaces around line breaks may be lost
@@ -183,7 +182,7 @@ Format: `help`
 
 <div markdown="span" class="alert alert-primary">
 :exclamation: **Note:**
-If you don't see the Help window, check if it's minimized (see <a href="#known-issues-as-of-v13">Known Issues</a>). 
+If you don't see the Help window, check if it's minimized (see <a href="#known-issues-as-of-v13">Known Issues</a>).
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -196,6 +195,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
 - Alphanumerics and special characters are allowed in NAME.
 - Phone numbers should only contain numbers, spaces, or the characters <code>+</code>, <code>-</code>, <code>(</code>, <code>)</code>.
+- These are the limits of each field:
+  - NAME: 70 characters
+  - PHONE_NUMBER: At least 3 numbers, max of 26
+  - COUNTRY: 56 characters
+  - COMPANY: 100 characters
 
 **Email Address Rules (Summary Table)**
 
@@ -209,7 +213,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 | **Domain Part** | - Made of **domain labels** separated by periods (`.`)<br>- **Ending label:** at least **2 characters long**<br>- Each label must **start and end with alphanumeric characters**<br>- Only **alphanumeric characters** or **hyphens (`-`)** allowed in the middle | Valid: <code>example.com</code>, <code>my-site.org</code>, <code>sub.domain.co</code><br>Invalid: <code>-example.com</code>, <code>example-.com</code>, <code>ex!ample.com</code> |
 | **Full Email** | - Combine local part + `@` + domain part<br>- Maximum length: **255 characters** | Valid: <code>john.doe@example.com</code>, <code>jane-doe+mail@sub.domain.co</code><br>Invalid: <code>_john@example.com</code>, <code>john@-example.com</code>, <code>john@example.c</code> |
 
-**Allowed special characters in the local part:**  
+**Allowed special characters in the local part:** 
 <code>! # $ % & ' * + - / = ? ^ ` { | } ~ .</code>
 
 <div markdown="span" class="alert alert-primary">
@@ -242,7 +246,7 @@ When you attempt to add a contact that shares a phone number or email with an ex
 2. Prompt you to confirm whether you want to proceed<br>
 3. Add the contact only after you approve the warning<br>
 <br>
-**Example:** If you have <code>John Doe</code>code> **(phone: 98765432)** in your contacts and you try to add <code>Jane Doe</code> with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding <code>Jane Doe</code>.<br>
+**Example:** If you have <code>John Doe</code> **(phone: 98765432)** in your contacts and you try to add <code>Jane Doe</code> with the same phone number, Wi-Find will warn you about the duplicate and ask for confirmation before adding <code>Jane Doe</code>.<br>
 <br>
 This feature helps prevent accidental duplicates while allowing you to intentionally add contacts with shared phone numbers or emails (e.g., family members sharing a phone, employees sharing a company email).
 
@@ -382,15 +386,15 @@ Format `addm INDEX m/dd-MM-YYYY HH:MM {description}`
 * The index **must be a positive integer** 1, 2, 3, …​
 * The meeting time provided must follow the format dd-MM-YYYY HH:MM
 * The description is optional and limited to up to 50 characters.
-* Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using 
+* Meeting times will be displayed as you input it, Wi-Find will determine whether it has already passed using
   your local time, hence it is highly recommended to put meetings in your local time.
 * Only upcoming meeting times are displayed in the GUI, for past meetings, see **[List Meeting](#list-previous-meetings-of-a-person--listm)**.
 * Upcoming meeting section will be refreshed whenever the user edits that specified contact or reopens the app.
-* Note: Each contact can have multiple meetings associated with them. Although there is no enforced limit, for optimal 
+* Note: Each contact can have multiple meetings associated with them. Although there is no enforced limit, for optimal
   performance and readability, it is recommended to keep the number of meetings per contact below 50.
 
 Examples:
-* `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that 
+* `list` followed by `addm 1 m/30-10-2025 14:30 Project discussion` adds a meeting to the first contact, given that
   there are no meetings scheduled at that time for all contacts.
   ![result for addm 1 m/30-10-2025 14:30 Project discussion](images/addmeeting-example.png)
 
@@ -409,7 +413,7 @@ Format `deletem INDEX m/dd-MM-YYYY HH:MM`
 * The meeting time provided must follow the format dd-MM-YYYY HH:MM
 
 Examples:
-* `list` followed by `deletem 1 m/20-10-2025 14:30` deletes a meeting from the first contact, given that there exists 
+* `list` followed by `deletem 1 m/20-10-2025 14:30` deletes a meeting from the first contact, given that there exists
   a meeting at that date and time for that contact. (Note that both past and future meetings can be deleted and follow the same behaviour)
   ![result for deletem 1 m/20-10-2025 14:30](images/DeleteMeetingCommandExample.png)
 
@@ -436,11 +440,11 @@ Adds/updates/remove a link from the specified person from the address book.
 Format: `link INDEX {LINK}`
 
 * Adds a link to the person at the specified `INDEX` using `link INDEX LINK`.
-* If the person already has a link, the link will be updated according to the latest input from user. 
+* If the person already has a link, the link will be updated according to the latest input from user.
 * To remove the link from a person, use `link INDEX` without the `LINK` parameter.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The link provided by user must be a valid link. 
+* The link provided by user must be a valid link and limited to 255 characters.
 
 Examples:
 * `list` followed by `link 2` removes the link from the 2nd person listed in the address book given that the contact has a link previously.
@@ -534,7 +538,7 @@ java -Dfile.encoding=UTF-8 -jar WiFind.jar
 ```
 
 Planned Resolution:
-Future versions of Wi-Find will include improved cross-platform font handling to ensure all Unicode characters are 
+Future versions of Wi-Find will include improved cross-platform font handling to ensure all Unicode characters are
 displayed correctly by default, regardless of operating system.
 
 
@@ -579,14 +583,14 @@ UTC Offset given below does not accurately provide time difference, due to the u
 |          | United Kingdom  | `Europe/London`        | UTC +00:00 |
 | Oceania  | Australia       | `Australia/Sydney`     | UTC +10:00 |
 
---- 
+---
 
 # Detailed guide on how to open Wi-Find
 
 
 ####  Step 1: Open a terminal (also called a “command prompt”)
 
-The **terminal** is a small window where you can type commands for your computer.  
+The **terminal** is a small window where you can type commands for your computer.
 Here’s how to open it:
 
 - **Windows:**
@@ -600,7 +604,7 @@ Here’s how to open it:
 
 - **Linux**
     - Press **Ctrl + Alt + T** to open a new terminal window.
-    - Alternatively, you can open it from your applications menu — search for “**Terminal**” or “**Konsole**” 
+    - Alternatively, you can open it from your applications menu — search for “**Terminal**” or “**Konsole**”
       (depending on your desktop environment).
     - A terminal window will open, ready for commands.
 
