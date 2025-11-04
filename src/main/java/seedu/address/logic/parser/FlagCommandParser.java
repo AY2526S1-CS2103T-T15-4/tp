@@ -17,6 +17,11 @@ public class FlagCommandParser implements Parser<FlagCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FlagCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            return new FlagCommand();
+        }
+
         try {
             Index index = ParserUtil.parseIndex(args);
             return new FlagCommand(index);

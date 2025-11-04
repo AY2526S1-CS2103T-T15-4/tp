@@ -30,4 +30,10 @@ public class FlagCommandParserTest {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FlagCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_emptyArgs_returnsFlagCommandForShowingAllFlagged() {
+        // empty string input should return a FlagCommand with no index
+        assertParseSuccess(parser, "   ", new FlagCommand());
+    }
 }

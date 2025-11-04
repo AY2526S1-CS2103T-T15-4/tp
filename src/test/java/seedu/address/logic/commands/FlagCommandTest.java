@@ -92,6 +92,22 @@ public class FlagCommandTest {
     }
 
     @Test
+    public void execute_showAllFlaggedContacts_success() {
+        Person person1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person person2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        model.setPerson(person1, new PersonBuilder(person1).withFlag(true).build());
+        model.setPerson(person2, new PersonBuilder(person2).withFlag(true).build());
+
+        FlagCommand flagCommand = new FlagCommand(); // no index = show all flagged
+        String expectedMessage = FlagCommand.MESSAGE_SHOW_FLAGGED_SUCCESS;
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(person -> person.isFlagged());
+
+        assertCommandSuccess(flagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         FlagCommand flagFirstCommand = new FlagCommand(INDEX_FIRST_PERSON);
         FlagCommand flagSecondCommand = new FlagCommand(INDEX_SECOND_PERSON);
