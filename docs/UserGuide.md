@@ -422,7 +422,7 @@ Format: `listm INDEX`
 * The index refers to the index number shown in the displayed person list
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Example:
+Example:<br>
 ![ListMeetingCommandExample](images/ListMeetingCommandExample.png)
 
 <div style="page-break-after: always;"></div>
@@ -578,6 +578,7 @@ UTC Offset given below does not accurately provide time difference, due to the u
 | Oceania  | Australia       | `Australia/Sydney`     | UTC +10:00 |
 
 --- 
+<div style="page-break-after: always;"></div>
 
 # Detailed guide on how to open Wi-Find
 
