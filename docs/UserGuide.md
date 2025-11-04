@@ -612,13 +612,12 @@ For example:
     cd Desktop/WiFindHomeFolder
 ```
 
-Tip: You can also drag the folder into the terminal window, it will automatically fill in the correct path!
+Tip: You can also drag the folder into the terminal, it will automatically fill in the correct path!
 
 #### Step 3: Start Wi-Find by typing:
 ```bash
 java -jar WiFind.jar
 ```
-
    Ensure file name matches exactly when you type it in. If it doesn't open, double-check the spelling!
 
 All done! Get familiar with WiFind continuing with step 4 in [Quick Start](#quick-start)!
