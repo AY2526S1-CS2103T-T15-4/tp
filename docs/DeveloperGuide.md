@@ -690,7 +690,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Code should follow the SE-EDU code style.
 6.  Portability Requirements
     - The product should be packaged as a single `.jar` file (≤100 MB).
-    - Documents should not exceed 15 MB each.
+    - Application related files should not exceed 15 MB each.
 7.  Reliability Requirements
     - The system should not crash under normal usage (Managing up to 1000 persons with 50 meetings each).
     - Invalid input should not cause data corruption or loss.
