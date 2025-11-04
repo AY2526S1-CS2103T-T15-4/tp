@@ -677,11 +677,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - On a computer meeting the minimum hardware specifications (Intel i5 10th Gen, 8 GB RAM, SSD, Windows 10 or 
       macOS 12), the system’s startup time — measured from launch command to main interface ready for input — shall not exceed 
       3 seconds in 95% of test runs.
-    - Should be able to hold up to 1000 persons and 50 meetings per contact without a noticeable sluggishness in 
+    - Should be able to hold up to 1000 persons and 50 meetings per contact without a noticeable sluggishness (<= 200ms) in 
       performance for typical usage.
     - Search/filter operations should return results within 1 second for 1000 contacts.
 4.  Usability Requirements
-    - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+    - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse (about 10% faster).
     - The system should provide clear, human-readable error messages when invalid input is given.
     - The GUI should remain usable across standard screen resolutions (≥1280x720) and scaling settings (100%, 125%, 150%).
 5.  Maintainability Requirements
@@ -694,7 +694,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - The system should not crash under normal usage (Managing up to 1000 persons with 50 meetings each).
     - Invalid input should not cause data corruption or loss.
 8.  Automatic timezone requirements
-    - The system should be able to change the local time if user travels overseas.
+    - The system should be able to change the local time if user travels overseas based on operating system's timezone settings.
 
 <div style="page-break-after: always;"></div>
 
@@ -840,3 +840,4 @@ Achievements:
 - Implement compatibility for meetings in dd-mm-yyyy in find command instead of just dd mmm yyyy.
 - Make edit only trigger duplicate detection upon editing phone or email fields
 - Implement automatic conversion of meeting times into clients timezone
+- Implement confirmation for ClearCommand
