@@ -622,4 +622,3 @@ java -jar WiFind.jar
    Ensure file name matches exactly when you type it in. If it doesn't open, double-check the spelling!
 
 All done! Get familiar with WiFind continuing with step 4 in [Quick Start](#quick-start)!
-
