@@ -582,7 +582,6 @@ UTC Offset given below does not accurately provide time difference, due to the u
 
 # Detailed guide on how to open Wi-Find
 
-
 ####  Step 1: Open a terminal (also called a “command prompt”)
 
 The **terminal** is a small window where you can type commands for your computer.  
@@ -612,7 +611,9 @@ For example:
     cd Desktop/WiFindHomeFolder
 ```
 
-Tip: You can also drag the folder into the terminal, it will automatically fill in the correct path!
+Tip: You can also drag the folder into the terminal window, it will automatically fill in the correct path!
+
+<div style="page-break-after: always;"></div>
 
 #### Step 3: Start Wi-Find by typing:
 ```bash
