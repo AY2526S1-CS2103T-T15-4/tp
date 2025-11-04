@@ -191,7 +191,6 @@ In Java's <code>DateTimeFormatter</code>, <code>yyyy</code> represents the **yea
 - <code>uuuu</code> ensures the year is interpreted in a way that <code>LocalDateTime</code> can always construct correctly, even in strict mode.
 - <code>yyyy</code> is used instead of <code>uuuu</code> in documentation for easier understanding.
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -248,8 +247,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user           | set multiple tags on one contact                 | maintain overlapping projects without confusion.        |
 | `*`      | impatient user | see my frequently contacted users                | save time.                                              |
 | `*`      | user           | auto-convert meeting times into my timezone      | prevent making scheduling mistakes.                     |
-
-<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -561,7 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Software System: Wi-Find**
 
-**Use case: UC010 - Update a link to a contact**
+**Use case: UC10 - Update a link to a contact**
 
 **Actor: User**
 
@@ -659,9 +656,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1c1. Wi-Find <u>updates the link of the contact (UC09)</u>.
 
+      Use case ends.
+
 * 1d. The link field provided is empty.
 
     * 1d1. Wi-Find <u>removes the link from the contact (UC10)</u>.
+    
+      Use case ends.
 
 <div style="page-break-after: always;"></div>
 
@@ -689,7 +690,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Code should follow the SE-EDU code style.
 6.  Portability Requirements
     - The product should be packaged as a single `.jar` file (≤100 MB).
-    - Documents should not exceed 15 MB each.
+    - Application related files should not exceed 15 MB each.
 7.  Reliability Requirements
     - The system should not crash under normal usage (Managing up to 1000 persons with 50 meetings each).
     - Invalid input should not cause data corruption or loss.
@@ -729,13 +730,23 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Open a **command prompt** (Windows), **terminal** (Mac) or **linux terminal/ Konsole** (Linux, depending on
+         your desktop environment)
+   3. Go to the **home folder** you designated for Wi-Find:
+
+      ```bash
+      cd path/to/your/folder
+      ```
+   4. Start Wi-Find by typing:
+       ```bash
+      java -jar WiFind.jar
+   5. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by following the same steps [above](#launch-and-shutdown).<br>
        Expected: The most recent window size and location is retained.
 
 ### Deleting a person
@@ -835,8 +846,7 @@ Achievements:
 ## **Planned Enhancements**
 - Upcoming meetings listed should be sorted.
 - Add more countries to timezonemapper.
-- Fix link and edit command to not reset the filtered list back to unfiltered list after execution.
-- Allow filtering of flagged contacts.
+- Ensure link/edit commands preserve active filters for smoother workflow.
 - Implement compatibility for meetings in dd-mm-yyyy in find command instead of just dd mmm yyyy.
 - Make edit only trigger duplicate detection upon editing phone or email fields
 - Implement automatic conversion of meeting times into clients timezone
