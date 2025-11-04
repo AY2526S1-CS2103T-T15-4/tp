@@ -417,7 +417,7 @@ Examples:
 
 ### List previous meetings of a person : `listm`
 
-Lists all past meetings with specified person.
+Lists all upcoming and past meetings with specified person.
 
 Format: `listm INDEX`
 

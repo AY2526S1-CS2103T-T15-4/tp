@@ -730,14 +730,23 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file<br> 
-      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Open a **command prompt** (Windows), **terminal** (Mac) or **linux terminal/ Konsole** (Linux, depending on
+         your desktop environment)
+   3. Go to the **home folder** you designated for Wi-Find:
+
+      ```bash
+      cd path/to/your/folder
+      ```
+   4. Start Wi-Find by typing:
+       ```bash
+      java -jar WiFind.jar
+   5. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by following the same steps [above](#launch-and-shutdown).<br>
        Expected: The most recent window size and location is retained.
 
 ### Deleting a person
