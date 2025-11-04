@@ -14,11 +14,11 @@ title: Developer Guide
 
 * This project also uses the following open-source libraries and tools:
   - [JavaFX](https://openjfx.io/) - for building the Graphical User Interface (GUI).
-  - [Jackson](https://github.com/FasterXML/jackson) - for JSON serialization and deserialization. 
-  - [JUnit 5](https://junit.org/junit5/) - for automated testing. 
-  - [Java 17 SDK](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) - for compiling and running the program. 
-  - [Checkstyle](https://checkstyle.sourceforge.io/) - for enforcing consistent coding style. 
-  - [Gradle](https://gradle.org/) - for build automation and dependency management. 
+  - [Jackson](https://github.com/FasterXML/jackson) - for JSON serialization and deserialization.
+  - [JUnit 5](https://junit.org/junit5/) - for automated testing.
+  - [Java 17 SDK](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) - for compiling and running the program.
+  - [Checkstyle](https://checkstyle.sourceforge.io/) - for enforcing consistent coding style.
+  - [Gradle](https://gradle.org/) - for build automation and dependency management.
   - [GitHub Actions](https://github.com/features/actions) - for Continuous Integration (CI) testing.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -172,14 +172,14 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Duplicate checking for person
-Wi-Find checks for Duplicates using email or phone number. 
-- If either of these already exist in the database, they are considered duplicates. 
+Wi-Find checks for Duplicates using email or phone number.
+- If either of these already exist in the database, they are considered duplicates.
 - Duplicate checking is checked in the Person class using the isSamePerson() method, and is handled in respective parsers by asking for confirmation.
 
 
 ### Find command supporting multiple variables
-Find command in Wi-Find supports filtering across multiple parameters. 
-- If two or more keywords of the same type of parameters are present, it works like a ‘OR’ search, displaying the contact as long as one of the keywords are present. 
+Find command in Wi-Find supports filtering across multiple parameters.
+- If two or more keywords of the same type of parameters are present, it works like a ‘OR’ search, displaying the contact as long as one of the keywords are present.
 - For keywords of different parameters, it works like ‘AND’ search, where the contact is displayed only when all of the conditions are satisfied across the parameters.
 
 ### Description for meetings
@@ -516,8 +516,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1c. The contact is already flagged.
 
-    * 1c1. Wi-Find shows an error message. 
-      
+    * 1c1. Wi-Find shows an error message.
+ 
       Use case ends.
 
 **Software System: Wi-Find**
@@ -579,7 +579,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Wi-Find shows an error message.
 
       Use case ends.
-  
+
 * 1b. The given identifier is invalid (no contact found).
 
     * 1b1. Wi-Find shows an error message.
@@ -661,7 +661,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1d. The link field provided is empty.
 
     * 1d1. Wi-Find <u>removes the link from the contact (UC10)</u>.
-    
+
       Use case ends.
 
 <div style="page-break-after: always;"></div>
@@ -675,8 +675,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - User data should be locally in a human-editable text file.
     - Data should be automatically saved after each modification to prevent accidental loss.
 3.  Performance Requirements
-    - On a computer meeting the minimum hardware specifications (Intel i5 10th Gen, 8 GB RAM, SSD, Windows 10 or 
-      macOS 12), the system’s startup time — measured from launch command to main interface ready for input — shall not exceed 
+    - On a computer meeting the minimum hardware specifications (Intel i5 10th Gen, 8 GB RAM, SSD, Windows 10 or
+      macOS 12), the system’s startup time — measured from launch command to main interface ready for input — shall not exceed
       3 seconds in 95% of test runs.
     - Should be able to hold up to 1000 persons and 50 meetings per contact without a noticeable sluggishness (<= 200ms) in 
       performance for typical usage.
