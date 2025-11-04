@@ -196,6 +196,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COUNTRY com/COMPANY {t/TAG}…​`
 
 - Alphanumerics and special characters are allowed in NAME.
 - Phone numbers should only contain numbers, spaces, or the characters <code>+</code>, <code>-</code>, <code>(</code>, <code>)</code>.
+- These are the limits of each field:
+  - NAME: 70 characters
+  - PHONE_NUMBER: At least 3 numbers, max of 26
+  - COUNTRY: 56 characters
+  - COMPANY: 100 characters
 
 **Email Address Rules (Summary Table)**
 
@@ -440,7 +445,7 @@ Format: `link INDEX {LINK}`
 * To remove the link from a person, use `link INDEX` without the `LINK` parameter.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The link provided by user must be a valid link. 
+* The link provided by user must be a valid link and limited to 255 characters. 
 
 Examples:
 * `list` followed by `link 2` removes the link from the 2nd person listed in the address book given that the contact has a link previously.
